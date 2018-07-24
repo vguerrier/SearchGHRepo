@@ -93,6 +93,7 @@ Partial Class FSearchCase
         Me.BGlib = New System.Windows.Forms.Button()
         Me.BSearch2 = New System.Windows.Forms.Button()
         Me.BSearch = New MaterialSkin.Controls.MaterialFlatButton()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'CHComments
@@ -730,6 +731,18 @@ Partial Class FSearchCase
         Me.BSearch.TabIndex = 150
         Me.BSearch.UseVisualStyleBackColor = True
         '
+        'Button2
+        '
+        Me.Button2.BackColor = System.Drawing.Color.White
+        Me.Button2.FlatAppearance.BorderSize = 0
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.Image = Global.WindowsApplication1.My.Resources.Resources.search3_p
+        Me.Button2.Location = New System.Drawing.Point(728, 208)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(25, 25)
+        Me.Button2.TabIndex = 151
+        Me.Button2.UseVisualStyleBackColor = False
+        '
         'FSearchCase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -737,6 +750,7 @@ Partial Class FSearchCase
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(784, 837)
+        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.BSearch)
         Me.Controls.Add(Me.TBFD)
         Me.Controls.Add(Me.LbFunctionalDomain)
@@ -882,4 +896,5 @@ Partial Class FSearchCase
     Friend WithEvents TBFD As TextBox
     Friend WithEvents LbFunctionalDomain As Label
     Friend WithEvents BSearch As MaterialSkin.Controls.MaterialFlatButton
+    Friend WithEvents Button2 As Button
 End Class
