@@ -213,10 +213,10 @@ Public Class FBacklog
 
             If nbrow = 0 Then
                 'MsgBox("Not a card, Case or Customer please retry")
-                researchBacklog = 1
+                researchBacklog = 0
                 Me.Close()
                 Exit Function
-
+            Else researchBacklog = nbrow
             End If
 
 

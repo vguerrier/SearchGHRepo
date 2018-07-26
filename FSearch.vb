@@ -58,6 +58,8 @@ Public Class FSearch
 
 
     Public Sub Research()
+        'ret <> 0 on trouvé 
+        'ret = 0 on a rien trouvé
 
         'on identifie la recherche à effectuer : Case, Gcent ou infos branche clients
         Dim ret, retcus As Integer
@@ -68,7 +70,7 @@ Public Class FSearch
                 'recherche sur les infos clients
                 FCustomer.TBCus.Text = Me.MSTSearch.Text
                 FCustomer.Show()
-                FCustomer.ResearchCus()
+                FCustomer.researchCus()
                 MCBBranch.Checked = False
             Else
 
@@ -102,37 +104,47 @@ Public Class FSearch
                         'on recherche un case
                         'on va ouvrir la form CASE
                         FSearchCase.RTBCase.Text = Me.MSTSearch.Text
-                        FSearchCase.Show()
+                        'FSearchCase.Show()
                         If MCBCusCase.Checked Then
                             ' on recherche par numéro du client
                             ret = FSearchCase.researchCase(1)
+                            If ret <> 0 Then
+                                FSearchCase.Show()
+                            End If
+
                             MCBCusCase.Checked = False
                         Else
                             ret = FSearchCase.researchCase(0)
+                            If ret <> 0 Then
+                                FSearchCase.Show()
+                            End If
                             MCBCusCase.Checked = False
                         End If
                         'End If
                     End If
                 End If
-                If ret = 1 Then
+                If ret = 0 Then
                     'recherche sur les infos clients
                     FCustomer.TBCus.Text = Me.MSTSearch.Text
-                    FCustomer.Show()
+
                     ret = FCustomer.researchCus()
+                    If ret <> 0 Then
+                        FCustomer.Show()
+                    End If
                     MCBBranch.Checked = False
                 End If
-                If ret = 1 Then
+                If ret = 0 Then
                     ret = FRessources.researchRes(Me.MSTSearch.Text)
-                    If ret <> 1 Then
+                    If ret <> 0 Then
                         FRessources.Show()
                     End If
                 End If
-                End If
-            If ret = 1 Then
+            End If
+            If ret = 0 Then
                 MsgBox("Not a card, Case, customer or ressource please retry")
             End If
         Catch ex As Exception
-            If retcus = 1 Then
+            If retcus = 0 Then
                 MsgBox("Not a card or a case, please retry")
 
             Else

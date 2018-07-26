@@ -67,7 +67,7 @@ Public Class FRessources
         RequestRessource = RequestRessource & "Or lower(t.TENROX_NAME) = lower('" + name + "') "
         RequestRessource = RequestRessource & "Or lower(t.LDAP_NAME) = lower('" + name + "') "
         RequestRessource = RequestRessource & "Or lower(t.CLEARQUEST_LOGIN) = lower('" + name + "') "
-        RequestRessource = RequestRessource & "order by t.TEAM_START desc "
+        RequestRessource = RequestRessource & " order by  t.LAST_NAME, t.TEAM_END desc, t.TEAM_START desc "
 
     End Function
 
@@ -115,9 +115,10 @@ Public Class FRessources
         End If
 
         If nbrow = 0 Then
-            researchRes = 1
+            researchRes = 0
             Me.Close()
             Exit Function
+        Else researchRes = nbrow
         End If
 
         Dim nb = 0

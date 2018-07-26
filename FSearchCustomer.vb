@@ -362,8 +362,11 @@ Fin:
             FBacklog.LB_NB.Text = "No Branch"
 
 
-            FBacklog.Show()
+            'FBacklog.Show()
             researchCus = FBacklog.researchBacklog()
+            If researchCus <> 0 Then
+                FBacklog.Show()
+            End If
             'MsgBox("Not a card, Case or Customer please retry")
             Me.Close()
             'researchCus = 1
@@ -390,9 +393,6 @@ Fin:
             End While
             i = i + 1
         End While
-
-
-
 
     End Function
 

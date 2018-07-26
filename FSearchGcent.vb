@@ -1131,6 +1131,5 @@ sortie:
         FSearch.Research()
     End Sub
 
-
 End Class
 

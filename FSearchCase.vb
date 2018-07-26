@@ -416,11 +416,11 @@ Public Class FSearchCase
                     'Throw New System.Exception("")
                     If CusCase = 0 Then
                         Me.Close()
-                        researchCase = 1
+                        researchCase = 0
                         Throw New Exception("Not a Case")
                     Else
                         Me.Close()
-                        researchCase = 1
+                        researchCase = 0
                         Throw New Exception("Not a Customer Case Number")
                     End If
                 End If
@@ -600,6 +600,8 @@ Public Class FSearchCase
                 SqlConn.Close()
                 BGCaseComment(FKcomment)
 
+                researchCase = NbRow
+
             Catch ex As Exception
                 'MsgBox("Not a card or a case, please retry")
                 'MsgBox(ex.Message)
@@ -609,7 +611,7 @@ Public Class FSearchCase
 
         Else
             Me.Close()
-            researchCase = 1
+            researchCase = 0
 
         End If
 

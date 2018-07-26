@@ -86,7 +86,7 @@ Partial Class FBacklog
         Me.DGVBacklog.CausesValidation = False
         Me.DGVBacklog.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised
         Me.DGVBacklog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGVBacklog.Location = New System.Drawing.Point(12, 224)
+        Me.DGVBacklog.Location = New System.Drawing.Point(12, 266)
         Me.DGVBacklog.MultiSelect = False
         Me.DGVBacklog.Name = "DGVBacklog"
         Me.DGVBacklog.ReadOnly = True
@@ -94,7 +94,7 @@ Partial Class FBacklog
         Me.DGVBacklog.ShowCellToolTips = False
         Me.DGVBacklog.ShowEditingIcon = False
         Me.DGVBacklog.ShowRowErrors = False
-        Me.DGVBacklog.Size = New System.Drawing.Size(1560, 533)
+        Me.DGVBacklog.Size = New System.Drawing.Size(1560, 531)
         Me.DGVBacklog.TabIndex = 99
         '
         'Bfilter
@@ -125,7 +125,7 @@ Partial Class FBacklog
         Me.CLBFilterState.FormattingEnabled = True
         Me.CLBFilterState.Location = New System.Drawing.Point(60, 129)
         Me.CLBFilterState.Name = "CLBFilterState"
-        Me.CLBFilterState.Size = New System.Drawing.Size(138, 79)
+        Me.CLBFilterState.Size = New System.Drawing.Size(138, 124)
         Me.CLBFilterState.TabIndex = 134
         '
         'CLBFilterPriority
@@ -134,7 +134,7 @@ Partial Class FBacklog
         Me.CLBFilterPriority.FormattingEnabled = True
         Me.CLBFilterPriority.Location = New System.Drawing.Point(254, 129)
         Me.CLBFilterPriority.Name = "CLBFilterPriority"
-        Me.CLBFilterPriority.Size = New System.Drawing.Size(138, 79)
+        Me.CLBFilterPriority.Size = New System.Drawing.Size(138, 124)
         Me.CLBFilterPriority.TabIndex = 136
         '
         'Label1
@@ -162,7 +162,7 @@ Partial Class FBacklog
         Me.CLBFilterAGroup.FormattingEnabled = True
         Me.CLBFilterAGroup.Location = New System.Drawing.Point(451, 129)
         Me.CLBFilterAGroup.Name = "CLBFilterAGroup"
-        Me.CLBFilterAGroup.Size = New System.Drawing.Size(138, 79)
+        Me.CLBFilterAGroup.Size = New System.Drawing.Size(138, 124)
         Me.CLBFilterAGroup.TabIndex = 139
         '
         'Label3
@@ -181,7 +181,7 @@ Partial Class FBacklog
         Me.CLBFilterWorkstream.FormattingEnabled = True
         Me.CLBFilterWorkstream.Location = New System.Drawing.Point(639, 129)
         Me.CLBFilterWorkstream.Name = "CLBFilterWorkstream"
-        Me.CLBFilterWorkstream.Size = New System.Drawing.Size(138, 79)
+        Me.CLBFilterWorkstream.Size = New System.Drawing.Size(138, 124)
         Me.CLBFilterWorkstream.TabIndex = 141
         '
         'Label4
@@ -233,7 +233,7 @@ Partial Class FBacklog
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.LightSteelBlue
-        Me.ClientSize = New System.Drawing.Size(1584, 767)
+        Me.ClientSize = New System.Drawing.Size(1584, 809)
         Me.Controls.Add(Me.CBGcent)
         Me.Controls.Add(Me.CBClosed)
         Me.Controls.Add(Me.Button1)
