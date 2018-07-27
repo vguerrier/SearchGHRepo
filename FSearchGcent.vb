@@ -314,7 +314,7 @@ Public Class FSearchGcent
         GetGcentRetInfo = GetGcentRetInfo & " and a.reportfiche like '%" + gcent + "%'"
 
     End Function
-    Public Sub researchCQ()
+    Public Function researchCQ() As Integer
         'crmtest_MSCRM()
         'Provider=OraOLEDB.Oracle.1;Password=READCQUEST;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1
         'Dim oradb As String = "Data Source=seyccrmsqlsip1.fi;User Id=readcquest;Password=readcquest;"
@@ -396,8 +396,10 @@ Public Class FSearchGcent
         '        dr = cmd.ExecuteReader()
 
         'If dr.Read() Then
+        researchCQ = 0
         While dr.Read()
             LbTitle.Visible = True
+            researchCQ = 1
             'Me.Size = New Size(776, 536)
             'pour lire la liste des sources modifées, on a un enregistrement par sources, il faut donc lire tous les enregistrements et ajouter à la liste
             'If dr.GetValue(0) <> TBGcent.Text Then
@@ -532,6 +534,8 @@ Public Class FSearchGcent
             'End If
         End While
 
+
+
         conn.Close()
         conn.Dispose()
 
@@ -653,9 +657,9 @@ Public Class FSearchGcent
             TBSev.ForeColor = Color.Black
         End If
         BGcentHistory()
-    End Sub
+    End Function
 
-    Public Sub researchGlib()
+    Public Function researchGlib() As Integer
         'crmtest_MSCRM()
         'Provider=OraOLEDB.Oracle.1;Password=READCQUEST;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1
         'Dim oradb As String = "Data Source=seyccrmsqlsip1.fi;User Id=readcquest;Password=readcquest;"
@@ -707,8 +711,9 @@ Public Class FSearchGcent
 
         'executing the command and assigning it to connection
         dr = myCommand.ExecuteReader()
-
+        researchGlib = 0
         If dr.Read() Then
+            researchGlib = 1
             LbTitle.Visible = True
             'Me.Size = New Size(776, 536)
             TBGcent.Text = dr.GetValue(0)
@@ -832,7 +837,7 @@ Public Class FSearchGcent
 
         BGlibHistory()
 
-    End Sub
+    End Function
 
     'Private Sub BHistory_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BHistory.Click
     Private Sub BGcentHistory()

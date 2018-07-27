@@ -91,7 +91,7 @@ Public Class FSearch
                     'Dim toto = Me.MSTSearch.Text
                     FSearchGcent.TBGcent.Text = Me.MSTSearch.Text
                     FSearchGcent.Show()
-                    FSearchGcent.researchCQ()
+                    ret = FSearchGcent.researchCQ()
                 Else
                     If InStr(Trim(Me.MSTSearch.Text), "GLIB") > 0 Then
                         'on recherche une GCENT
@@ -99,7 +99,7 @@ Public Class FSearch
                         Dim toto = Me.MSTSearch.Text
                         FSearchGcent.TBGcent.Text = Me.MSTSearch.Text
                         FSearchGcent.Show()
-                        FSearchGcent.researchGlib()
+                        ret = FSearchGcent.researchGlib()
                     Else
                         'on recherche un case
                         'on va ouvrir la form CASE
