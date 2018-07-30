@@ -89,7 +89,7 @@
     </Reference>
     <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\MaterialSkin-master\MaterialSkin\bin\Debug\MaterialSkin.dll</HintPath>
+      <HintPath>..\..\..\Documents\Visual Studio 2010\Projects\Projects\MaterialSkin-master\MaterialSkin\bin\Debug\MaterialSkin.dll</HintPath>
     </Reference>
     <Reference Include="Oracle.DataAccess, Version=2.112.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
