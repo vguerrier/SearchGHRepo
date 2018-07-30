@@ -1136,5 +1136,9 @@ sortie:
         FSearch.Research()
     End Sub
 
+    Private Sub BRessource_Click(sender As Object, e As EventArgs) Handles BRessource.Click
+        FRessources.researchRes(TBAssigned.Text)
+        FRessources.Show()
+    End Sub
 End Class
 

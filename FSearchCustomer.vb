@@ -216,6 +216,7 @@ Public Class FCustomer
         nbBranch = 0
         While dr.Read()
             'Customer Name
+            researchCus = 1
             If dr.GetValue(0) IsNot DBNull.Value Then
                 MyModule.Customers.CustomerName = dr.GetValue(0)
             End If
@@ -316,7 +317,7 @@ Public Class FCustomer
 
         conn.Close()
         If nbBranch = 0 Then GoTo Fin
-
+        Me.Show()
         conn.Open()
         'Appli
         'On parcourt les branchs et on recherche les appli

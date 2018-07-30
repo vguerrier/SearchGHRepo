@@ -5,6 +5,7 @@ Imports Oracle.DataAccess.Types
 Imports System.Data.SqlClient
 Imports System.Data.Sql
 Imports System.IO
+Imports System.DirectoryServices
 Imports MaterialSkin
 
 
@@ -32,6 +33,15 @@ Public Class FRessources
         Public Email As String
         Public Symphony As Boolean
 
+    End Structure
+
+    Private Structure Type_AD_Extraction
+        Public User_Name As String
+        Public User_Login As String
+        Public User_Department As String
+        Public User_Company As String
+        Public User_Mail As String
+        Public User_TelephoneNumber As String
     End Structure
 
     Dim Tressource() As ressource
@@ -233,7 +243,157 @@ Public Class FRessources
             'Email              30
             TBEmail.Text = Tressource(0).Email
         End If
+        If nbrow <> 0 Then
+            'ns = GetObject("LDAP:")
+        End If
     End Function
+
+
+
+    Sub Extract_AD_UserName_And_UserLogin()
+        'metthode d'extraction des info LDAP, active directory. info non pertinente
+        'non utilisé
+
+
+        Dim accountcontrol
+        Const ADS_SCOPE_SUBTREE = 2
+        ' Dim objRootDSE
+
+
+        ' Création du fichier Excel
+
+        Dim objExcel = CreateObject("Excel.Application")
+        Dim fsoObject = CreateObject("Scripting.FileSystemObject")
+
+        objExcel.Visible = True
+        objExcel.Workbooks.Add()
+
+        objExcel.Cells(1, 1).Value = "Liste des Comptes " & " le " & FormatDateTime(Now, vbLongDate)
+        objExcel.Cells(1, 1).Font.Bold = True
+        objExcel.Cells(1, 1).Font.Size = 10
+        objExcel.Cells(1, 1).Font.ColorIndex = 3
+
+
+        ' Ajout des titres de colonnes
+
+        objExcel.Cells(2, 2).Value = "Last name"
+        objExcel.Cells(2, 2).Font.ColorIndex = 5
+        objExcel.Cells(2, 3).Value = "First name"
+        objExcel.Cells(2, 3).Font.ColorIndex = 5
+        objExcel.Cells(2, 4).Value = "samAccountName"
+        objExcel.Cells(2, 4).Font.ColorIndex = 5
+        objExcel.Cells(2, 5).Value = "Department"
+        objExcel.Cells(2, 5).Font.ColorIndex = 5
+        objExcel.Cells(2, 6).Value = "Phone number"
+        objExcel.Cells(2, 6).Font.ColorIndex = 5
+        objExcel.Cells(2, 7).Value = "Mail"
+        objExcel.Cells(2, 7).Font.ColorIndex = 5
+        objExcel.Cells(2, 8).Value = "userPrincipalName"
+        objExcel.Cells(2, 8).Font.ColorIndex = 5
+        objExcel.Cells(2, 9).Value = "distinguishedName"
+        objExcel.Cells(2, 9).Font.ColorIndex = 5
+        objExcel.Cells(2, 10).Value = "homeDirectory"
+        objExcel.Cells(2, 10).Font.ColorIndex = 5
+        objExcel.Cells(2, 11).Value = "homeDrive"
+        objExcel.Cells(2, 11).Font.ColorIndex = 5
+        objExcel.Cells(2, 12).Value = "canonicalName"
+        objExcel.Cells(2, 12).Font.ColorIndex = 5
+        objExcel.Cells(2, 13).Value = "scriptPath"
+        objExcel.Cells(2, 13).Font.ColorIndex = 5
+        objExcel.Cells(2, 14).Value = "userAccountControl"
+        objExcel.Cells(2, 14).Font.ColorIndex = 5
+
+
+        ' Connexion Active directory et selection des données
+
+        Dim objRootDSE, strDNSDomain, objCommand, objConnection
+        Dim strBase ', strFilter, strAttributes, strQuery ' objRecordSet
+
+        ' Determine DNS domain name.
+        objRootDSE = GetObject("LDAP://RootDSE")
+        strDNSDomain = objRootDSE.Get("defaultNamingContext")
+
+        ' Use ADO to search Active Directory.
+        objCommand = CreateObject("ADODB.Command")
+        objConnection = CreateObject("ADODB.Connection")
+        objConnection.Provider = "ADsDSOObject"
+        objConnection.Open("Active Directory Provider")
+        objCommand.ActiveConnection = objConnection
+        strBase = "<LDAP://" & strDNSDomain & ">"
+
+        objCommand.Properties("Page Size") = 100
+        objCommand.Properties("Searchscope") = ADS_SCOPE_SUBTREE
+        objCommand.CommandText =
+"SELECT givenName, SN, samAccountName, department, telephoneNumber, mail, userPrincipalName, distinguishedName, homeDirectory, homeDrive, canonicalName, scriptPath, userAccountControl" _
+& " FROM " & "'LDAP://" & strDNSDomain & "' WHERE " _
+           & "objectCategory='person' AND objectClass='user' ORDER BY samAccountName"
+
+        Dim objRecordSet = objCommand.Execute
+
+        objRecordSet.MoveFirst()
+        Dim x = 3
+
+        ' Export des données vers Excel
+
+        Do Until objRecordSet.EOF
+            objExcel.Cells(x, 2).Value =
+                objRecordSet.Fields("SN").Value
+            objExcel.Cells(x, 3).Value =
+                objRecordSet.Fields("givenName").Value
+            objExcel.Cells(x, 4).Value =
+                objRecordSet.Fields("samAccountName").Value
+            objExcel.Cells(x, 5).Value =
+                objRecordSet.Fields("department").Value
+            objExcel.Cells(x, 6).Value =
+                objRecordSet.Fields("telephoneNumber").Value
+            objExcel.Cells(x, 7).Value =
+                objRecordSet.Fields("mail").Value
+            objExcel.Cells(x, 8).Value =
+                objRecordSet.Fields("userPrincipalName").Value
+            objExcel.Cells(x, 9).Value =
+                objRecordSet.Fields("distinguishedName").Value
+            objExcel.Cells(x, 10).Value =
+                objRecordSet.Fields("homeDirectory").Value
+            objExcel.Cells(x, 11).Value =
+                objRecordSet.Fields("homeDrive").Value
+            objExcel.Cells(x, 12).Value =
+                objRecordSet.Fields("canonicalName").Value
+            objExcel.Cells(x, 13).Value =
+                objRecordSet.Fields("scriptPath").Value
+
+
+            ' Check du User Account Control pour déterminer si les comptes sont Enabled
+            ' ou Disabled
+
+            accountcontrol = objRecordSet.Fields("userAccountControl").Value
+
+            If accountcontrol And 2 Then
+                objExcel.Cells(x, 14).Value = "Disabled"
+            Else : objExcel.Cells(x, 14).Value = "enabled"
+            End If
+
+            x = x + 1
+            objRecordSet.MoveNext()
+        Loop
+
+
+        ' Autofit des cellules Excel
+
+        objExcel.Columns("B:N").Select()
+        objExcel.Selection.Columns.AutoFit()
+        objExcel.Range("A1").Select()
+
+        ' Clean up.
+        objConnection.Close()
+        objRootDSE = Nothing
+        objCommand = Nothing
+        objConnection = Nothing
+        objRecordSet = Nothing
+
+
+        ' Fin de Script
+
+    End Sub
 
     Private Sub BBack_Click(sender As Object, e As EventArgs) Handles BBack.Click
         currow = currow - 1
@@ -289,6 +449,16 @@ Public Class FRessources
             'Email              30
             TBEmail.Text = Tressource(currow).Email
 
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        If TBEmail.Text <> "" Then
+            'Mail(TBCase.Text, TBGcent.Text, TBCustomer.Text, TBTitle.Text)
+            'eMail.To = toEmail;
+            System.Diagnostics.Process.Start("mailto:" + TBEmail.Text + "?") 'subject=" + "[" & TBCustomer.Text & "] " & TBCase.Text & " " & TBGcent.Text)
+        Else
+            MessageBox.Show("Warning", "Email is empty", MessageBoxButtons.OKCancel)
+        End If
     End Sub
 
     Private Sub Bnext_Click(sender As Object, e As EventArgs) Handles Bnext.Click

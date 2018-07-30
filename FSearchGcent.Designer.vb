@@ -100,6 +100,7 @@ Partial Class FSearchGcent
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Bsearch = New System.Windows.Forms.Button()
+        Me.BRessource = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'CBRetrofit
@@ -283,7 +284,7 @@ Partial Class FSearchGcent
         Me.TBAssigned.Location = New System.Drawing.Point(311, 158)
         Me.TBAssigned.Name = "TBAssigned"
         Me.TBAssigned.ReadOnly = True
-        Me.TBAssigned.Size = New System.Drawing.Size(140, 20)
+        Me.TBAssigned.Size = New System.Drawing.Size(120, 20)
         Me.TBAssigned.TabIndex = 88
         '
         'LbAssigned
@@ -803,12 +804,25 @@ Partial Class FSearchGcent
         Me.Bsearch.TabIndex = 155
         Me.Bsearch.UseVisualStyleBackColor = True
         '
+        'BRessource
+        '
+        Me.BRessource.BackColor = System.Drawing.Color.White
+        Me.BRessource.FlatAppearance.BorderSize = 0
+        Me.BRessource.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BRessource.Image = Global.WindowsApplication1.My.Resources.Resources.search3_p
+        Me.BRessource.Location = New System.Drawing.Point(433, 155)
+        Me.BRessource.Name = "BRessource"
+        Me.BRessource.Size = New System.Drawing.Size(25, 25)
+        Me.BRessource.TabIndex = 156
+        Me.BRessource.UseVisualStyleBackColor = False
+        '
         'FSearchGcent
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(941, 869)
+        Me.Controls.Add(Me.BRessource)
         Me.Controls.Add(Me.Bsearch)
         Me.Controls.Add(Me.Bsearch2)
         Me.Controls.Add(Me.Button1)
@@ -959,4 +973,5 @@ Partial Class FSearchGcent
     Friend WithEvents Button1 As Button
     Friend WithEvents Bsearch2 As Button
     Friend WithEvents Bsearch As Button
+    Friend WithEvents BRessource As Button
 End Class

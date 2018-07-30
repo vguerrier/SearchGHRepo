@@ -129,7 +129,7 @@ Public Class FSearch
 
                     ret = FCustomer.researchCus()
                     If ret <> 0 Then
-                        FCustomer.Show()
+                        'FCustomer.Show()
                     End If
                     MCBBranch.Checked = False
                 End If
