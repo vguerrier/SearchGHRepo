@@ -42,6 +42,8 @@ Partial Class FBacklog
         Me.Button1 = New System.Windows.Forms.Button()
         Me.CBClosed = New System.Windows.Forms.CheckBox()
         Me.CBGcent = New System.Windows.Forms.CheckBox()
+        Me.BExcel = New System.Windows.Forms.Button()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.DGVBacklog, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BS1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -107,6 +109,7 @@ Partial Class FBacklog
         Me.Bfilter.Name = "Bfilter"
         Me.Bfilter.Size = New System.Drawing.Size(30, 30)
         Me.Bfilter.TabIndex = 130
+        Me.ToolTip1.SetToolTip(Me.Bfilter, "Filter")
         Me.Bfilter.UseVisualStyleBackColor = False
         '
         'LState
@@ -204,6 +207,7 @@ Partial Class FBacklog
         Me.Button1.Size = New System.Drawing.Size(22, 20)
         Me.Button1.TabIndex = 142
         Me.Button1.Text = "X"
+        Me.ToolTip1.SetToolTip(Me.Button1, "Remove filters")
         Me.Button1.UseVisualStyleBackColor = False
         '
         'CBClosed
@@ -228,12 +232,30 @@ Partial Class FBacklog
         Me.CBGcent.Text = "Add CQ Cards to the Case list"
         Me.CBGcent.UseVisualStyleBackColor = False
         '
+        'BExcel
+        '
+        Me.BExcel.AccessibleDescription = ""
+        Me.BExcel.AccessibleName = ""
+        Me.BExcel.BackColor = System.Drawing.Color.White
+        Me.BExcel.FlatAppearance.BorderSize = 0
+        Me.BExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BExcel.Image = CType(resources.GetObject("BExcel.Image"), System.Drawing.Image)
+        Me.BExcel.Location = New System.Drawing.Point(811, 175)
+        Me.BExcel.Name = "BExcel"
+        Me.BExcel.Size = New System.Drawing.Size(30, 30)
+        Me.BExcel.TabIndex = 145
+        Me.ToolTip1.SetToolTip(Me.BExcel, "Excel Export")
+        Me.BExcel.UseVisualStyleBackColor = False
+        '
         'FBacklog
         '
+        Me.AccessibleDescription = ""
+        Me.AccessibleName = ""
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.LightSteelBlue
         Me.ClientSize = New System.Drawing.Size(1584, 809)
+        Me.Controls.Add(Me.BExcel)
         Me.Controls.Add(Me.CBGcent)
         Me.Controls.Add(Me.CBClosed)
         Me.Controls.Add(Me.Button1)
@@ -278,4 +300,6 @@ Partial Class FBacklog
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents CBClosed As CheckBox
     Friend WithEvents CBGcent As CheckBox
+    Friend WithEvents BExcel As Button
+    Friend WithEvents ToolTip1 As ToolTip
 End Class

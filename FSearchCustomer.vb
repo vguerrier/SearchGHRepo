@@ -246,7 +246,9 @@ Public Class FCustomer
                 env = dr.GetValue(2)
             End If
 
-            TBCus.Text = MyModule.Customers.CustomerName
+            If InStr(UCase(MyModule.Customers.CustomerName), UCase(TBCus.Text)) Then
+                TBCus.Text = MyModule.Customers.CustomerName
+            End If
             'on parcourt le tableau des branches pour savoir si on l'a deja remplit ou non
             found = False
             i = 0

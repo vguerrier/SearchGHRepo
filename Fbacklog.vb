@@ -4,6 +4,7 @@ Imports System.Data.Sql
 Imports Oracle.DataAccess.Types
 Imports System.Data.Common
 Imports MaterialSkin
+Imports Excel = Microsoft.Office.Interop.Excel
 
 'Imports DataGridViewAutoFilter;
 
@@ -32,7 +33,7 @@ Public Class FBacklog
             Case Else
                 RequestBacklog = "SELECT c.ticketnumber as ""Case"", "                                  '1
                 'RequestBacklog = RequestBacklog & "c.customeridname, "
-                RequestBacklog = RequestBacklog & "c.sfmig_ranking as ""Priority_Score"",  "                      '2
+                RequestBacklog = RequestBacklog & "c.sfmig_ranking as ""Priority Score"",  "                      '2
                 'RequestBacklog = RequestBacklog & "c.aldata_functionaldomainname, "         '3
                 If Optgcent = 1 Then
                     RequestBacklog = RequestBacklog & "cq.aldata_clearquestbugnumber as ""CQ_Card"", "         '5
@@ -109,7 +110,7 @@ Public Class FBacklog
             Case Else
                 RequestBacklogClosed = " Union select * from (SELECT top 30  c.ticketnumber as ""Case"", "                                  '1
                 'RequestBacklogClosed = RequestBacklogClosed & "c.customeridname, "
-                RequestBacklogClosed = RequestBacklogClosed & "c.sfmig_ranking as ""Priority_Score"",  "                      '2
+                RequestBacklogClosed = RequestBacklogClosed & "c.sfmig_ranking as ""Priority Score"",  "                      '2
                 'RequestBacklogClosed = RequestBacklogClosed & "c.aldata_functionaldomainname, "         '3
                 If Optgcent = 1 Then
                     RequestBacklogClosed = RequestBacklogClosed & "cq.aldata_clearquestbugnumber as ""CQ_Card"", "         '5
@@ -212,12 +213,14 @@ Public Class FBacklog
             AdjustColumnOrder(OptGcent)
 
             If nbrow = 0 Then
-                'MsgBox("Not a card, Case or Customer please retry")
+                MsgBox("No backlog")
                 researchBacklog = 0
                 Me.Close()
                 Exit Function
             Else researchBacklog = nbrow
             End If
+
+            DGVBacklog.Columns("Priority Score").DefaultCellStyle.Format = "n1"
 
 
             SqlConn.Close()
@@ -304,7 +307,7 @@ Public Class FBacklog
             TBNbCases.Text = nbrow
             ' MessageBox.Show(nbrow)
 
-
+            DGVBacklog.Columns("Priority Score").DefaultCellStyle.Format = "n0"
 
         Catch ex As Exception
             Opt = Opt
@@ -319,7 +322,7 @@ Public Class FBacklog
         i = 0
 
         DGVBacklog.Columns("Case").DisplayIndex = 0
-        DGVBacklog.Columns("Priority_Score").DisplayIndex = 1
+        DGVBacklog.Columns("Priority Score").DisplayIndex = 1
         If Optgcent = 1 Then
             DGVBacklog.Columns("CQ_Card").DisplayIndex = 2
             i = 1
@@ -463,6 +466,87 @@ Public Class FBacklog
         'SkinManager.ROBOTO_MEDIUM_10 = New Font("Microsoft Sans Serif", 8.25)
         'SkinManager.ROBOTO_MEDIUM_10 = New Font("Algerian", 8)
 
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles BExcel.Click
+        'Export Excel
+
+        Dim objExcel = CreateObject("Excel.Application")
+        Dim fsoObject = CreateObject("Scripting.FileSystemObject")
+        Dim i, OptGcent As Integer
+
+        objExcel.Visible = True
+        objExcel.Workbooks.Add()
+
+        ' Ajout des titres de colonnes
+        OptGcent = 0
+        If CBGcent.Checked Then
+            OptGcent = 1
+        End If
+        objExcel.Cells(1, 1).Value = TBCus.Text
+        objExcel.Cells(2, 1).Value = "Case"
+        objExcel.Cells(2, 1).Font.ColorIndex = 5
+        objExcel.Cells(2, 2).Value = "Priority Score"
+        objExcel.Cells(2, 2).Font.ColorIndex = 5
+
+        i = 0
+        If OptGcent = 1 Then
+            objExcel.Cells(2, 3).Value = "CQ_Card"
+            objExcel.Cells(2, 3).Font.ColorIndex = 5
+            i = 1
+        End If
+        objExcel.Cells(2, 3 + i).Value = "State"
+        objExcel.Cells(2, 3 + i).Font.ColorIndex = 5
+        objExcel.Cells(2, 4 + i).Value = "Priority"
+        objExcel.Cells(2, 4 + i).Font.ColorIndex = 5
+        objExcel.Cells(2, 5 + i).Value = "EDD"
+        objExcel.Cells(2, 5 + i).Font.ColorIndex = 5
+        objExcel.Cells(2, 6 + i).Value = "ECD"
+        objExcel.Cells(2, 6 + i).Font.ColorIndex = 5
+        objExcel.Cells(2, 7 + i).Value = "Assign Group"
+        objExcel.Cells(2, 7 + i).Font.ColorIndex = 5
+        objExcel.Cells(2, 8 + i).Value = "VTP"
+        objExcel.Cells(2, 8 + i).Font.ColorIndex = 5
+        objExcel.Cells(2, 9 + i).Value = "Title"
+        objExcel.Cells(2, 9 + i).Font.ColorIndex = 5
+        objExcel.Cells(2, 10 + i).Value = "Workstream"
+        objExcel.Cells(2, 10 + i).Font.ColorIndex = 5
+        objExcel.Cells(2, 11 + i).Value = "Created Date"
+        objExcel.Cells(2, 11 + i).Font.ColorIndex = 5
+        objExcel.Cells(2, 12 + i).Value = "LastStatusDate"
+        objExcel.Cells(2, 12 + i).Font.ColorIndex = 5
+
+        'Export Each Row Start
+        i = 0
+        For j As Integer = 3 To DGVBacklog.Rows.Count - 1
+            Dim columnIndex As Integer = 0
+            'Do Until columnIndex = 12 + i
+
+            objExcel.Cells(j, 1).Value = DGVBacklog.Item(0, j - 2).Value.ToString
+            objExcel.Cells(j, 2).Value = DGVBacklog.Item(1, j - 2).Value
+            If OptGcent = 1 Then
+                objExcel.Cells(j, 3).Value = DGVBacklog.Item(2, j - 2).Value
+                i = 1
+            End If
+            objExcel.Cells(j, 3 + i).Value = DGVBacklog.Item(2 + i, j - 2).Value
+            objExcel.Cells(j, 4 + i).Value = DGVBacklog.Item(3 + i, j - 2).Value
+            objExcel.Cells(j, 5 + i).Value = DGVBacklog.Item(4 + i, j - 2).Value
+            objExcel.Cells(j, 6 + i).Value = DGVBacklog.Item(5 + i, j - 2).Value
+            objExcel.Cells(j, 7 + i).Value = DGVBacklog.Item(6 + i, j - 2).Value
+            objExcel.Cells(j, 8 + i).Value = DGVBacklog.Item(7 + i, j - 2).Value
+            objExcel.Cells(j, 9 + i).Value = DGVBacklog.Item(8 + i, j - 2).Value
+            objExcel.Cells(j, 10 + i).Value = DGVBacklog.Item(9 + i, j - 2).Value
+            objExcel.Cells(j, 11 + i).Value = DGVBacklog.Item(10 + i, j - 2).Value
+            objExcel.Cells(j, 12 + i).Value = DGVBacklog.Item(11 + i, j - 2).Value
+            'Loop
+        Next
+
+        ' Autofit des cellules Excel
+
+        objExcel.Columns("A:N").Select()
+        objExcel.Selection.Columns.AutoFit()
+        objExcel.Range("A1").Select()
+        'Export Each Row End
     End Sub
 
 
