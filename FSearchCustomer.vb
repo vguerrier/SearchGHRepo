@@ -466,8 +466,9 @@ Fin:
 
     Private Sub BBacklog_Click(sender As System.Object, e As System.EventArgs) Handles BBacklog.Click
         FBacklog.TBCus.Text = Me.TBCus.Text
-        FBacklog.Show()
         FBacklog.researchBacklog()
+        FBacklog.Show()
+
     End Sub
 
     Private Sub LinkLabel1_LinkClicked(sender As System.Object, e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked

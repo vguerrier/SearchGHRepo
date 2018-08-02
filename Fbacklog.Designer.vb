@@ -39,7 +39,7 @@ Partial Class FBacklog
         Me.Label3 = New System.Windows.Forms.Label()
         Me.CLBFilterWorkstream = New System.Windows.Forms.CheckedListBox()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.FilterRemove = New System.Windows.Forms.Button()
         Me.CBClosed = New System.Windows.Forms.CheckBox()
         Me.CBGcent = New System.Windows.Forms.CheckBox()
         Me.BExcel = New System.Windows.Forms.Button()
@@ -116,7 +116,7 @@ Partial Class FBacklog
         '
         Me.LState.AutoSize = True
         Me.LState.BackColor = System.Drawing.Color.White
-        Me.LState.Location = New System.Drawing.Point(102, 113)
+        Me.LState.Location = New System.Drawing.Point(102, 98)
         Me.LState.Name = "LState"
         Me.LState.Size = New System.Drawing.Size(32, 13)
         Me.LState.TabIndex = 132
@@ -126,25 +126,25 @@ Partial Class FBacklog
         '
         Me.CLBFilterState.CheckOnClick = True
         Me.CLBFilterState.FormattingEnabled = True
-        Me.CLBFilterState.Location = New System.Drawing.Point(60, 129)
+        Me.CLBFilterState.Location = New System.Drawing.Point(60, 114)
         Me.CLBFilterState.Name = "CLBFilterState"
-        Me.CLBFilterState.Size = New System.Drawing.Size(138, 124)
+        Me.CLBFilterState.Size = New System.Drawing.Size(138, 139)
         Me.CLBFilterState.TabIndex = 134
         '
         'CLBFilterPriority
         '
         Me.CLBFilterPriority.CheckOnClick = True
         Me.CLBFilterPriority.FormattingEnabled = True
-        Me.CLBFilterPriority.Location = New System.Drawing.Point(254, 129)
+        Me.CLBFilterPriority.Location = New System.Drawing.Point(254, 114)
         Me.CLBFilterPriority.Name = "CLBFilterPriority"
-        Me.CLBFilterPriority.Size = New System.Drawing.Size(138, 124)
+        Me.CLBFilterPriority.Size = New System.Drawing.Size(138, 139)
         Me.CLBFilterPriority.TabIndex = 136
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.BackColor = System.Drawing.Color.White
-        Me.Label1.Location = New System.Drawing.Point(299, 113)
+        Me.Label1.Location = New System.Drawing.Point(299, 98)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(38, 13)
         Me.Label1.TabIndex = 135
@@ -163,16 +163,16 @@ Partial Class FBacklog
         '
         Me.CLBFilterAGroup.CheckOnClick = True
         Me.CLBFilterAGroup.FormattingEnabled = True
-        Me.CLBFilterAGroup.Location = New System.Drawing.Point(451, 129)
+        Me.CLBFilterAGroup.Location = New System.Drawing.Point(451, 114)
         Me.CLBFilterAGroup.Name = "CLBFilterAGroup"
-        Me.CLBFilterAGroup.Size = New System.Drawing.Size(138, 124)
+        Me.CLBFilterAGroup.Size = New System.Drawing.Size(138, 139)
         Me.CLBFilterAGroup.TabIndex = 139
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.BackColor = System.Drawing.Color.White
-        Me.Label3.Location = New System.Drawing.Point(486, 113)
+        Me.Label3.Location = New System.Drawing.Point(486, 98)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(70, 13)
         Me.Label3.TabIndex = 138
@@ -182,33 +182,33 @@ Partial Class FBacklog
         '
         Me.CLBFilterWorkstream.CheckOnClick = True
         Me.CLBFilterWorkstream.FormattingEnabled = True
-        Me.CLBFilterWorkstream.Location = New System.Drawing.Point(639, 129)
+        Me.CLBFilterWorkstream.Location = New System.Drawing.Point(639, 114)
         Me.CLBFilterWorkstream.Name = "CLBFilterWorkstream"
-        Me.CLBFilterWorkstream.Size = New System.Drawing.Size(138, 124)
+        Me.CLBFilterWorkstream.Size = New System.Drawing.Size(138, 139)
         Me.CLBFilterWorkstream.TabIndex = 141
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.BackColor = System.Drawing.Color.White
-        Me.Label4.Location = New System.Drawing.Point(674, 113)
+        Me.Label4.Location = New System.Drawing.Point(674, 98)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(64, 13)
         Me.Label4.TabIndex = 140
         Me.Label4.Text = "Workstream"
         '
-        'Button1
+        'FilterRemove
         '
-        Me.Button1.BackColor = System.Drawing.Color.White
-        Me.Button1.FlatAppearance.BorderSize = 0
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Location = New System.Drawing.Point(20, 137)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(22, 20)
-        Me.Button1.TabIndex = 142
-        Me.Button1.Text = "X"
-        Me.ToolTip1.SetToolTip(Me.Button1, "Remove filters")
-        Me.Button1.UseVisualStyleBackColor = False
+        Me.FilterRemove.BackColor = System.Drawing.Color.White
+        Me.FilterRemove.FlatAppearance.BorderSize = 0
+        Me.FilterRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.FilterRemove.Location = New System.Drawing.Point(20, 137)
+        Me.FilterRemove.Name = "FilterRemove"
+        Me.FilterRemove.Size = New System.Drawing.Size(22, 20)
+        Me.FilterRemove.TabIndex = 142
+        Me.FilterRemove.Text = "X"
+        Me.ToolTip1.SetToolTip(Me.FilterRemove, "Remove filters")
+        Me.FilterRemove.UseVisualStyleBackColor = False
         '
         'CBClosed
         '
@@ -258,7 +258,7 @@ Partial Class FBacklog
         Me.Controls.Add(Me.BExcel)
         Me.Controls.Add(Me.CBGcent)
         Me.Controls.Add(Me.CBClosed)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.FilterRemove)
         Me.Controls.Add(Me.CLBFilterWorkstream)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.CLBFilterAGroup)
@@ -297,7 +297,7 @@ Partial Class FBacklog
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents CLBFilterWorkstream As System.Windows.Forms.CheckedListBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents FilterRemove As System.Windows.Forms.Button
     Friend WithEvents CBClosed As CheckBox
     Friend WithEvents CBGcent As CheckBox
     Friend WithEvents BExcel As Button

@@ -14,6 +14,7 @@ Imports Excel = Microsoft.Office.Interop.Excel
 Public Class FBacklog
 
     Private lvwColumnSorter As ListViewColumnSorter
+    Dim FirstOpened As Integer
 
     Function RequestBacklog(Client As String, dist As String, Opt As Integer, Optgcent As Integer) As String
         'Opt = 1 si on veut les cases fermés
@@ -57,8 +58,8 @@ Public Class FBacklog
         'RequestBacklog = RequestBacklog & "c.sfmig_srclientnumber, "                '16
         'RequestBacklog = RequestBacklog & "c.sfmig_prodenvtname, "                  '17
         'RequestBacklog = RequestBacklog & "cq.aldata_assignedto, "                  '18
-        'RequestBacklog = RequestBacklog & "cq.aldata_label as Label, "                       '19
-        'RequestBacklog = RequestBacklog & "cq.aldata_state as ""CQ State"", "                       '20
+        'RequestBacklog = RequestBacklog & "cq.aldata_label as Label, "              '19
+        'RequestBacklog = RequestBacklog & "cq.aldata_state as ""CQ State"", "       '20
         'RequestBacklog = RequestBacklog & "c.aldata_assignedpersonname, "           '21
         'RequestBacklog = RequestBacklog & "c.sfmig_rejectedsolutionscount, "        '22
         'RequestBacklog = RequestBacklog & "c.sfmig_targetpatch, "                   '24
@@ -85,7 +86,7 @@ Public Class FBacklog
 
 
         RequestBacklogGen = RequestBacklogGen & "WHERE 1 = 1 "
-        RequestBacklogGen = RequestBacklogGen & "and c.statuscode not in (5, 6, 129770007) /*5=closed;6=cancelled,129770007=livre*/ "
+        RequestBacklogGen = RequestBacklogGen & "and c.statuscode not in (5, 6) /*5=closed;6=cancelled,129770007=livre*/ "
         RequestBacklogGen = RequestBacklogGen & "and c.customeridname like '%" & Client & "%' "
 
 
@@ -226,7 +227,7 @@ Public Class FBacklog
             SqlConn.Close()
             myReader.Close()
 
-            Opt = 0
+
             '*********filtre*************
             SqlConn.Open()
             SqlCmd = SqlConn.CreateCommand()
@@ -308,7 +309,11 @@ Public Class FBacklog
             ' MessageBox.Show(nbrow)
 
             DGVBacklog.Columns("Priority Score").DefaultCellStyle.Format = "n0"
+            If FirstOpened = 1 Then
+                FirstOpened = 0
+                Checkedlist()
 
+            End If
         Catch ex As Exception
             Opt = Opt
             'MsgBox("Not a card or a case, please retry")
@@ -351,6 +356,12 @@ Public Class FBacklog
 
         'MsgBox(CLBFilterState.SelectedItem.ToString())
         researchBacklog()
+
+
+        'For i As Integer = 0 To CLBFilterState.Items.Count - 1
+        ' If CLBFilterState.
+        ' .SetItemChecked(i, False) Then
+        ' Next
 
         '***********State************
         filtreState = " ( state='"
@@ -459,6 +470,9 @@ Public Class FBacklog
     Private Sub FBacklog_Load(sender As Object, e As EventArgs) Handles Me.Load
         Dim SkinManager As MaterialSkinManager = MaterialSkinManager.Instance
 
+
+        FirstOpened = 1
+        Checkedlist()
         'SkinManager.AddFormToManage(Me)
         SkinManager.Theme = MaterialSkinManager.Themes.LIGHT
         'SkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE)
@@ -549,5 +563,36 @@ Public Class FBacklog
         'Export Each Row End
     End Sub
 
+    Private Sub FilterRemove_Click(sender As Object, e As EventArgs) Handles FilterRemove.Click
 
+        For i As Integer = 0 To CLBFilterState.Items.Count - 1
+            CLBFilterState.SetItemChecked(i, False)
+        Next
+        For i As Integer = 0 To CLBFilterPriority.Items.Count - 1
+            CLBFilterPriority.SetItemChecked(i, False)
+        Next
+        For i As Integer = 0 To CLBFilterAGroup.Items.Count - 1
+            CLBFilterAGroup.SetItemChecked(i, False)
+        Next
+        For i As Integer = 0 To CLBFilterWorkstream.Items.Count - 1
+            CLBFilterWorkstream.SetItemChecked(i, False)
+        Next
+    End Sub
+
+    Private Sub Checkedlist()
+        'Dim i As Integer
+        ''tick all the item in the filer list
+        'For i = 0 To CLBFilterState.Items.Count - 1
+        '    CLBFilterState.SetItemChecked(i, True)
+        'Next
+        'For i = 0 To CLBFilterPriority.Items.Count - 1
+        '    CLBFilterPriority.SetItemChecked(i, True)
+        'Next
+        'For i = 0 To CLBFilterAGroup.Items.Count - 1
+        '    CLBFilterAGroup.SetItemChecked(i, True)
+        'Next
+        'For i = 0 To CLBFilterWorkstream.Items.Count - 1
+        '    CLBFilterWorkstream.SetItemChecked(i, True)
+        'Next
+    End Sub
 End Class
