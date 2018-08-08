@@ -205,7 +205,7 @@ Public Class FCustomer
 
         'opening the connection
         conn.Open()
-        Dim request As String = RequestBacklog(Trim(TBCus.Text))
+        Dim request As String = RequestBacklog(Replace(Trim(TBCus.Text), "'", "''"))
         myCommand = New OleDb.OleDbCommand(request, conn)
         dr = myCommand.ExecuteReader()
         nbBranch = 0

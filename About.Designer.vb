@@ -83,7 +83,7 @@ Partial Class Dabout
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(31, 20)
         Me.Label2.TabIndex = 144
-        Me.Label2.Text = "1.5"
+        Me.Label2.Text = "2.0"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label3
@@ -92,9 +92,9 @@ Partial Class Dabout
         Me.Label3.Location = New System.Drawing.Point(68, 63)
         Me.Label3.Margin = New System.Windows.Forms.Padding(3)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(130, 13)
+        Me.Label3.Size = New System.Drawing.Size(146, 13)
         Me.Label3.TabIndex = 145
-        Me.Label3.Text = "Copyright : SymphonyEYC"
+        Me.Label3.Text = "Copyright : SymphonyRetailAI"
         '
         'LinkLabel1
         '

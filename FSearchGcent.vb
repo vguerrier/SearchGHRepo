@@ -1137,8 +1137,12 @@ sortie:
     End Sub
 
     Private Sub BRessource_Click(sender As Object, e As EventArgs) Handles BRessource.Click
-        FRessources.researchRes(TBAssigned.Text)
-        FRessources.Show()
+
+        If FRessources.researchRes(TBAssigned.Text) <> 0 Then
+            FRessources.Show()
+        Else
+            MessageBox.Show("Not a R&D Ressource", "Warning", MessageBoxButtons.OKCancel)
+        End If
     End Sub
 End Class
 

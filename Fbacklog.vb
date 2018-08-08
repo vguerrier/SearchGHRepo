@@ -195,7 +195,7 @@ Public Class FBacklog
         Try
             SqlConn.Open()
             SqlCmd = SqlConn.CreateCommand()
-            req = RequestBacklog(Trim(TBCus.Text), "", Opt, OptGcent)
+            req = RequestBacklog(Replace(Trim(TBCus.Text), "'", "''"), "", Opt, OptGcent)
 
             SqlCmd.CommandText = req
 
@@ -214,7 +214,7 @@ Public Class FBacklog
             AdjustColumnOrder(OptGcent)
 
             If nbrow = 0 Then
-                MsgBox("No backlog")
+                'MsgBox("No backlog")
                 researchBacklog = 0
                 Me.Close()
                 Exit Function

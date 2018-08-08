@@ -63,8 +63,10 @@ Public Class FSearch
 
         'on identifie la recherche à effectuer : Case, Gcent ou infos branche clients
         Dim ret, retcus As Integer
+
         ret = 0
         Try
+
 
             If MCBBranch.Checked Then
                 'recherche sur les infos clients

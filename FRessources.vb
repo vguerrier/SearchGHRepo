@@ -97,7 +97,7 @@ Public Class FRessources
         nbrow = 0
         conn.Open()
 
-        request = RequestRessourceCount(name)
+        request = RequestRessourceCount(Replace(name, "'", "''"))
         myCommand = New OleDb.OleDbCommand(request, conn)
         dr = myCommand.ExecuteReader()
         'remplissage du treeview
@@ -113,7 +113,7 @@ Public Class FRessources
         'opening the connection
         conn.Open()
 
-        request = RequestRessource(name)
+        request = RequestRessource(Replace(name, "'", "''"))
         myCommand = New OleDb.OleDbCommand(request, conn)
         dr = myCommand.ExecuteReader()
         'remplissage du treeview

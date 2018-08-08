@@ -712,7 +712,7 @@ Public Class FSearchCase
         FSearch.Research()
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles BCustomer.Click
         'Dim ret As Integer
         FSearch.MSTSearch.Text = TBCustomer.Text
 
@@ -726,7 +726,7 @@ Public Class FSearchCase
         'End If
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Bassigned.Click
         FRessources.researchRes(TBCQAssignedto.Text)
         FRessources.Show()
     End Sub
