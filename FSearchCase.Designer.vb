@@ -23,6 +23,7 @@ Partial Class FSearchCase
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FSearchCase))
         Me.CHComments = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -90,11 +91,12 @@ Partial Class FSearchCase
         Me.TBFD = New System.Windows.Forms.TextBox()
         Me.LbFunctionalDomain = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.Bassigned = New System.Windows.Forms.Button()
+        Me.BCustomer = New System.Windows.Forms.Button()
         Me.BGlib = New System.Windows.Forms.Button()
         Me.BSearch2 = New System.Windows.Forms.Button()
-        Me.BSearch = New MaterialSkin.Controls.MaterialFlatButton()
-        Me.BCustomer = New System.Windows.Forms.Button()
-        Me.Bassigned = New System.Windows.Forms.Button()
+        Me.BSearch = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'CHComments
@@ -692,6 +694,32 @@ Partial Class FSearchCase
         Me.Button1.TabIndex = 145
         Me.Button1.UseVisualStyleBackColor = False
         '
+        'Bassigned
+        '
+        Me.Bassigned.BackColor = System.Drawing.Color.White
+        Me.Bassigned.FlatAppearance.BorderSize = 0
+        Me.Bassigned.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Bassigned.Image = Global.WindowsApplication1.My.Resources.Resources.search3_p
+        Me.Bassigned.Location = New System.Drawing.Point(728, 399)
+        Me.Bassigned.Name = "Bassigned"
+        Me.Bassigned.Size = New System.Drawing.Size(25, 25)
+        Me.Bassigned.TabIndex = 152
+        Me.ToolTip1.SetToolTip(Me.Bassigned, "Ressource R&D Information")
+        Me.Bassigned.UseVisualStyleBackColor = False
+        '
+        'BCustomer
+        '
+        Me.BCustomer.BackColor = System.Drawing.Color.White
+        Me.BCustomer.FlatAppearance.BorderSize = 0
+        Me.BCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BCustomer.Image = Global.WindowsApplication1.My.Resources.Resources.search3_p
+        Me.BCustomer.Location = New System.Drawing.Point(728, 208)
+        Me.BCustomer.Name = "BCustomer"
+        Me.BCustomer.Size = New System.Drawing.Size(25, 25)
+        Me.BCustomer.TabIndex = 151
+        Me.ToolTip1.SetToolTip(Me.BCustomer, "Customer information")
+        Me.BCustomer.UseVisualStyleBackColor = False
+        '
         'BGlib
         '
         Me.BGlib.FlatAppearance.BorderSize = 0
@@ -701,6 +729,7 @@ Partial Class FSearchCase
         Me.BGlib.Name = "BGlib"
         Me.BGlib.Size = New System.Drawing.Size(25, 25)
         Me.BGlib.TabIndex = 139
+        Me.ToolTip1.SetToolTip(Me.BGlib, "Card GLIB information")
         Me.BGlib.UseVisualStyleBackColor = True
         '
         'BSearch2
@@ -713,49 +742,20 @@ Partial Class FSearchCase
         Me.BSearch2.Name = "BSearch2"
         Me.BSearch2.Size = New System.Drawing.Size(25, 25)
         Me.BSearch2.TabIndex = 136
+        Me.ToolTip1.SetToolTip(Me.BSearch2, "Card CQ information")
         Me.BSearch2.UseVisualStyleBackColor = False
         '
         'BSearch
         '
-        Me.BSearch.AutoSize = True
-        Me.BSearch.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.BSearch.BackColor = System.Drawing.Color.White
-        Me.BSearch.Depth = 0
-        Me.BSearch.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.BSearch.Icon = Global.WindowsApplication1.My.Resources.Resources.search2
+        Me.BSearch.FlatAppearance.BorderSize = 0
+        Me.BSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BSearch.Image = Global.WindowsApplication1.My.Resources.Resources.search2
-        Me.BSearch.Location = New System.Drawing.Point(37, 69)
-        Me.BSearch.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
-        Me.BSearch.MouseState = MaterialSkin.MouseState.HOVER
+        Me.BSearch.Location = New System.Drawing.Point(27, 61)
         Me.BSearch.Name = "BSearch"
-        Me.BSearch.Primary = False
-        Me.BSearch.Size = New System.Drawing.Size(44, 36)
-        Me.BSearch.TabIndex = 150
+        Me.BSearch.Size = New System.Drawing.Size(50, 50)
+        Me.BSearch.TabIndex = 156
+        Me.ToolTip1.SetToolTip(Me.BSearch, "Case information")
         Me.BSearch.UseVisualStyleBackColor = True
-        '
-        'BCustomer
-        '
-        Me.BCustomer.BackColor = System.Drawing.Color.White
-        Me.BCustomer.FlatAppearance.BorderSize = 0
-        Me.BCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BCustomer.Image = Global.WindowsApplication1.My.Resources.Resources.search3_p
-        Me.BCustomer.Location = New System.Drawing.Point(728, 208)
-        Me.BCustomer.Name = "BCustomer"
-        Me.BCustomer.Size = New System.Drawing.Size(25, 25)
-        Me.BCustomer.TabIndex = 151
-        Me.BCustomer.UseVisualStyleBackColor = False
-        '
-        'Bassigned
-        '
-        Me.Bassigned.BackColor = System.Drawing.Color.White
-        Me.Bassigned.FlatAppearance.BorderSize = 0
-        Me.Bassigned.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Bassigned.Image = Global.WindowsApplication1.My.Resources.Resources.search3_p
-        Me.Bassigned.Location = New System.Drawing.Point(728, 399)
-        Me.Bassigned.Name = "Bassigned"
-        Me.Bassigned.Size = New System.Drawing.Size(25, 25)
-        Me.Bassigned.TabIndex = 152
-        Me.Bassigned.UseVisualStyleBackColor = False
         '
         'FSearchCase
         '
@@ -764,9 +764,9 @@ Partial Class FSearchCase
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(784, 837)
+        Me.Controls.Add(Me.BSearch)
         Me.Controls.Add(Me.Bassigned)
         Me.Controls.Add(Me.BCustomer)
-        Me.Controls.Add(Me.BSearch)
         Me.Controls.Add(Me.TBFD)
         Me.Controls.Add(Me.LbFunctionalDomain)
         Me.Controls.Add(Me.Button1)
@@ -910,7 +910,8 @@ Partial Class FSearchCase
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents TBFD As TextBox
     Friend WithEvents LbFunctionalDomain As Label
-    Friend WithEvents BSearch As MaterialSkin.Controls.MaterialFlatButton
     Friend WithEvents BCustomer As Button
     Friend WithEvents Bassigned As Button
+    Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents BSearch As Button
 End Class

@@ -23,6 +23,7 @@ Partial Class FSearchGcent
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
         Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FSearchGcent))
@@ -101,6 +102,7 @@ Partial Class FSearchGcent
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Bsearch = New System.Windows.Forms.Button()
         Me.BRessource = New System.Windows.Forms.Button()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.SuspendLayout()
         '
         'CBRetrofit
@@ -696,6 +698,7 @@ Partial Class FSearchGcent
         Me.LLBlinkCQ.TabIndex = 140
         Me.LLBlinkCQ.TabStop = True
         Me.LLBlinkCQ.Text = "Link CQ"
+        Me.ToolTip1.SetToolTip(Me.LLBlinkCQ, "Open CQ Web")
         '
         'LbLink
         '
@@ -756,6 +759,7 @@ Partial Class FSearchGcent
         Me.Bsearch2.Name = "Bsearch2"
         Me.Bsearch2.Size = New System.Drawing.Size(25, 25)
         Me.Bsearch2.TabIndex = 154
+        Me.ToolTip1.SetToolTip(Me.Bsearch2, "Card information")
         Me.Bsearch2.UseVisualStyleBackColor = False
         '
         'Button1
@@ -768,6 +772,7 @@ Partial Class FSearchGcent
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(25, 25)
         Me.Button1.TabIndex = 153
+        Me.ToolTip1.SetToolTip(Me.Button1, "Card retrofited details")
         Me.Button1.UseVisualStyleBackColor = False
         '
         'Button3
@@ -780,6 +785,7 @@ Partial Class FSearchGcent
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(20, 20)
         Me.Button3.TabIndex = 152
+        Me.ToolTip1.SetToolTip(Me.Button3, "Customer information")
         Me.Button3.UseVisualStyleBackColor = False
         '
         'Button2
@@ -791,6 +797,7 @@ Partial Class FSearchGcent
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(50, 50)
         Me.Button2.TabIndex = 129
+        Me.ToolTip1.SetToolTip(Me.Button2, "Mail")
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Bsearch
@@ -802,6 +809,7 @@ Partial Class FSearchGcent
         Me.Bsearch.Name = "Bsearch"
         Me.Bsearch.Size = New System.Drawing.Size(50, 50)
         Me.Bsearch.TabIndex = 155
+        Me.ToolTip1.SetToolTip(Me.Bsearch, "Case information")
         Me.Bsearch.UseVisualStyleBackColor = True
         '
         'BRessource
@@ -814,6 +822,7 @@ Partial Class FSearchGcent
         Me.BRessource.Name = "BRessource"
         Me.BRessource.Size = New System.Drawing.Size(25, 25)
         Me.BRessource.TabIndex = 156
+        Me.ToolTip1.SetToolTip(Me.BRessource, "Ressource R&D informtaion")
         Me.BRessource.UseVisualStyleBackColor = False
         '
         'FSearchGcent
@@ -974,4 +983,5 @@ Partial Class FSearchGcent
     Friend WithEvents Bsearch2 As Button
     Friend WithEvents Bsearch As Button
     Friend WithEvents BRessource As Button
+    Friend WithEvents ToolTip1 As ToolTip
 End Class

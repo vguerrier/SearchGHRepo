@@ -8,9 +8,13 @@ Imports MaterialSkin
 
 Public Class FSearchCase
 
+
+
     Private Sub FSearchCase_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         Dim SkinManager As MaterialSkinManager = MaterialSkinManager.Instance
+
+
 
         'SkinManager.AddFormToManage(Me)
         SkinManager.Theme = MaterialSkinManager.Themes.LIGHT
@@ -177,6 +181,8 @@ Public Class FSearchCase
         ' mise au premier plan
         Me.TopMost = True
         Me.TopMost = False
+
+
 
         nCase = RTBCase.Text
         ClearTextBox(Me)
@@ -706,11 +712,6 @@ Public Class FSearchCase
         FSearch.Research()
     End Sub
 
-    Private Sub BSearch_Click_1(sender As Object, e As EventArgs) Handles BSearch.Click
-        FSearch.MSTSearch.Text = Mid(CBGcent.Text, 1, 13)
-
-        FSearch.Research()
-    End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles BCustomer.Click
         'Dim ret As Integer
@@ -730,4 +731,12 @@ Public Class FSearchCase
         FRessources.researchRes(TBCQAssignedto.Text)
         FRessources.Show()
     End Sub
+
+    Private Sub BSearch_Click_2(sender As Object, e As EventArgs) Handles BSearch.Click
+        FSearch.MSTSearch.Text = Mid(CBGcent.Text, 1, 13)
+
+        FSearch.Research()
+    End Sub
+
+
 End Class

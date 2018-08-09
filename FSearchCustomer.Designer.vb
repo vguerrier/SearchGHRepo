@@ -22,6 +22,7 @@ Partial Class FCustomer
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FCustomer))
         Me.TVCus = New System.Windows.Forms.TreeView()
         Me.TBCus = New System.Windows.Forms.TextBox()
@@ -52,6 +53,7 @@ Partial Class FCustomer
         Me.Label5 = New System.Windows.Forms.Label()
         Me.TBDesc = New System.Windows.Forms.TextBox()
         Me.LBDesc = New System.Windows.Forms.Label()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -286,6 +288,7 @@ Partial Class FCustomer
         Me.BBacklog.Name = "BBacklog"
         Me.BBacklog.Size = New System.Drawing.Size(25, 25)
         Me.BBacklog.TabIndex = 26
+        Me.ToolTip1.SetToolTip(Me.BBacklog, "Customer Backlog")
         Me.BBacklog.UseVisualStyleBackColor = True
         '
         'TBLabel
@@ -390,4 +393,5 @@ Partial Class FCustomer
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents BBacklog As System.Windows.Forms.Button
     Friend WithEvents LinkLabel1 As System.Windows.Forms.LinkLabel
+    Friend WithEvents ToolTip1 As ToolTip
 End Class

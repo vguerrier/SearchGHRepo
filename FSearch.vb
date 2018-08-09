@@ -6,16 +6,21 @@ Imports MaterialSkin
 
 
 Public Class FSearch
-
+    Dim LStCase(20) As String
+    Dim nbSearch As Integer
+    Dim IndSearch As Integer
+    Dim Nav As Boolean
 
     'Dim TBIDD As Object
 
     Private Sub Form1_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         'Me.Size = New Size(300, 104)
         Dim curdir As String
-
-
         Dim SkinManager As MaterialSkinManager = MaterialSkinManager.Instance
+
+        BBack.Visible = False
+        BNext.Visible = False
+        Nav = False
         SkinManager.AddFormToManage(Me)
         SkinManager.Theme = MaterialSkinManager.Themes.LIGHT
         'SkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE)
@@ -63,6 +68,29 @@ Public Class FSearch
 
         'on identifie la recherche à effectuer : Case, Gcent ou infos branche clients
         Dim ret, retcus As Integer
+
+
+        If Nav = False Then
+            LStCase(nbSearch) = Me.MSTSearch.Text
+        End If
+        nbSearch = nbSearch + 1
+        If nbSearch > 20 Then
+            nbSearch = 0
+            IndSearch = 0
+            Nav = False
+        End If
+        If Nav = False Then
+            IndSearch = IndSearch + 1
+            'Else
+            '    nbSearch = nbSearch + 1
+        End If
+
+        If nbSearch > 1 And IndSearch > 1 Then
+            BBack.Visible = True
+        Else
+            BBack.Visible = False
+        End If
+
 
         ret = 0
         Try
@@ -196,6 +224,7 @@ Public Class FSearch
     End Sub
 
     Private Sub MFBSearch_Click(sender As Object, e As EventArgs) Handles MFBSearch.Click
+        Nav = False
         Research()
     End Sub
 
@@ -203,6 +232,7 @@ Public Class FSearch
     Private Sub MSTSearch_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MSTSearch.KeyDown
         If e.KeyCode = Keys.Enter Then
             'Call research()
+            Nav = False
             Research()
             'supprime lebbep quand on presse enter
             e.SuppressKeyPress = True
@@ -212,26 +242,26 @@ Public Class FSearch
 
 
     Private Sub BPlus_Click(sender As Object, e As EventArgs) Handles BPlus.Click
-        If Me.Height = 130 Then
-            Me.Height = 215
+        If Me.Height = 135 Then
+            Me.Height = 220
             BPlus.Visible = False
             Bminus.Visible = True
 
         Else
-            Me.Height = 130
+            Me.Height = 135
             BPlus.Visible = True
             Bminus.Visible = False
         End If
     End Sub
 
     Private Sub Bminus_Click(sender As Object, e As EventArgs) Handles Bminus.Click
-        If Me.Height = 130 Then
-            Me.Height = 215
+        If Me.Height = 135 Then
+            Me.Height = 220
             BPlus.Visible = False
             Bminus.Visible = True
 
         Else
-            Me.Height = 130
+            Me.Height = 135
             BPlus.Visible = True
             Bminus.Visible = False
         End If
@@ -242,6 +272,38 @@ Public Class FSearch
     End Sub
 
     Private Sub FSearch_LocationChanged(sender As Object, e As EventArgs) Handles Me.LocationChanged
+
+    End Sub
+
+    Private Sub BBack_Click(sender As Object, e As EventArgs) Handles BBack.Click
+        IndSearch = IndSearch - 1
+        Nav = True
+        If IndSearch > 0 Then
+            'MsgBox(LStCase(IndSearch - 1))
+            Me.MSTSearch.Text = LStCase(IndSearch - 1)
+            BNext.Visible = True
+            nbSearch = nbSearch - 1
+            Research()
+        Else
+            BBack.Visible = False
+        End If
+    End Sub
+
+    Private Sub BNext_Click(sender As Object, e As EventArgs) Handles BNext.Click
+        IndSearch = IndSearch + 1
+        Nav = True
+        If IndSearch <= nbSearch Then
+            'MsgBox(LStCase(IndSearch - 1))
+            Me.MSTSearch.Text = LStCase(IndSearch - 1)
+            BBack.Visible = True
+            nbSearch = nbSearch - 1
+            Research()
+            If IndSearch = nbSearch Then
+                BNext.Visible = False
+            End If
+        Else
+            BNext.Visible = False
+        End If
 
     End Sub
 End Class

@@ -23,6 +23,7 @@ Partial Class FRessources
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.LbName = New System.Windows.Forms.Label()
         Me.TBName = New System.Windows.Forms.TextBox()
         Me.LCQLogin = New System.Windows.Forms.Label()
@@ -61,6 +62,7 @@ Partial Class FRessources
         Me.Bnext = New MaterialSkin.Controls.MaterialFlatButton()
         Me.LBactual = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.SuspendLayout()
         '
         'LbName
@@ -417,6 +419,7 @@ Partial Class FRessources
         Me.BBack.Primary = False
         Me.BBack.Size = New System.Drawing.Size(44, 36)
         Me.BBack.TabIndex = 152
+        Me.ToolTip1.SetToolTip(Me.BBack, "previous information")
         Me.BBack.UseVisualStyleBackColor = False
         '
         'Bnext
@@ -435,6 +438,7 @@ Partial Class FRessources
         Me.Bnext.Primary = False
         Me.Bnext.Size = New System.Drawing.Size(44, 36)
         Me.Bnext.TabIndex = 151
+        Me.ToolTip1.SetToolTip(Me.Bnext, "next information")
         Me.Bnext.UseVisualStyleBackColor = False
         '
         'LBactual
@@ -458,6 +462,7 @@ Partial Class FRessources
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(50, 50)
         Me.Button2.TabIndex = 154
+        Me.ToolTip1.SetToolTip(Me.Button2, "Mail")
         Me.Button2.UseVisualStyleBackColor = False
         '
         'FRessources
@@ -550,4 +555,5 @@ Partial Class FRessources
     Friend WithEvents BBack As MaterialSkin.Controls.MaterialFlatButton
     Friend WithEvents LBactual As Label
     Friend WithEvents Button2 As Button
+    Friend WithEvents ToolTip1 As ToolTip
 End Class

@@ -23,6 +23,7 @@ Partial Class FSearch
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FSearch))
         Me.LLBlinkCQ = New System.Windows.Forms.LinkLabel()
         Me.MCBCusCase = New System.Windows.Forms.CheckBox()
@@ -35,13 +36,16 @@ Partial Class FSearch
         Me.MMCBCusCase = New MaterialSkin.Controls.MaterialCheckBox()
         Me.MMCBBranch = New MaterialSkin.Controls.MaterialCheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.BBack = New System.Windows.Forms.Button()
+        Me.BNext = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'LLBlinkCQ
         '
         Me.LLBlinkCQ.AutoSize = True
         Me.LLBlinkCQ.BackColor = System.Drawing.Color.Transparent
-        Me.LLBlinkCQ.Location = New System.Drawing.Point(12, 187)
+        Me.LLBlinkCQ.Location = New System.Drawing.Point(12, 192)
         Me.LLBlinkCQ.Margin = New System.Windows.Forms.Padding(3)
         Me.LLBlinkCQ.Name = "LLBlinkCQ"
         Me.LLBlinkCQ.Size = New System.Drawing.Size(29, 13)
@@ -74,7 +78,7 @@ Partial Class FSearch
         '
         Me.MSTSearch.Depth = 0
         Me.MSTSearch.Hint = ""
-        Me.MSTSearch.Location = New System.Drawing.Point(31, 92)
+        Me.MSTSearch.Location = New System.Drawing.Point(31, 97)
         Me.MSTSearch.MaxLength = 32767
         Me.MSTSearch.MouseState = MaterialSkin.MouseState.HOVER
         Me.MSTSearch.Name = "MSTSearch"
@@ -93,10 +97,11 @@ Partial Class FSearch
         Me.Button1.FlatAppearance.BorderSize = 0
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button1.Image = Global.WindowsApplication1.My.Resources.Resources.question_mark2
-        Me.Button1.Location = New System.Drawing.Point(2, 62)
+        Me.Button1.Location = New System.Drawing.Point(2, 65)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(18, 18)
         Me.Button1.TabIndex = 150
+        Me.ToolTip1.SetToolTip(Me.Button1, "About")
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Bminus
@@ -104,10 +109,11 @@ Partial Class FSearch
         Me.Bminus.FlatAppearance.BorderSize = 0
         Me.Bminus.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Bminus.Image = Global.WindowsApplication1.My.Resources.Resources.minus2
-        Me.Bminus.Location = New System.Drawing.Point(1, 95)
+        Me.Bminus.Location = New System.Drawing.Point(1, 100)
         Me.Bminus.Name = "Bminus"
         Me.Bminus.Size = New System.Drawing.Size(16, 16)
         Me.Bminus.TabIndex = 2
+        Me.ToolTip1.SetToolTip(Me.Bminus, "Options panel -")
         Me.Bminus.UseVisualStyleBackColor = True
         Me.Bminus.Visible = False
         '
@@ -116,10 +122,11 @@ Partial Class FSearch
         Me.BPlus.FlatAppearance.BorderSize = 0
         Me.BPlus.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BPlus.Image = Global.WindowsApplication1.My.Resources.Resources.plus
-        Me.BPlus.Location = New System.Drawing.Point(1, 95)
+        Me.BPlus.Location = New System.Drawing.Point(1, 100)
         Me.BPlus.Name = "BPlus"
         Me.BPlus.Size = New System.Drawing.Size(16, 16)
         Me.BPlus.TabIndex = 1
+        Me.ToolTip1.SetToolTip(Me.BPlus, "Options panel")
         Me.BPlus.UseVisualStyleBackColor = True
         '
         'MFBSearch
@@ -129,21 +136,22 @@ Partial Class FSearch
         Me.MFBSearch.Depth = 0
         Me.MFBSearch.Icon = Global.WindowsApplication1.My.Resources.Resources.search2
         Me.MFBSearch.Image = Global.WindowsApplication1.My.Resources.Resources.search2
-        Me.MFBSearch.Location = New System.Drawing.Point(217, 75)
+        Me.MFBSearch.Location = New System.Drawing.Point(217, 83)
         Me.MFBSearch.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
         Me.MFBSearch.MouseState = MaterialSkin.MouseState.HOVER
         Me.MFBSearch.Name = "MFBSearch"
         Me.MFBSearch.Primary = False
         Me.MFBSearch.Size = New System.Drawing.Size(44, 36)
         Me.MFBSearch.TabIndex = 149
+        Me.ToolTip1.SetToolTip(Me.MFBSearch, "Search")
         Me.MFBSearch.UseVisualStyleBackColor = True
         '
         'MMCBCusCase
         '
         Me.MMCBCusCase.AutoSize = True
         Me.MMCBCusCase.Depth = 0
-        Me.MMCBCusCase.Font = New System.Drawing.Font("MS Reference Sans Serif", 8.25!)
-        Me.MMCBCusCase.Location = New System.Drawing.Point(10, 132)
+        Me.MMCBCusCase.Font = New System.Drawing.Font("Roboto", 10.0!)
+        Me.MMCBCusCase.Location = New System.Drawing.Point(10, 137)
         Me.MMCBCusCase.Margin = New System.Windows.Forms.Padding(0)
         Me.MMCBCusCase.MouseLocation = New System.Drawing.Point(-1, -1)
         Me.MMCBCusCase.MouseState = MaterialSkin.MouseState.HOVER
@@ -159,7 +167,7 @@ Partial Class FSearch
         Me.MMCBBranch.AutoSize = True
         Me.MMCBBranch.Depth = 0
         Me.MMCBBranch.Font = New System.Drawing.Font("Roboto", 10.0!)
-        Me.MMCBBranch.Location = New System.Drawing.Point(10, 157)
+        Me.MMCBBranch.Location = New System.Drawing.Point(10, 162)
         Me.MMCBBranch.Margin = New System.Windows.Forms.Padding(0)
         Me.MMCBBranch.MouseLocation = New System.Drawing.Point(-1, -1)
         Me.MMCBBranch.MouseState = MaterialSkin.MouseState.HOVER
@@ -174,18 +182,48 @@ Partial Class FSearch
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(26, 67)
+        Me.Label1.Location = New System.Drawing.Point(26, 70)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(167, 16)
         Me.Label1.TabIndex = 154
         Me.Label1.Text = "CARD/CASE/CUSTOMER"
+        '
+        'BBack
+        '
+        Me.BBack.BackColor = System.Drawing.Color.White
+        Me.BBack.FlatAppearance.BorderSize = 0
+        Me.BBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BBack.ForeColor = System.Drawing.SystemColors.Window
+        Me.BBack.Image = Global.WindowsApplication1.My.Resources.Resources.backS
+        Me.BBack.Location = New System.Drawing.Point(211, 57)
+        Me.BBack.Name = "BBack"
+        Me.BBack.Size = New System.Drawing.Size(25, 25)
+        Me.BBack.TabIndex = 158
+        Me.ToolTip1.SetToolTip(Me.BBack, "Previous search")
+        Me.BBack.UseVisualStyleBackColor = False
+        '
+        'BNext
+        '
+        Me.BNext.BackColor = System.Drawing.Color.White
+        Me.BNext.FlatAppearance.BorderSize = 0
+        Me.BNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BNext.ForeColor = System.Drawing.SystemColors.Window
+        Me.BNext.Image = Global.WindowsApplication1.My.Resources.Resources.nextS
+        Me.BNext.Location = New System.Drawing.Point(242, 57)
+        Me.BNext.Name = "BNext"
+        Me.BNext.Size = New System.Drawing.Size(25, 25)
+        Me.BNext.TabIndex = 159
+        Me.ToolTip1.SetToolTip(Me.BNext, "Next search")
+        Me.BNext.UseVisualStyleBackColor = False
         '
         'FSearch
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(270, 130)
+        Me.ClientSize = New System.Drawing.Size(270, 135)
+        Me.Controls.Add(Me.BNext)
+        Me.Controls.Add(Me.BBack)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.MMCBBranch)
         Me.Controls.Add(Me.MMCBCusCase)
@@ -218,4 +256,7 @@ Partial Class FSearch
     Friend WithEvents MMCBCusCase As MaterialSkin.Controls.MaterialCheckBox
     Friend WithEvents MMCBBranch As MaterialSkin.Controls.MaterialCheckBox
     Friend WithEvents Label1 As Label
+    Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents BBack As Button
+    Friend WithEvents BNext As Button
 End Class
