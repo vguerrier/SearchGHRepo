@@ -118,9 +118,9 @@ Partial Class FBacklog
         Me.LState.BackColor = System.Drawing.Color.White
         Me.LState.Location = New System.Drawing.Point(102, 98)
         Me.LState.Name = "LState"
-        Me.LState.Size = New System.Drawing.Size(32, 13)
+        Me.LState.Size = New System.Drawing.Size(37, 13)
         Me.LState.TabIndex = 132
-        Me.LState.Text = "State"
+        Me.LState.Text = "Status"
         '
         'CLBFilterState
         '

@@ -96,13 +96,13 @@ Partial Class FSearchGcent
         Me.LbPatch = New System.Windows.Forms.Label()
         Me.TBDeliveryPatch = New System.Windows.Forms.TextBox()
         Me.LBdelDate = New System.Windows.Forms.Label()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.BRessource = New System.Windows.Forms.Button()
+        Me.Bsearch = New System.Windows.Forms.Button()
         Me.Bsearch2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
-        Me.Bsearch = New System.Windows.Forms.Button()
-        Me.BRessource = New System.Windows.Forms.Button()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.SuspendLayout()
         '
         'CBRetrofit
@@ -400,9 +400,9 @@ Partial Class FSearchGcent
         Me.LbState.BackColor = System.Drawing.Color.White
         Me.LbState.Location = New System.Drawing.Point(19, 142)
         Me.LbState.Name = "LbState"
-        Me.LbState.Size = New System.Drawing.Size(32, 13)
+        Me.LbState.Size = New System.Drawing.Size(37, 13)
         Me.LbState.TabIndex = 76
-        Me.LbState.Text = "State"
+        Me.LbState.Text = "Status"
         '
         'TBState
         '
@@ -749,6 +749,31 @@ Partial Class FSearchGcent
         Me.LBdelDate.TabIndex = 144
         Me.LBdelDate.Text = "Internal Delivery Date"
         '
+        'BRessource
+        '
+        Me.BRessource.BackColor = System.Drawing.Color.White
+        Me.BRessource.FlatAppearance.BorderSize = 0
+        Me.BRessource.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BRessource.Image = Global.WindowsApplication1.My.Resources.Resources.search3_p
+        Me.BRessource.Location = New System.Drawing.Point(433, 155)
+        Me.BRessource.Name = "BRessource"
+        Me.BRessource.Size = New System.Drawing.Size(25, 25)
+        Me.BRessource.TabIndex = 156
+        Me.ToolTip1.SetToolTip(Me.BRessource, "Ressource R&D informtaion")
+        Me.BRessource.UseVisualStyleBackColor = False
+        '
+        'Bsearch
+        '
+        Me.Bsearch.FlatAppearance.BorderSize = 0
+        Me.Bsearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Bsearch.Image = Global.WindowsApplication1.My.Resources.Resources.search2
+        Me.Bsearch.Location = New System.Drawing.Point(341, 63)
+        Me.Bsearch.Name = "Bsearch"
+        Me.Bsearch.Size = New System.Drawing.Size(50, 50)
+        Me.Bsearch.TabIndex = 155
+        Me.ToolTip1.SetToolTip(Me.Bsearch, "Case information")
+        Me.Bsearch.UseVisualStyleBackColor = True
+        '
         'Bsearch2
         '
         Me.Bsearch2.BackColor = System.Drawing.Color.White
@@ -799,31 +824,6 @@ Partial Class FSearchGcent
         Me.Button2.TabIndex = 129
         Me.ToolTip1.SetToolTip(Me.Button2, "Mail")
         Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Bsearch
-        '
-        Me.Bsearch.FlatAppearance.BorderSize = 0
-        Me.Bsearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Bsearch.Image = Global.WindowsApplication1.My.Resources.Resources.search2
-        Me.Bsearch.Location = New System.Drawing.Point(341, 63)
-        Me.Bsearch.Name = "Bsearch"
-        Me.Bsearch.Size = New System.Drawing.Size(50, 50)
-        Me.Bsearch.TabIndex = 155
-        Me.ToolTip1.SetToolTip(Me.Bsearch, "Case information")
-        Me.Bsearch.UseVisualStyleBackColor = True
-        '
-        'BRessource
-        '
-        Me.BRessource.BackColor = System.Drawing.Color.White
-        Me.BRessource.FlatAppearance.BorderSize = 0
-        Me.BRessource.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BRessource.Image = Global.WindowsApplication1.My.Resources.Resources.search3_p
-        Me.BRessource.Location = New System.Drawing.Point(433, 155)
-        Me.BRessource.Name = "BRessource"
-        Me.BRessource.Size = New System.Drawing.Size(25, 25)
-        Me.BRessource.TabIndex = 156
-        Me.ToolTip1.SetToolTip(Me.BRessource, "Ressource R&D informtaion")
-        Me.BRessource.UseVisualStyleBackColor = False
         '
         'FSearchGcent
         '

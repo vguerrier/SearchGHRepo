@@ -245,9 +245,9 @@ Partial Class FSearchCase
         Me.LbState.ForeColor = System.Drawing.Color.Black
         Me.LbState.Location = New System.Drawing.Point(28, 191)
         Me.LbState.Name = "LbState"
-        Me.LbState.Size = New System.Drawing.Size(32, 13)
+        Me.LbState.Size = New System.Drawing.Size(37, 13)
         Me.LbState.TabIndex = 42
-        Me.LbState.Text = "State"
+        Me.LbState.Text = "Status"
         '
         'TBState
         '
