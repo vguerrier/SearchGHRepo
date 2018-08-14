@@ -44,6 +44,8 @@ Partial Class FBacklog
         Me.CBGcent = New System.Windows.Forms.CheckBox()
         Me.BExcel = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.CLBVTP = New System.Windows.Forms.CheckedListBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         CType(Me.DGVBacklog, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BS1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -116,7 +118,7 @@ Partial Class FBacklog
         '
         Me.LState.AutoSize = True
         Me.LState.BackColor = System.Drawing.Color.White
-        Me.LState.Location = New System.Drawing.Point(102, 98)
+        Me.LState.Location = New System.Drawing.Point(111, 98)
         Me.LState.Name = "LState"
         Me.LState.Size = New System.Drawing.Size(37, 13)
         Me.LState.TabIndex = 132
@@ -128,23 +130,23 @@ Partial Class FBacklog
         Me.CLBFilterState.FormattingEnabled = True
         Me.CLBFilterState.Location = New System.Drawing.Point(60, 114)
         Me.CLBFilterState.Name = "CLBFilterState"
-        Me.CLBFilterState.Size = New System.Drawing.Size(138, 139)
+        Me.CLBFilterState.Size = New System.Drawing.Size(140, 139)
         Me.CLBFilterState.TabIndex = 134
         '
         'CLBFilterPriority
         '
         Me.CLBFilterPriority.CheckOnClick = True
         Me.CLBFilterPriority.FormattingEnabled = True
-        Me.CLBFilterPriority.Location = New System.Drawing.Point(254, 114)
+        Me.CLBFilterPriority.Location = New System.Drawing.Point(230, 114)
         Me.CLBFilterPriority.Name = "CLBFilterPriority"
-        Me.CLBFilterPriority.Size = New System.Drawing.Size(138, 139)
+        Me.CLBFilterPriority.Size = New System.Drawing.Size(140, 139)
         Me.CLBFilterPriority.TabIndex = 136
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.BackColor = System.Drawing.Color.White
-        Me.Label1.Location = New System.Drawing.Point(299, 98)
+        Me.Label1.Location = New System.Drawing.Point(281, 98)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(38, 13)
         Me.Label1.TabIndex = 135
@@ -163,16 +165,16 @@ Partial Class FBacklog
         '
         Me.CLBFilterAGroup.CheckOnClick = True
         Me.CLBFilterAGroup.FormattingEnabled = True
-        Me.CLBFilterAGroup.Location = New System.Drawing.Point(451, 114)
+        Me.CLBFilterAGroup.Location = New System.Drawing.Point(400, 114)
         Me.CLBFilterAGroup.Name = "CLBFilterAGroup"
-        Me.CLBFilterAGroup.Size = New System.Drawing.Size(138, 139)
+        Me.CLBFilterAGroup.Size = New System.Drawing.Size(140, 139)
         Me.CLBFilterAGroup.TabIndex = 139
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.BackColor = System.Drawing.Color.White
-        Me.Label3.Location = New System.Drawing.Point(486, 98)
+        Me.Label3.Location = New System.Drawing.Point(435, 98)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(70, 13)
         Me.Label3.TabIndex = 138
@@ -182,16 +184,16 @@ Partial Class FBacklog
         '
         Me.CLBFilterWorkstream.CheckOnClick = True
         Me.CLBFilterWorkstream.FormattingEnabled = True
-        Me.CLBFilterWorkstream.Location = New System.Drawing.Point(639, 114)
+        Me.CLBFilterWorkstream.Location = New System.Drawing.Point(570, 114)
         Me.CLBFilterWorkstream.Name = "CLBFilterWorkstream"
-        Me.CLBFilterWorkstream.Size = New System.Drawing.Size(138, 139)
+        Me.CLBFilterWorkstream.Size = New System.Drawing.Size(140, 139)
         Me.CLBFilterWorkstream.TabIndex = 141
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.BackColor = System.Drawing.Color.White
-        Me.Label4.Location = New System.Drawing.Point(674, 98)
+        Me.Label4.Location = New System.Drawing.Point(608, 98)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(64, 13)
         Me.Label4.TabIndex = 140
@@ -214,7 +216,7 @@ Partial Class FBacklog
         '
         Me.CBClosed.AutoSize = True
         Me.CBClosed.BackColor = System.Drawing.Color.White
-        Me.CBClosed.Location = New System.Drawing.Point(811, 114)
+        Me.CBClosed.Location = New System.Drawing.Point(910, 114)
         Me.CBClosed.Name = "CBClosed"
         Me.CBClosed.Size = New System.Drawing.Size(143, 17)
         Me.CBClosed.TabIndex = 143
@@ -225,7 +227,7 @@ Partial Class FBacklog
         '
         Me.CBGcent.AutoSize = True
         Me.CBGcent.BackColor = System.Drawing.Color.White
-        Me.CBGcent.Location = New System.Drawing.Point(811, 140)
+        Me.CBGcent.Location = New System.Drawing.Point(910, 140)
         Me.CBGcent.Name = "CBGcent"
         Me.CBGcent.Size = New System.Drawing.Size(165, 17)
         Me.CBGcent.TabIndex = 144
@@ -240,12 +242,31 @@ Partial Class FBacklog
         Me.BExcel.FlatAppearance.BorderSize = 0
         Me.BExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BExcel.Image = CType(resources.GetObject("BExcel.Image"), System.Drawing.Image)
-        Me.BExcel.Location = New System.Drawing.Point(811, 175)
+        Me.BExcel.Location = New System.Drawing.Point(910, 175)
         Me.BExcel.Name = "BExcel"
         Me.BExcel.Size = New System.Drawing.Size(30, 30)
         Me.BExcel.TabIndex = 145
         Me.ToolTip1.SetToolTip(Me.BExcel, "Excel Export")
         Me.BExcel.UseVisualStyleBackColor = False
+        '
+        'CLBVTP
+        '
+        Me.CLBVTP.CheckOnClick = True
+        Me.CLBVTP.FormattingEnabled = True
+        Me.CLBVTP.Location = New System.Drawing.Point(740, 114)
+        Me.CLBVTP.Name = "CLBVTP"
+        Me.CLBVTP.Size = New System.Drawing.Size(140, 139)
+        Me.CLBVTP.TabIndex = 147
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.BackColor = System.Drawing.Color.White
+        Me.Label5.Location = New System.Drawing.Point(796, 98)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(28, 13)
+        Me.Label5.TabIndex = 146
+        Me.Label5.Text = "VTP"
         '
         'FBacklog
         '
@@ -255,6 +276,8 @@ Partial Class FBacklog
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.LightSteelBlue
         Me.ClientSize = New System.Drawing.Size(1584, 809)
+        Me.Controls.Add(Me.CLBVTP)
+        Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.BExcel)
         Me.Controls.Add(Me.CBGcent)
         Me.Controls.Add(Me.CBClosed)
@@ -275,6 +298,7 @@ Partial Class FBacklog
         Me.Controls.Add(Me.TBCus)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FBacklog"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Backlog"
         CType(Me.DGVBacklog, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BS1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -302,4 +326,6 @@ Partial Class FBacklog
     Friend WithEvents CBGcent As CheckBox
     Friend WithEvents BExcel As Button
     Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents CLBVTP As CheckedListBox
+    Friend WithEvents Label5 As Label
 End Class

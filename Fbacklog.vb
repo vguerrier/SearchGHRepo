@@ -28,9 +28,8 @@ Public Class FBacklog
                 RequestBacklog = "select distinct c.aldata_assignedgroupname as ""Assign_Group"" "
             Case "Workstream"
                 RequestBacklog = "select distinct c.aldata_workstreamname as Workstream "
-            Case "condition 3", "condition 4"
-
-
+            Case "VTP"
+                RequestBacklog = "select distinct c.aldata_validatetargetpatch as VTP "
             Case Else
                 RequestBacklog = "SELECT c.ticketnumber as ""Case"", "                                  '1
                 'RequestBacklog = RequestBacklog & "c.customeridname, "
@@ -177,7 +176,7 @@ Public Class FBacklog
         Dim req As String
         Dim nbrow As Integer
         Dim Opt, OptGcent As Integer
-        Dim MonDataSet, MonDataSetState, MonDataSetPriority, MonDataSetAgroup, MonDataSetWorkstream As New DataSet
+        Dim MonDataSet, MonDataSetState, MonDataSetPriority, MonDataSetAgroup, MonDataSetWorkstream, MonDataSetVTP As New DataSet
         Dim Adaptateur As New SqlDataAdapter
         'Dim toto As String
 
@@ -304,6 +303,24 @@ Public Class FBacklog
             SqlConn.Close()
             myReader.Close()
 
+            '*********filtre VTP*************
+            SqlConn.Open()
+            SqlCmd = SqlConn.CreateCommand()
+            req = RequestBacklog(Trim(TBCus.Text), "VTP", Opt, OptGcent)
+
+
+            SqlCmd.CommandText = req
+
+            Adaptateur.SelectCommand = SqlCmd
+            Adaptateur.Fill(MonDataSetVTP, "backlog")
+
+            myReader = SqlCmd.ExecuteReader()
+
+            CLBVTP.DataSource = MonDataSetVTP.Tables("backlog")
+            CLBVTP.DisplayMember = "VTP"
+
+            SqlConn.Close()
+            myReader.Close()
 
             TBNbCases.Text = nbrow
             ' MessageBox.Show(nbrow)
@@ -351,8 +368,9 @@ Public Class FBacklog
     End Sub
 
     Private Sub BBfilter_Click(sender As System.Object, e As System.EventArgs) Handles Bfilter.Click
-        Dim filtreState, FiltrePriority, FiltreAGroup, FiltreWorkstream As String
+        Dim filtreState, FiltrePriority, FiltreAGroup, FiltreWorkstream, FiltreVTP As String
         Dim nbs, nbs2 As Integer
+        Dim Itemchk As String
 
         'MsgBox(CLBFilterState.SelectedItem.ToString())
         researchBacklog()
@@ -437,22 +455,28 @@ Public Class FBacklog
         End If
 
         '***********Workstream************
-        FiltreWorkstream = " ( Workstream='"
+        FiltreWorkstream = " ( Workstream "
+
         nbs = 0
         If nbs2 <> 0 Then
             FiltreWorkstream = " and" & FiltreWorkstream
         End If
         For Each itemChecked In CLBFilterWorkstream.CheckedItems
+            If itemChecked.item("Workstream").ToString = "" Then
+                Itemchk = "is null"
+            Else
+                Itemchk = "='" & itemChecked.item("Workstream").ToString & "'"
+            End If
             If nbs = 0 Then
-                FiltreWorkstream = FiltreWorkstream & itemChecked.item("Workstream").ToString & "'"
+                FiltreWorkstream = FiltreWorkstream & Itemchk
                 'MsgBox(itemChecked.item("State").ToString)
             Else
-                FiltreWorkstream = FiltreWorkstream & " or " & "Workstream='" & itemChecked.item("Workstream").ToString & "'"
+                FiltreWorkstream = FiltreWorkstream & " or Workstream " & Itemchk
             End If
             nbs = nbs + 1
         Next
 
-        If FiltreWorkstream = " ( Workstream='" Or FiltreWorkstream = " and ( Workstream='" Then
+        If FiltreWorkstream = " ( Workstream " Or FiltreWorkstream = " and ( Workstream " Then
             FiltreWorkstream = ""
 
             'nbs2 = 0
@@ -460,8 +484,63 @@ Public Class FBacklog
             nbs2 = 1
             FiltreWorkstream = FiltreWorkstream & ") "
         End If
+        'FiltreWorkstream = " ( Workstream='"
+        'nbs = 0
+        'If nbs2 <> 0 Then
+        '    FiltreWorkstream = " and" & FiltreWorkstream
+        'End If
+        'For Each itemChecked In CLBFilterWorkstream.CheckedItems
+        '    If nbs = 0 Then
+        '        FiltreWorkstream = FiltreWorkstream & itemChecked.item("Workstream").ToString & "'"
+        '        'MsgBox(itemChecked.item("State").ToString)
+        '    Else
+        '        FiltreWorkstream = FiltreWorkstream & " or " & "Workstream='" & itemChecked.item("Workstream").ToString & "'"
+        '    End If
+        '    nbs = nbs + 1
+        'Next
 
-        BS1.Filter = filtreState + FiltrePriority + FiltreAGroup + FiltreWorkstream
+        'If FiltreWorkstream = " ( Workstream='" Or FiltreWorkstream = " and ( Workstream='" Then
+        '    FiltreWorkstream = ""
+
+        '    'nbs2 = 0
+        'Else
+        '    nbs2 = 1
+        '    FiltreWorkstream = FiltreWorkstream & ") "
+        'End If
+
+        '***********VTP************
+        FiltreVTP = " ( VTP "
+
+        nbs = 0
+        If nbs2 <> 0 Then
+            FiltreVTP = " and" & FiltreVTP
+        End If
+        For Each itemChecked In CLBVTP.CheckedItems
+            If itemChecked.item("VTP").ToString = "" Then
+                Itemchk = "is null"
+            Else
+                Itemchk = "='" & itemChecked.item("VTP").ToString & "'"
+            End If
+            If nbs = 0 Then
+                FiltreVTP = FiltreVTP & Itemchk
+                'MsgBox(itemChecked.item("State").ToString)
+            Else
+                FiltreVTP = FiltreVTP & " or VTP " & Itemchk
+            End If
+            nbs = nbs + 1
+        Next
+
+        If FiltreVTP = " ( VTP " Or FiltreVTP = " and ( VTP " Then
+            FiltreVTP = ""
+
+            'nbs2 = 0
+        Else
+            nbs2 = 1
+            FiltreVTP = FiltreVTP & ") "
+        End If
+
+
+        BS1.Filter = filtreState + FiltrePriority + FiltreAGroup + FiltreWorkstream + FiltreVTP
         TBNbCases.Text = BS1.Count
 
     End Sub
