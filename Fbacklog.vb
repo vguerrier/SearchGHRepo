@@ -656,6 +656,9 @@ Public Class FBacklog
         For i As Integer = 0 To CLBFilterWorkstream.Items.Count - 1
             CLBFilterWorkstream.SetItemChecked(i, False)
         Next
+        For i As Integer = 0 To CLBVTP.Items.Count - 1
+            CLBVTP.SetItemChecked(i, False)
+        Next
     End Sub
 
     Private Sub Checkedlist()
@@ -673,5 +676,35 @@ Public Class FBacklog
         'For i = 0 To CLBFilterWorkstream.Items.Count - 1
         '    CLBFilterWorkstream.SetItemChecked(i, True)
         'Next
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        For i As Integer = 0 To CLBFilterState.Items.Count - 1
+            CLBFilterState.SetItemChecked(i, False)
+        Next
+    End Sub
+
+    Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click
+        For i As Integer = 0 To CLBFilterPriority.Items.Count - 1
+            CLBFilterPriority.SetItemChecked(i, False)
+        Next
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        For i As Integer = 0 To CLBFilterAGroup.Items.Count - 1
+            CLBFilterAGroup.SetItemChecked(i, False)
+        Next
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        For i As Integer = 0 To CLBFilterWorkstream.Items.Count - 1
+            CLBFilterWorkstream.SetItemChecked(i, False)
+        Next
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        For i As Integer = 0 To CLBVTP.Items.Count - 1
+            CLBVTP.SetItemChecked(i, False)
+        Next
     End Sub
 End Class

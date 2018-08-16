@@ -46,6 +46,11 @@ Partial Class FBacklog
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.CLBVTP = New System.Windows.Forms.CheckedListBox()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
         CType(Me.DGVBacklog, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BS1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -268,6 +273,76 @@ Partial Class FBacklog
         Me.Label5.TabIndex = 146
         Me.Label5.Text = "VTP"
         '
+        'Button1
+        '
+        Me.Button1.BackColor = System.Drawing.Color.White
+        Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(183, 98)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(15, 15)
+        Me.Button1.TabIndex = 148
+        Me.Button1.Text = "X"
+        Me.ToolTip1.SetToolTip(Me.Button1, "Remove Status Filter")
+        Me.Button1.UseVisualStyleBackColor = False
+        '
+        'Button2
+        '
+        Me.Button2.BackColor = System.Drawing.Color.White
+        Me.Button2.FlatAppearance.BorderSize = 0
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.Location = New System.Drawing.Point(353, 98)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(15, 15)
+        Me.Button2.TabIndex = 149
+        Me.Button2.Text = "X"
+        Me.ToolTip1.SetToolTip(Me.Button2, "Remove Priority Filter")
+        Me.Button2.UseVisualStyleBackColor = False
+        '
+        'Button3
+        '
+        Me.Button3.BackColor = System.Drawing.Color.White
+        Me.Button3.FlatAppearance.BorderSize = 0
+        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.Location = New System.Drawing.Point(524, 98)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(15, 15)
+        Me.Button3.TabIndex = 150
+        Me.Button3.Text = "X"
+        Me.ToolTip1.SetToolTip(Me.Button3, "Remove Assign Filter")
+        Me.Button3.UseVisualStyleBackColor = False
+        '
+        'Button4
+        '
+        Me.Button4.BackColor = System.Drawing.Color.White
+        Me.Button4.FlatAppearance.BorderSize = 0
+        Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button4.Location = New System.Drawing.Point(693, 98)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(15, 15)
+        Me.Button4.TabIndex = 151
+        Me.Button4.Text = "X"
+        Me.ToolTip1.SetToolTip(Me.Button4, "Remove Workstream Filter")
+        Me.Button4.UseVisualStyleBackColor = False
+        '
+        'Button5
+        '
+        Me.Button5.BackColor = System.Drawing.Color.White
+        Me.Button5.FlatAppearance.BorderSize = 0
+        Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button5.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button5.Location = New System.Drawing.Point(864, 98)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(15, 15)
+        Me.Button5.TabIndex = 152
+        Me.Button5.Text = "X"
+        Me.ToolTip1.SetToolTip(Me.Button5, "Remove VTP Filter")
+        Me.Button5.UseVisualStyleBackColor = False
+        '
         'FBacklog
         '
         Me.AccessibleDescription = ""
@@ -276,6 +351,11 @@ Partial Class FBacklog
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.LightSteelBlue
         Me.ClientSize = New System.Drawing.Size(1584, 809)
+        Me.Controls.Add(Me.Button5)
+        Me.Controls.Add(Me.Button4)
+        Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.CLBVTP)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.BExcel)
@@ -328,4 +408,9 @@ Partial Class FBacklog
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents CLBVTP As CheckedListBox
     Friend WithEvents Label5 As Label
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button3 As Button
+    Friend WithEvents Button4 As Button
+    Friend WithEvents Button5 As Button
 End Class
