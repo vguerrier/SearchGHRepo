@@ -133,6 +133,16 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property checkall() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("checkall", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property Fond1() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("Fond1", resourceCulture)
@@ -286,6 +296,16 @@ Namespace My.Resources
         Friend ReadOnly Property search3_p() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("search3_p", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property uncheckall() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("uncheckall", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

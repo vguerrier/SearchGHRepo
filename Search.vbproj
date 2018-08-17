@@ -273,6 +273,8 @@
     <None Include="icons\back.png" />
     <None Include="icons\backS.png" />
     <None Include="icons\nextS.png" />
+    <None Include="icons\checkall.png" />
+    <None Include="icons\uncheckall.png" />
     <Content Include="Igh0zt-Ios7-Style-Metro-Ui-MetroUI-Other-Search.ico" />
     <None Include="Resources\search.png" />
   </ItemGroup>

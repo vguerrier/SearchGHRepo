@@ -28,13 +28,11 @@ Partial Class FBacklog
         Me.TBNbCases = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.DGVBacklog = New System.Windows.Forms.DataGridView()
-        Me.Bfilter = New System.Windows.Forms.Button()
         Me.LState = New System.Windows.Forms.Label()
         Me.CLBFilterState = New System.Windows.Forms.CheckedListBox()
         Me.CLBFilterPriority = New System.Windows.Forms.CheckedListBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LB_NB = New System.Windows.Forms.Label()
-        Me.BS1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.CLBFilterAGroup = New System.Windows.Forms.CheckedListBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.CLBFilterWorkstream = New System.Windows.Forms.CheckedListBox()
@@ -42,15 +40,17 @@ Partial Class FBacklog
         Me.FilterRemove = New System.Windows.Forms.Button()
         Me.CBClosed = New System.Windows.Forms.CheckBox()
         Me.CBGcent = New System.Windows.Forms.CheckBox()
-        Me.BExcel = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.CLBVTP = New System.Windows.Forms.CheckedListBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
+        Me.CLBVTP = New System.Windows.Forms.CheckedListBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.BExcel = New System.Windows.Forms.Button()
+        Me.Bfilter = New System.Windows.Forms.Button()
+        Me.BS1 = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.DGVBacklog, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BS1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -60,7 +60,7 @@ Partial Class FBacklog
         Me.TBCus.BackColor = System.Drawing.Color.White
         Me.TBCus.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TBCus.ForeColor = System.Drawing.SystemColors.MenuHighlight
-        Me.TBCus.Location = New System.Drawing.Point(12, 69)
+        Me.TBCus.Location = New System.Drawing.Point(12, 65)
         Me.TBCus.Name = "TBCus"
         Me.TBCus.ReadOnly = True
         Me.TBCus.Size = New System.Drawing.Size(331, 26)
@@ -70,7 +70,7 @@ Partial Class FBacklog
         '
         Me.TBNbCases.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TBNbCases.ForeColor = System.Drawing.SystemColors.InfoText
-        Me.TBNbCases.Location = New System.Drawing.Point(489, 69)
+        Me.TBNbCases.Location = New System.Drawing.Point(489, 65)
         Me.TBNbCases.Name = "TBNbCases"
         Me.TBNbCases.Size = New System.Drawing.Size(100, 26)
         Me.TBNbCases.TabIndex = 97
@@ -79,7 +79,7 @@ Partial Class FBacklog
         '
         Me.Label2.AutoSize = True
         Me.Label2.BackColor = System.Drawing.Color.White
-        Me.Label2.Location = New System.Drawing.Point(432, 77)
+        Me.Label2.Location = New System.Drawing.Point(432, 73)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(53, 13)
         Me.Label2.TabIndex = 98
@@ -105,19 +105,6 @@ Partial Class FBacklog
         Me.DGVBacklog.ShowRowErrors = False
         Me.DGVBacklog.Size = New System.Drawing.Size(1560, 531)
         Me.DGVBacklog.TabIndex = 99
-        '
-        'Bfilter
-        '
-        Me.Bfilter.BackColor = System.Drawing.Color.White
-        Me.Bfilter.FlatAppearance.BorderSize = 0
-        Me.Bfilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Bfilter.Image = CType(resources.GetObject("Bfilter.Image"), System.Drawing.Image)
-        Me.Bfilter.Location = New System.Drawing.Point(12, 101)
-        Me.Bfilter.Name = "Bfilter"
-        Me.Bfilter.Size = New System.Drawing.Size(30, 30)
-        Me.Bfilter.TabIndex = 130
-        Me.ToolTip1.SetToolTip(Me.Bfilter, "Filter")
-        Me.Bfilter.UseVisualStyleBackColor = False
         '
         'LState
         '
@@ -209,11 +196,11 @@ Partial Class FBacklog
         Me.FilterRemove.BackColor = System.Drawing.Color.White
         Me.FilterRemove.FlatAppearance.BorderSize = 0
         Me.FilterRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.FilterRemove.Image = Global.WindowsApplication1.My.Resources.Resources.uncheckall
         Me.FilterRemove.Location = New System.Drawing.Point(20, 137)
         Me.FilterRemove.Name = "FilterRemove"
         Me.FilterRemove.Size = New System.Drawing.Size(22, 20)
         Me.FilterRemove.TabIndex = 142
-        Me.FilterRemove.Text = "X"
         Me.ToolTip1.SetToolTip(Me.FilterRemove, "Remove filters")
         Me.FilterRemove.UseVisualStyleBackColor = False
         '
@@ -239,20 +226,61 @@ Partial Class FBacklog
         Me.CBGcent.Text = "Add CQ Cards to the Case list"
         Me.CBGcent.UseVisualStyleBackColor = False
         '
-        'BExcel
+        'Button2
         '
-        Me.BExcel.AccessibleDescription = ""
-        Me.BExcel.AccessibleName = ""
-        Me.BExcel.BackColor = System.Drawing.Color.White
-        Me.BExcel.FlatAppearance.BorderSize = 0
-        Me.BExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BExcel.Image = CType(resources.GetObject("BExcel.Image"), System.Drawing.Image)
-        Me.BExcel.Location = New System.Drawing.Point(910, 175)
-        Me.BExcel.Name = "BExcel"
-        Me.BExcel.Size = New System.Drawing.Size(30, 30)
-        Me.BExcel.TabIndex = 145
-        Me.ToolTip1.SetToolTip(Me.BExcel, "Excel Export")
-        Me.BExcel.UseVisualStyleBackColor = False
+        Me.Button2.BackColor = System.Drawing.Color.White
+        Me.Button2.FlatAppearance.BorderSize = 0
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.Image = Global.WindowsApplication1.My.Resources.Resources.checkall
+        Me.Button2.Location = New System.Drawing.Point(350, 94)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(20, 20)
+        Me.Button2.TabIndex = 149
+        Me.ToolTip1.SetToolTip(Me.Button2, "All")
+        Me.Button2.UseVisualStyleBackColor = False
+        '
+        'Button3
+        '
+        Me.Button3.BackColor = System.Drawing.Color.White
+        Me.Button3.FlatAppearance.BorderSize = 0
+        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.Image = Global.WindowsApplication1.My.Resources.Resources.checkall
+        Me.Button3.Location = New System.Drawing.Point(520, 94)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(20, 20)
+        Me.Button3.TabIndex = 150
+        Me.ToolTip1.SetToolTip(Me.Button3, "All")
+        Me.Button3.UseVisualStyleBackColor = False
+        '
+        'Button4
+        '
+        Me.Button4.BackColor = System.Drawing.Color.White
+        Me.Button4.FlatAppearance.BorderSize = 0
+        Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button4.Image = Global.WindowsApplication1.My.Resources.Resources.checkall
+        Me.Button4.Location = New System.Drawing.Point(690, 94)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(20, 20)
+        Me.Button4.TabIndex = 151
+        Me.ToolTip1.SetToolTip(Me.Button4, "All")
+        Me.Button4.UseVisualStyleBackColor = False
+        '
+        'Button5
+        '
+        Me.Button5.BackColor = System.Drawing.Color.White
+        Me.Button5.FlatAppearance.BorderSize = 0
+        Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button5.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button5.Image = Global.WindowsApplication1.My.Resources.Resources.checkall
+        Me.Button5.Location = New System.Drawing.Point(860, 94)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(20, 20)
+        Me.Button5.TabIndex = 152
+        Me.ToolTip1.SetToolTip(Me.Button5, "All")
+        Me.Button5.UseVisualStyleBackColor = False
         '
         'CLBVTP
         '
@@ -279,69 +307,41 @@ Partial Class FBacklog
         Me.Button1.FlatAppearance.BorderSize = 0
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(183, 98)
+        Me.Button1.Image = Global.WindowsApplication1.My.Resources.Resources.checkall
+        Me.Button1.Location = New System.Drawing.Point(180, 94)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(15, 15)
+        Me.Button1.Size = New System.Drawing.Size(20, 20)
         Me.Button1.TabIndex = 148
-        Me.Button1.Text = "X"
-        Me.ToolTip1.SetToolTip(Me.Button1, "Remove Status Filter")
+        Me.ToolTip1.SetToolTip(Me.Button1, "All")
         Me.Button1.UseVisualStyleBackColor = False
         '
-        'Button2
+        'BExcel
         '
-        Me.Button2.BackColor = System.Drawing.Color.White
-        Me.Button2.FlatAppearance.BorderSize = 0
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.Location = New System.Drawing.Point(353, 98)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(15, 15)
-        Me.Button2.TabIndex = 149
-        Me.Button2.Text = "X"
-        Me.ToolTip1.SetToolTip(Me.Button2, "Remove Priority Filter")
-        Me.Button2.UseVisualStyleBackColor = False
+        Me.BExcel.AccessibleDescription = ""
+        Me.BExcel.AccessibleName = ""
+        Me.BExcel.BackColor = System.Drawing.Color.White
+        Me.BExcel.FlatAppearance.BorderSize = 0
+        Me.BExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BExcel.Image = CType(resources.GetObject("BExcel.Image"), System.Drawing.Image)
+        Me.BExcel.Location = New System.Drawing.Point(910, 175)
+        Me.BExcel.Name = "BExcel"
+        Me.BExcel.Size = New System.Drawing.Size(30, 30)
+        Me.BExcel.TabIndex = 145
+        Me.ToolTip1.SetToolTip(Me.BExcel, "Excel Export")
+        Me.BExcel.UseVisualStyleBackColor = False
         '
-        'Button3
+        'Bfilter
         '
-        Me.Button3.BackColor = System.Drawing.Color.White
-        Me.Button3.FlatAppearance.BorderSize = 0
-        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.Location = New System.Drawing.Point(524, 98)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(15, 15)
-        Me.Button3.TabIndex = 150
-        Me.Button3.Text = "X"
-        Me.ToolTip1.SetToolTip(Me.Button3, "Remove Assign Filter")
-        Me.Button3.UseVisualStyleBackColor = False
-        '
-        'Button4
-        '
-        Me.Button4.BackColor = System.Drawing.Color.White
-        Me.Button4.FlatAppearance.BorderSize = 0
-        Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button4.Location = New System.Drawing.Point(693, 98)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(15, 15)
-        Me.Button4.TabIndex = 151
-        Me.Button4.Text = "X"
-        Me.ToolTip1.SetToolTip(Me.Button4, "Remove Workstream Filter")
-        Me.Button4.UseVisualStyleBackColor = False
-        '
-        'Button5
-        '
-        Me.Button5.BackColor = System.Drawing.Color.White
-        Me.Button5.FlatAppearance.BorderSize = 0
-        Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button5.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button5.Location = New System.Drawing.Point(864, 98)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(15, 15)
-        Me.Button5.TabIndex = 152
-        Me.Button5.Text = "X"
-        Me.ToolTip1.SetToolTip(Me.Button5, "Remove VTP Filter")
-        Me.Button5.UseVisualStyleBackColor = False
+        Me.Bfilter.BackColor = System.Drawing.Color.White
+        Me.Bfilter.FlatAppearance.BorderSize = 0
+        Me.Bfilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Bfilter.Image = CType(resources.GetObject("Bfilter.Image"), System.Drawing.Image)
+        Me.Bfilter.Location = New System.Drawing.Point(12, 101)
+        Me.Bfilter.Name = "Bfilter"
+        Me.Bfilter.Size = New System.Drawing.Size(30, 30)
+        Me.Bfilter.TabIndex = 130
+        Me.ToolTip1.SetToolTip(Me.Bfilter, "Filter")
+        Me.Bfilter.UseVisualStyleBackColor = False
         '
         'FBacklog
         '

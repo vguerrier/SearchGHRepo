@@ -14,7 +14,7 @@ Imports Excel = Microsoft.Office.Interop.Excel
 Public Class FBacklog
 
     Private lvwColumnSorter As ListViewColumnSorter
-    Dim FirstOpened As Integer
+    Dim FirstOpened, iStatus, iWorkstream, iAssign, iVTP, iPriority As Integer
 
     Function RequestBacklog(Client As String, dist As String, Opt As Integer, Optgcent As Integer) As String
         'Opt = 1 si on veut les cases fermés
@@ -551,6 +551,11 @@ Public Class FBacklog
 
 
         FirstOpened = 1
+        iStatus = 1
+        iWorkstream = 1
+        iAssign = 1
+        iVTP = 1
+        iPriority = 1
         Checkedlist()
         'SkinManager.AddFormToManage(Me)
         SkinManager.Theme = MaterialSkinManager.Themes.LIGHT
@@ -647,18 +652,23 @@ Public Class FBacklog
         For i As Integer = 0 To CLBFilterState.Items.Count - 1
             CLBFilterState.SetItemChecked(i, False)
         Next
+        Button1.Image = Global.WindowsApplication1.My.Resources.Resources.checkall
         For i As Integer = 0 To CLBFilterPriority.Items.Count - 1
             CLBFilterPriority.SetItemChecked(i, False)
         Next
+        Button2.Image = Global.WindowsApplication1.My.Resources.Resources.checkall
         For i As Integer = 0 To CLBFilterAGroup.Items.Count - 1
             CLBFilterAGroup.SetItemChecked(i, False)
         Next
+        Button3.Image = Global.WindowsApplication1.My.Resources.Resources.checkall
         For i As Integer = 0 To CLBFilterWorkstream.Items.Count - 1
             CLBFilterWorkstream.SetItemChecked(i, False)
         Next
+        Button4.Image = Global.WindowsApplication1.My.Resources.Resources.checkall
         For i As Integer = 0 To CLBVTP.Items.Count - 1
             CLBVTP.SetItemChecked(i, False)
         Next
+        Button5.Image = Global.WindowsApplication1.My.Resources.Resources.checkall
     End Sub
 
     Private Sub Checkedlist()
@@ -679,32 +689,83 @@ Public Class FBacklog
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        For i As Integer = 0 To CLBFilterState.Items.Count - 1
-            CLBFilterState.SetItemChecked(i, False)
-        Next
+
+        If iStatus = 0 Then
+            For i As Integer = 0 To CLBFilterState.Items.Count - 1
+                CLBFilterState.SetItemChecked(i, False)
+            Next
+            iStatus = 1
+            Button1.Image = Global.WindowsApplication1.My.Resources.Resources.checkall
+        Else
+            For i As Integer = 0 To CLBFilterState.Items.Count - 1
+                CLBFilterState.SetItemChecked(i, True)
+            Next
+            iStatus = 0
+            Button1.Image = Global.WindowsApplication1.My.Resources.Resources.uncheckall
+        End If
     End Sub
 
     Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click
-        For i As Integer = 0 To CLBFilterPriority.Items.Count - 1
-            CLBFilterPriority.SetItemChecked(i, False)
-        Next
+        If iPriority = 0 Then
+            For i As Integer = 0 To CLBFilterPriority.Items.Count - 1
+                CLBFilterPriority.SetItemChecked(i, False)
+            Next
+            iPriority = 1
+            Button2.Image = Global.WindowsApplication1.My.Resources.Resources.checkall
+        Else
+            For i As Integer = 0 To CLBFilterPriority.Items.Count - 1
+                CLBFilterPriority.SetItemChecked(i, True)
+            Next
+            iPriority = 0
+            Button2.Image = Global.WindowsApplication1.My.Resources.Resources.uncheckall
+        End If
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        For i As Integer = 0 To CLBFilterAGroup.Items.Count - 1
-            CLBFilterAGroup.SetItemChecked(i, False)
-        Next
+        If iAssign = 0 Then
+            For i As Integer = 0 To CLBFilterAGroup.Items.Count - 1
+                CLBFilterAGroup.SetItemChecked(i, False)
+            Next
+            iAssign = 1
+            Button3.Image = Global.WindowsApplication1.My.Resources.Resources.checkall
+        Else
+            For i As Integer = 0 To CLBFilterAGroup.Items.Count - 1
+                CLBFilterAGroup.SetItemChecked(i, True)
+            Next
+            iAssign = 0
+            Button3.Image = Global.WindowsApplication1.My.Resources.Resources.uncheckall
+        End If
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        For i As Integer = 0 To CLBFilterWorkstream.Items.Count - 1
-            CLBFilterWorkstream.SetItemChecked(i, False)
-        Next
+        If iWorkstream = 0 Then
+            For i As Integer = 0 To CLBFilterWorkstream.Items.Count - 1
+                CLBFilterWorkstream.SetItemChecked(i, False)
+            Next
+            iWorkstream = 1
+            Button4.Image = Global.WindowsApplication1.My.Resources.Resources.checkall
+        Else
+            For i As Integer = 0 To CLBFilterWorkstream.Items.Count - 1
+                CLBFilterWorkstream.SetItemChecked(i, True)
+            Next
+            iWorkstream = 0
+            Button4.Image = Global.WindowsApplication1.My.Resources.Resources.uncheckall
+        End If
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        For i As Integer = 0 To CLBVTP.Items.Count - 1
-            CLBVTP.SetItemChecked(i, False)
-        Next
+        If iVTP = 0 Then
+            For i As Integer = 0 To CLBVTP.Items.Count - 1
+                CLBVTP.SetItemChecked(i, False)
+            Next
+            iVTP = 1
+            Button5.Image = Global.WindowsApplication1.My.Resources.Resources.checkall
+        Else
+            For i As Integer = 0 To CLBVTP.Items.Count - 1
+                CLBVTP.SetItemChecked(i, True)
+            Next
+            iVTP = 0
+            Button5.Image = Global.WindowsApplication1.My.Resources.Resources.uncheckall
+        End If
     End Sub
 End Class
