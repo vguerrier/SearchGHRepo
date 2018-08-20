@@ -219,6 +219,7 @@ Public Class FCustomer
             researchCus = 1
             If dr.GetValue(0) IsNot DBNull.Value Then
                 MyModule.Customers.CustomerName = dr.GetValue(0)
+                TBCus.Text = dr.GetValue(0)
             End If
             If dr.GetValue(1) IsNot DBNull.Value Then
                 branchname = dr.GetValue(1)

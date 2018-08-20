@@ -1024,8 +1024,7 @@ Public Class FSearchGcent
 
     Private Sub Button2_Click(sender As System.Object, e As System.EventArgs) Handles Button2.Click
 
-        'Mail(TBCase.Text, TBGcent.Text, TBCustomer.Text, TBTitle.Text)
-        System.Diagnostics.Process.Start("mailto:?subject=" + "[" & TBCustomer.Text & "] " & TBCase.Text & " " & TBGcent.Text)
+        System.Diagnostics.Process.Start("mailto:? subject=" + "[" & Replace(TBCustomer.Text, "&", "") & "] " & TBCase.Text & " " & TBGcent.Text)
     End Sub
 
 
@@ -1042,15 +1041,15 @@ Public Class FSearchGcent
         Try
             'Dim cn As New SqlConnection("Provider=OraOLEDB.Oracle.1;Password=READCQUEST;Persist Security Info=True;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1;")
             gcent = TBGcent.Text
-            Dim cmd As String = "select atb.data   from cqcentral.anomalie Ta, cqcentral.attachments Tat, cqcentral.attachments_blob atb where Ta.dbid = Tat.entity_dbid(+) and Tat.dbid = atb.attachments_dbid and Ta.numerofiche =" + "'" + gcent + "' order by tat.dbid"
-            'Dim DestFilePath As String = "C:\test.doc"
-            'Dim saveFileDialog1 As New SaveFileDialog()
-            'saveFileDialog1.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif"
-            'saveFileDialog1.Title = "Save the document"
-            'saveFileDialog1.FileName = LVad.FocusedItem.SubItems(0).Text
-            'saveFileDialog1.InitialDirectory = "c:\temp\"
-            'saveFileDialog1.ShowDialog()
-            Dim DestFilePath As String = "c:\tempSearch\" + LVad.FocusedItem.SubItems(0).Text
+            Dim cmd As String = "Select atb.data   from cqcentral.anomalie Ta, cqcentral.attachments Tat, cqcentral.attachments_blob atb where Ta.dbid = Tat.entity_dbid(+) And Tat.dbid = atb.attachments_dbid And Ta.numerofiche = " + "'" + gcent + "' order by tat.dbid"
+        'Dim DestFilePath As String = "C:\test.doc"
+        'Dim saveFileDialog1 As New SaveFileDialog()
+        'saveFileDialog1.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif"
+        'saveFileDialog1.Title = "Save the document"
+        'saveFileDialog1.FileName = LVad.FocusedItem.SubItems(0).Text
+        'saveFileDialog1.InitialDirectory = "c:\temp\"
+        'saveFileDialog1.ShowDialog()
+        Dim DestFilePath As String = "c:\tempSearch\" + LVad.FocusedItem.SubItems(0).Text
 
             If My.Computer.FileSystem.DirectoryExists("c:\tempSearch\") Then
             Else

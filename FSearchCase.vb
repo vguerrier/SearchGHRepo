@@ -155,8 +155,6 @@ Public Class FSearchCase
     End Function
     Public Function researchCase(CusCase As Short) As Integer
 
-        'Dim Sqldb As String = "Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=True;Initial Catalog=crm_MSCRM;Data Source=seyccrmsqlsip1;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=MESSIKA7;Use Encryption for Data=False;Tag with column collation when possible=False"
-        'Dim Sqldb As String = "Data Source=seyccrmsqlsip1;Workstation ID=MESSIKA7;Uid=auth_windows;"
         Dim Sqldb As String = "Data Source=seyccrmsqlsip1;Integrated Security=SSPI;Initial Catalog=crm_MSCRM"
         Dim SqlConn As New SqlClient.SqlConnection(Sqldb)
         Dim SqlCmd As New SqlCommand
