@@ -46,7 +46,6 @@ Partial Class FCustomer
         Me.LLBURL = New System.Windows.Forms.LinkLabel()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.BBacklog = New System.Windows.Forms.Button()
         Me.TBLabel = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.TBBranchType = New System.Windows.Forms.TextBox()
@@ -54,6 +53,8 @@ Partial Class FCustomer
         Me.TBDesc = New System.Windows.Forms.TextBox()
         Me.LBDesc = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.BBacklog = New System.Windows.Forms.Button()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -81,6 +82,7 @@ Partial Class FCustomer
         '
         Me.TBFramework.Location = New System.Drawing.Point(13, 38)
         Me.TBFramework.Name = "TBFramework"
+        Me.TBFramework.ReadOnly = True
         Me.TBFramework.Size = New System.Drawing.Size(300, 20)
         Me.TBFramework.TabIndex = 7
         '
@@ -106,6 +108,7 @@ Partial Class FCustomer
         '
         Me.TBFSpring.Location = New System.Drawing.Point(13, 82)
         Me.TBFSpring.Name = "TBFSpring"
+        Me.TBFSpring.ReadOnly = True
         Me.TBFSpring.Size = New System.Drawing.Size(300, 20)
         Me.TBFSpring.TabIndex = 9
         '
@@ -122,6 +125,7 @@ Partial Class FCustomer
         '
         Me.TBOracle.Location = New System.Drawing.Point(14, 126)
         Me.TBOracle.Name = "TBOracle"
+        Me.TBOracle.ReadOnly = True
         Me.TBOracle.Size = New System.Drawing.Size(300, 20)
         Me.TBOracle.TabIndex = 17
         '
@@ -138,7 +142,8 @@ Partial Class FCustomer
         '
         Me.TBServer.Location = New System.Drawing.Point(13, 83)
         Me.TBServer.Name = "TBServer"
-        Me.TBServer.Size = New System.Drawing.Size(300, 20)
+        Me.TBServer.ReadOnly = True
+        Me.TBServer.Size = New System.Drawing.Size(269, 20)
         Me.TBServer.TabIndex = 15
         '
         'Label2
@@ -154,6 +159,7 @@ Partial Class FCustomer
         '
         Me.TBEnvType.Location = New System.Drawing.Point(13, 40)
         Me.TBEnvType.Name = "TBEnvType"
+        Me.TBEnvType.ReadOnly = True
         Me.TBEnvType.Size = New System.Drawing.Size(300, 20)
         Me.TBEnvType.TabIndex = 13
         '
@@ -170,6 +176,7 @@ Partial Class FCustomer
         '
         Me.TBJava.Location = New System.Drawing.Point(13, 169)
         Me.TBJava.Name = "TBJava"
+        Me.TBJava.ReadOnly = True
         Me.TBJava.Size = New System.Drawing.Size(300, 20)
         Me.TBJava.TabIndex = 19
         '
@@ -186,6 +193,7 @@ Partial Class FCustomer
         '
         Me.GroupBox2.BackColor = System.Drawing.Color.White
         Me.GroupBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.GroupBox2.Controls.Add(Me.Button1)
         Me.GroupBox2.Controls.Add(Me.TBJava)
         Me.GroupBox2.Controls.Add(Me.Label4)
         Me.GroupBox2.Controls.Add(Me.TBOracle)
@@ -236,6 +244,7 @@ Partial Class FCustomer
         '
         Me.TBProduct.Location = New System.Drawing.Point(13, 128)
         Me.TBProduct.Name = "TBProduct"
+        Me.TBProduct.ReadOnly = True
         Me.TBProduct.Size = New System.Drawing.Size(300, 20)
         Me.TBProduct.TabIndex = 26
         '
@@ -278,23 +287,11 @@ Partial Class FCustomer
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Branch Information"
         '
-        'BBacklog
-        '
-        Me.BBacklog.FlatAppearance.BorderSize = 0
-        Me.BBacklog.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BBacklog.ForeColor = System.Drawing.Color.Black
-        Me.BBacklog.Image = Global.WindowsApplication1.My.Resources.Resources.Backlog
-        Me.BBacklog.Location = New System.Drawing.Point(270, 11)
-        Me.BBacklog.Name = "BBacklog"
-        Me.BBacklog.Size = New System.Drawing.Size(25, 25)
-        Me.BBacklog.TabIndex = 26
-        Me.ToolTip1.SetToolTip(Me.BBacklog, "Customer Backlog")
-        Me.BBacklog.UseVisualStyleBackColor = True
-        '
         'TBLabel
         '
         Me.TBLabel.Location = New System.Drawing.Point(13, 115)
         Me.TBLabel.Name = "TBLabel"
+        Me.TBLabel.ReadOnly = True
         Me.TBLabel.Size = New System.Drawing.Size(300, 20)
         Me.TBLabel.TabIndex = 25
         '
@@ -311,6 +308,7 @@ Partial Class FCustomer
         '
         Me.TBBranchType.Location = New System.Drawing.Point(13, 77)
         Me.TBBranchType.Name = "TBBranchType"
+        Me.TBBranchType.ReadOnly = True
         Me.TBBranchType.Size = New System.Drawing.Size(300, 20)
         Me.TBBranchType.TabIndex = 23
         '
@@ -327,6 +325,7 @@ Partial Class FCustomer
         '
         Me.TBDesc.Location = New System.Drawing.Point(13, 40)
         Me.TBDesc.Name = "TBDesc"
+        Me.TBDesc.ReadOnly = True
         Me.TBDesc.Size = New System.Drawing.Size(300, 20)
         Me.TBDesc.TabIndex = 3
         '
@@ -338,6 +337,32 @@ Partial Class FCustomer
         Me.LBDesc.Size = New System.Drawing.Size(60, 13)
         Me.LBDesc.TabIndex = 2
         Me.LBDesc.Text = "Description"
+        '
+        'Button1
+        '
+        Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.ForeColor = System.Drawing.Color.Black
+        Me.Button1.Image = Global.WindowsApplication1.My.Resources.Resources.putty_dark_24
+        Me.Button1.Location = New System.Drawing.Point(291, 78)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(25, 25)
+        Me.Button1.TabIndex = 27
+        Me.ToolTip1.SetToolTip(Me.Button1, "Launch Putty on server")
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'BBacklog
+        '
+        Me.BBacklog.FlatAppearance.BorderSize = 0
+        Me.BBacklog.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BBacklog.ForeColor = System.Drawing.Color.Black
+        Me.BBacklog.Image = Global.WindowsApplication1.My.Resources.Resources.Backlog
+        Me.BBacklog.Location = New System.Drawing.Point(270, 11)
+        Me.BBacklog.Name = "BBacklog"
+        Me.BBacklog.Size = New System.Drawing.Size(25, 25)
+        Me.BBacklog.TabIndex = 26
+        Me.ToolTip1.SetToolTip(Me.BBacklog, "Customer Backlog")
+        Me.BBacklog.UseVisualStyleBackColor = True
         '
         'FCustomer
         '
@@ -394,4 +419,5 @@ Partial Class FCustomer
     Friend WithEvents BBacklog As System.Windows.Forms.Button
     Friend WithEvents LinkLabel1 As System.Windows.Forms.LinkLabel
     Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents Button1 As Button
 End Class

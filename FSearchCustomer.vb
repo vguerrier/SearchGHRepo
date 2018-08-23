@@ -46,6 +46,10 @@ End Structure
 Module MyModule
     Public Const NbCusmax = 50
     Public Customers As Cus
+    Declare Auto Function FindWindow Lib "User32.dll" (ByVal lpClassName As String, ByVal lpWindowName As String) As IntPtr
+    Public Declare Function IsWindowVisible Lib "User32" Alias "IsWindowVisible" (ByVal hWnd As IntPtr) As Boolean
+    Public Declare Function ShowWindow Lib "User32" Alias "ShowWindow" (handle As IntPtr, nCmdShow As Integer) As Boolean
+
     Public Function GetBranchDesc(Branchname As String) As String
         Dim i As Integer
         i = 0
@@ -480,5 +484,39 @@ Fin:
         processlink = "https://intranet.eyc.com/product/Gold/ProductSupportRetail/Process"
         'https://intranet.eyc.com/product/Gold/ProductSupportRetail/Process/process_CONFORAMA.pdf
         System.Diagnostics.Process.Start(processlink)
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        'On lance Putty sur le server
+        'ligne de commande putty.exe <nom serveur>
+        'Ensuite on récupère la fenêtre pour l'afficher car sinon elle est minimisée
+        'pour cela via les fonction dans user32.dll, on récupère la main sur la fenêtre et on la restore.
+        Try
+            'on lance putty sur le serveur
+            Shell("C:\Program Files (x86)\putty\putty.exe " & TBServer.Text)
+
+            'on recherche la fenêtre par son titre, pour cela il faut qu'on trouve le nom de la fenêtre :
+            '<servername> & ".eyc.com - Putty"
+            Dim WindowTitle As String
+            WindowTitle = TBServer.Text & ".eyc.com - Putty"
+            Dim windowhandle As IntPtr = FindWindow(Nothing, WindowTitle)
+            'test si on a trouvé la fenêtre ou non
+            'If windowhandle = Nothing Then
+            '    MessageBox.Show("Could not find window", "Window Does Not Exist", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            'Else
+            '    If IsWindowVisible(windowhandle) = True Then
+            '        MessageBox.Show("The window is visible", "Window Visible", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            '    Else
+            '        MessageBox.Show("The window is not visible", "Window Not Yet Visible", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            '    End If
+            'End If
+
+            'on restore la fenêtre
+            ShowWindow(windowhandle, 1)
+        Catch ex As Exception
+            MsgBox("Problem to launch putty : " & vbCrLf & ex.Message & vbCrLf & "Please verify the path of Putty.exe" & vbCrLf & " or copy to C:\Program Files (x86)\putty\putty.exe")
+        End Try
+
+        'Shell("%systemroot%\system32\mstsc.exe ""C:\Users\guerrier\AppData\Roaming\Microsoft\Workspaces\{4B548D83-D065-4190-8D74-31A7214932C9}\Resource\Putty (GOLD Development 2012 R2).rdp"
     End Sub
 End Class

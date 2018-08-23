@@ -10,6 +10,9 @@ Public Class FSearch
     Dim nbSearch As Integer
     Dim IndSearch As Integer
     Dim Nav As Boolean
+    Dim sw As DateTime
+    Dim buttonUp As Boolean = False
+    Dim holdButtonDuration As Integer = 2000
 
     'Dim TBIDD As Object
 
@@ -96,7 +99,7 @@ Public Class FSearch
         Try
 
 
-            If MCBBranch.Checked Then
+            If MMCBBranch.Checked Then
                 'recherche sur les infos clients
                 FCustomer.TBCus.Text = Me.MSTSearch.Text
                 FCustomer.Show()
@@ -135,7 +138,7 @@ Public Class FSearch
                         'on va ouvrir la form CASE
                         FSearchCase.RTBCase.Text = Me.MSTSearch.Text
                         'FSearchCase.Show()
-                        If MCBCusCase.Checked Then
+                        If MMCBCusCase.Checked Then
                             ' on recherche par numéro du client
                             ret = FSearchCase.researchCase(1)
                             If ret <> 0 Then
@@ -275,6 +278,28 @@ Public Class FSearch
 
     End Sub
 
+
+    Private Sub BBack_MouseDown(sender As Object, e As MouseEventArgs) Handles BBack.MouseDown
+
+        buttonUp = False
+        sw = DateTime.Now
+        While (e.Button = MouseButtons.Left And e.Clicks = 1 And (buttonUp = False And (DateTime.Now - sw).TotalMilliseconds < holdButtonDuration))
+            Application.DoEvents()
+        End While
+        If ((DateTime.Now - sw).TotalMilliseconds >= holdButtonDuration) Then
+            Llong.Location = New Point(e.X + BBack.Location.X, e.Y + BBack.Location.Y)
+            Llong.Visible = True
+
+            'MessageBox.Show("Long")
+        End If
+    End Sub
+
+    Private Sub BBack_MouseUp(sender As Object, e As MouseEventArgs) Handles BBack.MouseUp
+
+        buttonUp = True
+    End Sub
+
+
     Private Sub BBack_Click(sender As Object, e As EventArgs) Handles BBack.Click
         IndSearch = IndSearch - 1
         Nav = True
@@ -306,4 +331,5 @@ Public Class FSearch
         End If
 
     End Sub
+
 End Class

@@ -230,7 +230,7 @@ Public Class FBacklog
             '*********filtre*************
             SqlConn.Open()
             SqlCmd = SqlConn.CreateCommand()
-            req = RequestBacklog(Trim(TBCus.Text), "state", Opt, OptGcent)
+            req = RequestBacklog(Replace(Trim(TBCus.Text), "'", "''"), "state", Opt, OptGcent)
 
 
             SqlCmd.CommandText = req
@@ -249,7 +249,7 @@ Public Class FBacklog
             '*********filtre priorité*************
             SqlConn.Open()
             SqlCmd = SqlConn.CreateCommand()
-            req = RequestBacklog(Trim(TBCus.Text), "Priority", Opt, OptGcent)
+            req = RequestBacklog(Replace(Trim(TBCus.Text), "'", "''"), "Priority", Opt, OptGcent)
 
 
             SqlCmd.CommandText = req
@@ -268,7 +268,7 @@ Public Class FBacklog
             '*********filtre Assign_Group*************
             SqlConn.Open()
             SqlCmd = SqlConn.CreateCommand()
-            req = RequestBacklog(Trim(TBCus.Text), "Assign_Group", Opt, OptGcent)
+            req = RequestBacklog(Replace(Trim(TBCus.Text), "'", "''"), "Assign_Group", Opt, OptGcent)
 
 
             SqlCmd.CommandText = req
@@ -287,7 +287,7 @@ Public Class FBacklog
             '*********filtre Workstream*************
             SqlConn.Open()
             SqlCmd = SqlConn.CreateCommand()
-            req = RequestBacklog(Trim(TBCus.Text), "Workstream", Opt, OptGcent)
+            req = RequestBacklog(Replace(Trim(TBCus.Text), "'", "''"), "Workstream", Opt, OptGcent)
 
 
             SqlCmd.CommandText = req
@@ -306,7 +306,7 @@ Public Class FBacklog
             '*********filtre VTP*************
             SqlConn.Open()
             SqlCmd = SqlConn.CreateCommand()
-            req = RequestBacklog(Trim(TBCus.Text), "VTP", Opt, OptGcent)
+            req = RequestBacklog(Replace(Trim(TBCus.Text), "'", "''"), "VTP", Opt, OptGcent)
 
 
             SqlCmd.CommandText = req

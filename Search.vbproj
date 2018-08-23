@@ -121,6 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="MyProcess.vb" />
     <Compile Include="FRessources.Designer.vb">
       <DependentUpon>FRessources.vb</DependentUpon>
     </Compile>
@@ -277,6 +278,9 @@
     <None Include="icons\uncheckall.png" />
     <None Include="icons\SRAI.png" />
     <None Include="icons\SRAI logo.png" />
+    <None Include="icons\putty-dark-32.png" />
+    <None Include="icons\putty-dark-16.png" />
+    <None Include="icons\putty-dark-24.png" />
     <Content Include="Igh0zt-Ios7-Style-Metro-Ui-MetroUI-Other-Search.ico" />
     <None Include="Resources\search.png" />
   </ItemGroup>

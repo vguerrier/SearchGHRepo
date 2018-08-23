@@ -39,6 +39,7 @@ Partial Class FSearch
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.BBack = New System.Windows.Forms.Button()
         Me.BNext = New System.Windows.Forms.Button()
+        Me.Llong = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'LLBlinkCQ
@@ -216,12 +217,23 @@ Partial Class FSearch
         Me.ToolTip1.SetToolTip(Me.BNext, "Next search")
         Me.BNext.UseVisualStyleBackColor = False
         '
+        'Llong
+        '
+        Me.Llong.AutoSize = True
+        Me.Llong.Location = New System.Drawing.Point(145, 90)
+        Me.Llong.Name = "Llong"
+        Me.Llong.Size = New System.Drawing.Size(85, 13)
+        Me.Llong.TabIndex = 160
+        Me.Llong.Text = "LOOOOOOONG"
+        Me.Llong.Visible = False
+        '
         'FSearch
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(270, 135)
+        Me.Controls.Add(Me.Llong)
         Me.Controls.Add(Me.BNext)
         Me.Controls.Add(Me.BBack)
         Me.Controls.Add(Me.Label1)
@@ -259,4 +271,5 @@ Partial Class FSearch
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents BBack As Button
     Friend WithEvents BNext As Button
+    Friend WithEvents Llong As Label
 End Class

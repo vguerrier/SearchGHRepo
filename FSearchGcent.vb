@@ -1130,8 +1130,11 @@ sortie:
     End Sub
 
     Private Sub Button3_Click_1(sender As System.Object, e As System.EventArgs) Handles Button3.Click
-        FSearch.MSTSearch.Text = TBLabel.Text.Substring(0, 9)
-
+        If Len(TBLabel.Text) >= 9 Then
+            FSearch.MSTSearch.Text = TBLabel.Text.Substring(0, 9)
+        Else
+            FSearch.MSTSearch.Text = TBLabel.Text
+        End If
         FSearch.Research()
     End Sub
 
