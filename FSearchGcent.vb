@@ -1146,5 +1146,9 @@ sortie:
             MessageBox.Show("Not a R&D Ressource", "Warning", MessageBoxButtons.OKCancel)
         End If
     End Sub
+
+    Private Sub Bsearch_Click_1(sender As Object, e As EventArgs) Handles Bsearch.Click
+
+    End Sub
 End Class
 

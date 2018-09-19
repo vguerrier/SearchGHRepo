@@ -222,9 +222,8 @@ Partial Class FSearch
         Me.Llong.AutoSize = True
         Me.Llong.Location = New System.Drawing.Point(145, 90)
         Me.Llong.Name = "Llong"
-        Me.Llong.Size = New System.Drawing.Size(85, 13)
+        Me.Llong.Size = New System.Drawing.Size(0, 13)
         Me.Llong.TabIndex = 160
-        Me.Llong.Text = "LOOOOOOONG"
         Me.Llong.Visible = False
         '
         'FSearch

@@ -121,6 +121,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="FSearchRFE.Designer.vb">
+      <DependentUpon>FSearchRFE.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FSearchRFE.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MyProcess.vb" />
     <Compile Include="FRessources.Designer.vb">
       <DependentUpon>FRessources.vb</DependentUpon>
@@ -211,6 +217,9 @@
     <EmbeddedResource Include="Fbacklog.resx">
       <DependentUpon>Fbacklog.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FSearchRFE.resx">
+      <DependentUpon>FSearchRFE.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FRessources.resx">
       <DependentUpon>FRessources.vb</DependentUpon>

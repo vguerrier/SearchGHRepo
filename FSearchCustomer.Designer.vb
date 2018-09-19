@@ -357,7 +357,7 @@ Partial Class FCustomer
         Me.BBacklog.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BBacklog.ForeColor = System.Drawing.Color.Black
         Me.BBacklog.Image = Global.WindowsApplication1.My.Resources.Resources.Backlog
-        Me.BBacklog.Location = New System.Drawing.Point(270, 11)
+        Me.BBacklog.Location = New System.Drawing.Point(288, 9)
         Me.BBacklog.Name = "BBacklog"
         Me.BBacklog.Size = New System.Drawing.Size(25, 25)
         Me.BBacklog.TabIndex = 26

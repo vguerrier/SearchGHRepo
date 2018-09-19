@@ -167,10 +167,18 @@ Public Class FSearch
                     MCBBranch.Checked = False
                 End If
                 If ret = 0 Then
+                    'recherche sur les infos Ressources
                     ret = FRessources.researchRes(Me.MSTSearch.Text)
                     If ret <> 0 Then
                         FRessources.Show()
                     End If
+                End If
+                If ret = 0 Then
+                    'recherche sur les infos Ressources
+                    ret = FSearchRFE.researchRFE(Me.MSTSearch.Text)
+                    'If ret <> 0 Then
+                    'FSearchRFE.Show()
+                    'End If
                 End If
             End If
             If ret = 0 Then
@@ -288,7 +296,7 @@ Public Class FSearch
         End While
         If ((DateTime.Now - sw).TotalMilliseconds >= holdButtonDuration) Then
             Llong.Location = New Point(e.X + BBack.Location.X, e.Y + BBack.Location.Y)
-            Llong.Visible = True
+            Llong.Visible = False
 
             'MessageBox.Show("Long")
         End If
