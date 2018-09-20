@@ -33,7 +33,8 @@ Public Class FSearchRFE
         RequestRFE = RequestRFE + "to_char(r.gapdplg, 'DD-MM-RR') as                   initial_delivery_date, " '7
         RequestRFE = RequestRFE + "to_char(r.gapdrlg, 'DD-MM-RR') as                    real_delivery_Date, "   '8
         RequestRFE = RequestRFE + "r.GAPCOMPC as                                            Macro_estimate, "   '9
-        RequestRFE = RequestRFE + "r.GAPDESC as                                                 desription "   '10
+        RequestRFE = RequestRFE + "r.GAPDESC as                                                 desription, "   '10
+        RequestRFE = RequestRFE + "r.gapcrmstream                                               Workstream "    '11
         RequestRFE = RequestRFE + "from gap r, "
         RequestRFE = RequestRFE + "Client c, "
         RequestRFE = RequestRFE + "Projet p, "
@@ -65,12 +66,72 @@ Public Class FSearchRFE
 
     End Function
 
+    Function GetGcentInfoCQ(RFE As String) As String
+        Dim CQbase As String
+
+        CQbase = "cqcentral"
+
+        GetGcentInfoCQ = "select   s.name, a.label, a.numerofiche from  "
+        GetGcentInfoCQ = GetGcentInfoCQ & CQbase & ".anomalie a,"
+        GetGcentInfoCQ = GetGcentInfoCQ & CQbase & ".statedef s,"
+        GetGcentInfoCQ = GetGcentInfoCQ & CQbase & ".rfe r "
+        GetGcentInfoCQ = GetGcentInfoCQ & " where a.State = s.ID "
+        GetGcentInfoCQ = GetGcentInfoCQ & " And a.rfecode = r.dbid"
+        GetGcentInfoCQ = GetGcentInfoCQ & " And r.code Like '%" + RFE + "%'"
+
+    End Function
+
+    Function Cardinfo(card As String, status As String, label As String) As String
+
+        If status = "Corrigée" Then
+            status = "C"
+        ElseIf status = "Ouverte" Then
+            status = "O"
+        ElseIf status = "Assignée" Then
+            status = "A"
+        ElseIf status = "En_qualification" Then
+            status = "EQ"
+        ElseIf status = "A_installer" Then
+            status = "AI"
+        ElseIf status = "En_Integration" Then
+            status = "EI"
+        ElseIf status = "A_Qualifier" Then
+            status = "AQ"
+        ElseIf status = "En_Attente" Then
+            status = "EA"
+        ElseIf status = "Being_Delivered" Then
+            status = "BD"
+        ElseIf status = "Analyse_Estimation_Impact" Then
+            status = "AEI"
+        ElseIf status = "Rejetée" Then
+            status = "R"
+        ElseIf status = "Codée" Then
+            status = "CO"
+        ElseIf status = "Attente_approbation" Then
+            status = "AA"
+        ElseIf status = "Refusée" Then
+            status = "Ref"
+        ElseIf status = "Fermée" Then
+            status = "F"
+        End If
+
+        Cardinfo = card + "  " + status + "  " + label
+
+
+    End Function
+
     Public Function researchRFE(RFE As String) As Integer
         Dim myCommand As OleDb.OleDbCommand
         Dim dr As OleDb.OleDbDataReader
         Dim Oradb As String = "Provider=OraOLEDB.Oracle.1;Password=RFE_READ;Persist Security Info=True;User ID=RFE_READ;Data Source=RDTOOLS;"
         Dim conn As New OleDb.OleDbConnection(Oradb) 'OracleConnection(oradb)
         Dim nbRFE As Integer
+        Dim Oradb2 As String = "Provider=OraOLEDB.Oracle.1;Password=READCQUEST;Persist Security Info=True;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1;"
+        Dim SqlConn2 As New OleDb.OleDbConnection(Oradb2) 'OracleConnection(oradb2)
+        Dim SqlCmd2 As OleDb.OleDbCommand
+        Dim myReader2 As OleDb.OleDbDataReader
+        Dim nbrow2 As Integer
+        Dim status, label As String
 
         nbRFE = 0
 
@@ -97,9 +158,40 @@ Public Class FSearchRFE
             TBTDD.Text = dr.GetValue(7)
             TBRDD.Text = dr.GetValue(8)
             RTBDesc.Text = dr.GetValue(10)
+            TBWorstream.Text = dr.GetValue(11)
         End If
         conn.Close()
         conn.Dispose()
+
+
+        'recherche des fiches liées au RFE
+        Dim req As String = GetGcentInfoCQ(RFE)
+        'opening the connection
+        SqlConn2.Open()
+        SqlCmd2 = New OleDb.OleDbCommand(req, SqlConn2)
+        SqlCmd2.CommandText = req
+        myReader2 = SqlCmd2.ExecuteReader()
+
+        nbrow2 = 0
+        While myReader2.Read()
+            nbrow2 = nbrow2 + 1
+            status = myReader2.Item(0)
+            If myReader2.Item(1) IsNot DBNull.Value Then
+                label = myReader2.Item(1)
+            Else
+                label = ""
+            End If
+
+            Cardinfo(myReader2.Item(2), status, label)
+            CBGcent.Items.Add(Cardinfo(myReader2.Item(2), status, label))
+            CBGcent.Text = Cardinfo(myReader2.Item(2), status, label)
+
+            If nbrow2 > 1 Then
+                CBGcent.ForeColor = Color.Red
+            Else
+                CBGcent.ForeColor = Color.Black
+            End If
+        End While
 
         If nbRFE <> 0 Then
             Me.Show()
@@ -107,4 +199,10 @@ Public Class FSearchRFE
         researchRFE = nbRFE
     End Function
 
+
+    Private Sub BSearch_Click_1(sender As Object, e As EventArgs) Handles BSearch.Click
+        FSearch.MSTSearch.Text = Mid(CBGcent.Text, 1, 13)
+
+        FSearch.Research()
+    End Sub
 End Class

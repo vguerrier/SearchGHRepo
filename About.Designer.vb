@@ -31,11 +31,11 @@ Partial Class Dabout
         Me.Label3 = New System.Windows.Forms.Label()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.LogoPictureBox = New System.Windows.Forms.PictureBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.TableLayoutPanel1.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'OK_Button
@@ -83,7 +83,7 @@ Partial Class Dabout
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(31, 20)
         Me.Label2.TabIndex = 144
-        Me.Label2.Text = "2.0"
+        Me.Label2.Text = "2.1"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label3
@@ -132,16 +132,6 @@ Partial Class Dabout
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(218, 185)
         Me.TableLayoutPanel1.TabIndex = 147
         '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = Global.WindowsApplication1.My.Resources.Resources.SRAI_logo
-        Me.PictureBox1.Location = New System.Drawing.Point(236, 61)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(57, 57)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 148
-        Me.PictureBox1.TabStop = False
-        '
         'LogoPictureBox
         '
         Me.LogoPictureBox.Dock = System.Windows.Forms.DockStyle.Top
@@ -153,6 +143,16 @@ Partial Class Dabout
         Me.LogoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.LogoPictureBox.TabIndex = 147
         Me.LogoPictureBox.TabStop = False
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.WindowsApplication1.My.Resources.Resources.SRAI_logo
+        Me.PictureBox1.Location = New System.Drawing.Point(236, 61)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(57, 57)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 148
+        Me.PictureBox1.TabStop = False
         '
         'Dabout
         '
@@ -170,8 +170,8 @@ Partial Class Dabout
         Me.Text = "About"
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

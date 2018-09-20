@@ -736,5 +736,4 @@ Public Class FSearchCase
         FSearch.Research()
     End Sub
 
-
 End Class

@@ -24,7 +24,7 @@ Partial Class FSearchCase
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FSearchCase))
         Me.CHComments = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.TBSev = New System.Windows.Forms.TextBox()
@@ -142,7 +142,7 @@ Partial Class FSearchCase
         '
         Me.LVComment.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.CHComments, Me.CHUser, Me.CHTime})
         Me.LVComment.GridLines = True
-        Me.LVComment.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
+        Me.LVComment.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
         Me.LVComment.Location = New System.Drawing.Point(31, 585)
         Me.LVComment.Name = "LVComment"
         Me.LVComment.Size = New System.Drawing.Size(722, 241)
