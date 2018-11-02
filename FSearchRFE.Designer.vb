@@ -52,12 +52,14 @@ Partial Class FSearchRFE
         Me.CBGcent = New System.Windows.Forms.ComboBox()
         Me.LbGcent2 = New System.Windows.Forms.Label()
         Me.BSearch = New System.Windows.Forms.Button()
+        Me.TBTrans = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'TBCRFE
         '
         Me.TBCRFE.BackColor = System.Drawing.SystemColors.Window
-        Me.TBCRFE.Location = New System.Drawing.Point(97, 66)
+        Me.TBCRFE.Location = New System.Drawing.Point(81, 66)
         Me.TBCRFE.Name = "TBCRFE"
         Me.TBCRFE.ReadOnly = True
         Me.TBCRFE.Size = New System.Drawing.Size(179, 20)
@@ -67,7 +69,7 @@ Partial Class FSearchRFE
         '
         Me.LBDesc.AutoSize = True
         Me.LBDesc.BackColor = System.Drawing.SystemColors.Window
-        Me.LBDesc.Location = New System.Drawing.Point(35, 69)
+        Me.LBDesc.Location = New System.Drawing.Point(19, 69)
         Me.LBDesc.Name = "LBDesc"
         Me.LBDesc.Size = New System.Drawing.Size(56, 13)
         Me.LBDesc.TabIndex = 4
@@ -76,7 +78,7 @@ Partial Class FSearchRFE
         'TBTitle
         '
         Me.TBTitle.BackColor = System.Drawing.SystemColors.Window
-        Me.TBTitle.Location = New System.Drawing.Point(490, 66)
+        Me.TBTitle.Location = New System.Drawing.Point(384, 66)
         Me.TBTitle.Name = "TBTitle"
         Me.TBTitle.ReadOnly = True
         Me.TBTitle.Size = New System.Drawing.Size(179, 20)
@@ -86,7 +88,7 @@ Partial Class FSearchRFE
         '
         Me.Label1.AutoSize = True
         Me.Label1.BackColor = System.Drawing.SystemColors.Window
-        Me.Label1.Location = New System.Drawing.Point(457, 69)
+        Me.Label1.Location = New System.Drawing.Point(351, 69)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(27, 13)
         Me.Label1.TabIndex = 6
@@ -95,7 +97,7 @@ Partial Class FSearchRFE
         'TBCustomer
         '
         Me.TBCustomer.BackColor = System.Drawing.SystemColors.Window
-        Me.TBCustomer.Location = New System.Drawing.Point(97, 101)
+        Me.TBCustomer.Location = New System.Drawing.Point(81, 101)
         Me.TBCustomer.Name = "TBCustomer"
         Me.TBCustomer.ReadOnly = True
         Me.TBCustomer.Size = New System.Drawing.Size(179, 20)
@@ -105,7 +107,7 @@ Partial Class FSearchRFE
         '
         Me.Label2.AutoSize = True
         Me.Label2.BackColor = System.Drawing.SystemColors.Window
-        Me.Label2.Location = New System.Drawing.Point(40, 104)
+        Me.Label2.Location = New System.Drawing.Point(24, 104)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(51, 13)
         Me.Label2.TabIndex = 8
@@ -114,7 +116,7 @@ Partial Class FSearchRFE
         'TBStatus
         '
         Me.TBStatus.BackColor = System.Drawing.SystemColors.Window
-        Me.TBStatus.Location = New System.Drawing.Point(97, 138)
+        Me.TBStatus.Location = New System.Drawing.Point(81, 138)
         Me.TBStatus.Name = "TBStatus"
         Me.TBStatus.ReadOnly = True
         Me.TBStatus.Size = New System.Drawing.Size(179, 20)
@@ -124,7 +126,7 @@ Partial Class FSearchRFE
         '
         Me.Label3.AutoSize = True
         Me.Label3.BackColor = System.Drawing.SystemColors.Window
-        Me.Label3.Location = New System.Drawing.Point(54, 138)
+        Me.Label3.Location = New System.Drawing.Point(38, 138)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(37, 13)
         Me.Label3.TabIndex = 10
@@ -143,7 +145,7 @@ Partial Class FSearchRFE
         'TBProduct
         '
         Me.TBProduct.BackColor = System.Drawing.SystemColors.Window
-        Me.TBProduct.Location = New System.Drawing.Point(97, 211)
+        Me.TBProduct.Location = New System.Drawing.Point(81, 211)
         Me.TBProduct.Name = "TBProduct"
         Me.TBProduct.ReadOnly = True
         Me.TBProduct.Size = New System.Drawing.Size(179, 20)
@@ -153,7 +155,7 @@ Partial Class FSearchRFE
         '
         Me.Label5.AutoSize = True
         Me.Label5.BackColor = System.Drawing.SystemColors.Window
-        Me.Label5.Location = New System.Drawing.Point(47, 211)
+        Me.Label5.Location = New System.Drawing.Point(31, 211)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(44, 13)
         Me.Label5.TabIndex = 14
@@ -162,7 +164,7 @@ Partial Class FSearchRFE
         'TBDomain
         '
         Me.TBDomain.BackColor = System.Drawing.SystemColors.Window
-        Me.TBDomain.Location = New System.Drawing.Point(97, 249)
+        Me.TBDomain.Location = New System.Drawing.Point(81, 249)
         Me.TBDomain.Name = "TBDomain"
         Me.TBDomain.ReadOnly = True
         Me.TBDomain.Size = New System.Drawing.Size(179, 20)
@@ -172,7 +174,7 @@ Partial Class FSearchRFE
         '
         Me.Label6.AutoSize = True
         Me.Label6.BackColor = System.Drawing.SystemColors.Window
-        Me.Label6.Location = New System.Drawing.Point(47, 249)
+        Me.Label6.Location = New System.Drawing.Point(31, 249)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(43, 13)
         Me.Label6.TabIndex = 16
@@ -181,7 +183,7 @@ Partial Class FSearchRFE
         'TBManager
         '
         Me.TBManager.BackColor = System.Drawing.SystemColors.Window
-        Me.TBManager.Location = New System.Drawing.Point(490, 208)
+        Me.TBManager.Location = New System.Drawing.Point(384, 208)
         Me.TBManager.Name = "TBManager"
         Me.TBManager.ReadOnly = True
         Me.TBManager.Size = New System.Drawing.Size(179, 20)
@@ -191,7 +193,7 @@ Partial Class FSearchRFE
         '
         Me.Label7.AutoSize = True
         Me.Label7.BackColor = System.Drawing.SystemColors.Window
-        Me.Label7.Location = New System.Drawing.Point(435, 211)
+        Me.Label7.Location = New System.Drawing.Point(329, 211)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(49, 13)
         Me.Label7.TabIndex = 18
@@ -200,7 +202,7 @@ Partial Class FSearchRFE
         'TBTDD
         '
         Me.TBTDD.BackColor = System.Drawing.SystemColors.Window
-        Me.TBTDD.Location = New System.Drawing.Point(490, 97)
+        Me.TBTDD.Location = New System.Drawing.Point(384, 97)
         Me.TBTDD.Name = "TBTDD"
         Me.TBTDD.ReadOnly = True
         Me.TBTDD.Size = New System.Drawing.Size(179, 20)
@@ -210,7 +212,7 @@ Partial Class FSearchRFE
         '
         Me.Label8.AutoSize = True
         Me.Label8.BackColor = System.Drawing.SystemColors.Window
-        Me.Label8.Location = New System.Drawing.Point(366, 100)
+        Me.Label8.Location = New System.Drawing.Point(260, 104)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(118, 13)
         Me.Label8.TabIndex = 20
@@ -219,7 +221,7 @@ Partial Class FSearchRFE
         'TBRDD
         '
         Me.TBRDD.BackColor = System.Drawing.SystemColors.Window
-        Me.TBRDD.Location = New System.Drawing.Point(490, 135)
+        Me.TBRDD.Location = New System.Drawing.Point(384, 135)
         Me.TBRDD.Name = "TBRDD"
         Me.TBRDD.ReadOnly = True
         Me.TBRDD.Size = New System.Drawing.Size(179, 20)
@@ -229,7 +231,7 @@ Partial Class FSearchRFE
         '
         Me.Label9.AutoSize = True
         Me.Label9.BackColor = System.Drawing.SystemColors.Window
-        Me.Label9.Location = New System.Drawing.Point(388, 138)
+        Me.Label9.Location = New System.Drawing.Point(282, 138)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(96, 13)
         Me.Label9.TabIndex = 22
@@ -258,7 +260,7 @@ Partial Class FSearchRFE
         'TBType
         '
         Me.TBType.BackColor = System.Drawing.SystemColors.Window
-        Me.TBType.Location = New System.Drawing.Point(97, 174)
+        Me.TBType.Location = New System.Drawing.Point(81, 174)
         Me.TBType.Name = "TBType"
         Me.TBType.ReadOnly = True
         Me.TBType.Size = New System.Drawing.Size(179, 20)
@@ -268,7 +270,7 @@ Partial Class FSearchRFE
         '
         Me.Label11.AutoSize = True
         Me.Label11.BackColor = System.Drawing.SystemColors.Window
-        Me.Label11.Location = New System.Drawing.Point(24, 177)
+        Me.Label11.Location = New System.Drawing.Point(8, 177)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(72, 13)
         Me.Label11.TabIndex = 144
@@ -287,7 +289,7 @@ Partial Class FSearchRFE
         'TBWorstream
         '
         Me.TBWorstream.BackColor = System.Drawing.SystemColors.Window
-        Me.TBWorstream.Location = New System.Drawing.Point(490, 171)
+        Me.TBWorstream.Location = New System.Drawing.Point(384, 171)
         Me.TBWorstream.Name = "TBWorstream"
         Me.TBWorstream.ReadOnly = True
         Me.TBWorstream.Size = New System.Drawing.Size(179, 20)
@@ -297,7 +299,7 @@ Partial Class FSearchRFE
         '
         Me.Label12.AutoSize = True
         Me.Label12.BackColor = System.Drawing.SystemColors.Window
-        Me.Label12.Location = New System.Drawing.Point(420, 174)
+        Me.Label12.Location = New System.Drawing.Point(314, 174)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(64, 13)
         Me.Label12.TabIndex = 147
@@ -308,7 +310,7 @@ Partial Class FSearchRFE
         Me.CBGcent.BackColor = System.Drawing.Color.White
         Me.CBGcent.ForeColor = System.Drawing.SystemColors.WindowText
         Me.CBGcent.FormattingEnabled = True
-        Me.CBGcent.Location = New System.Drawing.Point(375, 251)
+        Me.CBGcent.Location = New System.Drawing.Point(384, 249)
         Me.CBGcent.Name = "CBGcent"
         Me.CBGcent.Size = New System.Drawing.Size(308, 21)
         Me.CBGcent.TabIndex = 158
@@ -318,7 +320,7 @@ Partial Class FSearchRFE
         Me.LbGcent2.AutoSize = True
         Me.LbGcent2.BackColor = System.Drawing.Color.White
         Me.LbGcent2.ForeColor = System.Drawing.Color.Black
-        Me.LbGcent2.Location = New System.Drawing.Point(372, 233)
+        Me.LbGcent2.Location = New System.Drawing.Point(381, 231)
         Me.LbGcent2.Name = "LbGcent2"
         Me.LbGcent2.Size = New System.Drawing.Size(70, 13)
         Me.LbGcent2.TabIndex = 157
@@ -330,17 +332,38 @@ Partial Class FSearchRFE
         Me.BSearch.FlatAppearance.BorderSize = 0
         Me.BSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BSearch.Image = Global.WindowsApplication1.My.Resources.Resources.search3_p
-        Me.BSearch.Location = New System.Drawing.Point(344, 249)
+        Me.BSearch.Location = New System.Drawing.Point(353, 247)
         Me.BSearch.Name = "BSearch"
         Me.BSearch.Size = New System.Drawing.Size(25, 25)
         Me.BSearch.TabIndex = 159
         Me.BSearch.UseVisualStyleBackColor = False
+        '
+        'TBTrans
+        '
+        Me.TBTrans.BackColor = System.Drawing.SystemColors.Window
+        Me.TBTrans.Location = New System.Drawing.Point(579, 85)
+        Me.TBTrans.Name = "TBTrans"
+        Me.TBTrans.ReadOnly = True
+        Me.TBTrans.Size = New System.Drawing.Size(179, 20)
+        Me.TBTrans.TabIndex = 161
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.BackColor = System.Drawing.SystemColors.Window
+        Me.Label13.Location = New System.Drawing.Point(576, 69)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(131, 13)
+        Me.Label13.TabIndex = 160
+        Me.Label13.Text = "Transfert Date CSO/Maint"
         '
         'FSearchRFE
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 707)
+        Me.Controls.Add(Me.TBTrans)
+        Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.BSearch)
         Me.Controls.Add(Me.CBGcent)
         Me.Controls.Add(Me.LbGcent2)
@@ -406,4 +429,6 @@ Partial Class FSearchRFE
     Friend WithEvents CBGcent As ComboBox
     Friend WithEvents LbGcent2 As Label
     Friend WithEvents BSearch As Button
+    Friend WithEvents TBTrans As TextBox
+    Friend WithEvents Label13 As Label
 End Class

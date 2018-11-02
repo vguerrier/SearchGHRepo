@@ -519,4 +519,6 @@ Fin:
 
         'Shell("%systemroot%\system32\mstsc.exe ""C:\Users\guerrier\AppData\Roaming\Microsoft\Workspaces\{4B548D83-D065-4190-8D74-31A7214932C9}\Resource\Putty (GOLD Development 2012 R2).rdp"
     End Sub
+
+
 End Class

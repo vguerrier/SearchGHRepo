@@ -5,20 +5,20 @@ Imports Oracle.DataAccess.Types
 Imports MaterialSkin
 
 Public Class FSearchRFE
-    Private Sub FSearchRFE_Load(sender As Object, e As EventArgs) Handles Me.Load
+    'Private Sub FSearchRFE_Load(sender As Object, e As EventArgs) Handles Me.Load
 
-        Dim SkinManager As MaterialSkinManager = MaterialSkinManager.Instance
+    '    Dim SkinManager As MaterialSkinManager = MaterialSkinManager.Instance
 
 
 
-        'SkinManager.AddFormToManage(Me)
-        SkinManager.Theme = MaterialSkinManager.Themes.LIGHT
-        'SkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE)
-        SkinManager.ColorScheme = New ColorScheme(Primary.Indigo500, Primary.Indigo700, Primary.Indigo100, Accent.Pink200, TextShade.WHITE)
-        'SkinManager.ColorScheme = New ColorScheme(Primary.Yellow500, Primary.Yellow700, Primary.Yellow100, Accent.Yellow200, TextShade.WHITE)
-        'SkinManager.ROBOTO_MEDIUM_10 = New Font("Microsoft Sans Serif", 8.25)
-        'SkinManager.ROBOTO_MEDIUM_10 = New Font("Algerian", 8)
-    End Sub
+    '    'SkinManager.AddFormToManage(Me)
+    '    SkinManager.Theme = MaterialSkinManager.Themes.LIGHT
+    '    'SkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE)
+    '    SkinManager.ColorScheme = New ColorScheme(Primary.Indigo500, Primary.Indigo700, Primary.Indigo100, Accent.Pink200, TextShade.WHITE)
+    '    'SkinManager.ColorScheme = New ColorScheme(Primary.Yellow500, Primary.Yellow700, Primary.Yellow100, Accent.Yellow200, TextShade.WHITE)
+    '    'SkinManager.ROBOTO_MEDIUM_10 = New Font("Microsoft Sans Serif", 8.25)
+    '    'SkinManager.ROBOTO_MEDIUM_10 = New Font("Algerian", 8)
+    'End Sub
 
     Function RequestRFE(ByVal CaseN As String) As String
 
@@ -34,7 +34,8 @@ Public Class FSearchRFE
         RequestRFE = RequestRFE + "to_char(r.gapdrlg, 'DD-MM-RR') as                    real_delivery_Date, "   '8
         RequestRFE = RequestRFE + "r.GAPCOMPC as                                            Macro_estimate, "   '9
         RequestRFE = RequestRFE + "r.GAPDESC as                                                 desription, "   '10
-        RequestRFE = RequestRFE + "r.gapcrmstream                                               Workstream "    '11
+        RequestRFE = RequestRFE + "r.gapcrmstream as                                              Workstream, " '11
+        RequestRFE = RequestRFE + "r.gapknwtsf as                                               transfert   "   '12
         RequestRFE = RequestRFE + "from gap r, "
         RequestRFE = RequestRFE + "Client c, "
         RequestRFE = RequestRFE + "Projet p, "
@@ -60,7 +61,7 @@ Public Class FSearchRFE
         RequestRFE = RequestRFE + "and lib_sta.langue = 'GB' "
         RequestRFE = RequestRFE + "and lib_app.tlaident = a.aaplibe "
         RequestRFE = RequestRFE + "and lib_app.langue = 'GB' "
-        RequestRFE = RequestRFE + "and u.AUSIDENT = r.gappjtmgr_ident "
+        RequestRFE = RequestRFE + "and u.AUSIDENT(+) = r.gappjtmgr_ident "
 
 
 
@@ -132,7 +133,7 @@ Public Class FSearchRFE
         Dim myReader2 As OleDb.OleDbDataReader
         Dim nbrow2 As Integer
         Dim status, label As String
-
+        'ex : RN37022 
         nbRFE = 0
 
         'opening the connection
@@ -148,20 +149,46 @@ Public Class FSearchRFE
             TBCRFE.Text = RFE
             TBTitle.Text = dr.GetValue(0)
 
-            TBCustomer.Text = dr.GetValue(1)
-            TBType.Text = dr.GetValue(2)
-            TBDomain.Text = dr.GetValue(3)
-            TBManager.Text = dr.GetValue(6)
-            TBProduct.Text = dr.GetValue(5)
-            RTBSol.Text = dr.GetValue(9)
-            TBStatus.Text = dr.GetValue(4)
-            TBTDD.Text = dr.GetValue(7)
-            TBRDD.Text = dr.GetValue(8)
-            RTBDesc.Text = dr.GetValue(10)
-            TBWorstream.Text = dr.GetValue(11)
+            If dr.GetValue(1) IsNot DBNull.Value Then
+                TBCustomer.Text = dr.GetValue(1)
+            End If
+            If dr.GetValue(2) IsNot DBNull.Value Then
+                TBType.Text = dr.GetValue(2)
+            End If
+            If dr.GetValue(3) IsNot DBNull.Value Then
+                TBDomain.Text = dr.GetValue(3)
+            End If
+            If dr.GetValue(6) IsNot DBNull.Value Then
+                TBManager.Text = dr.GetValue(6)
+            End If
+            If dr.GetValue(5) IsNot DBNull.Value Then
+                TBProduct.Text = dr.GetValue(5)
+            End If
+            If dr.GetValue(9) IsNot DBNull.Value Then
+                RTBSol.Text = dr.GetValue(9)
+            End If
+            If dr.GetValue(4) IsNot DBNull.Value Then
+                TBStatus.Text = dr.GetValue(4)
+            End If
+            If dr.GetValue(7) IsNot DBNull.Value Then
+                TBTDD.Text = dr.GetValue(7)
+            End If
+            If dr.GetValue(8) IsNot DBNull.Value Then
+                TBRDD.Text = dr.GetValue(8)
+            End If
+            If dr.GetValue(10) IsNot DBNull.Value Then
+                RTBDesc.Text = dr.GetValue(10)
+            End If
+            If dr.GetValue(11) IsNot DBNull.Value Then
+                TBWorstream.Text = dr.GetValue(11)
+            End If
+            If dr.GetValue(12) IsNot DBNull.Value Then
+                TBTrans.Text = dr.GetValue(12)
+            End If
         End If
         conn.Close()
         conn.Dispose()
+
 
 
         'recherche des fiches liées au RFE

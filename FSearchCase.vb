@@ -180,8 +180,6 @@ Public Class FSearchCase
         Me.TopMost = True
         Me.TopMost = False
 
-
-
         nCase = RTBCase.Text
         ClearTextBox(Me)
         RTBCase.Text = nCase
