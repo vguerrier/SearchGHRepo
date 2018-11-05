@@ -221,7 +221,7 @@ Public Class FSearchRFE
         End While
 
         If nbRFE <> 0 Then
-            Me.Show()
+            'Me.Show()
         End If
         researchRFE = nbRFE
     End Function
@@ -230,6 +230,6 @@ Public Class FSearchRFE
     Private Sub BSearch_Click_1(sender As Object, e As EventArgs) Handles BSearch.Click
         FSearch.MSTSearch.Text = Mid(CBGcent.Text, 1, 13)
 
-        FSearch.Research()
+        FSearch.Research(0)
     End Sub
 End Class

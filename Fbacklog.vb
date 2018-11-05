@@ -364,7 +364,7 @@ Public Class FBacklog
     Private Sub DGVBacklog_CellContentDoubleClick(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DGVBacklog.CellContentDoubleClick
         'MsgBox(Me.DGVBacklog.CurrentCell.Value)
         FSearch.MSTSearch.Text = Me.DGVBacklog.CurrentCell.Value
-        FSearch.Research()
+        FSearch.Research(0)
     End Sub
 
     Private Sub BBfilter_Click(sender As System.Object, e As System.EventArgs) Handles Bfilter.Click

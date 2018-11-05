@@ -28,7 +28,7 @@ Public Class FSearchCase
     Private Sub BSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         FSearch.MSTSearch.Text = Mid(CBGcent.Text, 1, 13)
 
-        FSearch.Research()
+        FSearch.Research(0)
     End Sub
 
     Function RequestCase(ByVal CaseN As String, Opt As Short) As String
@@ -685,13 +685,13 @@ Public Class FSearchCase
     Private Sub BSearch2_Click(sender As System.Object, e As System.EventArgs) Handles BSearch2.Click
         FSearch.MSTSearch.Text = Mid(CBGcent2.Text, 1, 13)
 
-        FSearch.Research()
+        FSearch.Research(0)
     End Sub
 
     Private Sub BGlib_Click(sender As System.Object, e As System.EventArgs) Handles BGlib.Click
         FSearch.MSTSearch.Text = Mid(CBGlib.Text, 1, 13)
 
-        FSearch.Research()
+        FSearch.Research(0)
     End Sub
 
 
@@ -705,7 +705,7 @@ Public Class FSearchCase
     Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
         FSearch.MSTSearch.Text = Mid(TBCustomer.Text, 1, 13)
 
-        FSearch.Research()
+        FSearch.Research(0)
     End Sub
 
 
@@ -713,7 +713,7 @@ Public Class FSearchCase
         'Dim ret As Integer
         FSearch.MSTSearch.Text = TBCustomer.Text
 
-        FSearch.Research()
+        FSearch.Research(0)
         'ret = FCustomer.TBCus.Text = TBCustomer.Text
         'FSearch.MSTSearch.Text = TBCustomer.Text
 
@@ -731,7 +731,7 @@ Public Class FSearchCase
     Private Sub BSearch_Click_2(sender As Object, e As EventArgs) Handles BSearch.Click
         FSearch.MSTSearch.Text = Mid(CBGcent.Text, 1, 13)
 
-        FSearch.Research()
+        FSearch.Research(0)
     End Sub
 
 End Class

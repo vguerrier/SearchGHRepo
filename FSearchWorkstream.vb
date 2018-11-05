@@ -198,9 +198,9 @@ Public Class FSearchWorkstream
             End If
         End While
 
-        If nbRFE <> 0 Then
-            Me.Show()
-        End If
+        'If nbRFE <> 0 Then
+        'Me.Show()
+        'End If
         researchWS = nbRFE
     End Function
 
@@ -208,7 +208,7 @@ Public Class FSearchWorkstream
     Private Sub BSearch_Click_1(sender As Object, e As EventArgs) Handles BSearch.Click
         FSearch.MSTSearch.Text = Mid(CBGcent.Text, 1, 13)
 
-        FSearch.Research()
+        FSearch.Research(0)
     End Sub
     Private Sub BSearch_Click(sender As Object, e As EventArgs) Handles BSearch.Click
 

@@ -12,7 +12,7 @@ Public Class FSearchGcent
     Private Sub BSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BSearch.Click
         FSearch.MSTSearch.Text = TBCase.Text
 
-        FSearch.Research()
+        FSearch.Research(0)
 
     End Sub
 
@@ -955,7 +955,7 @@ Public Class FSearchGcent
 
         TBRetCard.Text = Replace(TBRetCard.Text, ",", "")
         FSearch.MSTSearch.Text = TBRetCard.Text
-        FSearch.Research()
+        FSearch.Research(0)
     End Sub
 
     Sub Mail(CaseN As String, Card As String, Customer As String, title As String)
@@ -1119,7 +1119,7 @@ sortie:
 
         FSearch.MSTSearch.Text = Mid(CBGcent.Text, 1, 13)
 
-        FSearch.Research()
+        FSearch.Research(0)
     End Sub
 
 
@@ -1135,7 +1135,7 @@ sortie:
         Else
             FSearch.MSTSearch.Text = TBLabel.Text
         End If
-        FSearch.Research()
+        FSearch.Research(0)
     End Sub
 
     Private Sub BRessource_Click(sender As Object, e As EventArgs) Handles BRessource.Click

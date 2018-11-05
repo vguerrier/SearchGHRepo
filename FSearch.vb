@@ -65,12 +65,21 @@ Public Class FSearch
 
 
 
-    Public Sub Research()
+    Public Sub Research(type As Integer)
         'ret <> 0 on trouvé 
         'ret = 0 on a rien trouvé
 
         'on identifie la recherche à effectuer : Case, Gcent ou infos branche clients
-        Dim ret, retcus As Integer
+        'type poermet d'identifier quel type on recherche.
+        '0 : pas de type
+        '1 case
+        '2 gcent
+        '3 client
+        '4 ressource
+        '5 rfe
+        '6 workstream
+
+        Dim ret, retRFE, retcus As Integer
 
 
         If Nav = False Then
@@ -94,102 +103,167 @@ Public Class FSearch
             BBack.Visible = False
         End If
 
+        'si le répertoire n'existe pas on propose de le créer sinon on ne pourra pas sauvegarder les documents
+        If My.Computer.FileSystem.DirectoryExists("c:\tempSearch\") Then
+        Else
+            If My.Forms.frmMessage.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
+                ' OK button pressed
+                My.Computer.FileSystem.CreateDirectory("c:\tempSearch\")
+
+            End If
+        End If
 
         ret = 0
+        retRFE = 0
         Try
+            If type = 0 Then
 
-
-            If MMCBBranch.Checked Then
-                'recherche sur les infos clients
-                FCustomer.TBCus.Text = Me.MSTSearch.Text
-                FCustomer.Show()
-                FCustomer.researchCus()
-                MCBBranch.Checked = False
-            Else
-
-                If InStr(Trim(Me.MSTSearch.Text), "GCENT") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GTOP") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GADMI") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GSTOC") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GTRAC") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GCAS") > 0 Then
-                    'on recherche une GCENT
-                    'on va ouvrir la form GCENT
-
-                    'si le répertoire n'existe pas on propose de le créer sinon on ne pourra pas sauvegarder les documents
-                    If My.Computer.FileSystem.DirectoryExists("c:\tempSearch\") Then
-                    Else
-                        If My.Forms.frmMessage.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
-                            ' OK button pressed
-                            My.Computer.FileSystem.CreateDirectory("c:\tempSearch\")
-
-                        End If
-                    End If
-
-                    'Dim toto = Me.MSTSearch.Text
-                    FSearchGcent.TBGcent.Text = Me.MSTSearch.Text
-                    FSearchGcent.Show()
-                    ret = FSearchGcent.researchCQ()
-                Else
-                    If InStr(Trim(Me.MSTSearch.Text), "GLIB") > 0 Then
-                        'on recherche une GCENT
-                        'on va ouvrir la form GCENT
-                        Dim toto = Me.MSTSearch.Text
-                        FSearchGcent.TBGcent.Text = Me.MSTSearch.Text
-                        FSearchGcent.Show()
-                        ret = FSearchGcent.researchGlib()
-                    Else
-                        'on recherche un case
-                        'on va ouvrir la form CASE
-                        FSearchCase.RTBCase.Text = Me.MSTSearch.Text
-                        'FSearchCase.Show()
-                        If MMCBCusCase.Checked Then
-                            ' on recherche par numéro du client
-                            ret = FSearchCase.researchCase(1)
-                            If ret <> 0 Then
-                                FSearchCase.Show()
-                            End If
-
-                            MCBCusCase.Checked = False
-                        Else
-                            ret = FSearchCase.researchCase(0)
-                            If ret <> 0 Then
-                                FSearchCase.Show()
-                            End If
-                            MCBCusCase.Checked = False
-                        End If
-                        'End If
-                    End If
-                End If
-                If ret = 0 Then
+                If MMCBBranch.Checked Then
                     'recherche sur les infos clients
                     FCustomer.TBCus.Text = Me.MSTSearch.Text
-
-                    ret = FCustomer.researchCus()
-                    If ret <> 0 Then
-                        'FCustomer.Show()
-                    End If
+                    FCustomer.Show()
+                    FCustomer.researchCus()
                     MCBBranch.Checked = False
-                End If
-                If ret = 0 Then
-                    'recherche sur les infos Ressources
-                    ret = FRessources.researchRes(Me.MSTSearch.Text)
-                    If ret <> 0 Then
-                        FRessources.Show()
+                Else
+
+                    If InStr(Trim(Me.MSTSearch.Text), "GCENT") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GTOP") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GADMI") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GSTOC") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GTRAC") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GCAS") > 0 Then
+                        'on recherche une GCENT
+                        'on va ouvrir la form GCENT
+
+                        FSearchGcent.TBGcent.Text = Me.MSTSearch.Text
+                        FSearchGcent.Show()
+                        ret = FSearchGcent.researchCQ()
+                    Else
+                        If InStr(Trim(Me.MSTSearch.Text), "GLIB") > 0 Then
+                            'on recherche une GCENT
+                            'on va ouvrir la form GCENT
+                            Dim toto = Me.MSTSearch.Text
+                            FSearchGcent.TBGcent.Text = Me.MSTSearch.Text
+                            FSearchGcent.Show()
+                            ret = FSearchGcent.researchGlib()
+                        Else
+                            'on recherche un case
+                            'on va ouvrir la form CASE
+                            FSearchCase.RTBCase.Text = Me.MSTSearch.Text
+                            'FSearchCase.Show()
+                            If MMCBCusCase.Checked Then
+                                ' on recherche par numéro du client
+                                ret = FSearchCase.researchCase(1)
+                                If ret <> 0 Then
+                                    FSearchCase.Show()
+                                End If
+
+                                MCBCusCase.Checked = False
+                            Else
+                                ret = FSearchCase.researchCase(0)
+                                If ret <> 0 Then
+                                    FSearchCase.Show()
+                                End If
+                                MCBCusCase.Checked = False
+                            End If
+                            'End If
+                        End If
+                    End If
+
+                    If ret = 0 Then
+                        'recherche sur les infos clients
+                        FCustomer.TBCus.Text = Me.MSTSearch.Text
+
+                        ret = FCustomer.researchCus()
+                        If ret <> 0 Then
+                            'FCustomer.Show()
+                        End If
+                        MCBBranch.Checked = False
+                    End If
+
+                    If ret = 0 Then
+                        'recherche sur les infos Ressources
+                        ret = FRessources.researchRes(Me.MSTSearch.Text)
+                        If ret <> 0 Then
+                            FRessources.Show()
+                        End If
+                    End If
+
+                    If ret = 0 Then
+                        retRFE = FSearchRFE.researchRFE(Me.MSTSearch.Text)
+                        If retRFE = 0 Then
+                            retRFE = FSearchWorkstream.researchWS(Me.MSTSearch.Text)
+                            If retRFE <> 0 Then
+                                FSearchRFE.Show()
+                            End If
+                        Else
+                            'si on trouve un rfe on va chercher aussi si on a un workstream car ils peuvent avoir le même nom
+                            ret = FSearchWorkstream.researchWS(Me.MSTSearch.Text)
+                            If ret <> 0 And retRFE = 0 Then
+                                FSearchWorkstream.Show()
+                            Else
+                                'on a le cas où on a un RFE et un workstream avec le même nom. on propose le choix.
+                                FSearchSelect.Show()
+                                FSearchSelect.List(Me.MSTSearch.Text, "RFE")
+                                FSearchSelect.List(Me.MSTSearch.Text, "Workstream")
+                            End If
+                        End If
+                    End If
+
+
+
+                    If ret = 0 Then
+                        MsgBox("Not a card, Case, customer or ressource please retry")
                     End If
                 End If
-                If ret = 0 Then
-                    'recherche sur les infos Ressources
-                    ret = FSearchRFE.researchRFE(Me.MSTSearch.Text)
-                    If ret <> 0 Then
-                        FSearchRFE.Show()
-                    End If
-                End If
-                If ret = 0 Then
-                    'recherche sur les workstream
-                    ret = FSearchWorkstream.researchWS(Me.MSTSearch.Text)
-                    'If ret <> 0 Then
-                    'FSearchRFE.Show()
-                    'End If
-                End If
-            End If
-            If ret = 0 Then
-                MsgBox("Not a card, Case, customer or ressource please retry")
+            Else
+                Select Case type
+                    Case 1
+                        ret = FSearchCase.researchCase(0)
+                        If ret <> 0 Then
+                            FSearchCase.Show()
+                        End If
+                    Case 2
+                        If InStr(Trim(Me.MSTSearch.Text), "GCENT") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GTOP") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GADMI") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GSTOC") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GTRAC") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GCAS") > 0 Then
+                            'on recherche une GCENT
+                            'on va ouvrir la form GCENT
+
+                            FSearchGcent.TBGcent.Text = Me.MSTSearch.Text
+                            FSearchGcent.Show()
+                            ret = FSearchGcent.researchCQ()
+                        Else
+                            If InStr(Trim(Me.MSTSearch.Text), "GLIB") > 0 Then
+                                'on recherche une GCENT
+                                'on va ouvrir la form GCENT
+                                Dim toto = Me.MSTSearch.Text
+                                FSearchGcent.TBGcent.Text = Me.MSTSearch.Text
+                                FSearchGcent.Show()
+                                ret = FSearchGcent.researchGlib()
+                            End If
+                        End If
+                    Case 3
+                        FCustomer.TBCus.Text = Me.MSTSearch.Text
+
+                        ret = FCustomer.researchCus()
+                        If ret <> 0 Then
+                            'FCustomer.Show()
+                        End If
+                    Case 4
+                        ret = FRessources.researchRes(Me.MSTSearch.Text)
+                        If ret <> 0 Then
+                            FRessources.Show()
+                        End If
+                    Case 5
+                        'recherche sur les RFE
+                        ret = FSearchRFE.researchRFE(Me.MSTSearch.Text)
+                        If ret <> 0 Then
+                            FSearchRFE.Show()
+                        End If
+                    Case 6
+                        'recherche sur les workstream
+                        ret = FSearchWorkstream.researchWS(Me.MSTSearch.Text)
+                        If ret <> 0 Then
+                            FSearchWorkstream.Show()
+                        End If
+
+                End Select
+
+
             End If
         Catch ex As Exception
             If retcus = 0 Then
@@ -205,15 +279,15 @@ Public Class FSearch
     Private Sub TBSearch_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs)
 
         If e.KeyCode = Keys.Enter Then
-            'Call research()
-            Research()
+            'Call Research(0)
+            Research(0)
             'supprime lebbep quand on presse enter
             e.SuppressKeyPress = True
         End If
     End Sub
 
     Private Sub BSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Research()
+        Research(0)
         'Me.Size = New Size(314, 704)
         'FSearchCase.Size = New Size(776, 455)
     End Sub
@@ -243,15 +317,15 @@ Public Class FSearch
 
     Private Sub MFBSearch_Click(sender As Object, e As EventArgs) Handles MFBSearch.Click
         Nav = False
-        Research()
+        Research(0)
     End Sub
 
 
     Private Sub MSTSearch_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MSTSearch.KeyDown
         If e.KeyCode = Keys.Enter Then
-            'Call research()
+            'Call Research(0)
             Nav = False
-            Research()
+            Research(0)
             'supprime lebbep quand on presse enter
             e.SuppressKeyPress = True
         End If
@@ -323,7 +397,7 @@ Public Class FSearch
             Me.MSTSearch.Text = LStCase(IndSearch - 1)
             BNext.Visible = True
             nbSearch = nbSearch - 1
-            Research()
+            Research(0)
         Else
             BBack.Visible = False
         End If
@@ -337,7 +411,7 @@ Public Class FSearch
             Me.MSTSearch.Text = LStCase(IndSearch - 1)
             BBack.Visible = True
             nbSearch = nbSearch - 1
-            Research()
+            Research(0)
             If IndSearch = nbSearch Then
                 BNext.Visible = False
             End If
