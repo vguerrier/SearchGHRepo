@@ -24,6 +24,7 @@ Partial Class FRessources
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FRessources))
         Me.LbName = New System.Windows.Forms.Label()
         Me.TBName = New System.Windows.Forms.TextBox()
         Me.LCQLogin = New System.Windows.Forms.Label()
@@ -508,6 +509,7 @@ Partial Class FRessources
         Me.Controls.Add(Me.TBCQLogin)
         Me.Controls.Add(Me.LbName)
         Me.Controls.Add(Me.TBName)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Location = New System.Drawing.Point(21, 69)
         Me.Name = "FRessources"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

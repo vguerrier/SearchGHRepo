@@ -187,9 +187,9 @@ Public Class FSearch
                     If ret = 0 Then
                         retRFE = FSearchRFE.researchRFE(Me.MSTSearch.Text)
                         If retRFE = 0 Then
-                            retRFE = FSearchWorkstream.researchWS(Me.MSTSearch.Text)
-                            If retRFE <> 0 Then
-                                FSearchRFE.Show()
+                            ret = FSearchWorkstream.researchWS(Me.MSTSearch.Text)
+                            If ret <> 0 Then
+                                FSearchWorkstream.Show()
                             End If
                         Else
                             'si on trouve un rfe on va chercher aussi si on a un workstream car ils peuvent avoir le même nom
@@ -201,6 +201,7 @@ Public Class FSearch
                                 FSearchSelect.Show()
                                 FSearchSelect.List(Me.MSTSearch.Text, "RFE")
                                 FSearchSelect.List(Me.MSTSearch.Text, "Workstream")
+                                ret = 1
                             End If
                         End If
                     End If

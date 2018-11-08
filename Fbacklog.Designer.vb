@@ -45,12 +45,13 @@ Partial Class FBacklog
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
-        Me.CLBVTP = New System.Windows.Forms.CheckedListBox()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.BExcel = New System.Windows.Forms.Button()
         Me.Bfilter = New System.Windows.Forms.Button()
+        Me.CLBVTP = New System.Windows.Forms.CheckedListBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.BS1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.BBacklog = New System.Windows.Forms.Button()
         CType(Me.DGVBacklog, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BS1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -282,25 +283,6 @@ Partial Class FBacklog
         Me.ToolTip1.SetToolTip(Me.Button5, "All")
         Me.Button5.UseVisualStyleBackColor = False
         '
-        'CLBVTP
-        '
-        Me.CLBVTP.CheckOnClick = True
-        Me.CLBVTP.FormattingEnabled = True
-        Me.CLBVTP.Location = New System.Drawing.Point(740, 114)
-        Me.CLBVTP.Name = "CLBVTP"
-        Me.CLBVTP.Size = New System.Drawing.Size(140, 139)
-        Me.CLBVTP.TabIndex = 147
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.BackColor = System.Drawing.Color.White
-        Me.Label5.Location = New System.Drawing.Point(796, 98)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(28, 13)
-        Me.Label5.TabIndex = 146
-        Me.Label5.Text = "VTP"
-        '
         'Button1
         '
         Me.Button1.BackColor = System.Drawing.Color.White
@@ -343,14 +325,47 @@ Partial Class FBacklog
         Me.ToolTip1.SetToolTip(Me.Bfilter, "Filter")
         Me.Bfilter.UseVisualStyleBackColor = False
         '
+        'CLBVTP
+        '
+        Me.CLBVTP.CheckOnClick = True
+        Me.CLBVTP.FormattingEnabled = True
+        Me.CLBVTP.Location = New System.Drawing.Point(740, 114)
+        Me.CLBVTP.Name = "CLBVTP"
+        Me.CLBVTP.Size = New System.Drawing.Size(140, 139)
+        Me.CLBVTP.TabIndex = 147
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.BackColor = System.Drawing.Color.White
+        Me.Label5.Location = New System.Drawing.Point(796, 98)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(28, 13)
+        Me.Label5.TabIndex = 146
+        Me.Label5.Text = "VTP"
+        '
+        'BBacklog
+        '
+        Me.BBacklog.FlatAppearance.BorderSize = 0
+        Me.BBacklog.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BBacklog.ForeColor = System.Drawing.Color.Black
+        Me.BBacklog.Image = Global.WindowsApplication1.My.Resources.Resources.Backlog
+        Me.BBacklog.Location = New System.Drawing.Point(1112, 109)
+        Me.BBacklog.Name = "BBacklog"
+        Me.BBacklog.Size = New System.Drawing.Size(25, 25)
+        Me.BBacklog.TabIndex = 153
+        Me.ToolTip1.SetToolTip(Me.BBacklog, "Customer Backlog")
+        Me.BBacklog.UseVisualStyleBackColor = True
+        '
         'FBacklog
         '
         Me.AccessibleDescription = ""
         Me.AccessibleName = ""
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.LightSteelBlue
+        Me.BackColor = System.Drawing.SystemColors.Window
         Me.ClientSize = New System.Drawing.Size(1584, 809)
+        Me.Controls.Add(Me.BBacklog)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button3)
@@ -413,4 +428,5 @@ Partial Class FBacklog
     Friend WithEvents Button3 As Button
     Friend WithEvents Button4 As Button
     Friend WithEvents Button5 As Button
+    Friend WithEvents BBacklog As Button
 End Class

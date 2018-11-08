@@ -47,7 +47,7 @@ Public Class FSearchRFE
         RequestRFE = RequestRFE + "TRA_LIB_ADM lib_app, "
         RequestRFE = RequestRFE + "Adm_Domaine d, "
         RequestRFE = RequestRFE + "v_adm_users u "
-        RequestRFE = RequestRFE + "where upper(r.gapcode) = upper('" + CaseN + "') "
+        RequestRFE = RequestRFE + "where upper(r.gapcode) = upper('" + Trim(CaseN) + "') "
         RequestRFE = RequestRFE + "and p.proclient = c.cliident "
         RequestRFE = RequestRFE + "and r.gapproj = p.proident "
         RequestRFE = RequestRFE + "and r.gapappli = a.aapident "
@@ -78,7 +78,7 @@ Public Class FSearchRFE
         GetGcentInfoCQ = GetGcentInfoCQ & CQbase & ".rfe r "
         GetGcentInfoCQ = GetGcentInfoCQ & " where a.State = s.ID "
         GetGcentInfoCQ = GetGcentInfoCQ & " And a.rfecode = r.dbid"
-        GetGcentInfoCQ = GetGcentInfoCQ & " And r.code Like '%" + RFE + "%'"
+        GetGcentInfoCQ = GetGcentInfoCQ & " And r.code Like '%" + Trim(RFE) + "%'"
 
     End Function
 
@@ -231,5 +231,11 @@ Public Class FSearchRFE
         FSearch.MSTSearch.Text = Mid(CBGcent.Text, 1, 13)
 
         FSearch.Research(0)
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        FSearch.MSTSearch.Text = TBWorstream.Text
+
+        FSearch.Research(6)
     End Sub
 End Class

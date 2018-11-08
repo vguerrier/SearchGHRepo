@@ -67,7 +67,7 @@ Public Class FSearchCase
         RequestCase = RequestCase + "FROM FilteredIncident c WITH (NOLOCK) " '"
         RequestCase = RequestCase + "LEFT OUTER JOIN Filteredaldata_clearquestbug cq WITH (NOLOCK) ON c.incidentid = cq.aldata_case "
         If Opt = 0 Then
-            RequestCase = RequestCase + "WHERE c.ticketnumber like '%" + CaseN + "%'"
+            RequestCase = RequestCase + "WHERE c.ticketnumber like '%" + Trim(CaseN) + "%'"
         Else
             'customer number
             RequestCase = RequestCase + "WHERE c.sfmig_srclientnumber = '" + Trim(CaseN) + "'"

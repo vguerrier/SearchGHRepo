@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class FSearchSelect
+Partial Class FSearchSelectWS
     Inherits MaterialSkin.Controls.MaterialForm
 
     'Form remplace la méthode Dispose pour nettoyer la liste des composants.
@@ -23,7 +23,7 @@ Partial Class FSearchSelect
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FSearchSelect))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FSearchSelectWS))
         Me.LVChoice = New System.Windows.Forms.ListView()
         Me.CHNom = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.CHType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -63,7 +63,7 @@ Partial Class FSearchSelect
         Me.LBCase.TabIndex = 70
         Me.LBCase.Text = "Search result brings more than one result. please choose a type. (Double click)"
         '
-        'FSearchSelect
+        'FSearchSelectWS
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -71,7 +71,7 @@ Partial Class FSearchSelect
         Me.Controls.Add(Me.LBCase)
         Me.Controls.Add(Me.LVChoice)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Name = "FSearchSelect"
+        Me.Name = "FSearchSelectWS"
         Me.Text = "Select Type"
         Me.ResumeLayout(False)
         Me.PerformLayout()

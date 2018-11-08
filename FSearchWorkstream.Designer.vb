@@ -23,6 +23,7 @@ Partial Class FSearchWorkstream
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FSearchWorkstream))
         Me.BSearch = New System.Windows.Forms.Button()
         Me.CBGcent = New System.Windows.Forms.ComboBox()
         Me.LbGcent2 = New System.Windows.Forms.Label()
@@ -90,7 +91,7 @@ Partial Class FSearchWorkstream
         'TBType
         '
         Me.TBType.BackColor = System.Drawing.SystemColors.Window
-        Me.TBType.Location = New System.Drawing.Point(503, 172)
+        Me.TBType.Location = New System.Drawing.Point(446, 172)
         Me.TBType.Name = "TBType"
         Me.TBType.ReadOnly = True
         Me.TBType.Size = New System.Drawing.Size(179, 20)
@@ -100,7 +101,7 @@ Partial Class FSearchWorkstream
         '
         Me.Label12.AutoSize = True
         Me.Label12.BackColor = System.Drawing.SystemColors.Window
-        Me.Label12.Location = New System.Drawing.Point(466, 175)
+        Me.Label12.Location = New System.Drawing.Point(409, 175)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(31, 13)
         Me.Label12.TabIndex = 180
@@ -128,7 +129,7 @@ Partial Class FSearchWorkstream
         'TBMD
         '
         Me.TBMD.BackColor = System.Drawing.SystemColors.Window
-        Me.TBMD.Location = New System.Drawing.Point(503, 209)
+        Me.TBMD.Location = New System.Drawing.Point(446, 209)
         Me.TBMD.Name = "TBMD"
         Me.TBMD.ReadOnly = True
         Me.TBMD.Size = New System.Drawing.Size(179, 20)
@@ -138,7 +139,7 @@ Partial Class FSearchWorkstream
         '
         Me.Label9.AutoSize = True
         Me.Label9.BackColor = System.Drawing.SystemColors.Window
-        Me.Label9.Location = New System.Drawing.Point(407, 212)
+        Me.Label9.Location = New System.Drawing.Point(350, 212)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(90, 13)
         Me.Label9.TabIndex = 176
@@ -147,7 +148,7 @@ Partial Class FSearchWorkstream
         'TBCD
         '
         Me.TBCD.BackColor = System.Drawing.SystemColors.Window
-        Me.TBCD.Location = New System.Drawing.Point(503, 98)
+        Me.TBCD.Location = New System.Drawing.Point(446, 98)
         Me.TBCD.Name = "TBCD"
         Me.TBCD.ReadOnly = True
         Me.TBCD.Size = New System.Drawing.Size(179, 20)
@@ -157,7 +158,7 @@ Partial Class FSearchWorkstream
         '
         Me.Label8.AutoSize = True
         Me.Label8.BackColor = System.Drawing.SystemColors.Window
-        Me.Label8.Location = New System.Drawing.Point(425, 102)
+        Me.Label8.Location = New System.Drawing.Point(368, 102)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(72, 13)
         Me.Label8.TabIndex = 174
@@ -166,7 +167,7 @@ Partial Class FSearchWorkstream
         'TBModified
         '
         Me.TBModified.BackColor = System.Drawing.SystemColors.Window
-        Me.TBModified.Location = New System.Drawing.Point(503, 135)
+        Me.TBModified.Location = New System.Drawing.Point(446, 135)
         Me.TBModified.Name = "TBModified"
         Me.TBModified.ReadOnly = True
         Me.TBModified.Size = New System.Drawing.Size(179, 20)
@@ -176,7 +177,7 @@ Partial Class FSearchWorkstream
         '
         Me.Label7.AutoSize = True
         Me.Label7.BackColor = System.Drawing.SystemColors.Window
-        Me.Label7.Location = New System.Drawing.Point(436, 138)
+        Me.Label7.Location = New System.Drawing.Point(379, 138)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(61, 13)
         Me.Label7.TabIndex = 172
@@ -261,7 +262,7 @@ Partial Class FSearchWorkstream
         'TBCreated
         '
         Me.TBCreated.BackColor = System.Drawing.SystemColors.Window
-        Me.TBCreated.Location = New System.Drawing.Point(503, 67)
+        Me.TBCreated.Location = New System.Drawing.Point(446, 67)
         Me.TBCreated.Name = "TBCreated"
         Me.TBCreated.ReadOnly = True
         Me.TBCreated.Size = New System.Drawing.Size(179, 20)
@@ -271,7 +272,7 @@ Partial Class FSearchWorkstream
         '
         Me.Label1.AutoSize = True
         Me.Label1.BackColor = System.Drawing.SystemColors.Window
-        Me.Label1.Location = New System.Drawing.Point(439, 70)
+        Me.Label1.Location = New System.Drawing.Point(382, 70)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(58, 13)
         Me.Label1.TabIndex = 162
@@ -299,7 +300,7 @@ Partial Class FSearchWorkstream
         'TBOwner
         '
         Me.TBOwner.BackColor = System.Drawing.SystemColors.Window
-        Me.TBOwner.Location = New System.Drawing.Point(503, 246)
+        Me.TBOwner.Location = New System.Drawing.Point(446, 246)
         Me.TBOwner.Name = "TBOwner"
         Me.TBOwner.ReadOnly = True
         Me.TBOwner.Size = New System.Drawing.Size(179, 20)
@@ -309,7 +310,7 @@ Partial Class FSearchWorkstream
         '
         Me.Label4.AutoSize = True
         Me.Label4.BackColor = System.Drawing.SystemColors.Window
-        Me.Label4.Location = New System.Drawing.Point(459, 246)
+        Me.Label4.Location = New System.Drawing.Point(402, 246)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(38, 13)
         Me.Label4.TabIndex = 185
@@ -338,7 +339,7 @@ Partial Class FSearchWorkstream
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(707, 378)
         Me.Controls.Add(Me.TBState)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.TBOwner)
@@ -368,6 +369,7 @@ Partial Class FSearchWorkstream
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TBWorkstream)
         Me.Controls.Add(Me.LBDesc)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FSearchWorkstream"
         Me.Text = "Search Workstream"
         Me.ResumeLayout(False)

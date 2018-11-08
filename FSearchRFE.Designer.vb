@@ -23,6 +23,7 @@ Partial Class FSearchRFE
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FSearchRFE))
         Me.TBCRFE = New System.Windows.Forms.TextBox()
         Me.LBDesc = New System.Windows.Forms.Label()
         Me.TBTitle = New System.Windows.Forms.TextBox()
@@ -51,9 +52,10 @@ Partial Class FSearchRFE
         Me.Label12 = New System.Windows.Forms.Label()
         Me.CBGcent = New System.Windows.Forms.ComboBox()
         Me.LbGcent2 = New System.Windows.Forms.Label()
-        Me.BSearch = New System.Windows.Forms.Button()
         Me.TBTrans = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
+        Me.BSearch = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'TBCRFE
@@ -320,23 +322,11 @@ Partial Class FSearchRFE
         Me.LbGcent2.AutoSize = True
         Me.LbGcent2.BackColor = System.Drawing.Color.White
         Me.LbGcent2.ForeColor = System.Drawing.Color.Black
-        Me.LbGcent2.Location = New System.Drawing.Point(381, 231)
+        Me.LbGcent2.Location = New System.Drawing.Point(308, 252)
         Me.LbGcent2.Name = "LbGcent2"
         Me.LbGcent2.Size = New System.Drawing.Size(70, 13)
         Me.LbGcent2.TabIndex = 157
         Me.LbGcent2.Text = "CARD (CRM)"
-        '
-        'BSearch
-        '
-        Me.BSearch.BackColor = System.Drawing.SystemColors.Window
-        Me.BSearch.FlatAppearance.BorderSize = 0
-        Me.BSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BSearch.Image = Global.WindowsApplication1.My.Resources.Resources.search3_p
-        Me.BSearch.Location = New System.Drawing.Point(353, 247)
-        Me.BSearch.Name = "BSearch"
-        Me.BSearch.Size = New System.Drawing.Size(25, 25)
-        Me.BSearch.TabIndex = 159
-        Me.BSearch.UseVisualStyleBackColor = False
         '
         'TBTrans
         '
@@ -357,11 +347,36 @@ Partial Class FSearchRFE
         Me.Label13.TabIndex = 160
         Me.Label13.Text = "Transfert Date CSO/Maint"
         '
+        'BSearch
+        '
+        Me.BSearch.BackColor = System.Drawing.SystemColors.Window
+        Me.BSearch.FlatAppearance.BorderSize = 0
+        Me.BSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BSearch.Image = Global.WindowsApplication1.My.Resources.Resources.search3_p
+        Me.BSearch.Location = New System.Drawing.Point(698, 249)
+        Me.BSearch.Name = "BSearch"
+        Me.BSearch.Size = New System.Drawing.Size(25, 25)
+        Me.BSearch.TabIndex = 159
+        Me.BSearch.UseVisualStyleBackColor = False
+        '
+        'Button1
+        '
+        Me.Button1.BackColor = System.Drawing.SystemColors.Window
+        Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Image = Global.WindowsApplication1.My.Resources.Resources.search3_p
+        Me.Button1.Location = New System.Drawing.Point(569, 168)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(25, 25)
+        Me.Button1.TabIndex = 162
+        Me.Button1.UseVisualStyleBackColor = False
+        '
         'FSearchRFE
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 707)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.TBTrans)
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.BSearch)
@@ -393,6 +408,7 @@ Partial Class FSearchRFE
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TBCRFE)
         Me.Controls.Add(Me.LBDesc)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FSearchRFE"
         Me.Text = "RFE"
         Me.ResumeLayout(False)
@@ -431,4 +447,5 @@ Partial Class FSearchRFE
     Friend WithEvents BSearch As Button
     Friend WithEvents TBTrans As TextBox
     Friend WithEvents Label13 As Label
+    Friend WithEvents Button1 As Button
 End Class
