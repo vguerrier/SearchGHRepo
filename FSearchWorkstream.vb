@@ -6,7 +6,11 @@ Imports MaterialSkin
 
 Public Class FSearchWorkstream
     Private Sub FSearchWorkstream_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        If TBType.Text = "RFE" Then
+            BType.Visible = True
+        Else
+            BType.Visible = False
+        End If
     End Sub
 
     Function RequestWSCount(ByVal WS As String) As String
@@ -184,6 +188,7 @@ Public Class FSearchWorkstream
                 End If
                 If myReader.GetValue(11) IsNot DBNull.Value Then
                     TBType.Text = myReader.GetValue(11)
+
                 End If
                 If myReader.GetValue(3) IsNot DBNull.Value Then
                     TBAGroup.Text = myReader.GetValue(3)
@@ -263,7 +268,10 @@ Public Class FSearchWorkstream
 
         FSearch.Research(0)
     End Sub
-    Private Sub BSearch_Click(sender As Object, e As EventArgs) Handles BSearch.Click
 
+    Private Sub BType_Click(sender As Object, e As EventArgs) Handles BType.Click
+        FSearch.MSTSearch.Text = TBWorkstream.Text
+
+        FSearch.Research(5)
     End Sub
 End Class

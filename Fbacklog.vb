@@ -688,6 +688,10 @@ Public Class FBacklog
         'Next
     End Sub
 
+    Private Sub BBacklog_Click(sender As Object, e As EventArgs) Handles BBacklog.Click
+        FsearchEvolution.Show()
+    End Sub
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
         If iStatus = 0 Then

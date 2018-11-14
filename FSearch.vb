@@ -194,15 +194,20 @@ Public Class FSearch
                         Else
                             'si on trouve un rfe on va chercher aussi si on a un workstream car ils peuvent avoir le même nom
                             ret = FSearchWorkstream.researchWS(Me.MSTSearch.Text)
-                            If ret <> 0 And retRFE = 0 Then
-                                FSearchWorkstream.Show()
+                            If ret = 0 And retRFE = 1 Then
+                                FSearchRFE.Show()
                             Else
-                                'on a le cas où on a un RFE et un workstream avec le même nom. on propose le choix.
-                                FSearchSelect.Show()
-                                FSearchSelect.List(Me.MSTSearch.Text, "RFE")
-                                FSearchSelect.List(Me.MSTSearch.Text, "Workstream")
-                                ret = 1
+                                If ret <> 0 And retRFE = 0 Then
+                                    FSearchWorkstream.Show()
+                                Else
+                                    'on a le cas où on a un RFE et un workstream avec le même nom. on propose le choix.
+                                    FSearchSelect.Show()
+                                    FSearchSelect.List(Me.MSTSearch.Text, "RFE")
+                                    FSearchSelect.List(Me.MSTSearch.Text, "Workstream")
+                                End If
+
                             End If
+                            ret = 1
                         End If
                     End If
 

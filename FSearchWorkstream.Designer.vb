@@ -53,6 +53,7 @@ Partial Class FSearchWorkstream
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TBState = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.BType = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'BSearch
@@ -335,11 +336,24 @@ Partial Class FSearchWorkstream
         Me.Label10.TabIndex = 187
         Me.Label10.Text = "State"
         '
+        'BType
+        '
+        Me.BType.BackColor = System.Drawing.SystemColors.Window
+        Me.BType.FlatAppearance.BorderSize = 0
+        Me.BType.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BType.Image = Global.WindowsApplication1.My.Resources.Resources.search3_p
+        Me.BType.Location = New System.Drawing.Point(631, 172)
+        Me.BType.Name = "BType"
+        Me.BType.Size = New System.Drawing.Size(25, 25)
+        Me.BType.TabIndex = 189
+        Me.BType.UseVisualStyleBackColor = False
+        '
         'FSearchWorkstream
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(707, 378)
+        Me.Controls.Add(Me.BType)
         Me.Controls.Add(Me.TBState)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.TBOwner)
@@ -406,4 +420,5 @@ Partial Class FSearchWorkstream
     Friend WithEvents Label4 As Label
     Friend WithEvents TBState As TextBox
     Friend WithEvents Label10 As Label
+    Friend WithEvents BType As Button
 End Class

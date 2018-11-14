@@ -56,6 +56,8 @@ Partial Class FSearchRFE
         Me.Label13 = New System.Windows.Forms.Label()
         Me.BSearch = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.LLBlinkRFE = New System.Windows.Forms.LinkLabel()
+        Me.LbLink = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'TBCRFE
@@ -371,11 +373,35 @@ Partial Class FSearchRFE
         Me.Button1.TabIndex = 162
         Me.Button1.UseVisualStyleBackColor = False
         '
+        'LLBlinkRFE
+        '
+        Me.LLBlinkRFE.AutoSize = True
+        Me.LLBlinkRFE.BackColor = System.Drawing.Color.White
+        Me.LLBlinkRFE.Location = New System.Drawing.Point(603, 135)
+        Me.LLBlinkRFE.Name = "LLBlinkRFE"
+        Me.LLBlinkRFE.Size = New System.Drawing.Size(83, 13)
+        Me.LLBlinkRFE.TabIndex = 163
+        Me.LLBlinkRFE.TabStop = True
+        Me.LLBlinkRFE.Text = "Link RFE TOOL"
+        '
+        'LbLink
+        '
+        Me.LbLink.AutoSize = True
+        Me.LbLink.BackColor = System.Drawing.Color.White
+        Me.LbLink.Location = New System.Drawing.Point(603, 148)
+        Me.LbLink.Name = "LbLink"
+        Me.LbLink.Size = New System.Drawing.Size(37, 13)
+        Me.LbLink.TabIndex = 164
+        Me.LbLink.Text = "CARD"
+        Me.LbLink.Visible = False
+        '
         'FSearchRFE
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 707)
+        Me.Controls.Add(Me.LbLink)
+        Me.Controls.Add(Me.LLBlinkRFE)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.TBTrans)
         Me.Controls.Add(Me.Label13)
@@ -448,4 +474,6 @@ Partial Class FSearchRFE
     Friend WithEvents TBTrans As TextBox
     Friend WithEvents Label13 As Label
     Friend WithEvents Button1 As Button
+    Friend WithEvents LLBlinkRFE As LinkLabel
+    Friend WithEvents LbLink As Label
 End Class

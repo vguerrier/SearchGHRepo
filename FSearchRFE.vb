@@ -35,7 +35,8 @@ Public Class FSearchRFE
         RequestRFE = RequestRFE + "r.GAPCOMPC as                                            Macro_estimate, "   '9
         RequestRFE = RequestRFE + "r.GAPDESC as                                                 desription, "   '10
         RequestRFE = RequestRFE + "r.gapcrmstream as                                              Workstream, " '11
-        RequestRFE = RequestRFE + "r.gapknwtsf as                                               transfert   "   '12
+        RequestRFE = RequestRFE + "r.gapknwtsf as                                               transfert,  "   '12
+        RequestRFE = RequestRFE + "r.gapident                                                             "   '13
         RequestRFE = RequestRFE + "from gap r, "
         RequestRFE = RequestRFE + "Client c, "
         RequestRFE = RequestRFE + "Projet p, "
@@ -52,7 +53,7 @@ Public Class FSearchRFE
         RequestRFE = RequestRFE + "and r.gapproj = p.proident "
         RequestRFE = RequestRFE + "and r.gapappli = a.aapident "
         RequestRFE = RequestRFE + "and r.gapstatu = statut.staident "
-        RequestRFE = RequestRFE + "and r.gapident = s.solgap "
+        RequestRFE = RequestRFE + "and r.gapident = s.solgap(+) "
         RequestRFE = RequestRFE + "and (s.solactu = 1 or s.solactu is null) "
         RequestRFE = RequestRFE + "and r.gapdoma = d.adoident "
         RequestRFE = RequestRFE + "and lib_dom.tlaident = d.adolibe "
@@ -185,6 +186,12 @@ Public Class FSearchRFE
             If dr.GetValue(12) IsNot DBNull.Value Then
                 TBTrans.Text = dr.GetValue(12)
             End If
+            'link
+            If dr.GetValue(13) IsNot DBNull.Value Then
+
+                LbLink.Text = "https://tools.eyc.com:5577/rfe/rfe6.html?screen=gap_modification&gap_ident=" + CStr(dr.GetValue(13))
+
+            End If
         End If
         conn.Close()
         conn.Dispose()
@@ -237,5 +244,9 @@ Public Class FSearchRFE
         FSearch.MSTSearch.Text = TBWorstream.Text
 
         FSearch.Research(6)
+    End Sub
+
+    Private Sub LLBlinkCQ_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LLBlinkRFE.LinkClicked
+        System.Diagnostics.Process.Start(LbLink.Text)
     End Sub
 End Class

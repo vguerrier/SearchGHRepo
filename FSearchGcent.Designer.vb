@@ -692,7 +692,7 @@ Partial Class FSearchGcent
         '
         Me.LLBlinkCQ.AutoSize = True
         Me.LLBlinkCQ.BackColor = System.Drawing.Color.White
-        Me.LLBlinkCQ.Location = New System.Drawing.Point(128, 64)
+        Me.LLBlinkCQ.Location = New System.Drawing.Point(127, 63)
         Me.LLBlinkCQ.Name = "LLBlinkCQ"
         Me.LLBlinkCQ.Size = New System.Drawing.Size(45, 13)
         Me.LLBlinkCQ.TabIndex = 140
