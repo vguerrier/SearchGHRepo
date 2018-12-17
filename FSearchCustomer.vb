@@ -174,6 +174,10 @@ Public Class FCustomer
         Dim dr As OleDb.OleDbDataReader
         Dim Oradb As String = "Provider=OraOLEDB.Oracle.1;Password=read_only;Persist Security Info=True;User ID=read_only;Data Source=RDTOOLS;"
         Dim conn As New OleDb.OleDbConnection(Oradb) 'OracleConnection(oradb)
+        'Dim myCommand As OleDb.OleDbCommand
+        'Dim dr As OleDb.OleDbDataReader
+        Dim Oradb2 As String = "Provider=OraOLEDB.Oracle.1;Password=RFE_READ;Persist Security Info=True;User ID=RFE_READ;Data Source=RDTOOLS;"
+        Dim conn2 As New OleDb.OleDbConnection(Oradb2) 'OracleConnection(oradb)
         'Dim Customer As Env
         Dim found As Boolean
         Dim i, j, z, nbBranch, nbenv, nbappli, IndEnv As Integer
@@ -361,6 +365,40 @@ Public Class FCustomer
         Next
         conn.Close()
 
+        'recherche des RFE
+        conn2.Open()
+        request = RequestRFE(TBCus.Text)
+        myCommand = New OleDb.OleDbCommand(request, conn2)
+        dr = myCommand.ExecuteReader()
+        Dim nbrow2 As Integer = 0
+        While dr.Read()
+            nbrow2 = nbrow2 + 1
+
+            CBRfe.Items.Add(dr.Item(1) + " - " + dr.Item(0))
+
+        End While
+        dr.Close()
+
+        'recherche des Workstream
+        Dim Sqldb As String = "Data Source=seyccrmsqlsip1;Integrated Security=SSPI;Initial Catalog=crm_MSCRM"
+        Dim SqlConn As New SqlClient.SqlConnection(Sqldb)
+        Dim SqlCmd As New SqlCommand
+        Dim req As String
+        Dim myReader As SqlDataReader
+
+        req = RequestWS(TBCus.Text)
+        SqlConn.Open()
+        SqlCmd = SqlConn.CreateCommand()
+
+        SqlCmd.CommandText = req
+        myReader = SqlCmd.ExecuteReader()
+
+        While myReader.Read()
+
+            CBWorkstream.Items.Add(myReader.Item(1) + " - " + myReader.Item(0))
+        End While
+        myReader.Close()
+
 
 Fin:
         FBacklog.LB_NB.Text = ""
@@ -403,6 +441,33 @@ Fin:
         End While
 
     End Function
+
+
+    Function RequestRFE(ByVal Cus As String) As String
+
+
+        RequestRFE = "select r.gapcode, lib_sta.tladesc "
+        RequestRFE = RequestRFE + "from gap r, Client c, Projet p, TRA_LIB_ADM lib_sta, Adm_Statut statut "
+        RequestRFE = RequestRFE + "where p.proclient = c.cliident "
+        RequestRFE = RequestRFE + "and r.gapproj = p.proident "
+        RequestRFE = RequestRFE + "and r.gapstatu = statut.staident "
+        RequestRFE = RequestRFE + "and lib_sta.tlaident = statut.stalibe "
+        RequestRFE = RequestRFE + "and lib_sta.langue = 'GB' "
+        RequestRFE = RequestRFE + "and lower(c.clilibe) like '%" + LCase(Cus) + "%' "
+        RequestRFE = RequestRFE + "order by 2 "
+
+    End Function
+
+    Function RequestWS(ByVal WS As String) As String
+
+
+        RequestWS = "Select c.aldata_name, "
+        RequestWS = RequestWS + "statecodename "
+        RequestWS = RequestWS + "From Filteredaldata_workstream c "
+        RequestWS = RequestWS + "Where lower(c.aldata_accountname) Like ('%" + LCase(WS) + "%') "
+
+    End Function
+
 
     Private Sub TVCus_AfterSelect(sender As System.Object, e As System.Windows.Forms.TreeViewEventArgs) Handles TVCus.AfterSelect
         Dim level As Integer
@@ -520,5 +585,25 @@ Fin:
         'Shell("%systemroot%\system32\mstsc.exe ""C:\Users\guerrier\AppData\Roaming\Microsoft\Workspaces\{4B548D83-D065-4190-8D74-31A7214932C9}\Resource\Putty (GOLD Development 2012 R2).rdp"
     End Sub
 
+    Private Sub BSearch_Click(sender As Object, e As EventArgs) Handles BSearch.Click
 
+
+        Dim str() = CBRfe.Text.Split("-")
+
+        TBRfe.Text = str(1)
+
+        FSearch.MSTSearch.Text = Trim(TBRfe.Text)
+
+        FSearch.Research(5)
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Dim str() = CBWorkstream.Text.Split("-")
+
+        TBWs.Text = str(1)
+
+        FSearch.MSTSearch.Text = Trim(TBWs.Text)
+
+        FSearch.Research(6)
+    End Sub
 End Class

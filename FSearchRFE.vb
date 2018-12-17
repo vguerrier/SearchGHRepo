@@ -238,7 +238,7 @@ Public Class FSearchRFE
     Private Sub BSearch_Click_1(sender As Object, e As EventArgs) Handles BSearch.Click
         FSearch.MSTSearch.Text = Mid(CBGcent.Text, 1, 13)
 
-        FSearch.Research(0)
+        FSearch.Research(5)
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -250,4 +250,5 @@ Public Class FSearchRFE
     Private Sub LLBlinkCQ_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LLBlinkRFE.LinkClicked
         System.Diagnostics.Process.Start(LbLink.Text)
     End Sub
+
 End Class

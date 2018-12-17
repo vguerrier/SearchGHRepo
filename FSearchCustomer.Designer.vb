@@ -40,12 +40,15 @@ Partial Class FCustomer
         Me.TBJava = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.TBProduct = New System.Windows.Forms.TextBox()
         Me.LLBURL = New System.Windows.Forms.LinkLabel()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.BBacklog = New System.Windows.Forms.Button()
         Me.TBLabel = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.TBBranchType = New System.Windows.Forms.TextBox()
@@ -53,18 +56,26 @@ Partial Class FCustomer
         Me.TBDesc = New System.Windows.Forms.TextBox()
         Me.LBDesc = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.BBacklog = New System.Windows.Forms.Button()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.CBWorkstream = New System.Windows.Forms.ComboBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.BSearch = New System.Windows.Forms.Button()
+        Me.CBRfe = New System.Windows.Forms.ComboBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.TBRfe = New System.Windows.Forms.TextBox()
+        Me.TBWs = New System.Windows.Forms.TextBox()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
         Me.SuspendLayout()
         '
         'TVCus
         '
         Me.TVCus.Location = New System.Drawing.Point(19, 101)
         Me.TVCus.Name = "TVCus"
-        Me.TVCus.Size = New System.Drawing.Size(325, 512)
+        Me.TVCus.Size = New System.Drawing.Size(325, 638)
         Me.TVCus.TabIndex = 0
         '
         'TBCus
@@ -106,7 +117,7 @@ Partial Class FCustomer
         '
         'TBFSpring
         '
-        Me.TBFSpring.Location = New System.Drawing.Point(13, 82)
+        Me.TBFSpring.Location = New System.Drawing.Point(13, 80)
         Me.TBFSpring.Name = "TBFSpring"
         Me.TBFSpring.ReadOnly = True
         Me.TBFSpring.Size = New System.Drawing.Size(300, 20)
@@ -115,7 +126,7 @@ Partial Class FCustomer
         'LBFSpring
         '
         Me.LBFSpring.AutoSize = True
-        Me.LBFSpring.Location = New System.Drawing.Point(10, 68)
+        Me.LBFSpring.Location = New System.Drawing.Point(10, 66)
         Me.LBFSpring.Name = "LBFSpring"
         Me.LBFSpring.Size = New System.Drawing.Size(92, 13)
         Me.LBFSpring.TabIndex = 8
@@ -210,9 +221,23 @@ Partial Class FCustomer
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Environment Information"
         '
+        'Button1
+        '
+        Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.ForeColor = System.Drawing.Color.Black
+        Me.Button1.Image = Global.WindowsApplication1.My.Resources.Resources.putty_dark_24
+        Me.Button1.Location = New System.Drawing.Point(291, 78)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(25, 25)
+        Me.Button1.TabIndex = 27
+        Me.ToolTip1.SetToolTip(Me.Button1, "Launch Putty on server")
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'GroupBox3
         '
         Me.GroupBox3.BackColor = System.Drawing.Color.White
+        Me.GroupBox3.Controls.Add(Me.Label8)
         Me.GroupBox3.Controls.Add(Me.LinkLabel1)
         Me.GroupBox3.Controls.Add(Me.TBProduct)
         Me.GroupBox3.Controls.Add(Me.LLBURL)
@@ -229,6 +254,15 @@ Partial Class FCustomer
         Me.GroupBox3.TabIndex = 24
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Application Information"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(13, 112)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(44, 13)
+        Me.Label8.TabIndex = 143
+        Me.Label8.Text = "Product"
         '
         'LinkLabel1
         '
@@ -287,6 +321,19 @@ Partial Class FCustomer
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Branch Information"
         '
+        'BBacklog
+        '
+        Me.BBacklog.FlatAppearance.BorderSize = 0
+        Me.BBacklog.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BBacklog.ForeColor = System.Drawing.Color.Black
+        Me.BBacklog.Image = Global.WindowsApplication1.My.Resources.Resources.Backlog
+        Me.BBacklog.Location = New System.Drawing.Point(288, 9)
+        Me.BBacklog.Name = "BBacklog"
+        Me.BBacklog.Size = New System.Drawing.Size(25, 25)
+        Me.BBacklog.TabIndex = 26
+        Me.ToolTip1.SetToolTip(Me.BBacklog, "Customer Backlog")
+        Me.BBacklog.UseVisualStyleBackColor = True
+        '
         'TBLabel
         '
         Me.TBLabel.Location = New System.Drawing.Point(13, 115)
@@ -338,38 +385,108 @@ Partial Class FCustomer
         Me.LBDesc.TabIndex = 2
         Me.LBDesc.Text = "Description"
         '
-        'Button1
+        'GroupBox4
         '
-        Me.Button1.FlatAppearance.BorderSize = 0
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.ForeColor = System.Drawing.Color.Black
-        Me.Button1.Image = Global.WindowsApplication1.My.Resources.Resources.putty_dark_24
-        Me.Button1.Location = New System.Drawing.Point(291, 78)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(25, 25)
-        Me.Button1.TabIndex = 27
-        Me.ToolTip1.SetToolTip(Me.Button1, "Launch Putty on server")
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.GroupBox4.BackColor = System.Drawing.Color.White
+        Me.GroupBox4.Controls.Add(Me.Button2)
+        Me.GroupBox4.Controls.Add(Me.CBWorkstream)
+        Me.GroupBox4.Controls.Add(Me.Label9)
+        Me.GroupBox4.Controls.Add(Me.BSearch)
+        Me.GroupBox4.Controls.Add(Me.CBRfe)
+        Me.GroupBox4.Controls.Add(Me.Label13)
+        Me.GroupBox4.Controls.Add(Me.TBRfe)
+        Me.GroupBox4.Controls.Add(Me.TBWs)
+        Me.GroupBox4.ForeColor = System.Drawing.Color.Black
+        Me.GroupBox4.Location = New System.Drawing.Point(358, 620)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(322, 119)
+        Me.GroupBox4.TabIndex = 25
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "RFE && Workstream"
         '
-        'BBacklog
+        'Button2
         '
-        Me.BBacklog.FlatAppearance.BorderSize = 0
-        Me.BBacklog.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BBacklog.ForeColor = System.Drawing.Color.Black
-        Me.BBacklog.Image = Global.WindowsApplication1.My.Resources.Resources.Backlog
-        Me.BBacklog.Location = New System.Drawing.Point(288, 9)
-        Me.BBacklog.Name = "BBacklog"
-        Me.BBacklog.Size = New System.Drawing.Size(25, 25)
-        Me.BBacklog.TabIndex = 26
-        Me.ToolTip1.SetToolTip(Me.BBacklog, "Customer Backlog")
-        Me.BBacklog.UseVisualStyleBackColor = True
+        Me.Button2.BackColor = System.Drawing.SystemColors.Window
+        Me.Button2.FlatAppearance.BorderSize = 0
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.Image = Global.WindowsApplication1.My.Resources.Resources.search3_p
+        Me.Button2.Location = New System.Drawing.Point(290, 82)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(23, 25)
+        Me.Button2.TabIndex = 164
+        Me.Button2.UseVisualStyleBackColor = False
+        '
+        'CBWorkstream
+        '
+        Me.CBWorkstream.BackColor = System.Drawing.Color.White
+        Me.CBWorkstream.ForeColor = System.Drawing.SystemColors.WindowText
+        Me.CBWorkstream.FormattingEnabled = True
+        Me.CBWorkstream.Location = New System.Drawing.Point(13, 82)
+        Me.CBWorkstream.Name = "CBWorkstream"
+        Me.CBWorkstream.Size = New System.Drawing.Size(269, 21)
+        Me.CBWorkstream.TabIndex = 163
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(10, 66)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(64, 13)
+        Me.Label9.TabIndex = 162
+        Me.Label9.Text = "Workstream"
+        '
+        'BSearch
+        '
+        Me.BSearch.BackColor = System.Drawing.SystemColors.Window
+        Me.BSearch.FlatAppearance.BorderSize = 0
+        Me.BSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BSearch.Image = Global.WindowsApplication1.My.Resources.Resources.search3_p
+        Me.BSearch.Location = New System.Drawing.Point(290, 41)
+        Me.BSearch.Name = "BSearch"
+        Me.BSearch.Size = New System.Drawing.Size(23, 25)
+        Me.BSearch.TabIndex = 161
+        Me.BSearch.UseVisualStyleBackColor = False
+        '
+        'CBRfe
+        '
+        Me.CBRfe.BackColor = System.Drawing.Color.White
+        Me.CBRfe.ForeColor = System.Drawing.SystemColors.WindowText
+        Me.CBRfe.FormattingEnabled = True
+        Me.CBRfe.Location = New System.Drawing.Point(13, 41)
+        Me.CBRfe.Name = "CBRfe"
+        Me.CBRfe.Size = New System.Drawing.Size(269, 21)
+        Me.CBRfe.TabIndex = 160
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(10, 25)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(28, 13)
+        Me.Label13.TabIndex = 6
+        Me.Label13.Text = "RFE"
+        '
+        'TBRfe
+        '
+        Me.TBRfe.Location = New System.Drawing.Point(109, 42)
+        Me.TBRfe.Name = "TBRfe"
+        Me.TBRfe.Size = New System.Drawing.Size(100, 20)
+        Me.TBRfe.TabIndex = 165
+        '
+        'TBWs
+        '
+        Me.TBWs.Location = New System.Drawing.Point(151, 82)
+        Me.TBWs.Name = "TBWs"
+        Me.TBWs.Size = New System.Drawing.Size(100, 20)
+        Me.TBWs.TabIndex = 166
         '
         'FCustomer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.DarkSlateBlue
-        Me.ClientSize = New System.Drawing.Size(709, 632)
+        Me.ClientSize = New System.Drawing.Size(709, 756)
+        Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
@@ -385,6 +502,8 @@ Partial Class FCustomer
         Me.GroupBox3.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -420,4 +539,14 @@ Partial Class FCustomer
     Friend WithEvents LinkLabel1 As System.Windows.Forms.LinkLabel
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents Button1 As Button
+    Friend WithEvents Label8 As Label
+    Friend WithEvents GroupBox4 As GroupBox
+    Friend WithEvents Label13 As Label
+    Friend WithEvents Button2 As Button
+    Friend WithEvents CBWorkstream As ComboBox
+    Friend WithEvents Label9 As Label
+    Friend WithEvents BSearch As Button
+    Friend WithEvents CBRfe As ComboBox
+    Friend WithEvents TBRfe As TextBox
+    Friend WithEvents TBWs As TextBox
 End Class

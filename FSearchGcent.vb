@@ -1014,7 +1014,7 @@ Public Class FSearchGcent
 
         RangetoHTMLPlanif = Message '& ts.readall
         'ts.Close()
-        RangetoHTMLPlanif = Replace(RangetoHTMLPlanif, "align=center x:publishsource=", _
+        RangetoHTMLPlanif = Replace(RangetoHTMLPlanif, "align=center x:publishsource=",
                               "align=left x:publishsource=")
 
 
@@ -1042,14 +1042,14 @@ Public Class FSearchGcent
             'Dim cn As New SqlConnection("Provider=OraOLEDB.Oracle.1;Password=READCQUEST;Persist Security Info=True;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1;")
             gcent = TBGcent.Text
             Dim cmd As String = "Select atb.data   from cqcentral.anomalie Ta, cqcentral.attachments Tat, cqcentral.attachments_blob atb where Ta.dbid = Tat.entity_dbid(+) And Tat.dbid = atb.attachments_dbid And Ta.numerofiche = " + "'" + gcent + "' order by tat.dbid"
-        'Dim DestFilePath As String = "C:\test.doc"
-        'Dim saveFileDialog1 As New SaveFileDialog()
-        'saveFileDialog1.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif"
-        'saveFileDialog1.Title = "Save the document"
-        'saveFileDialog1.FileName = LVad.FocusedItem.SubItems(0).Text
-        'saveFileDialog1.InitialDirectory = "c:\temp\"
-        'saveFileDialog1.ShowDialog()
-        Dim DestFilePath As String = "c:\tempSearch\" + LVad.FocusedItem.SubItems(0).Text
+            'Dim DestFilePath As String = "C:\test.doc"
+            'Dim saveFileDialog1 As New SaveFileDialog()
+            'saveFileDialog1.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif"
+            'saveFileDialog1.Title = "Save the document"
+            'saveFileDialog1.FileName = LVad.FocusedItem.SubItems(0).Text
+            'saveFileDialog1.InitialDirectory = "c:\temp\"
+            'saveFileDialog1.ShowDialog()
+            Dim DestFilePath As String = "c:\tempSearch\" + LVad.FocusedItem.SubItems(0).Text
 
             If My.Computer.FileSystem.DirectoryExists("c:\tempSearch\") Then
             Else
@@ -1123,7 +1123,7 @@ sortie:
     End Sub
 
 
-  
+
     Private Sub LLBlinkCQ_LinkClicked(sender As System.Object, e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LLBlinkCQ.LinkClicked
         System.Diagnostics.Process.Start(LbLink.Text)
 
@@ -1157,5 +1157,6 @@ sortie:
             FSearch.Research(5)
         End If
     End Sub
+
 End Class
 
