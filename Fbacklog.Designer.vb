@@ -40,8 +40,6 @@ Partial Class FBacklog
         Me.CBClosed = New System.Windows.Forms.CheckBox()
         Me.CBGcent = New System.Windows.Forms.CheckBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.CLBVTP = New System.Windows.Forms.CheckedListBox()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.BBacklog = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
@@ -51,6 +49,8 @@ Partial Class FBacklog
         Me.BExcel = New System.Windows.Forms.Button()
         Me.FilterRemove = New System.Windows.Forms.Button()
         Me.Bfilter = New System.Windows.Forms.Button()
+        Me.CLBVTP = New System.Windows.Forms.CheckedListBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.BS1 = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.DGVBacklog, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BS1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -214,25 +214,6 @@ Partial Class FBacklog
         Me.CBGcent.Text = "Add CQ Cards to the Case list"
         Me.CBGcent.UseVisualStyleBackColor = False
         '
-        'CLBVTP
-        '
-        Me.CLBVTP.CheckOnClick = True
-        Me.CLBVTP.FormattingEnabled = True
-        Me.CLBVTP.Location = New System.Drawing.Point(740, 114)
-        Me.CLBVTP.Name = "CLBVTP"
-        Me.CLBVTP.Size = New System.Drawing.Size(140, 139)
-        Me.CLBVTP.TabIndex = 147
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.BackColor = System.Drawing.Color.White
-        Me.Label5.Location = New System.Drawing.Point(796, 98)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(28, 13)
-        Me.Label5.TabIndex = 146
-        Me.Label5.Text = "VTP"
-        '
         'BBacklog
         '
         Me.BBacklog.FlatAppearance.BorderSize = 0
@@ -356,6 +337,25 @@ Partial Class FBacklog
         Me.Bfilter.TabIndex = 130
         Me.ToolTip1.SetToolTip(Me.Bfilter, "Filter")
         Me.Bfilter.UseVisualStyleBackColor = False
+        '
+        'CLBVTP
+        '
+        Me.CLBVTP.CheckOnClick = True
+        Me.CLBVTP.FormattingEnabled = True
+        Me.CLBVTP.Location = New System.Drawing.Point(740, 114)
+        Me.CLBVTP.Name = "CLBVTP"
+        Me.CLBVTP.Size = New System.Drawing.Size(140, 139)
+        Me.CLBVTP.TabIndex = 147
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.BackColor = System.Drawing.Color.White
+        Me.Label5.Location = New System.Drawing.Point(796, 98)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(28, 13)
+        Me.Label5.TabIndex = 146
+        Me.Label5.Text = "VTP"
         '
         'FBacklog
         '

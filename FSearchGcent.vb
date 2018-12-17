@@ -1147,6 +1147,15 @@ sortie:
         End If
     End Sub
 
+    Private Sub BRFE_Click(sender As Object, e As EventArgs) Handles BRFE.Click
+        Dim cus, rfe As String
 
+        If TBRFE.Text <> "" Then
+            cus = "(" + TBCustomer.Text + ")"
+            rfe = Replace(TBRFE.Text, cus, "")
+            FSearch.MSTSearch.Text = rfe
+            FSearch.Research(5)
+        End If
+    End Sub
 End Class
 

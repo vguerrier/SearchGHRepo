@@ -25,14 +25,25 @@ Partial Class FsearchEvolution
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FsearchEvolution))
         Me.BS1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.BS1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(71, 132)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 0
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'FsearchEvolution
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.Button1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FsearchEvolution"
         Me.Text = "Backlog Evolution"
@@ -42,4 +53,5 @@ Partial Class FsearchEvolution
     End Sub
 
     Friend WithEvents BS1 As BindingSource
+    Friend WithEvents Button1 As Button
 End Class

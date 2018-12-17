@@ -97,6 +97,7 @@ Partial Class FSearchCase
         Me.BGlib = New System.Windows.Forms.Button()
         Me.BSearch2 = New System.Windows.Forms.Button()
         Me.BSearch = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'CHComments
@@ -757,6 +758,18 @@ Partial Class FSearchCase
         Me.ToolTip1.SetToolTip(Me.BSearch, "Case information")
         Me.BSearch.UseVisualStyleBackColor = True
         '
+        'Button2
+        '
+        Me.Button2.FlatAppearance.BorderSize = 0
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.Image = Global.WindowsApplication1.My.Resources.Resources.Mail_i
+        Me.Button2.Location = New System.Drawing.Point(722, 63)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(50, 50)
+        Me.Button2.TabIndex = 157
+        Me.ToolTip1.SetToolTip(Me.Button2, "Mail")
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'FSearchCase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -764,6 +777,7 @@ Partial Class FSearchCase
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(784, 837)
+        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.BSearch)
         Me.Controls.Add(Me.Bassigned)
         Me.Controls.Add(Me.BCustomer)
@@ -914,4 +928,5 @@ Partial Class FSearchCase
     Friend WithEvents Bassigned As Button
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents BSearch As Button
+    Friend WithEvents Button2 As Button
 End Class

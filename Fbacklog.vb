@@ -168,11 +168,43 @@ Public Class FBacklog
 
     End Function
 
+    Function GetGcentInfo(gcent As String) As String
+        Dim CQbase As String
+
+        CQbase = "cqcentral"
+
+        If InStr(gcent, "GTOP") > 0 Then
+            CQbase = "cqgtop"
+        End If
+        If InStr(gcent, "GADMI") > 0 Then
+            CQbase = "cqgadmin"
+        End If
+        If InStr(gcent, "GSTOC") > 0 Then
+            CQbase = "CQGOLDSTOCK"
+        End If
+        If InStr(gcent, "GTRAC") > 0 Then
+            CQbase = "cqgtrack"
+        End If
+
+        GetGcentInfo = "select  T5.name, T1.label, Tu.login_name, T1.dateplanifauplustot + 1, T1.reportfiche retrofit from "
+        GetGcentInfo = GetGcentInfo & CQbase & ".anomalie T1, "
+        GetGcentInfo = GetGcentInfo & CQbase & ".statedef T5, "
+        GetGcentInfo = GetGcentInfo & CQbase & ".users Tu "
+        GetGcentInfo = GetGcentInfo & " where T1.State = T5.ID"
+        GetGcentInfo = GetGcentInfo & " And T1.assigne = Tu.dbid "
+        GetGcentInfo = GetGcentInfo & " and T1.numerofiche = '" + gcent + "'"
+
+    End Function
+
     Function researchBacklog() As Integer
         Dim Sqldb As String = "Data Source=seyccrmsqlsip1;Integrated Security=SSPI;Initial Catalog=crm_MSCRM"
         Dim SqlConn As New SqlClient.SqlConnection(Sqldb)
         Dim SqlCmd As New SqlCommand
+        Dim Oradb As String = "Provider=OraOLEDB.Oracle.1;Password=READCQUEST;Persist Security Info=True;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1;"
+        Dim SqlConn2 As New OleDb.OleDbConnection(Oradb) 'OracleConnection(oradb)
+        Dim SqlCmd2 As OleDb.OleDbCommand
         Dim myReader As SqlDataReader
+        Dim myReader2 As OleDb.OleDbDataReader
         Dim req As String
         Dim nbrow As Integer
         Dim Opt, OptGcent As Integer
@@ -204,6 +236,54 @@ Public Class FBacklog
             myReader = SqlCmd.ExecuteReader()
 
             DGVBacklog.DataSource = MonDataSet.Tables("backlog")
+
+
+            'ajout de la colonne Status pour la gcent
+            If OptGcent Then
+                MonDataSet.Tables("backlog").Columns.Add("Card Status", GetType(String))
+                MonDataSet.Tables("backlog").Columns.Add("Label", GetType(String))
+                MonDataSet.Tables("backlog").Columns.Add("Assigned", GetType(String))
+                MonDataSet.Tables("backlog").Columns.Add("Correction Date", GetType(String))
+                MonDataSet.Tables("backlog").Columns.Add("Retrofited from Card", GetType(String))
+
+                'Ta.label, Tu.login_name, Ta.dateplanifauplustot + 1, Ta.RETROFITCARD retrofit
+                SqlConn2.Open()
+
+                For Each k In MonDataSet.Tables("backlog").Rows
+
+
+                    'recherche des infos de la fiche 
+                    If k.item("CQ_Card") IsNot DBNull.Value Then
+                        req = GetGcentInfo(k.item("CQ_Card"))
+                        SqlCmd2 = New OleDb.OleDbCommand(req, SqlConn2)
+                        SqlCmd2.CommandText = req
+                        myReader2 = SqlCmd2.ExecuteReader()
+                        myReader2.Read()
+                        k.item("Card Status") = myReader2.Item(0)
+                        If myReader2.Item(1) IsNot DBNull.Value Then
+                            k.item("Label") = myReader2.Item(1)
+                        End If
+
+                        If myReader2.Item(2) IsNot DBNull.Value Then
+                            k.item("Assigned") = myReader2.Item(2)
+                        End If
+                        If myReader2.Item(3) IsNot DBNull.Value Then
+                            k.item("Correction Date") = myReader2.Item(3)
+                        End If
+                        If myReader2.Item(4) IsNot DBNull.Value Then
+                            k.item("Retrofited from Card") = Replace(myReader2.Item(4), ",", "")
+
+                        End If
+                    End If
+                Next
+                DGVBacklog.Columns("CQ_Card").DefaultCellStyle.BackColor = Color.Yellow
+                DGVBacklog.Columns("Card Status").DefaultCellStyle.BackColor = Color.Yellow
+                DGVBacklog.Columns("Label").DefaultCellStyle.BackColor = Color.Yellow
+                DGVBacklog.Columns("Assigned").DefaultCellStyle.BackColor = Color.Yellow
+                DGVBacklog.Columns("Correction Date").DefaultCellStyle.BackColor = Color.Yellow
+                DGVBacklog.Columns("Retrofited from Card").DefaultCellStyle.BackColor = Color.Yellow
+            End If
+
             'DGVBacklog.DataSource = BS1
             BS1.DataSource = DGVBacklog.DataSource
             'BS1.Filter = "state='In Progress'"
@@ -347,7 +427,14 @@ Public Class FBacklog
         DGVBacklog.Columns("Priority Score").DisplayIndex = 1
         If Optgcent = 1 Then
             DGVBacklog.Columns("CQ_Card").DisplayIndex = 2
-            i = 1
+            DGVBacklog.Columns("Card Status").DisplayIndex = 3
+            DGVBacklog.Columns("CQ_Card").DisplayIndex = 4
+            DGVBacklog.Columns("Card Status").DisplayIndex = 5
+            DGVBacklog.Columns("Label").DisplayIndex = 6
+            DGVBacklog.Columns("Assigned").DisplayIndex = 7
+            DGVBacklog.Columns("Correction Date").DisplayIndex = 8
+            DGVBacklog.Columns("Retrofited from Card").DisplayIndex = 9
+            i = 8
         End If
         DGVBacklog.Columns("State").DisplayIndex = 2 + i
         DGVBacklog.Columns("Priority").DisplayIndex = 3 + i
@@ -591,7 +678,22 @@ Public Class FBacklog
         If OptGcent = 1 Then
             objExcel.Cells(2, 3).Value = "CQ_Card"
             objExcel.Cells(2, 3).Font.ColorIndex = 5
-            i = 1
+            objExcel.Cells(2, 4).Value = "Card Status"
+            objExcel.Cells(2, 4).Font.ColorIndex = 5
+
+            objExcel.Cells(2, 3).Value = "CQ_Card"
+            objExcel.Cells(2, 3).Font.ColorIndex = 5
+            objExcel.Cells(2, 3).Value = "Card Status"
+            objExcel.Cells(2, 3).Font.ColorIndex = 5
+            objExcel.Cells(2, 3).Value = "Label"
+            objExcel.Cells(2, 3).Font.ColorIndex = 5
+            objExcel.Cells(2, 3).Value = "Assigned"
+            objExcel.Cells(2, 3).Font.ColorIndex = 5
+            objExcel.Cells(2, 3).Value = "Correction Date"
+            objExcel.Cells(2, 3).Font.ColorIndex = 5
+            objExcel.Cells(2, 3).Value = "Retrofited from Card"
+            objExcel.Cells(2, 3).Font.ColorIndex = 5
+            i = 8
         End If
         objExcel.Cells(2, 3 + i).Value = "State"
         objExcel.Cells(2, 3 + i).Font.ColorIndex = 5
@@ -616,26 +718,33 @@ Public Class FBacklog
 
         'Export Each Row Start
         i = 0
-        For j As Integer = 3 To DGVBacklog.Rows.Count - 1
+        For j As Integer = 3 To DGVBacklog.Rows.Count + 2
             Dim columnIndex As Integer = 0
             'Do Until columnIndex = 12 + i
 
-            objExcel.Cells(j, 1).Value = DGVBacklog.Item(0, j - 2).Value.ToString
-            objExcel.Cells(j, 2).Value = DGVBacklog.Item(1, j - 2).Value
+            objExcel.Cells(j, 1).Value = DGVBacklog.Item(0, j - 3).Value.ToString
+            objExcel.Cells(j, 2).Value = DGVBacklog.Item(1, j - 3).Value
             If OptGcent = 1 Then
-                objExcel.Cells(j, 3).Value = DGVBacklog.Item(2, j - 2).Value
-                i = 1
+                objExcel.Cells(j, 3).Value = DGVBacklog.Item(2, j - 3).Value
+                objExcel.Cells(j, 4).Value = DGVBacklog.Item(3, j - 3).Value
+                objExcel.Cells(j, 3).Value = DGVBacklog.Item(4, j - 3).Value
+                objExcel.Cells(j, 4).Value = DGVBacklog.Item(5, j - 3).Value
+                objExcel.Cells(j, 3).Value = DGVBacklog.Item(6, j - 3).Value
+                objExcel.Cells(j, 4).Value = DGVBacklog.Item(7, j - 3).Value
+                objExcel.Cells(j, 3).Value = DGVBacklog.Item(8, j - 3).Value
+                objExcel.Cells(j, 4).Value = DGVBacklog.Item(9, j - 3).Value
+                i = 8
             End If
-            objExcel.Cells(j, 3 + i).Value = DGVBacklog.Item(2 + i, j - 2).Value
-            objExcel.Cells(j, 4 + i).Value = DGVBacklog.Item(3 + i, j - 2).Value
-            objExcel.Cells(j, 5 + i).Value = DGVBacklog.Item(4 + i, j - 2).Value
-            objExcel.Cells(j, 6 + i).Value = DGVBacklog.Item(5 + i, j - 2).Value
-            objExcel.Cells(j, 7 + i).Value = DGVBacklog.Item(6 + i, j - 2).Value
-            objExcel.Cells(j, 8 + i).Value = DGVBacklog.Item(7 + i, j - 2).Value
-            objExcel.Cells(j, 9 + i).Value = DGVBacklog.Item(8 + i, j - 2).Value
-            objExcel.Cells(j, 10 + i).Value = DGVBacklog.Item(9 + i, j - 2).Value
-            objExcel.Cells(j, 11 + i).Value = DGVBacklog.Item(10 + i, j - 2).Value
-            objExcel.Cells(j, 12 + i).Value = DGVBacklog.Item(11 + i, j - 2).Value
+            objExcel.Cells(j, 3 + i).Value = DGVBacklog.Item(2 + i, j - 3).Value
+            objExcel.Cells(j, 4 + i).Value = DGVBacklog.Item(3 + i, j - 3).Value
+            objExcel.Cells(j, 5 + i).Value = DGVBacklog.Item(4 + i, j - 3).Value
+            objExcel.Cells(j, 6 + i).Value = DGVBacklog.Item(5 + i, j - 3).Value
+            objExcel.Cells(j, 7 + i).Value = DGVBacklog.Item(6 + i, j - 3).Value
+            objExcel.Cells(j, 8 + i).Value = DGVBacklog.Item(7 + i, j - 3).Value
+            objExcel.Cells(j, 9 + i).Value = DGVBacklog.Item(8 + i, j - 3).Value
+            objExcel.Cells(j, 10 + i).Value = DGVBacklog.Item(9 + i, j - 3).Value
+            objExcel.Cells(j, 11 + i).Value = DGVBacklog.Item(10 + i, j - 3).Value
+            objExcel.Cells(j, 12 + i).Value = DGVBacklog.Item(11 + i, j - 3).Value
             'Loop
         Next
 
@@ -691,6 +800,7 @@ Public Class FBacklog
     Private Sub BBacklog_Click(sender As Object, e As EventArgs) Handles BBacklog.Click
         FsearchEvolution.Show()
     End Sub
+
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 

@@ -136,6 +136,7 @@ Public Class FSearchRFE
         Dim status, label As String
         'ex : RN37022 
         nbRFE = 0
+        CBGcent.Items.Clear()
 
         'opening the connection
         conn.Open()

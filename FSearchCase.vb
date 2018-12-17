@@ -734,4 +734,7 @@ Public Class FSearchCase
         FSearch.Research(0)
     End Sub
 
+    Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click
+        System.Diagnostics.Process.Start("mailto:? subject=" + "[" & Replace(TBCustomer.Text, "&", "") & "] " & RTBCase.Text)
+    End Sub
 End Class

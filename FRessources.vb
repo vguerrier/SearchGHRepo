@@ -61,23 +61,23 @@ Public Class FRessources
     Function RequestRessourceCount(name As String) As String
 
         RequestRessourceCount = "Select count(*) From V_GLOBAL_RDRESOURCES t "
-        RequestRessourceCount = RequestRessourceCount & "Where lower(t.LAST_NAME) = lower('" + name + "') "
-        RequestRessourceCount = RequestRessourceCount & "Or lower(t.FIRST_NAME) = lower('" + name + "') "
-        RequestRessourceCount = RequestRessourceCount & "Or lower(t.TENROX_NAME) = lower('" + name + "') "
-        RequestRessourceCount = RequestRessourceCount & "Or lower(t.LDAP_NAME) = lower('" + name + "') "
-        RequestRessourceCount = RequestRessourceCount & "Or lower(t.CLEARQUEST_LOGIN) = lower('" + name + "') "
+        RequestRessourceCount = RequestRessourceCount & "Where lower(t.LASTNAME) = lower('" + Trim(name) + "') "
+        RequestRessourceCount = RequestRessourceCount & "Or lower(t.FIRSTNAME) = lower('" + Trim(name) + "') "
+        RequestRessourceCount = RequestRessourceCount & "Or lower(t.AX_NAME) = lower('" + Trim(name) + "') "
+        RequestRessourceCount = RequestRessourceCount & "Or lower(t.LDAP_NAME) = lower('" + Trim(name) + "') "
+        RequestRessourceCount = RequestRessourceCount & "Or lower(t.CLEARQUESTLOGIN) = lower('" + Trim(name) + "') "
 
     End Function
 
     Function RequestRessource(name As String) As String
 
         RequestRessource = "Select * From V_GLOBAL_RDRESOURCES t "
-        RequestRessource = RequestRessource & "Where lower(t.LAST_NAME) = lower('" + name + "') "
-        RequestRessource = RequestRessource & "Or lower(t.FIRST_NAME) = lower('" + name + "') "
-        RequestRessource = RequestRessource & "Or lower(t.TENROX_NAME) = lower('" + name + "') "
-        RequestRessource = RequestRessource & "Or lower(t.LDAP_NAME) = lower('" + name + "') "
-        RequestRessource = RequestRessource & "Or lower(t.CLEARQUEST_LOGIN) = lower('" + name + "') "
-        RequestRessource = RequestRessource & " order by  t.LAST_NAME, t.TEAM_END desc, t.TEAM_START desc "
+        RequestRessource = RequestRessource & "Where lower(t.LASTNAME) = lower('" + Trim(name) + "') "
+        RequestRessource = RequestRessource & "Or lower(t.FIRSTNAME) = lower('" + Trim(name) + "') "
+        RequestRessource = RequestRessource & "Or lower(t.AX_NAME) = lower('" + Trim(name) + "') "
+        RequestRessource = RequestRessource & "Or lower(t.LDAP_NAME) = lower('" + Trim(name) + "') "
+        RequestRessource = RequestRessource & "Or lower(t.CLEARQUESTLOGIN) = lower('" + Trim(name) + "') "
+        RequestRessource = RequestRessource & " order by  t.LASTNAME, t.TEAM_END desc, t.TEAM_START desc "
 
     End Function
 
@@ -134,61 +134,61 @@ Public Class FRessources
         Dim nb = 0
         While dr.Read()
             Tressource(nb).Symphony = False
+            If dr.GetValue(4) IsNot DBNull.Value Then
+                Tressource(nb).Country = dr.GetValue(4)
+            End If
             If dr.GetValue(1) IsNot DBNull.Value Then
-                Tressource(nb).Country = dr.GetValue(1)
+                Tressource(nb).Last_name = dr.GetValue(1)
             End If
             If dr.GetValue(2) IsNot DBNull.Value Then
-                Tressource(nb).Last_name = dr.GetValue(2)
+                Tressource(nb).First_name = dr.GetValue(2)
             End If
             If dr.GetValue(3) IsNot DBNull.Value Then
-                Tressource(nb).First_name = dr.GetValue(3)
-            End If
-            If dr.GetValue(4) IsNot DBNull.Value Then
-                Tressource(nb).Company = dr.GetValue(4)
-            End If
-            If dr.GetValue(5) IsNot DBNull.Value Then
-                Tressource(nb).Manager = dr.GetValue(5)
+                Tressource(nb).Company = dr.GetValue(3)
             End If
             If dr.GetValue(6) IsNot DBNull.Value Then
-                Tressource(nb).Job = dr.GetValue(6)
+                Tressource(nb).Manager = dr.GetValue(6)
             End If
             If dr.GetValue(7) IsNot DBNull.Value Then
-                Tressource(nb).Team = dr.GetValue(7)
+                Tressource(nb).Job = dr.GetValue(7)
             End If
             If dr.GetValue(14) IsNot DBNull.Value Then
-                Tressource(nb).TeamStartDate = dr.GetValue(14)
+                Tressource(nb).Team = dr.GetValue(14)
             End If
-            If dr.GetValue(15) IsNot DBNull.Value Then
-                Tressource(nb).TeamEndDate = dr.GetValue(15)
+            If dr.GetValue(12) IsNot DBNull.Value Then
+                Tressource(nb).TeamStartDate = dr.GetValue(12)
+            End If
+            If dr.GetValue(13) IsNot DBNull.Value Then
+                Tressource(nb).TeamEndDate = dr.GetValue(13)
             Else
                 Tressource(nb).Symphony = True
             End If
             If dr.GetValue(17) IsNot DBNull.Value Then
                 Tressource(nb).AXname = dr.GetValue(17)
             End If
+            If dr.GetValue(9) IsNot DBNull.Value Then
+                Tressource(nb).RHStartDate = dr.GetValue(9)
+            End If
+            If dr.GetValue(10) IsNot DBNull.Value Then
+                Tressource(nb).RHEndDate = dr.GetValue(10)
+            End If
             If dr.GetValue(18) IsNot DBNull.Value Then
-                Tressource(nb).RHStartDate = dr.GetValue(18)
+                Tressource(nb).LDAPName = dr.GetValue(18)
             End If
-            If dr.GetValue(19) IsNot DBNull.Value Then
-                Tressource(nb).RHEndDate = dr.GetValue(19)
-            End If
-            If dr.GetValue(20) IsNot DBNull.Value Then
-                Tressource(nb).LDAPName = dr.GetValue(20)
-            End If
-            If dr.GetValue(22) IsNot DBNull.Value Then
-                Tressource(nb).City = dr.GetValue(22)
+            If dr.GetValue(5) IsNot DBNull.Value Then
+                Tressource(nb).City = dr.GetValue(5)
             End If
             If dr.GetValue(24) IsNot DBNull.Value Then
                 Tressource(nb).Team2 = dr.GetValue(24)
             End If
-            If dr.GetValue(25) IsNot DBNull.Value Then
-                Tressource(nb).Gender = dr.GetValue(25)
+            If dr.GetValue(15) IsNot DBNull.Value Then
+                Tressource(nb).Gender = dr.GetValue(15)
             End If
-            If dr.GetValue(26) IsNot DBNull.Value Then
-                Tressource(nb).ClearQuestLogin = dr.GetValue(26)
+            If dr.GetValue(16) IsNot DBNull.Value Then
+                Tressource(nb).ClearQuestLogin = dr.GetValue(16)
             End If
-            If dr.GetValue(30) IsNot DBNull.Value Then
-                Tressource(nb).Email = dr.GetValue(30)
+            If dr.GetValue(20) IsNot DBNull.Value Then
+                Tressource(nb).Email = dr.GetValue(20)
             End If
             nb = nb + 1
 
