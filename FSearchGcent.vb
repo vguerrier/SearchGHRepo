@@ -72,7 +72,9 @@ Public Class FSearchGcent
         If InStr(Card, "GCAS") > 0 Then
             CQbase = "cqcas"
         End If
-
+        If InStr(Card, "GEVEN") > 0 Then
+            CQbase = "CQGOLDEVENTS"
+        End If
 
 
         Request = " select Ta.numerofiche,"             '0
@@ -169,6 +171,9 @@ Public Class FSearchGcent
         If InStr(Card, "GCAS") > 0 Then
             CQbase = "cqcas"
         End If
+        If InStr(Card, "GEVEN") > 0 Then
+            CQbase = "CQGOLDEVENTS"
+        End If
 
         Request = " select Ta.numerofiche, Tat.filename from "
         Request = Request & CQbase & ".anomalie     Ta,"
@@ -240,6 +245,9 @@ Public Class FSearchGcent
         If InStr(Card, "GCAS") > 0 Then
             CQbase = "cqcas"
         End If
+        If InStr(Card, "GEVEN") > 0 Then
+            CQbase = "CQGOLDEVENTS"
+        End If
 
         RequestGcentHistory = "select distinct T1.DBID,"
         RequestGcentHistory = RequestGcentHistory & " T1.action_timestamp,"
@@ -305,6 +313,9 @@ Public Class FSearchGcent
         End If
         If InStr(gcent, "GCAS") > 0 Then
             CQbase = "cqcas"
+        End If
+        If InStr(gcent, "GEVEN") > 0 Then
+            CQbase = "CQGOLDEVENTS"
         End If
 
         GetGcentRetInfo = "select   s.name, a.label, a.numerofiche from  "

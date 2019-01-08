@@ -80,6 +80,7 @@ Public Class FSearchRFE
         GetGcentInfoCQ = GetGcentInfoCQ & " where a.State = s.ID "
         GetGcentInfoCQ = GetGcentInfoCQ & " And a.rfecode = r.dbid"
         GetGcentInfoCQ = GetGcentInfoCQ & " And r.code Like '%" + Trim(RFE) + "%'"
+        GetGcentInfoCQ = GetGcentInfoCQ & " order by 3"
 
     End Function
 
@@ -238,7 +239,7 @@ Public Class FSearchRFE
     Private Sub BSearch_Click_1(sender As Object, e As EventArgs) Handles BSearch.Click
         FSearch.MSTSearch.Text = Mid(CBGcent.Text, 1, 13)
 
-        FSearch.Research(5)
+        FSearch.Research(2)
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click

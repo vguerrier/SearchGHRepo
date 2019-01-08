@@ -134,6 +134,9 @@ Public Class FSearchCase
         If InStr(gcent, "GTRAC") > 0 Then
             CQbase = "cqgtrack"
         End If
+        If InStr(gcent, "GEVEN") > 0 Then
+            CQbase = "CQGOLDEVENTS"
+        End If
 
         GetGcentInfo = "select  T5.name,T1.label from "
         GetGcentInfo = GetGcentInfo & CQbase & ".anomalie T1,"
