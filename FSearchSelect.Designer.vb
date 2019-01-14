@@ -37,7 +37,7 @@ Partial Class FSearchSelect
         Me.LVChoice.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.LVChoice.Location = New System.Drawing.Point(31, 105)
         Me.LVChoice.Name = "LVChoice"
-        Me.LVChoice.Size = New System.Drawing.Size(633, 147)
+        Me.LVChoice.Size = New System.Drawing.Size(783, 462)
         Me.LVChoice.TabIndex = 69
         Me.LVChoice.UseCompatibleStateImageBehavior = False
         Me.LVChoice.View = System.Windows.Forms.View.Details
@@ -67,11 +67,12 @@ Partial Class FSearchSelect
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(699, 280)
+        Me.ClientSize = New System.Drawing.Size(832, 579)
         Me.Controls.Add(Me.LBCase)
         Me.Controls.Add(Me.LVChoice)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FSearchSelect"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Select Type"
         Me.ResumeLayout(False)
         Me.PerformLayout()

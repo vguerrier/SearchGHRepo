@@ -546,8 +546,7 @@ Fin:
     Private Sub LinkLabel1_LinkClicked(sender As System.Object, e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
         Dim processlink As String
         'System.Diagnostics.Process.Start(LLBURL.Text)
-        processlink = "https://intranet.eyc.com/product/Gold/ProductSupportRetail/Process"
-        'https://intranet.eyc.com/product/Gold/ProductSupportRetail/Process/process_CONFORAMA.pdf
+        processlink = "https://eyc.sharepoint.com/sites/RS_SCM_RD/All_Documents/Forms/Processes.aspx#InplviewHash02f9a5a8-6796-4791-8aed-0a21fcbcf995=FilterField1%3DCategory-FilterValue1%3DProcedure-FilterField2%3DActivity-FilterValue2%3DMaintenance-FilterField3%3DKeywords-FilterValue3%3DProcess%2520PDF"
         System.Diagnostics.Process.Start(processlink)
     End Sub
 

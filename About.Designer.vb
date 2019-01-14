@@ -83,7 +83,7 @@ Partial Class Dabout
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(31, 20)
         Me.Label2.TabIndex = 144
-        Me.Label2.Text = "2.1"
+        Me.Label2.Text = "2.3"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label3

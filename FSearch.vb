@@ -4,6 +4,11 @@ Imports System.Data.Sql
 Imports System.IO
 Imports MaterialSkin
 
+Public Structure Cases
+    Public Number As String
+    Public Title As String
+    Public Type As String
+End Structure
 
 Public Class FSearch
     Dim LStCase(20) As String
@@ -184,6 +189,7 @@ Public Class FSearch
                         End If
                     End If
 
+                    'recherche RFE et Workstream
                     If ret = 0 Then
                         retRFE = FSearchRFE.researchRFE(Me.MSTSearch.Text)
                         If retRFE = 0 Then
@@ -211,7 +217,69 @@ Public Class FSearch
                         End If
                     End If
 
+                    'recherche par titre
+                    If ret = 0 Then
+                        Dim LstCase(), LstCard() As Cases
+                        Dim nb, nbCase, nbCard As Integer
+                        'recherche par case, 
+                        nbCase = 0
+                        nb = 0
+                        nbCard = 0
+                        FSearchCase.RTBCase.Text = Me.MSTSearch.Text
+                        LstCase = FSearchCase.researchCaseTitle()
+                        nbCase = UBound(LstCase)
+                        If LstCase Is Nothing Then
+                            ret = 0
+                        Else
+                            ret = UBound(LstCase)
+                        End If
+                        'recherche par card
+                        FSearchGcent.TBGcent.Text = Me.MSTSearch.Text
+                        LstCard = FSearchGcent.researchCQTitle()
+                        'If LstCase(0).Number = 0 Then
+                        'ret = 0
+                        'Else
+                        nbCard = UBound(LstCard)
+                        If LstCard Is Nothing Then
+                            ret = 0
+                        Else
+                            ret = ret + nbCard
+                        End If
 
+                        If LstCase Is Nothing And LstCard Is Nothing Then
+                            ret = 0
+                        Else
+                            'ret = UBound(LstCase)
+                            'Fusion des 2 tableaux
+                            nb = nbCard + nbCase
+                            ReDim Preserve LstCase(nb)
+                            For i = 0 To nbCard - 1
+                                LstCase(nbCase + i).Number = LstCard(i).Number
+                                LstCase(nbCase + i).Title = LstCard(i).Title
+                                LstCase(nbCase + i).Type = LstCard(i).Type
+                            Next
+                            FSearchSelect.Show()
+                            FSearchSelect.LVChoice.Columns(0).Text = "ID"
+                            FSearchSelect.LVChoice.Columns(0).Width = 134
+                            Dim CHTitle As New ColumnHeader
+                            CHTitle.Text = "Titre"
+                            CHTitle.Width = 495
+                            CHTitle.DisplayIndex = 2
+                            FSearchSelect.LVChoice.Columns.Add(CHTitle)
+                            FSearchSelect.LVChoice.Columns(1).Width = 50
+                            FSearchSelect.LVChoice.Columns(2).Text = "Title"
+                            FSearchSelect.LVChoice.Columns(2).Width = 595
+
+                            For i = 0 To ret
+                                FSearchSelect.ListCases(LstCase(i).Number, LstCase(i).Type, LstCase(i).Title)
+                                'FSearchSelect.List(Me.MSTSearch.Text, "Workstream")
+                            Next
+
+
+
+                        End If
+
+                    End If
 
                     If ret = 0 Then
                         MsgBox("Not a card, Case, customer or ressource please retry")

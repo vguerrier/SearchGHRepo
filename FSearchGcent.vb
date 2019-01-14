@@ -1169,5 +1169,79 @@ sortie:
         End If
     End Sub
 
+    Function RequestCardTitle(card As String) As String
+
+        Dim Request As String
+        Dim CQbase As String
+
+        CQbase = "cqcentral"
+
+        If InStr(card, "GTOP") > 0 Then
+            CQbase = "cqgtop"
+        End If
+        If InStr(card, "GADMI") > 0 Then
+            CQbase = "cqgadmin"
+        End If
+
+        If InStr(card, "GSTOC") > 0 Then
+            CQbase = "CQGOLDSTOCK"
+        End If
+        If InStr(card, "GTRAC") > 0 Then
+            CQbase = "cqgtrack"
+        End If
+        If InStr(card, "GCAS") > 0 Then
+            CQbase = "cqcas"
+        End If
+        If InStr(card, "GEVEN") > 0 Then
+            CQbase = "CQGOLDEVENTS"
+        End If
+
+        Request = " Select a.numerofiche, a.titre from "
+        Request = Request & CQbase & ".anomalie a "
+        Request = Request & "where a.titre like '%" + Trim(card) + "%'"
+
+        RequestCardTitle = Request
+
+    End Function
+
+
+    Public Function researchCQTitle() As Cases()
+        Dim myCommand As OleDb.OleDbCommand
+        Dim dr As OleDb.OleDbDataReader
+        Dim Oradb As String = "Provider=OraOLEDB.Oracle.1;Password=READCQUEST;Persist Security Info=True;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1;"
+        Dim conn As New OleDb.OleDbConnection(Oradb) 'OracleConnection(oradb)
+        Dim req As String
+        Dim NbRow As Integer
+        Dim LstCase() As Cases
+
+        req = RequestCardTitle(Trim(TBGcent.Text))
+        conn.Open()
+        'myCommand.Open()
+        myCommand = New OleDb.OleDbCommand(req, conn)
+
+        'Dim dr As SqlDataReader = cmd.ExecuteReader()
+        dr = myCommand.ExecuteReader()
+
+        'LstCase(0).Number = "0"
+        LstCase = Nothing
+
+
+        'myReader = dr.Read()
+        NbRow = 0
+        While dr.Read()
+            If dr.Item(0) IsNot DBNull.Value Then
+                ReDim Preserve LstCase(NbRow + 1)
+                LstCase(NbRow).Number = dr.Item(0)
+                If dr.Item(1) IsNot DBNull.Value Then
+                    LstCase(NbRow).Title = dr.Item(1)
+                End If
+                LstCase(NbRow).Type = "Gcent"
+                NbRow = NbRow + 1
+            End If
+        End While
+        'Nb = UBound(LstCase)
+        researchCQTitle = LstCase
+
+    End Function
 End Class
 

@@ -75,6 +75,45 @@ Public Class FSearchCase
 
     End Function
 
+    Function RequestCaseTitle(ByVal CaseN As String) As String
+
+
+        RequestCaseTitle = "SELECT c.customeridname, "                           ' Account name
+        RequestCaseTitle = RequestCaseTitle + "c.ticketnumber, "                      'Case #,
+        RequestCaseTitle = RequestCaseTitle + "c.sfmig_ranking,                  "    'Priority Score",
+        RequestCaseTitle = RequestCaseTitle + "c.aldata_functionaldomainname,  "      'Domain",
+        RequestCaseTitle = RequestCaseTitle + "c.statuscodename,                 "    'Status",
+        RequestCaseTitle = RequestCaseTitle + "cq.aldata_clearquestbugnumber,    "    'CQ Card",
+        RequestCaseTitle = RequestCaseTitle + "c.productidname,                  "    'Module",
+        RequestCaseTitle = RequestCaseTitle + "c.prioritycodename,               "    'Priority",
+        RequestCaseTitle = RequestCaseTitle + "c.sfmig_expecteddeliverydate,     "    'Expected Delivery",
+        RequestCaseTitle = RequestCaseTitle + "c.owneridname,                    "    'Owner",
+        RequestCaseTitle = RequestCaseTitle + "c.aldata_assignedgroupname,       "    'Assigned Group",
+        RequestCaseTitle = RequestCaseTitle + "c.aldata_validatetargetpatch,     "    'Validate Target Patch",
+        RequestCaseTitle = RequestCaseTitle + "c.title,                          "    'Title",
+        RequestCaseTitle = RequestCaseTitle + "c.aldata_workstreamname,          "    'Workstream",
+        RequestCaseTitle = RequestCaseTitle + "c.createdonutc,                   "    'Created On (UTC)",
+        RequestCaseTitle = RequestCaseTitle + "c.sfmig_truelastmodifieddateutc,  "    'Last Modified (UTC)",
+        RequestCaseTitle = RequestCaseTitle + "c.sfmig_srclientnumber,           "    'Customer's Case #",
+        RequestCaseTitle = RequestCaseTitle + "c.sfmig_prodenvtname,             "    'Production?",
+        RequestCaseTitle = RequestCaseTitle + "cq.aldata_assignedto,             "    'CQ Assigned To",
+        RequestCaseTitle = RequestCaseTitle + "cq.aldata_label,                  "    'CQ Label",
+        RequestCaseTitle = RequestCaseTitle + "cq.aldata_state,                  "    'CQ State",
+        RequestCaseTitle = RequestCaseTitle + "c.aldata_assignedpersonname,      "    'Assigned Person",
+        RequestCaseTitle = RequestCaseTitle + "c.sfmig_rejectedsolutionscount,   "    '# Rejection",
+        RequestCaseTitle = RequestCaseTitle + "c.aldata_expectedcorrectiondate,   "   'date_correction",
+        RequestCaseTitle = RequestCaseTitle + "c.sfmig_targetpatch,                 "  'Target Patch"
+        RequestCaseTitle = RequestCaseTitle + "c.aldata_versionidname,             " 'Version
+        RequestCaseTitle = RequestCaseTitle + "convert(nvarchar(50), c.incidentid), " 'foreign key Filteredaldata_casecomment commentaire
+        RequestCaseTitle = RequestCaseTitle + "c.description, "                        'Description
+        RequestCaseTitle = RequestCaseTitle + "convert(sql_variant,c.incidentid) "
+        RequestCaseTitle = RequestCaseTitle + "FROM FilteredIncident c WITH (NOLOCK) " '"
+        RequestCaseTitle = RequestCaseTitle + "LEFT OUTER JOIN Filteredaldata_clearquestbug cq WITH (NOLOCK) ON c.incidentid = cq.aldata_case "
+        RequestCaseTitle = RequestCaseTitle + "WHERE c.title like '%" + Trim(CaseN) + "%'"
+
+
+    End Function
+
     Function RequestCaseComment(ByVal CaseN As String) As String
 
         'RequestCaseComment = "SELECT c.ticketnumber, "                           ' Case #
@@ -156,6 +195,40 @@ Public Class FSearchCase
         GetGlibCQ = GetGlibCQ & " where a.state = s.id and a.ref_case = '" + caseN + "'"
 
     End Function
+
+    Public Function researchCaseTitle() As Cases()
+        Dim req As String
+        Dim Sqldb As String = "Data Source=seyccrmsqlsip1;Integrated Security=SSPI;Initial Catalog=crm_MSCRM"
+        Dim SqlConn As New SqlClient.SqlConnection(Sqldb)
+        Dim SqlCmd As New SqlCommand
+        Dim myReader As SqlDataReader
+        Dim NbRow, Nb As Integer
+        Dim LstCase() As Cases
+        req = RequestCaseTitle(Trim(RTBCase.Text))
+        'LstCase(0).Number = "0"
+        LstCase = Nothing
+
+        SqlConn.Open()
+        SqlCmd = SqlConn.CreateCommand()
+        SqlCmd.CommandText = req
+        myReader = SqlCmd.ExecuteReader()
+        NbRow = 0
+        While myReader.Read()
+            If myReader.Item(1) IsNot DBNull.Value Then
+                ReDim Preserve LstCase(NbRow + 1)
+                LstCase(NbRow).Number = myReader.Item(1)
+                If myReader.Item(12) IsNot DBNull.Value Then
+                    LstCase(NbRow).Title = myReader.Item(12)
+                End If
+                LstCase(NbRow).Type = "Case"
+                NbRow = NbRow + 1
+            End If
+        End While
+        'Nb = UBound(LstCase)
+        researchCaseTitle = LstCase
+
+    End Function
+
     Public Function researchCase(CusCase As Short) As Integer
 
         Dim Sqldb As String = "Data Source=seyccrmsqlsip1;Integrated Security=SSPI;Initial Catalog=crm_MSCRM"
@@ -183,11 +256,17 @@ Public Class FSearchCase
         Me.TopMost = True
         Me.TopMost = False
 
+        RTBCase.Text = FSearch.MSTSearch.Text
         nCase = RTBCase.Text
+
         ClearTextBox(Me)
         RTBCase.Text = nCase
         researchCase = 0
         'Me.Size = New Size(314, 804)
+
+
+
+
         If (RTBCase.Text <> "" And Len(RTBCase.Text) >= 6) Or CusCase = 1 Then
 
             Try

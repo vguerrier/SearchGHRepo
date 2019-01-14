@@ -72,6 +72,7 @@ Partial Class FSearchSelectWS
         Me.Controls.Add(Me.LVChoice)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FSearchSelectWS"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Select Type"
         Me.ResumeLayout(False)
         Me.PerformLayout()

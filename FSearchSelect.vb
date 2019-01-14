@@ -15,11 +15,23 @@ Public Class FSearchSelect
 
     End Sub
 
+    Public Sub ListCases(name As String, type As String, Titre As String)
+        'LVChoice.Items.Clear()
+
+        Dim LVITime As New ListViewItem(name)
+
+        LVITime.SubItems.Add(type)
+        LVITime.SubItems.Add(Titre)
+        LVChoice.Items.AddRange(New ListViewItem() {LVITime})
+
+    End Sub
+
     Private Sub LVChoice_DoubleClick(sender As System.Object, e As System.EventArgs) Handles LVChoice.DoubleClick
         Dim comment As String
 
         comment = LVChoice.FocusedItem.SubItems(1).Text
-        'FSearch.MSTSearch.Text = comment
+        FSearch.MSTSearch.Text = LVChoice.FocusedItem.SubItems(0).Text
+        'FSearch.MSTSearch.Text = "tyty"
 
         If comment = "Case" Then
             FSearch.Research(1)
@@ -34,7 +46,7 @@ Public Class FSearchSelect
         ElseIf comment = "Workstream" Then
             FSearch.Research(6)
         End If
-        Me.Close()
+        'Me.Close()
     End Sub
 
 

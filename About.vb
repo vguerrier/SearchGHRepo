@@ -22,5 +22,7 @@ Public Class Dabout
         System.Diagnostics.Process.Start("https://intranet.eyc.com/product/Gold/ProductSupportRetail/Documents/Search Help.pdf")
     End Sub
 
+    Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
 
+    End Sub
 End Class

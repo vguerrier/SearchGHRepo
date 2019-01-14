@@ -46,6 +46,7 @@ Partial Class FsearchEvolution
         Me.Controls.Add(Me.Button1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FsearchEvolution"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Backlog Evolution"
         CType(Me.BS1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)

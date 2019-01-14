@@ -385,6 +385,7 @@ Partial Class FSearchWorkstream
         Me.Controls.Add(Me.LBDesc)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FSearchWorkstream"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Search Workstream"
         Me.ResumeLayout(False)
         Me.PerformLayout()

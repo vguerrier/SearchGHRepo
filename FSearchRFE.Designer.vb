@@ -436,6 +436,7 @@ Partial Class FSearchRFE
         Me.Controls.Add(Me.LBDesc)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FSearchRFE"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "RFE"
         Me.ResumeLayout(False)
         Me.PerformLayout()
