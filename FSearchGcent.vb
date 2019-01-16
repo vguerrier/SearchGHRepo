@@ -1230,7 +1230,7 @@ sortie:
         NbRow = 0
         While dr.Read()
             If dr.Item(0) IsNot DBNull.Value Then
-                ReDim Preserve LstCase(NbRow + 1)
+                ReDim Preserve LstCase(NbRow)
                 LstCase(NbRow).Number = dr.Item(0)
                 If dr.Item(1) IsNot DBNull.Value Then
                     LstCase(NbRow).Title = dr.Item(1)

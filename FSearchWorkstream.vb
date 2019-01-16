@@ -57,6 +57,15 @@ Public Class FSearchWorkstream
 
     End Function
 
+    Function RequestWStitle(ByVal WS As String) As String
+
+
+        RequestWStitle = "Select aldata_name  from Filteredaldata_workstream c  "                  '0
+        RequestWStitle = RequestWStitle + "Where c.aldata_name Like ('%" + Trim(WS) + "%') "
+        'RequestWStitle = RequestWStitle + "Where c.aldata_accountname Like ('" + CaseN + "') "
+
+    End Function
+
     Function GetGcentInfoCQ(RFE As String) As String
         Dim CQbase As String
 
@@ -71,6 +80,8 @@ Public Class FSearchWorkstream
         GetGcentInfoCQ = GetGcentInfoCQ & " And r.code Like '%" + Trim(RFE) + "%'"
 
     End Function
+
+
 
 
 
@@ -111,6 +122,39 @@ Public Class FSearchWorkstream
         Cardinfo = card + "  " + status + "  " + label
 
 
+    End Function
+
+    Public Function ResearchWSTitle(WS As String) As Cases()
+        Dim req As String
+        Dim Sqldb As String = "Data Source=seyccrmsqlsip1;Integrated Security=SSPI;Initial Catalog=crm_MSCRM"
+        Dim SqlConn As New SqlClient.SqlConnection(Sqldb)
+        Dim SqlCmd As New SqlCommand
+        Dim myReader As SqlDataReader
+        Dim NbRow As Integer
+        Dim LstWS() As Cases
+
+        req = RequestWStitle(WS)
+        'LstCase(0).Number = "0"
+        LstWS = Nothing
+
+        SqlConn.Open()
+        SqlCmd = SqlConn.CreateCommand()
+        SqlCmd.CommandText = req
+        myReader = SqlCmd.ExecuteReader()
+        NbRow = 0
+        While myReader.Read()
+            If myReader.Item(0) IsNot DBNull.Value Then
+                ReDim Preserve LstWS(NbRow)
+                LstWS(NbRow).Number = myReader.Item(0)
+                If myReader.Item(0) IsNot DBNull.Value Then
+                    LstWS(NbRow).Title = myReader.Item(0)
+                End If
+                LstWS(NbRow).Type = "Workstream"
+                NbRow = NbRow + 1
+            End If
+        End While
+        'Nb = UBound(LstCase)
+        ResearchWSTitle = LstWS
     End Function
 
     Public Function researchWS(WS As String) As Integer

@@ -5,20 +5,14 @@ Imports Oracle.DataAccess.Types
 Imports MaterialSkin
 
 Public Class FSearchRFE
-    'Private Sub FSearchRFE_Load(sender As Object, e As EventArgs) Handles Me.Load
-
-    '    Dim SkinManager As MaterialSkinManager = MaterialSkinManager.Instance
 
 
+    Function RequestRFETitle(ByVal RFE As String) As String
 
-    '    'SkinManager.AddFormToManage(Me)
-    '    SkinManager.Theme = MaterialSkinManager.Themes.LIGHT
-    '    'SkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE)
-    '    SkinManager.ColorScheme = New ColorScheme(Primary.Indigo500, Primary.Indigo700, Primary.Indigo100, Accent.Pink200, TextShade.WHITE)
-    '    'SkinManager.ColorScheme = New ColorScheme(Primary.Yellow500, Primary.Yellow700, Primary.Yellow100, Accent.Yellow200, TextShade.WHITE)
-    '    'SkinManager.ROBOTO_MEDIUM_10 = New Font("Microsoft Sans Serif", 8.25)
-    '    'SkinManager.ROBOTO_MEDIUM_10 = New Font("Algerian", 8)
-    'End Sub
+        RequestRFETitle = "select r.gapcode, r.gaptitr as title from gap r "  '0
+        RequestRFETitle = RequestRFETitle + "where upper(r.gaptitr) like upper('%" + Trim(RFE) + "%') " '
+
+    End Function
 
     Function RequestRFE(ByVal CaseN As String) As String
 
@@ -121,6 +115,44 @@ Public Class FSearchRFE
         Cardinfo = card + "  " + status + "  " + label
 
 
+    End Function
+
+    Public Function researchRFETitle(RFE As String) As Cases()
+        Dim myCommand As OleDb.OleDbCommand
+        Dim dr As OleDb.OleDbDataReader
+        Dim Oradb As String = "Provider=OraOLEDB.Oracle.1;Password=RFE_READ;Persist Security Info=True;User ID=RFE_READ;Data Source=RDTOOLS;"
+        Dim conn As New OleDb.OleDbConnection(Oradb) 'OracleConnection(oradb)
+        Dim req As String
+        Dim NbRow As Integer
+        Dim LstRFE() As Cases
+
+        req = RequestRFETitle(Trim(RFE))
+        conn.Open()
+        'myCommand.Open()
+        myCommand = New OleDb.OleDbCommand(req, conn)
+
+        'Dim dr As SqlDataReader = cmd.ExecuteReader()
+        dr = myCommand.ExecuteReader()
+
+        'LstCase(0).Number = "0"
+        LstRFE = Nothing
+
+
+        'myReader = dr.Read()
+        NbRow = 0
+        While dr.Read()
+            If dr.Item(0) IsNot DBNull.Value Then
+                ReDim Preserve LstRFE(NbRow)
+                LstRFE(NbRow).Number = dr.Item(0)
+                If dr.Item(1) IsNot DBNull.Value Then
+                    LstRFE(NbRow).Title = dr.Item(1)
+                End If
+                LstRFE(NbRow).Type = "RFE"
+                NbRow = NbRow + 1
+            End If
+        End While
+        'Nb = UBound(LstCase)
+        researchRFETitle = LstRFE
     End Function
 
     Public Function researchRFE(RFE As String) As Integer

@@ -34,13 +34,13 @@ Public Class ListViewColumnSorter
         ' Calculate the correct return value based on the object 
         ' comparison.
         'MessageBox.Show(OrderOfSort)
-        'If (OrderOfSort = SortOrder.Ascending) Then
-        If (OrderOfSort = 0) Then
+        If (OrderOfSort = SortOrder.Ascending) Then
+            'If (OrderOfSort = 1) Then
             ' Ascending sort is selected, return typical result of 
             ' compare operation.
             Return compareResult
             'ElseIf (OrderOfSort = SortOrder.Descending) Then
-        ElseIf (OrderOfSort = 1) Then
+        ElseIf (OrderOfSort = SortOrder.Descending) Then
             ' Descending sort is selected, return negative result of 
             ' compare operation.
             Return (-compareResult)

@@ -85,6 +85,8 @@ Public Class FSearch
         '6 workstream
 
         Dim ret, retRFE, retcus As Integer
+        Dim LstCases(), LstCard(), LstRFE(), LstWS() As Cases
+        Dim nb, nbCase, nbCard, nbRFE, nbWS As Integer
 
 
         If Nav = False Then
@@ -219,59 +221,103 @@ Public Class FSearch
 
                     'recherche par titre
                     If ret = 0 Then
-                        Dim LstCase(), LstCard() As Cases
-                        Dim nb, nbCase, nbCard As Integer
+
                         'recherche par case, 
                         nbCase = 0
                         nb = 0
-                        nbCard = 0
+
                         FSearchCase.RTBCase.Text = Me.MSTSearch.Text
-                        LstCase = FSearchCase.researchCaseTitle()
-                        nbCase = UBound(LstCase)
-                        If LstCase Is Nothing Then
-                            ret = 0
+                        LstCases = FSearchCase.researchCaseTitle()
+                        'nbCase = UBound(LstCases)
+                        If LstCases Is Nothing Then
+                            nbCase = 0
                         Else
-                            ret = UBound(LstCase)
-                        End If
-                        'recherche par card
-                        FSearchGcent.TBGcent.Text = Me.MSTSearch.Text
-                        LstCard = FSearchGcent.researchCQTitle()
-                        'If LstCase(0).Number = 0 Then
-                        'ret = 0
-                        'Else
-                        nbCard = UBound(LstCard)
-                        If LstCard Is Nothing Then
-                            ret = 0
-                        Else
-                            ret = ret + nbCard
+                            nbCase = UBound(LstCases) + 1
                         End If
 
-                        If LstCase Is Nothing And LstCard Is Nothing Then
+                        'recherche par card
+                        nbCard = 0
+                        FSearchGcent.TBGcent.Text = Me.MSTSearch.Text
+                        LstCard = FSearchGcent.researchCQTitle()
+
+                        'nbCard = UBound(LstCard)
+                        If LstCard Is Nothing Then
+                            nbCard = 0
+                        Else
+                            nbCard = UBound(LstCard) + 1
+                        End If
+
+                        'recherche par RFE
+                        nbRFE = 0
+                        LstRFE = FSearchRFE.researchRFETitle(Me.MSTSearch.Text)
+                        If LstRFE Is Nothing Then
+                            nbRFE = 0
+                        Else
+                            nbRFE = UBound(LstRFE) + 1
+                        End If
+
+                        'recherche par Workstream
+                        nbWS = 0
+                        LstWS = FSearchWorkstream.ResearchWSTitle(Me.MSTSearch.Text)
+                        If LstWS Is Nothing Then
+                            nbWS = 0
+                        Else
+                            nbWS = UBound(LstWS) + 1
+                        End If
+
+                        ret = nbCase + nbCard + nbRFE + nbWS
+
+                        'fusion des tableaux et affichage
+                        If LstCases Is Nothing And LstCard Is Nothing And LstRFE Is Nothing And LstWS Is Nothing Then
                             ret = 0
                         Else
-                            'ret = UBound(LstCase)
+                            'ret = UBound(LstCases)
                             'Fusion des 2 tableaux
-                            nb = nbCard + nbCase
-                            ReDim Preserve LstCase(nb)
+                            nb = ret
+                            ReDim Preserve LstCases(nb - 1)
                             For i = 0 To nbCard - 1
-                                LstCase(nbCase + i).Number = LstCard(i).Number
-                                LstCase(nbCase + i).Title = LstCard(i).Title
-                                LstCase(nbCase + i).Type = LstCard(i).Type
+                                LstCases(nbCase + i).Number = LstCard(i).Number
+                                LstCases(nbCase + i).Title = LstCard(i).Title
+                                LstCases(nbCase + i).Type = LstCard(i).Type
                             Next
+                            For i = 0 To nbRFE - 1
+                                LstCases(nbCase + nbCard + i).Number = LstRFE(i).Number
+                                LstCases(nbCase + nbCard + i).Title = LstRFE(i).Title
+                                LstCases(nbCase + nbCard + i).Type = LstRFE(i).Type
+                            Next
+                            For i = 0 To nbWS - 1
+                                LstCases(nbCase + nbCard + nbRFE + i).Number = LstWS(i).Number
+                                LstCases(nbCase + nbCard + nbRFE + i).Title = LstWS(i).Title
+                                LstCases(nbCase + nbCard + nbRFE + i).Type = LstWS(i).Type
+                            Next
+
+
+                            For Each frm In Application.OpenForms
+                                '    'Si son nom est celui que l'on cherche
+                                If frm.Name = Trim("FSearchSelect") Then
+                                    FSearchSelect.Close()
+                                    Exit For
+                                End If
+                            Next
+
+                            'If VB.Forms.
+
                             FSearchSelect.Show()
+                            FSearchSelect.Text = "Results on title"
+                            FSearchSelect.TBNB.Text = ret
                             FSearchSelect.LVChoice.Columns(0).Text = "ID"
                             FSearchSelect.LVChoice.Columns(0).Width = 134
                             Dim CHTitle As New ColumnHeader
-                            CHTitle.Text = "Titre"
+                            CHTitle.Text = "Title"
                             CHTitle.Width = 495
                             CHTitle.DisplayIndex = 2
                             FSearchSelect.LVChoice.Columns.Add(CHTitle)
-                            FSearchSelect.LVChoice.Columns(1).Width = 50
+                            FSearchSelect.LVChoice.Columns(1).Width = 80
                             FSearchSelect.LVChoice.Columns(2).Text = "Title"
                             FSearchSelect.LVChoice.Columns(2).Width = 595
 
-                            For i = 0 To ret
-                                FSearchSelect.ListCases(LstCase(i).Number, LstCase(i).Type, LstCase(i).Title)
+                            For i = 0 To ret - 1
+                                FSearchSelect.ListCases(LstCases(i).Number, LstCases(i).Type, LstCases(i).Title)
                                 'FSearchSelect.List(Me.MSTSearch.Text, "Workstream")
                             Next
 
@@ -282,7 +328,7 @@ Public Class FSearch
                     End If
 
                     If ret = 0 Then
-                        MsgBox("Not a card, Case, customer or ressource please retry")
+                        MsgBox("Nothing matches with your search")
                     End If
                 End If
             Else
@@ -341,7 +387,7 @@ Public Class FSearch
             End If
         Catch ex As Exception
             If retcus = 0 Then
-                MsgBox("Not a card or a case, please retry")
+                MsgBox("Nothing matches with your search")
 
             Else
                 MsgBox(ex.Message)

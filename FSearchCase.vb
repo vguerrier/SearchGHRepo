@@ -78,37 +78,9 @@ Public Class FSearchCase
     Function RequestCaseTitle(ByVal CaseN As String) As String
 
 
-        RequestCaseTitle = "SELECT c.customeridname, "                           ' Account name
-        RequestCaseTitle = RequestCaseTitle + "c.ticketnumber, "                      'Case #,
-        RequestCaseTitle = RequestCaseTitle + "c.sfmig_ranking,                  "    'Priority Score",
-        RequestCaseTitle = RequestCaseTitle + "c.aldata_functionaldomainname,  "      'Domain",
-        RequestCaseTitle = RequestCaseTitle + "c.statuscodename,                 "    'Status",
-        RequestCaseTitle = RequestCaseTitle + "cq.aldata_clearquestbugnumber,    "    'CQ Card",
-        RequestCaseTitle = RequestCaseTitle + "c.productidname,                  "    'Module",
-        RequestCaseTitle = RequestCaseTitle + "c.prioritycodename,               "    'Priority",
-        RequestCaseTitle = RequestCaseTitle + "c.sfmig_expecteddeliverydate,     "    'Expected Delivery",
-        RequestCaseTitle = RequestCaseTitle + "c.owneridname,                    "    'Owner",
-        RequestCaseTitle = RequestCaseTitle + "c.aldata_assignedgroupname,       "    'Assigned Group",
-        RequestCaseTitle = RequestCaseTitle + "c.aldata_validatetargetpatch,     "    'Validate Target Patch",
-        RequestCaseTitle = RequestCaseTitle + "c.title,                          "    'Title",
-        RequestCaseTitle = RequestCaseTitle + "c.aldata_workstreamname,          "    'Workstream",
-        RequestCaseTitle = RequestCaseTitle + "c.createdonutc,                   "    'Created On (UTC)",
-        RequestCaseTitle = RequestCaseTitle + "c.sfmig_truelastmodifieddateutc,  "    'Last Modified (UTC)",
-        RequestCaseTitle = RequestCaseTitle + "c.sfmig_srclientnumber,           "    'Customer's Case #",
-        RequestCaseTitle = RequestCaseTitle + "c.sfmig_prodenvtname,             "    'Production?",
-        RequestCaseTitle = RequestCaseTitle + "cq.aldata_assignedto,             "    'CQ Assigned To",
-        RequestCaseTitle = RequestCaseTitle + "cq.aldata_label,                  "    'CQ Label",
-        RequestCaseTitle = RequestCaseTitle + "cq.aldata_state,                  "    'CQ State",
-        RequestCaseTitle = RequestCaseTitle + "c.aldata_assignedpersonname,      "    'Assigned Person",
-        RequestCaseTitle = RequestCaseTitle + "c.sfmig_rejectedsolutionscount,   "    '# Rejection",
-        RequestCaseTitle = RequestCaseTitle + "c.aldata_expectedcorrectiondate,   "   'date_correction",
-        RequestCaseTitle = RequestCaseTitle + "c.sfmig_targetpatch,                 "  'Target Patch"
-        RequestCaseTitle = RequestCaseTitle + "c.aldata_versionidname,             " 'Version
-        RequestCaseTitle = RequestCaseTitle + "convert(nvarchar(50), c.incidentid), " 'foreign key Filteredaldata_casecomment commentaire
-        RequestCaseTitle = RequestCaseTitle + "c.description, "                        'Description
-        RequestCaseTitle = RequestCaseTitle + "convert(sql_variant,c.incidentid) "
-        RequestCaseTitle = RequestCaseTitle + "FROM FilteredIncident c WITH (NOLOCK) " '"
-        RequestCaseTitle = RequestCaseTitle + "LEFT OUTER JOIN Filteredaldata_clearquestbug cq WITH (NOLOCK) ON c.incidentid = cq.aldata_case "
+        RequestCaseTitle = "SELECT c.ticketnumber, "                           ' Account name
+        RequestCaseTitle = RequestCaseTitle + "c.title                        "    'Title",
+        RequestCaseTitle = RequestCaseTitle + "FROM FilteredIncident c " '"
         RequestCaseTitle = RequestCaseTitle + "WHERE c.title like '%" + Trim(CaseN) + "%'"
 
 
@@ -214,11 +186,11 @@ Public Class FSearchCase
         myReader = SqlCmd.ExecuteReader()
         NbRow = 0
         While myReader.Read()
-            If myReader.Item(1) IsNot DBNull.Value Then
-                ReDim Preserve LstCase(NbRow + 1)
-                LstCase(NbRow).Number = myReader.Item(1)
-                If myReader.Item(12) IsNot DBNull.Value Then
-                    LstCase(NbRow).Title = myReader.Item(12)
+            If myReader.Item(0) IsNot DBNull.Value Then
+                ReDim Preserve LstCase(NbRow)
+                LstCase(NbRow).Number = myReader.Item(0)
+                If myReader.Item(1) IsNot DBNull.Value Then
+                    LstCase(NbRow).Title = myReader.Item(1)
                 End If
                 LstCase(NbRow).Type = "Case"
                 NbRow = NbRow + 1
