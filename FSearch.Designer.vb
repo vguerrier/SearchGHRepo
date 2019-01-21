@@ -25,7 +25,6 @@ Partial Class FSearch
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FSearch))
-        Me.LLBlinkCQ = New System.Windows.Forms.LinkLabel()
         Me.MCBCusCase = New System.Windows.Forms.CheckBox()
         Me.MCBBranch = New System.Windows.Forms.CheckBox()
         Me.MSTSearch = New MaterialSkin.Controls.MaterialSingleLineTextField()
@@ -40,20 +39,9 @@ Partial Class FSearch
         Me.BBack = New System.Windows.Forms.Button()
         Me.BNext = New System.Windows.Forms.Button()
         Me.Llong = New System.Windows.Forms.Label()
+        Me.MCBTitle = New MaterialSkin.Controls.MaterialCheckBox()
+        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.SuspendLayout()
-        '
-        'LLBlinkCQ
-        '
-        Me.LLBlinkCQ.AutoSize = True
-        Me.LLBlinkCQ.BackColor = System.Drawing.Color.Transparent
-        Me.LLBlinkCQ.Location = New System.Drawing.Point(12, 192)
-        Me.LLBlinkCQ.Margin = New System.Windows.Forms.Padding(3)
-        Me.LLBlinkCQ.Name = "LLBlinkCQ"
-        Me.LLBlinkCQ.Size = New System.Drawing.Size(29, 13)
-        Me.LLBlinkCQ.TabIndex = 147
-        Me.LLBlinkCQ.TabStop = True
-        Me.LLBlinkCQ.Tag = ""
-        Me.LLBlinkCQ.Text = "Help"
         '
         'MCBCusCase
         '
@@ -226,12 +214,44 @@ Partial Class FSearch
         Me.Llong.TabIndex = 160
         Me.Llong.Visible = False
         '
+        'MCBTitle
+        '
+        Me.MCBTitle.AutoSize = True
+        Me.MCBTitle.Depth = 0
+        Me.MCBTitle.Font = New System.Drawing.Font("Roboto", 10.0!)
+        Me.MCBTitle.Location = New System.Drawing.Point(10, 187)
+        Me.MCBTitle.Margin = New System.Windows.Forms.Padding(0)
+        Me.MCBTitle.MouseLocation = New System.Drawing.Point(-1, -1)
+        Me.MCBTitle.MouseState = MaterialSkin.MouseState.HOVER
+        Me.MCBTitle.Name = "MCBTitle"
+        Me.MCBTitle.Ripple = True
+        Me.MCBTitle.Size = New System.Drawing.Size(182, 30)
+        Me.MCBTitle.TabIndex = 161
+        Me.MCBTitle.Text = "Search by content in title"
+        Me.MCBTitle.UseVisualStyleBackColor = True
+        '
+        'LinkLabel1
+        '
+        Me.LinkLabel1.AutoSize = True
+        Me.LinkLabel1.BackColor = System.Drawing.Color.Transparent
+        Me.LinkLabel1.LinkColor = System.Drawing.Color.White
+        Me.LinkLabel1.Location = New System.Drawing.Point(229, 33)
+        Me.LinkLabel1.Margin = New System.Windows.Forms.Padding(3)
+        Me.LinkLabel1.Name = "LinkLabel1"
+        Me.LinkLabel1.Size = New System.Drawing.Size(29, 13)
+        Me.LinkLabel1.TabIndex = 162
+        Me.LinkLabel1.TabStop = True
+        Me.LinkLabel1.Tag = ""
+        Me.LinkLabel1.Text = "Help"
+        '
         'FSearch
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(270, 135)
+        Me.Controls.Add(Me.LinkLabel1)
+        Me.Controls.Add(Me.MCBTitle)
         Me.Controls.Add(Me.Llong)
         Me.Controls.Add(Me.BNext)
         Me.Controls.Add(Me.BBack)
@@ -244,7 +264,6 @@ Partial Class FSearch
         Me.Controls.Add(Me.MFBSearch)
         Me.Controls.Add(Me.MSTSearch)
         Me.Controls.Add(Me.MCBBranch)
-        Me.Controls.Add(Me.LLBlinkCQ)
         Me.Controls.Add(Me.MCBCusCase)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -256,7 +275,6 @@ Partial Class FSearch
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents LLBlinkCQ As System.Windows.Forms.LinkLabel
     Friend WithEvents MCBCusCase As CheckBox
     Friend WithEvents MCBBranch As CheckBox
     Friend WithEvents MSTSearch As MaterialSkin.Controls.MaterialSingleLineTextField
@@ -271,4 +289,6 @@ Partial Class FSearch
     Friend WithEvents BBack As Button
     Friend WithEvents BNext As Button
     Friend WithEvents Llong As Label
+    Friend WithEvents MCBTitle As MaterialSkin.Controls.MaterialCheckBox
+    Friend WithEvents LinkLabel1 As LinkLabel
 End Class

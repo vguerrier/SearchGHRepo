@@ -1243,5 +1243,7 @@ sortie:
         researchCQTitle = LstCase
 
     End Function
+
+
 End Class
 

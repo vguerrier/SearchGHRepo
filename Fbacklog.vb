@@ -800,7 +800,7 @@ Public Class FBacklog
         'Next
     End Sub
 
-    Private Sub BBacklog_Click(sender As Object, e As EventArgs) Handles BBacklog.Click
+    Private Sub BBacklog_Click(sender As Object, e As EventArgs)
         FsearchEvolution.Show()
     End Sub
 

@@ -97,13 +97,14 @@ Partial Class FSearchGcent
         Me.TBDeliveryPatch = New System.Windows.Forms.TextBox()
         Me.LBdelDate = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.BRFE = New System.Windows.Forms.Button()
         Me.BRessource = New System.Windows.Forms.Button()
         Me.Bsearch = New System.Windows.Forms.Button()
         Me.Bsearch2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
-        Me.BRFE = New System.Windows.Forms.Button()
+        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.SuspendLayout()
         '
         'CBRetrofit
@@ -750,6 +751,19 @@ Partial Class FSearchGcent
         Me.LBdelDate.TabIndex = 144
         Me.LBdelDate.Text = "Internal Delivery Date"
         '
+        'BRFE
+        '
+        Me.BRFE.BackColor = System.Drawing.Color.White
+        Me.BRFE.FlatAppearance.BorderSize = 0
+        Me.BRFE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BRFE.Image = Global.WindowsApplication1.My.Resources.Resources.search3_p
+        Me.BRFE.Location = New System.Drawing.Point(433, 193)
+        Me.BRFE.Name = "BRFE"
+        Me.BRFE.Size = New System.Drawing.Size(25, 25)
+        Me.BRFE.TabIndex = 157
+        Me.ToolTip1.SetToolTip(Me.BRFE, "Ressource R&D informtaion")
+        Me.BRFE.UseVisualStyleBackColor = False
+        '
         'BRessource
         '
         Me.BRessource.BackColor = System.Drawing.Color.White
@@ -825,19 +839,6 @@ Partial Class FSearchGcent
         Me.Button2.TabIndex = 129
         Me.ToolTip1.SetToolTip(Me.Button2, "Mail")
         Me.Button2.UseVisualStyleBackColor = True
-        '
-        'BRFE
-        '
-        Me.BRFE.BackColor = System.Drawing.Color.White
-        Me.BRFE.FlatAppearance.BorderSize = 0
-        Me.BRFE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BRFE.Image = Global.WindowsApplication1.My.Resources.Resources.search3_p
-        Me.BRFE.Location = New System.Drawing.Point(433, 193)
-        Me.BRFE.Name = "BRFE"
-        Me.BRFE.Size = New System.Drawing.Size(25, 25)
-        Me.BRFE.TabIndex = 157
-        Me.ToolTip1.SetToolTip(Me.BRFE, "Ressource R&D informtaion")
-        Me.BRFE.UseVisualStyleBackColor = False
         '
         'FSearchGcent
         '
@@ -1000,4 +1001,5 @@ Partial Class FSearchGcent
     Friend WithEvents BRessource As Button
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents BRFE As Button
+    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
 End Class

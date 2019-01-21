@@ -40,7 +40,6 @@ Partial Class FBacklog
         Me.CBClosed = New System.Windows.Forms.CheckBox()
         Me.CBGcent = New System.Windows.Forms.CheckBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.BBacklog = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
@@ -214,19 +213,6 @@ Partial Class FBacklog
         Me.CBGcent.Text = "Add CQ Cards to the Case list"
         Me.CBGcent.UseVisualStyleBackColor = False
         '
-        'BBacklog
-        '
-        Me.BBacklog.FlatAppearance.BorderSize = 0
-        Me.BBacklog.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BBacklog.ForeColor = System.Drawing.Color.Black
-        Me.BBacklog.Image = Global.WindowsApplication1.My.Resources.Resources.Backlog
-        Me.BBacklog.Location = New System.Drawing.Point(1112, 109)
-        Me.BBacklog.Name = "BBacklog"
-        Me.BBacklog.Size = New System.Drawing.Size(25, 25)
-        Me.BBacklog.TabIndex = 153
-        Me.ToolTip1.SetToolTip(Me.BBacklog, "Customer Backlog")
-        Me.BBacklog.UseVisualStyleBackColor = True
-        '
         'Button5
         '
         Me.Button5.BackColor = System.Drawing.Color.White
@@ -365,7 +351,6 @@ Partial Class FBacklog
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Window
         Me.ClientSize = New System.Drawing.Size(1584, 809)
-        Me.Controls.Add(Me.BBacklog)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button3)
@@ -428,5 +413,4 @@ Partial Class FBacklog
     Friend WithEvents Button3 As Button
     Friend WithEvents Button4 As Button
     Friend WithEvents Button5 As Button
-    Friend WithEvents BBacklog As Button
 End Class
