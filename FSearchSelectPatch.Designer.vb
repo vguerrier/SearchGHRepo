@@ -109,7 +109,7 @@ Partial Class FsearchSelectPatch
         Me.TBPatch.Location = New System.Drawing.Point(139, 62)
         Me.TBPatch.Name = "TBPatch"
         Me.TBPatch.ReadOnly = True
-        Me.TBPatch.Size = New System.Drawing.Size(179, 20)
+        Me.TBPatch.Size = New System.Drawing.Size(282, 20)
         Me.TBPatch.TabIndex = 77
         '
         'FsearchSelectPatch

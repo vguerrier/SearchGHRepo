@@ -104,6 +104,7 @@ Partial Class FSearchGcent
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.BPatch = New System.Windows.Forms.Button()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.SuspendLayout()
         '
@@ -431,7 +432,7 @@ Partial Class FSearchGcent
         Me.TBTitle.Location = New System.Drawing.Point(22, 121)
         Me.TBTitle.Name = "TBTitle"
         Me.TBTitle.ReadOnly = True
-        Me.TBTitle.Size = New System.Drawing.Size(904, 20)
+        Me.TBTitle.Size = New System.Drawing.Size(945, 20)
         Me.TBTitle.TabIndex = 73
         '
         'TBRFE
@@ -497,7 +498,7 @@ Partial Class FSearchGcent
         Me.RTBLog.Location = New System.Drawing.Point(515, 274)
         Me.RTBLog.Name = "RTBLog"
         Me.RTBLog.ReadOnly = True
-        Me.RTBLog.Size = New System.Drawing.Size(411, 110)
+        Me.RTBLog.Size = New System.Drawing.Size(452, 110)
         Me.RTBLog.TabIndex = 114
         Me.RTBLog.Text = ""
         '
@@ -507,7 +508,7 @@ Partial Class FSearchGcent
         Me.RTBDesc.Location = New System.Drawing.Point(23, 594)
         Me.RTBDesc.Name = "RTBDesc"
         Me.RTBDesc.ReadOnly = True
-        Me.RTBDesc.Size = New System.Drawing.Size(450, 264)
+        Me.RTBDesc.Size = New System.Drawing.Size(470, 264)
         Me.RTBDesc.TabIndex = 115
         Me.RTBDesc.Text = ""
         '
@@ -537,7 +538,7 @@ Partial Class FSearchGcent
         Me.RTBDOTI.Location = New System.Drawing.Point(24, 518)
         Me.RTBDOTI.Name = "RTBDOTI"
         Me.RTBDOTI.ReadOnly = True
-        Me.RTBDOTI.Size = New System.Drawing.Size(902, 20)
+        Me.RTBDOTI.Size = New System.Drawing.Size(943, 20)
         Me.RTBDOTI.TabIndex = 118
         Me.RTBDOTI.Text = ""
         '
@@ -567,17 +568,17 @@ Partial Class FSearchGcent
         Me.RTBDOTM.Location = New System.Drawing.Point(22, 556)
         Me.RTBDOTM.Name = "RTBDOTM"
         Me.RTBDOTM.ReadOnly = True
-        Me.RTBDOTM.Size = New System.Drawing.Size(904, 20)
+        Me.RTBDOTM.Size = New System.Drawing.Size(945, 20)
         Me.RTBDOTM.TabIndex = 120
         Me.RTBDOTM.Text = ""
         '
         'RTBms
         '
         Me.RTBms.BackColor = System.Drawing.Color.White
-        Me.RTBms.Location = New System.Drawing.Point(476, 594)
+        Me.RTBms.Location = New System.Drawing.Point(499, 593)
         Me.RTBms.Name = "RTBms"
         Me.RTBms.ReadOnly = True
-        Me.RTBms.Size = New System.Drawing.Size(450, 264)
+        Me.RTBms.Size = New System.Drawing.Size(469, 264)
         Me.RTBms.TabIndex = 122
         Me.RTBms.Text = ""
         '
@@ -585,7 +586,7 @@ Partial Class FSearchGcent
         '
         Me.Label5.AutoSize = True
         Me.Label5.BackColor = System.Drawing.Color.White
-        Me.Label5.Location = New System.Drawing.Point(512, 578)
+        Me.Label5.Location = New System.Drawing.Point(498, 578)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(89, 13)
         Me.Label5.TabIndex = 123
@@ -627,7 +628,7 @@ Partial Class FSearchGcent
         Me.LVad.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
         Me.LVad.Location = New System.Drawing.Point(514, 405)
         Me.LVad.Name = "LVad"
-        Me.LVad.Size = New System.Drawing.Size(411, 110)
+        Me.LVad.Size = New System.Drawing.Size(453, 110)
         Me.LVad.TabIndex = 131
         Me.LVad.UseCompatibleStateImageBehavior = False
         Me.LVad.View = System.Windows.Forms.View.Details
@@ -635,7 +636,7 @@ Partial Class FSearchGcent
         'ColumnHeader1
         '
         Me.ColumnHeader1.Text = "Document"
-        Me.ColumnHeader1.Width = 406
+        Me.ColumnHeader1.Width = 442
         '
         'TBUrgence
         '
@@ -643,14 +644,14 @@ Partial Class FSearchGcent
         Me.TBUrgence.Location = New System.Drawing.Point(747, 158)
         Me.TBUrgence.Name = "TBUrgence"
         Me.TBUrgence.ReadOnly = True
-        Me.TBUrgence.Size = New System.Drawing.Size(178, 20)
+        Me.TBUrgence.Size = New System.Drawing.Size(221, 20)
         Me.TBUrgence.TabIndex = 133
         '
         'LbUrg
         '
         Me.LbUrg.AutoSize = True
         Me.LbUrg.BackColor = System.Drawing.Color.White
-        Me.LbUrg.Location = New System.Drawing.Point(750, 142)
+        Me.LbUrg.Location = New System.Drawing.Point(748, 142)
         Me.LbUrg.Name = "LbUrg"
         Me.LbUrg.Size = New System.Drawing.Size(48, 13)
         Me.LbUrg.TabIndex = 132
@@ -719,14 +720,14 @@ Partial Class FSearchGcent
         Me.TBPatch.Location = New System.Drawing.Point(748, 196)
         Me.TBPatch.Name = "TBPatch"
         Me.TBPatch.ReadOnly = True
-        Me.TBPatch.Size = New System.Drawing.Size(177, 20)
+        Me.TBPatch.Size = New System.Drawing.Size(200, 20)
         Me.TBPatch.TabIndex = 143
         '
         'LbPatch
         '
         Me.LbPatch.AutoSize = True
         Me.LbPatch.BackColor = System.Drawing.Color.White
-        Me.LbPatch.Location = New System.Drawing.Point(750, 180)
+        Me.LbPatch.Location = New System.Drawing.Point(748, 180)
         Me.LbPatch.Name = "LbPatch"
         Me.LbPatch.Size = New System.Drawing.Size(76, 13)
         Me.LbPatch.TabIndex = 142
@@ -735,17 +736,17 @@ Partial Class FSearchGcent
         'TBDeliveryPatch
         '
         Me.TBDeliveryPatch.BackColor = System.Drawing.Color.White
-        Me.TBDeliveryPatch.Location = New System.Drawing.Point(747, 234)
+        Me.TBDeliveryPatch.Location = New System.Drawing.Point(748, 234)
         Me.TBDeliveryPatch.Name = "TBDeliveryPatch"
         Me.TBDeliveryPatch.ReadOnly = True
-        Me.TBDeliveryPatch.Size = New System.Drawing.Size(178, 20)
+        Me.TBDeliveryPatch.Size = New System.Drawing.Size(219, 20)
         Me.TBDeliveryPatch.TabIndex = 145
         '
         'LBdelDate
         '
         Me.LBdelDate.AutoSize = True
         Me.LBdelDate.BackColor = System.Drawing.Color.White
-        Me.LBdelDate.Location = New System.Drawing.Point(750, 218)
+        Me.LBdelDate.Location = New System.Drawing.Point(748, 218)
         Me.LBdelDate.Name = "LBdelDate"
         Me.LBdelDate.Size = New System.Drawing.Size(109, 13)
         Me.LBdelDate.TabIndex = 144
@@ -840,12 +841,26 @@ Partial Class FSearchGcent
         Me.ToolTip1.SetToolTip(Me.Button2, "Mail")
         Me.Button2.UseVisualStyleBackColor = True
         '
+        'BPatch
+        '
+        Me.BPatch.BackColor = System.Drawing.Color.Transparent
+        Me.BPatch.FlatAppearance.BorderSize = 0
+        Me.BPatch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BPatch.Image = Global.WindowsApplication1.My.Resources.Resources.search3_p
+        Me.BPatch.Location = New System.Drawing.Point(955, 196)
+        Me.BPatch.Name = "BPatch"
+        Me.BPatch.Size = New System.Drawing.Size(20, 20)
+        Me.BPatch.TabIndex = 158
+        Me.ToolTip1.SetToolTip(Me.BPatch, "Patch content")
+        Me.BPatch.UseVisualStyleBackColor = False
+        '
         'FSearchGcent
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(941, 869)
+        Me.ClientSize = New System.Drawing.Size(987, 869)
+        Me.Controls.Add(Me.BPatch)
         Me.Controls.Add(Me.BRFE)
         Me.Controls.Add(Me.BRessource)
         Me.Controls.Add(Me.Bsearch)
@@ -1002,4 +1017,5 @@ Partial Class FSearchGcent
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents BRFE As Button
     Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
+    Friend WithEvents BPatch As Button
 End Class

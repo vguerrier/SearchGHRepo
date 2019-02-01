@@ -39,7 +39,7 @@ Public Class FSearchSelect
 
         If comment = "Case" Then
             FSearch.Research(1)
-        ElseIf comment = "Gcent" Then
+        ElseIf comment = "CARD" Then
             FSearch.Research(2)
         ElseIf comment = "Customer" Then
             FSearch.Research(3)

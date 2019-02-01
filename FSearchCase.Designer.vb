@@ -98,6 +98,9 @@ Partial Class FSearchCase
         Me.BSearch2 = New System.Windows.Forms.Button()
         Me.BSearch = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.TBPatch = New System.Windows.Forms.TextBox()
+        Me.BPatch = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'CHComments
@@ -107,7 +110,7 @@ Partial Class FSearchCase
         '
         'TBSev
         '
-        Me.TBSev.Location = New System.Drawing.Point(216, 208)
+        Me.TBSev.Location = New System.Drawing.Point(216, 203)
         Me.TBSev.Name = "TBSev"
         Me.TBSev.Size = New System.Drawing.Size(182, 20)
         Me.TBSev.TabIndex = 71
@@ -117,7 +120,7 @@ Partial Class FSearchCase
         Me.Label2.AutoSize = True
         Me.Label2.BackColor = System.Drawing.Color.White
         Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(213, 192)
+        Me.Label2.Location = New System.Drawing.Point(213, 187)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(45, 13)
         Me.Label2.TabIndex = 70
@@ -176,7 +179,7 @@ Partial Class FSearchCase
         '
         'TBCustomer
         '
-        Me.TBCustomer.Location = New System.Drawing.Point(586, 208)
+        Me.TBCustomer.Location = New System.Drawing.Point(586, 203)
         Me.TBCustomer.Name = "TBCustomer"
         Me.TBCustomer.Size = New System.Drawing.Size(136, 20)
         Me.TBCustomer.TabIndex = 62
@@ -186,7 +189,7 @@ Partial Class FSearchCase
         Me.LbCustomer.AutoSize = True
         Me.LbCustomer.BackColor = System.Drawing.Color.White
         Me.LbCustomer.ForeColor = System.Drawing.Color.Black
-        Me.LbCustomer.Location = New System.Drawing.Point(583, 192)
+        Me.LbCustomer.Location = New System.Drawing.Point(583, 187)
         Me.LbCustomer.Name = "LbCustomer"
         Me.LbCustomer.Size = New System.Drawing.Size(51, 13)
         Me.LbCustomer.TabIndex = 61
@@ -194,7 +197,7 @@ Partial Class FSearchCase
         '
         'TBProduct
         '
-        Me.TBProduct.Location = New System.Drawing.Point(216, 256)
+        Me.TBProduct.Location = New System.Drawing.Point(216, 246)
         Me.TBProduct.Name = "TBProduct"
         Me.TBProduct.Size = New System.Drawing.Size(182, 20)
         Me.TBProduct.TabIndex = 50
@@ -204,7 +207,7 @@ Partial Class FSearchCase
         Me.LbProduct.AutoSize = True
         Me.LbProduct.BackColor = System.Drawing.Color.White
         Me.LbProduct.ForeColor = System.Drawing.Color.Black
-        Me.LbProduct.Location = New System.Drawing.Point(213, 240)
+        Me.LbProduct.Location = New System.Drawing.Point(213, 230)
         Me.LbProduct.Name = "LbProduct"
         Me.LbProduct.Size = New System.Drawing.Size(44, 13)
         Me.LbProduct.TabIndex = 49
@@ -212,7 +215,7 @@ Partial Class FSearchCase
         '
         'TBModule
         '
-        Me.TBModule.Location = New System.Drawing.Point(31, 306)
+        Me.TBModule.Location = New System.Drawing.Point(31, 285)
         Me.TBModule.Name = "TBModule"
         Me.TBModule.Size = New System.Drawing.Size(179, 20)
         Me.TBModule.TabIndex = 46
@@ -222,7 +225,7 @@ Partial Class FSearchCase
         Me.LbModule.AutoSize = True
         Me.LbModule.BackColor = System.Drawing.Color.White
         Me.LbModule.ForeColor = System.Drawing.Color.Black
-        Me.LbModule.Location = New System.Drawing.Point(28, 290)
+        Me.LbModule.Location = New System.Drawing.Point(28, 269)
         Me.LbModule.Name = "LbModule"
         Me.LbModule.Size = New System.Drawing.Size(42, 13)
         Me.LbModule.TabIndex = 45
@@ -244,7 +247,7 @@ Partial Class FSearchCase
         Me.LbState.AutoSize = True
         Me.LbState.BackColor = System.Drawing.Color.White
         Me.LbState.ForeColor = System.Drawing.Color.Black
-        Me.LbState.Location = New System.Drawing.Point(28, 191)
+        Me.LbState.Location = New System.Drawing.Point(28, 186)
         Me.LbState.Name = "LbState"
         Me.LbState.Size = New System.Drawing.Size(37, 13)
         Me.LbState.TabIndex = 42
@@ -252,7 +255,7 @@ Partial Class FSearchCase
         '
         'TBState
         '
-        Me.TBState.Location = New System.Drawing.Point(31, 208)
+        Me.TBState.Location = New System.Drawing.Point(31, 203)
         Me.TBState.Name = "TBState"
         Me.TBState.Size = New System.Drawing.Size(179, 20)
         Me.TBState.TabIndex = 41
@@ -295,7 +298,7 @@ Partial Class FSearchCase
         '
         'TBECD
         '
-        Me.TBECD.Location = New System.Drawing.Point(586, 256)
+        Me.TBECD.Location = New System.Drawing.Point(586, 246)
         Me.TBECD.Name = "TBECD"
         Me.TBECD.Size = New System.Drawing.Size(167, 20)
         Me.TBECD.TabIndex = 77
@@ -305,7 +308,7 @@ Partial Class FSearchCase
         Me.LbECD.AutoSize = True
         Me.LbECD.BackColor = System.Drawing.Color.White
         Me.LbECD.ForeColor = System.Drawing.Color.Black
-        Me.LbECD.Location = New System.Drawing.Point(583, 240)
+        Me.LbECD.Location = New System.Drawing.Point(583, 230)
         Me.LbECD.Name = "LbECD"
         Me.LbECD.Size = New System.Drawing.Size(126, 13)
         Me.LbECD.TabIndex = 76
@@ -313,7 +316,7 @@ Partial Class FSearchCase
         '
         'TBEDD
         '
-        Me.TBEDD.Location = New System.Drawing.Point(404, 256)
+        Me.TBEDD.Location = New System.Drawing.Point(404, 246)
         Me.TBEDD.Name = "TBEDD"
         Me.TBEDD.Size = New System.Drawing.Size(176, 20)
         Me.TBEDD.TabIndex = 75
@@ -323,7 +326,7 @@ Partial Class FSearchCase
         Me.LbEDD.AutoSize = True
         Me.LbEDD.BackColor = System.Drawing.Color.White
         Me.LbEDD.ForeColor = System.Drawing.Color.Black
-        Me.LbEDD.Location = New System.Drawing.Point(401, 240)
+        Me.LbEDD.Location = New System.Drawing.Point(401, 230)
         Me.LbEDD.Name = "LbEDD"
         Me.LbEDD.Size = New System.Drawing.Size(119, 13)
         Me.LbEDD.TabIndex = 74
@@ -331,7 +334,7 @@ Partial Class FSearchCase
         '
         'TBvtp
         '
-        Me.TBvtp.Location = New System.Drawing.Point(31, 256)
+        Me.TBvtp.Location = New System.Drawing.Point(31, 246)
         Me.TBvtp.Name = "TBvtp"
         Me.TBvtp.Size = New System.Drawing.Size(179, 20)
         Me.TBvtp.TabIndex = 79
@@ -341,7 +344,7 @@ Partial Class FSearchCase
         Me.Lbvtp.AutoSize = True
         Me.Lbvtp.BackColor = System.Drawing.Color.White
         Me.Lbvtp.ForeColor = System.Drawing.Color.Black
-        Me.Lbvtp.Location = New System.Drawing.Point(28, 240)
+        Me.Lbvtp.Location = New System.Drawing.Point(28, 230)
         Me.Lbvtp.Name = "Lbvtp"
         Me.Lbvtp.Size = New System.Drawing.Size(116, 13)
         Me.Lbvtp.TabIndex = 78
@@ -352,7 +355,7 @@ Partial Class FSearchCase
         Me.LBAg.AutoSize = True
         Me.LBAg.BackColor = System.Drawing.Color.White
         Me.LBAg.ForeColor = System.Drawing.Color.Black
-        Me.LBAg.Location = New System.Drawing.Point(401, 192)
+        Me.LBAg.Location = New System.Drawing.Point(401, 187)
         Me.LBAg.Name = "LBAg"
         Me.LBAg.Size = New System.Drawing.Size(82, 13)
         Me.LBAg.TabIndex = 80
@@ -360,7 +363,7 @@ Partial Class FSearchCase
         '
         'TBLastModified
         '
-        Me.TBLastModified.Location = New System.Drawing.Point(404, 352)
+        Me.TBLastModified.Location = New System.Drawing.Point(404, 326)
         Me.TBLastModified.Name = "TBLastModified"
         Me.TBLastModified.Size = New System.Drawing.Size(174, 20)
         Me.TBLastModified.TabIndex = 89
@@ -370,7 +373,7 @@ Partial Class FSearchCase
         Me.LBLastModified.AutoSize = True
         Me.LBLastModified.BackColor = System.Drawing.Color.White
         Me.LBLastModified.ForeColor = System.Drawing.Color.Black
-        Me.LBLastModified.Location = New System.Drawing.Point(401, 336)
+        Me.LBLastModified.Location = New System.Drawing.Point(401, 310)
         Me.LBLastModified.Name = "LBLastModified"
         Me.LBLastModified.Size = New System.Drawing.Size(70, 13)
         Me.LBLastModified.TabIndex = 88
@@ -378,7 +381,7 @@ Partial Class FSearchCase
         '
         'TBWorkstream
         '
-        Me.TBWorkstream.Location = New System.Drawing.Point(31, 352)
+        Me.TBWorkstream.Location = New System.Drawing.Point(31, 326)
         Me.TBWorkstream.Name = "TBWorkstream"
         Me.TBWorkstream.Size = New System.Drawing.Size(179, 20)
         Me.TBWorkstream.TabIndex = 87
@@ -388,7 +391,7 @@ Partial Class FSearchCase
         Me.LBWorkstream.AutoSize = True
         Me.LBWorkstream.BackColor = System.Drawing.Color.White
         Me.LBWorkstream.ForeColor = System.Drawing.Color.Black
-        Me.LBWorkstream.Location = New System.Drawing.Point(28, 336)
+        Me.LBWorkstream.Location = New System.Drawing.Point(28, 310)
         Me.LBWorkstream.Name = "LBWorkstream"
         Me.LBWorkstream.Size = New System.Drawing.Size(64, 13)
         Me.LBWorkstream.TabIndex = 86
@@ -396,7 +399,7 @@ Partial Class FSearchCase
         '
         'TBCreated
         '
-        Me.TBCreated.Location = New System.Drawing.Point(216, 352)
+        Me.TBCreated.Location = New System.Drawing.Point(216, 326)
         Me.TBCreated.Name = "TBCreated"
         Me.TBCreated.Size = New System.Drawing.Size(182, 20)
         Me.TBCreated.TabIndex = 83
@@ -406,7 +409,7 @@ Partial Class FSearchCase
         Me.LBCreated.AutoSize = True
         Me.LBCreated.BackColor = System.Drawing.Color.White
         Me.LBCreated.ForeColor = System.Drawing.Color.Black
-        Me.LBCreated.Location = New System.Drawing.Point(213, 336)
+        Me.LBCreated.Location = New System.Drawing.Point(213, 310)
         Me.LBCreated.Name = "LBCreated"
         Me.LBCreated.Size = New System.Drawing.Size(44, 13)
         Me.LBCreated.TabIndex = 82
@@ -414,7 +417,7 @@ Partial Class FSearchCase
         '
         'TBAssigned
         '
-        Me.TBAssigned.Location = New System.Drawing.Point(404, 208)
+        Me.TBAssigned.Location = New System.Drawing.Point(404, 203)
         Me.TBAssigned.Name = "TBAssigned"
         Me.TBAssigned.Size = New System.Drawing.Size(176, 20)
         Me.TBAssigned.TabIndex = 58
@@ -424,7 +427,7 @@ Partial Class FSearchCase
         Me.LBOwner.AutoSize = True
         Me.LBOwner.BackColor = System.Drawing.Color.White
         Me.LBOwner.ForeColor = System.Drawing.Color.Black
-        Me.LBOwner.Location = New System.Drawing.Point(213, 290)
+        Me.LBOwner.Location = New System.Drawing.Point(213, 269)
         Me.LBOwner.Name = "LBOwner"
         Me.LBOwner.Size = New System.Drawing.Size(38, 13)
         Me.LBOwner.TabIndex = 84
@@ -432,14 +435,14 @@ Partial Class FSearchCase
         '
         'TBOwner
         '
-        Me.TBOwner.Location = New System.Drawing.Point(216, 306)
+        Me.TBOwner.Location = New System.Drawing.Point(216, 285)
         Me.TBOwner.Name = "TBOwner"
         Me.TBOwner.Size = New System.Drawing.Size(185, 20)
         Me.TBOwner.TabIndex = 85
         '
         'TBCQState
         '
-        Me.TBCQState.Location = New System.Drawing.Point(586, 352)
+        Me.TBCQState.Location = New System.Drawing.Point(586, 326)
         Me.TBCQState.Name = "TBCQState"
         Me.TBCQState.Size = New System.Drawing.Size(167, 20)
         Me.TBCQState.TabIndex = 91
@@ -449,7 +452,7 @@ Partial Class FSearchCase
         Me.LBQState.AutoSize = True
         Me.LBQState.BackColor = System.Drawing.Color.White
         Me.LBQState.ForeColor = System.Drawing.Color.Black
-        Me.LBQState.Location = New System.Drawing.Point(583, 336)
+        Me.LBQState.Location = New System.Drawing.Point(583, 310)
         Me.LBQState.Name = "LBQState"
         Me.LBQState.Size = New System.Drawing.Size(47, 13)
         Me.LBQState.TabIndex = 90
@@ -457,7 +460,7 @@ Partial Class FSearchCase
         '
         'TBRejection
         '
-        Me.TBRejection.Location = New System.Drawing.Point(31, 402)
+        Me.TBRejection.Location = New System.Drawing.Point(31, 365)
         Me.TBRejection.Name = "TBRejection"
         Me.TBRejection.Size = New System.Drawing.Size(179, 20)
         Me.TBRejection.TabIndex = 93
@@ -467,7 +470,7 @@ Partial Class FSearchCase
         Me.LBRejection.AutoSize = True
         Me.LBRejection.BackColor = System.Drawing.Color.White
         Me.LBRejection.ForeColor = System.Drawing.Color.Black
-        Me.LBRejection.Location = New System.Drawing.Point(28, 386)
+        Me.LBRejection.Location = New System.Drawing.Point(28, 349)
         Me.LBRejection.Name = "LBRejection"
         Me.LBRejection.Size = New System.Drawing.Size(52, 13)
         Me.LBRejection.TabIndex = 92
@@ -475,7 +478,7 @@ Partial Class FSearchCase
         '
         'TBAperson
         '
-        Me.TBAperson.Location = New System.Drawing.Point(216, 402)
+        Me.TBAperson.Location = New System.Drawing.Point(216, 365)
         Me.TBAperson.Name = "TBAperson"
         Me.TBAperson.Size = New System.Drawing.Size(182, 20)
         Me.TBAperson.TabIndex = 95
@@ -485,7 +488,7 @@ Partial Class FSearchCase
         Me.LBAPerson.AutoSize = True
         Me.LBAPerson.BackColor = System.Drawing.Color.White
         Me.LBAPerson.ForeColor = System.Drawing.Color.Black
-        Me.LBAPerson.Location = New System.Drawing.Point(213, 386)
+        Me.LBAPerson.Location = New System.Drawing.Point(213, 349)
         Me.LBAPerson.Name = "LBAPerson"
         Me.LBAPerson.Size = New System.Drawing.Size(86, 13)
         Me.LBAPerson.TabIndex = 94
@@ -493,7 +496,7 @@ Partial Class FSearchCase
         '
         'TBCustomerCase
         '
-        Me.TBCustomerCase.Location = New System.Drawing.Point(404, 402)
+        Me.TBCustomerCase.Location = New System.Drawing.Point(404, 365)
         Me.TBCustomerCase.Name = "TBCustomerCase"
         Me.TBCustomerCase.Size = New System.Drawing.Size(174, 20)
         Me.TBCustomerCase.TabIndex = 97
@@ -503,7 +506,7 @@ Partial Class FSearchCase
         Me.LBCustomerCase.AutoSize = True
         Me.LBCustomerCase.BackColor = System.Drawing.Color.White
         Me.LBCustomerCase.ForeColor = System.Drawing.Color.Black
-        Me.LBCustomerCase.Location = New System.Drawing.Point(401, 386)
+        Me.LBCustomerCase.Location = New System.Drawing.Point(401, 349)
         Me.LBCustomerCase.Name = "LBCustomerCase"
         Me.LBCustomerCase.Size = New System.Drawing.Size(85, 13)
         Me.LBCustomerCase.TabIndex = 96
@@ -511,7 +514,7 @@ Partial Class FSearchCase
         '
         'TBCQAssignedto
         '
-        Me.TBCQAssignedto.Location = New System.Drawing.Point(584, 402)
+        Me.TBCQAssignedto.Location = New System.Drawing.Point(584, 365)
         Me.TBCQAssignedto.Name = "TBCQAssignedto"
         Me.TBCQAssignedto.Size = New System.Drawing.Size(138, 20)
         Me.TBCQAssignedto.TabIndex = 99
@@ -521,7 +524,7 @@ Partial Class FSearchCase
         Me.LBCQAssigned.AutoSize = True
         Me.LBCQAssigned.BackColor = System.Drawing.Color.White
         Me.LBCQAssigned.ForeColor = System.Drawing.Color.Black
-        Me.LBCQAssigned.Location = New System.Drawing.Point(583, 386)
+        Me.LBCQAssigned.Location = New System.Drawing.Point(583, 349)
         Me.LBCQAssigned.Name = "LBCQAssigned"
         Me.LBCQAssigned.Size = New System.Drawing.Size(80, 13)
         Me.LBCQAssigned.TabIndex = 98
@@ -548,7 +551,7 @@ Partial Class FSearchCase
         '
         'TBVersion
         '
-        Me.TBVersion.Location = New System.Drawing.Point(407, 306)
+        Me.TBVersion.Location = New System.Drawing.Point(407, 285)
         Me.TBVersion.Name = "TBVersion"
         Me.TBVersion.Size = New System.Drawing.Size(173, 20)
         Me.TBVersion.TabIndex = 131
@@ -558,7 +561,7 @@ Partial Class FSearchCase
         Me.Label3.AutoSize = True
         Me.Label3.BackColor = System.Drawing.Color.White
         Me.Label3.ForeColor = System.Drawing.Color.Black
-        Me.Label3.Location = New System.Drawing.Point(401, 290)
+        Me.Label3.Location = New System.Drawing.Point(401, 269)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(42, 13)
         Me.Label3.TabIndex = 130
@@ -667,7 +670,7 @@ Partial Class FSearchCase
         '
         'TBFD
         '
-        Me.TBFD.Location = New System.Drawing.Point(586, 306)
+        Me.TBFD.Location = New System.Drawing.Point(586, 285)
         Me.TBFD.Name = "TBFD"
         Me.TBFD.Size = New System.Drawing.Size(167, 20)
         Me.TBFD.TabIndex = 147
@@ -677,7 +680,7 @@ Partial Class FSearchCase
         Me.LbFunctionalDomain.AutoSize = True
         Me.LbFunctionalDomain.BackColor = System.Drawing.Color.White
         Me.LbFunctionalDomain.ForeColor = System.Drawing.Color.Black
-        Me.LbFunctionalDomain.Location = New System.Drawing.Point(580, 290)
+        Me.LbFunctionalDomain.Location = New System.Drawing.Point(580, 269)
         Me.LbFunctionalDomain.Name = "LbFunctionalDomain"
         Me.LbFunctionalDomain.Size = New System.Drawing.Size(95, 13)
         Me.LbFunctionalDomain.TabIndex = 146
@@ -689,7 +692,7 @@ Partial Class FSearchCase
         Me.Button1.FlatAppearance.BorderSize = 0
         Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Location = New System.Drawing.Point(728, 203)
+        Me.Button1.Location = New System.Drawing.Point(728, 198)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(25, 25)
         Me.Button1.TabIndex = 145
@@ -701,7 +704,7 @@ Partial Class FSearchCase
         Me.Bassigned.FlatAppearance.BorderSize = 0
         Me.Bassigned.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Bassigned.Image = Global.WindowsApplication1.My.Resources.Resources.search3_p
-        Me.Bassigned.Location = New System.Drawing.Point(728, 399)
+        Me.Bassigned.Location = New System.Drawing.Point(728, 362)
         Me.Bassigned.Name = "Bassigned"
         Me.Bassigned.Size = New System.Drawing.Size(25, 25)
         Me.Bassigned.TabIndex = 152
@@ -714,7 +717,7 @@ Partial Class FSearchCase
         Me.BCustomer.FlatAppearance.BorderSize = 0
         Me.BCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BCustomer.Image = Global.WindowsApplication1.My.Resources.Resources.search3_p
-        Me.BCustomer.Location = New System.Drawing.Point(728, 208)
+        Me.BCustomer.Location = New System.Drawing.Point(728, 203)
         Me.BCustomer.Name = "BCustomer"
         Me.BCustomer.Size = New System.Drawing.Size(25, 25)
         Me.BCustomer.TabIndex = 151
@@ -770,6 +773,37 @@ Partial Class FSearchCase
         Me.ToolTip1.SetToolTip(Me.Button2, "Mail")
         Me.Button2.UseVisualStyleBackColor = True
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.BackColor = System.Drawing.Color.White
+        Me.Label1.ForeColor = System.Drawing.Color.Black
+        Me.Label1.Location = New System.Drawing.Point(30, 388)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(76, 13)
+        Me.Label1.TabIndex = 159
+        Me.Label1.Text = "External Patch"
+        '
+        'TBPatch
+        '
+        Me.TBPatch.Location = New System.Drawing.Point(31, 405)
+        Me.TBPatch.Name = "TBPatch"
+        Me.TBPatch.Size = New System.Drawing.Size(691, 20)
+        Me.TBPatch.TabIndex = 158
+        '
+        'BPatch
+        '
+        Me.BPatch.BackColor = System.Drawing.Color.White
+        Me.BPatch.FlatAppearance.BorderSize = 0
+        Me.BPatch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BPatch.Image = Global.WindowsApplication1.My.Resources.Resources.search3_p
+        Me.BPatch.Location = New System.Drawing.Point(728, 402)
+        Me.BPatch.Name = "BPatch"
+        Me.BPatch.Size = New System.Drawing.Size(25, 25)
+        Me.BPatch.TabIndex = 160
+        Me.ToolTip1.SetToolTip(Me.BPatch, "Patch Content")
+        Me.BPatch.UseVisualStyleBackColor = False
+        '
         'FSearchCase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -777,6 +811,9 @@ Partial Class FSearchCase
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(784, 837)
+        Me.Controls.Add(Me.BPatch)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.TBPatch)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.BSearch)
         Me.Controls.Add(Me.Bassigned)
@@ -929,4 +966,7 @@ Partial Class FSearchCase
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents BSearch As Button
     Friend WithEvents Button2 As Button
+    Friend WithEvents Label1 As Label
+    Friend WithEvents TBPatch As TextBox
+    Friend WithEvents BPatch As Button
 End Class

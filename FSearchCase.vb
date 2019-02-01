@@ -149,7 +149,7 @@ Public Class FSearchCase
             CQbase = "CQGOLDEVENTS"
         End If
 
-        GetGcentInfo = "select  T5.name,T1.label from "
+        GetGcentInfo = "select  T5.name,T1.label, T1.identificationexterne from "
         GetGcentInfo = GetGcentInfo & CQbase & ".anomalie T1,"
         GetGcentInfo = GetGcentInfo & CQbase & ".statedef T5"
         GetGcentInfo = GetGcentInfo & " where T1.State = T5.ID"
@@ -174,7 +174,7 @@ Public Class FSearchCase
         Dim SqlConn As New SqlClient.SqlConnection(Sqldb)
         Dim SqlCmd As New SqlCommand
         Dim myReader As SqlDataReader
-        Dim NbRow, Nb As Integer
+        Dim NbRow As Integer
         Dim LstCase() As Cases
         req = RequestCaseTitle(Trim(RTBCase.Text))
         'LstCase(0).Number = "0"
@@ -384,6 +384,13 @@ Public Class FSearchCase
                             Label = myReader2.Item(1)
                         End If
 
+                        If myReader2.Item(2) IsNot DBNull.Value Then
+                            If TBPatch.Text = "" Then
+                                TBPatch.Text = myReader2.Item(2)
+                            End If
+                        End If
+
+
 
                         'Label = Mid(Label, 4, 9)
                         TBGcent.Text = myReader.Item(5)
@@ -429,7 +436,10 @@ Public Class FSearchCase
                         TBCQState.Text = myReader.Item(20)
                     End If
                     If myReader.Item(22) IsNot DBNull.Value Then
+
                         TBRejection.Text = myReader.Item(22)
+                        TBRejection.Text = Replace(TBRejection.Text, ",", "")
+                        TBRejection.Text = Replace(TBRejection.Text, "0", "")
                     End If
                     If myReader.Item(21) IsNot DBNull.Value Then
                         TBAperson.Text = myReader.Item(21)
@@ -790,5 +800,12 @@ Public Class FSearchCase
 
     Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click
         System.Diagnostics.Process.Start("mailto:? subject=" + "[" & Replace(TBCustomer.Text, "&", "") & "] " & RTBCase.Text)
+    End Sub
+
+    Private Sub BPatch_Click(sender As Object, e As EventArgs) Handles BPatch.Click
+        If TBPatch.Text <> "" Then
+            FSearch.MSTSearch.Text = TBPatch.Text
+            FSearch.Research(7)
+        End If
     End Sub
 End Class

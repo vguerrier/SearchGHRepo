@@ -203,7 +203,7 @@ Public Class FSearchGcent
         Request = Request & " ta.fldcolumn,"
         Request = Request & " ta.numversion,"
         Request = Request & " tm.nom,"
-        Request = Request & " ta.fermeturedoublon, ta.fermeturepaspb, ta.fermeturerejetee, ta.fermeturelivree, ta.otherversion, ta.ref_card, ta.ref_case, ta.framework"
+        Request = Request & " ta.fermeturedoublon, ta.fermeturepaspb, ta.fermeturerejetee, ta.fermeturelivree, ta.otherversion, ta.ref_card, ta.ref_case, ta.framework, Ta.dbid"
         Request = Request & " from cqglib.anomalie     Ta,"
         Request = Request & " cqglib.statedef     Ts,"
         Request = Request & " cqglib.users        Tu,"
@@ -350,6 +350,7 @@ Public Class FSearchGcent
         Dim status As String
         Dim label As String
         Dim link As String
+        ''GCENT17030635
 
 
 
@@ -813,6 +814,12 @@ Public Class FSearchGcent
                 LBstom.Text = "Framework Version Expected"
                 TBstom.Text = dr.GetValue(20)
             End If
+            'link
+            If dr.GetValue(21) IsNot DBNull.Value Then
+                Dim link As String = dr.GetValue(21)
+                LbLink.Text = "http://seycscm1/cqweb/main?command=GenerateMainFrame&service=CQ&schema=cqaldata&contextid=GCENT&entityID=" + link + "&entityDefName=Anomalie"
+
+            End If
             'fermerture motif
             LbECD.Text = "Close reason"
             Dim motif As String
@@ -1169,36 +1176,39 @@ sortie:
         End If
     End Sub
 
-    Function RequestCardTitle(card As String) As String
+    Function RequestCardTitle(card As String, base As String) As String
 
         Dim Request As String
         Dim CQbase As String
 
         CQbase = "cqcentral"
 
-        If InStr(card, "GTOP") > 0 Then
+        If InStr(base, "GTOP") > 0 Then
             CQbase = "cqgtop"
         End If
-        If InStr(card, "GADMI") > 0 Then
+        If InStr(base, "GADMI") > 0 Then
             CQbase = "cqgadmin"
         End If
 
-        If InStr(card, "GSTOC") > 0 Then
+        If InStr(base, "GSTOC") > 0 Then
             CQbase = "CQGOLDSTOCK"
         End If
-        If InStr(card, "GTRAC") > 0 Then
+        If InStr(base, "GTRAC") > 0 Then
             CQbase = "cqgtrack"
         End If
-        If InStr(card, "GCAS") > 0 Then
+        If InStr(base, "GCAS") > 0 Then
             CQbase = "cqcas"
         End If
-        If InStr(card, "GEVEN") > 0 Then
+        If InStr(base, "GEVEN") > 0 Then
             CQbase = "CQGOLDEVENTS"
+        End If
+        If InStr(base, "GLIB") > 0 Then
+            CQbase = "cqglib"
         End If
 
         Request = " Select a.numerofiche, a.titre from "
         Request = Request & CQbase & ".anomalie a "
-        Request = Request & "where a.titre like '%" + Trim(card) + "%'"
+        Request = Request & "where lower(a.titre) like '%" + LCase(Trim(card)) + "%'"
 
         RequestCardTitle = Request
 
@@ -1213,37 +1223,51 @@ sortie:
         Dim req As String
         Dim NbRow As Integer
         Dim LstCase() As Cases
+        Dim Lstbase() As String = {"cqcentral", "GTOP", "GADMI", "GSTOC", "GTRAC", "GCAS", "GEVEN", "GLIB"}
 
-        req = RequestCardTitle(Trim(TBGcent.Text))
-        conn.Open()
-        'myCommand.Open()
-        myCommand = New OleDb.OleDbCommand(req, conn)
-
-        'Dim dr As SqlDataReader = cmd.ExecuteReader()
-        dr = myCommand.ExecuteReader()
-
-        'LstCase(0).Number = "0"
         LstCase = Nothing
+        For Each base In Lstbase
+
+            req = RequestCardTitle(Trim(TBGcent.Text), base)
+            conn.Open()
+            'myCommand.Open()
+            myCommand = New OleDb.OleDbCommand(req, conn)
+
+            'Dim dr As SqlDataReader = cmd.ExecuteReader()
+            dr = myCommand.ExecuteReader()
+
+            'LstCase(0).Number = "0"
 
 
-        'myReader = dr.Read()
-        NbRow = 0
-        While dr.Read()
-            If dr.Item(0) IsNot DBNull.Value Then
-                ReDim Preserve LstCase(NbRow)
-                LstCase(NbRow).Number = dr.Item(0)
-                If dr.Item(1) IsNot DBNull.Value Then
-                    LstCase(NbRow).Title = dr.Item(1)
+
+            'myReader = dr.Read()
+            NbRow = 0
+            While dr.Read()
+                If dr.Item(0) IsNot DBNull.Value Then
+                    ReDim Preserve LstCase(NbRow)
+                    LstCase(NbRow).Number = dr.Item(0)
+                    If dr.Item(1) IsNot DBNull.Value Then
+                        LstCase(NbRow).Title = dr.Item(1)
+                    End If
+                    LstCase(NbRow).Type = "CARD"
+                    NbRow = NbRow + 1
                 End If
-                LstCase(NbRow).Type = "Gcent"
-                NbRow = NbRow + 1
-            End If
-        End While
-        'Nb = UBound(LstCase)
+            End While
+            conn.Close()
+            'Nb = UBound(LstCase)
+        Next
         researchCQTitle = LstCase
 
     End Function
 
+    Private Sub BPatch_Click(sender As Object, e As EventArgs) Handles BPatch.Click
+
+
+        If TBPatch.Text <> "" Then
+            FSearch.MSTSearch.Text = TBPatch.Text
+            FSearch.Research(7)
+        End If
+    End Sub
 
 End Class
 

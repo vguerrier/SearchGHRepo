@@ -48,7 +48,7 @@ Public Class FsearchSelectPatch
     Private Sub LVChoice_DoubleClick(sender As System.Object, e As System.EventArgs) Handles LVPatch.DoubleClick
         Dim comment As String
         Dim nb As Point
-        Dim col As Integer
+
 
 
         LVPatch.FullRowSelect = True

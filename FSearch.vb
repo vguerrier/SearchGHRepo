@@ -229,6 +229,14 @@ Public Class FSearch
                                         FSearchWorkstream.Show()
                                     Else
                                         'on a le cas où on a un RFE et un workstream avec le même nom. on propose le choix.
+                                        For Each frm In Application.OpenForms
+                                            '    'Si son nom est celui que l'on cherche
+                                            If frm.Name = Trim("FSearchSelect") Then
+                                                FSearchSelect.Close()
+                                                Exit For
+                                            End If
+                                        Next
+
                                         FSearchSelect.Show()
                                         FSearchSelect.List(Me.MSTSearch.Text, "RFE")
                                         FSearchSelect.List(Me.MSTSearch.Text, "Workstream")
@@ -336,9 +344,9 @@ Public Class FSearch
                                 FSearchSelect.LVChoice.Columns.Add(CHTitle)
                                 FSearchSelect.LVChoice.Columns(1).Width = 80
                                 FSearchSelect.LVChoice.Columns(2).Text = "Title"
-                                FSearchSelect.LVChoice.Columns(2).Width = 595
+                            FSearchSelect.LVChoice.Columns(2).Width = 565
 
-                                For i = 0 To ret - 1
+                            For i = 0 To ret - 1
                                     FSearchSelect.ListCases(LstCases(i).Number, LstCases(i).Type, LstCases(i).Title)
                                     'FSearchSelect.List(Me.MSTSearch.Text, "Workstream")
                                 Next

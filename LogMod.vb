@@ -47,6 +47,7 @@ Module LogMod
                 If (fichiers.Length > 0) Then
                     ' le nom du fichiers sera (temporairement) le dernier de la liste
                     nomFichier = fichiers(fichiers.Length - 1)
+                    'nomFichier = "Log.txt"
                     'récupération des informations du fichier
                     Dim fi As New FileInfo(nomFichier)
                     'si le fichier est supérieur à la taille max on remer le nom du fichier à vide

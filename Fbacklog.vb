@@ -189,7 +189,7 @@ Public Class FBacklog
             CQbase = "CQGOLDEVENTS"
         End If
 
-        GetGcentInfo = "select  T5.name, T1.label, Tu.login_name, T1.dateplanifauplustot + 1, T1.reportfiche retrofit from "
+        GetGcentInfo = "select  T5.name, T1.label, Tu.login_name, T1.dateplanifauplustot + 1, T1.identificationexterne from "
         GetGcentInfo = GetGcentInfo & CQbase & ".anomalie T1, "
         GetGcentInfo = GetGcentInfo & CQbase & ".statedef T5, "
         GetGcentInfo = GetGcentInfo & CQbase & ".users Tu "
@@ -247,7 +247,7 @@ Public Class FBacklog
                 MonDataSet.Tables("backlog").Columns.Add("Label", GetType(String))
                 MonDataSet.Tables("backlog").Columns.Add("Assigned", GetType(String))
                 MonDataSet.Tables("backlog").Columns.Add("Correction Date", GetType(String))
-                MonDataSet.Tables("backlog").Columns.Add("Retrofited from Card", GetType(String))
+                MonDataSet.Tables("backlog").Columns.Add("External Patch", GetType(String))
 
                 'Ta.label, Tu.login_name, Ta.dateplanifauplustot + 1, Ta.RETROFITCARD retrofit
                 SqlConn2.Open()
@@ -274,7 +274,7 @@ Public Class FBacklog
                             k.item("Correction Date") = myReader2.Item(3)
                         End If
                         If myReader2.Item(4) IsNot DBNull.Value Then
-                            k.item("Retrofited from Card") = Replace(myReader2.Item(4), ",", "")
+                            k.item("External Patch") = Replace(myReader2.Item(4), ",", "")
 
                         End If
                     End If
@@ -284,7 +284,7 @@ Public Class FBacklog
                 DGVBacklog.Columns("Label").DefaultCellStyle.BackColor = Color.Yellow
                 DGVBacklog.Columns("Assigned").DefaultCellStyle.BackColor = Color.Yellow
                 DGVBacklog.Columns("Correction Date").DefaultCellStyle.BackColor = Color.Yellow
-                DGVBacklog.Columns("Retrofited from Card").DefaultCellStyle.BackColor = Color.Yellow
+                DGVBacklog.Columns("External Patch").DefaultCellStyle.BackColor = Color.Yellow
             End If
 
             'DGVBacklog.DataSource = BS1
@@ -436,7 +436,7 @@ Public Class FBacklog
             DGVBacklog.Columns("Label").DisplayIndex = 6
             DGVBacklog.Columns("Assigned").DisplayIndex = 7
             DGVBacklog.Columns("Correction Date").DisplayIndex = 8
-            DGVBacklog.Columns("Retrofited from Card").DisplayIndex = 9
+            DGVBacklog.Columns("External Patch").DisplayIndex = 9
             i = 8
         End If
         DGVBacklog.Columns("State").DisplayIndex = 2 + i
@@ -694,7 +694,7 @@ Public Class FBacklog
             objExcel.Cells(2, 3).Font.ColorIndex = 5
             objExcel.Cells(2, 3).Value = "Correction Date"
             objExcel.Cells(2, 3).Font.ColorIndex = 5
-            objExcel.Cells(2, 3).Value = "Retrofited from Card"
+            objExcel.Cells(2, 3).Value = "External Patch"
             objExcel.Cells(2, 3).Font.ColorIndex = 5
             i = 8
         End If
