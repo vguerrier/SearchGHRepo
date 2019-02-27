@@ -366,8 +366,9 @@ Public Class FCustomer
         conn.Close()
 
         'recherche des RFE
+
         conn2.Open()
-        request = RequestRFE(TBCus.Text)
+        request = RequestRFE(Replace(Trim(TBCus.Text), "'", "''"))
         myCommand = New OleDb.OleDbCommand(request, conn2)
         dr = myCommand.ExecuteReader()
         Dim nbrow2 As Integer = 0
@@ -386,7 +387,7 @@ Public Class FCustomer
         Dim req As String
         Dim myReader As SqlDataReader
 
-        req = RequestWS(TBCus.Text)
+        req = RequestWS(Replace(Trim(TBCus.Text), "'", "''"))
         SqlConn.Open()
         SqlCmd = SqlConn.CreateCommand()
 

@@ -817,7 +817,7 @@ Public Class FSearchGcent
             'link
             If dr.GetValue(21) IsNot DBNull.Value Then
                 Dim link As String = dr.GetValue(21)
-                LbLink.Text = "http://seycscm1/cqweb/main?command=GenerateMainFrame&service=CQ&schema=cqaldata&contextid=GCENT&entityID=" + link + "&entityDefName=Anomalie"
+                LbLink.Text = "http://seycscm1/cqweb/main?command=GenerateMainFrame&service=CQ&schema=cqaldata&contextid=GLIB&entityID=" + link + "&entityDefName=Anomalie"
 
             End If
             'fermerture motif
@@ -1226,6 +1226,7 @@ sortie:
         Dim Lstbase() As String = {"cqcentral", "GTOP", "GADMI", "GSTOC", "GTRAC", "GCAS", "GEVEN", "GLIB"}
 
         LstCase = Nothing
+        NbRow = 0
         For Each base In Lstbase
 
             req = RequestCardTitle(Trim(TBGcent.Text), base)
@@ -1241,7 +1242,7 @@ sortie:
 
 
             'myReader = dr.Read()
-            NbRow = 0
+            'NbRow = 0
             While dr.Read()
                 If dr.Item(0) IsNot DBNull.Value Then
                     ReDim Preserve LstCase(NbRow)

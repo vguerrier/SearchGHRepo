@@ -423,7 +423,7 @@ Public Class FSearch
             End If
         Catch ex As Exception
             If retcus = 0 Then
-                MsgBox("Nothing matches with your search")
+                MsgBox("Nothing matches with your search or error : " + ex.ToString)
 
             Else
                 MsgBox(ex.Message)
