@@ -171,6 +171,21 @@ Public Class FSearchRFE
         nbRFE = 0
         CBGcent.Items.Clear()
 
+        CBGcent.Text = ""
+        Me.TBCRFE.Text = ""
+        Me.TBCustomer.Text = ""
+        Me.TBDomain.Text = ""
+        Me.TBManager.Text = ""
+        Me.TBProduct.Text = ""
+        Me.TBRDD.Text = ""
+        Me.TBStatus.Text = ""
+        Me.TBTDD.Text = ""
+        Me.TBTitle.Text = ""
+        Me.TBTrans.Text = ""
+        Me.TBType.Text = ""
+        Me.TBWorstream.Text = ""
+
+
         'opening the connection
         conn.Open()
         Dim request As String = RequestRFE(RFE)

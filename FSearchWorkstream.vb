@@ -175,6 +175,9 @@ Public Class FSearchWorkstream
         Dim status, label As String
         'ex : Gold Specific 
         nbRFE = 0
+        CBGcent.Items.Clear()
+
+        CBGcent.Text = ""
 
         SqlConn.Open()
         SqlCmd = SqlConn.CreateCommand()
