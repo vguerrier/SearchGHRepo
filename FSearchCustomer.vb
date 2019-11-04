@@ -1,8 +1,8 @@
 ﻿
 Imports System.Data
 Imports System.Data.OleDb
-Imports Oracle.DataAccess.Client ' ODP.NET Oracle managed provider
-Imports Oracle.DataAccess.Types
+Imports Oracle.ManagedDataAccess.Client ' ODP.NET Oracle managed provider
+Imports Oracle.ManagedDataAccess.Types
 Imports System.Data.SqlClient
 Imports System.Data.Sql
 Imports System.IO
@@ -170,14 +170,15 @@ Public Class FCustomer
 
 
     Public Function researchCus() As Integer
-        Dim myCommand As OleDb.OleDbCommand
-        Dim dr As OleDb.OleDbDataReader
-        Dim Oradb As String = "Provider=OraOLEDB.Oracle.1;Password=read_only;Persist Security Info=True;User ID=read_only;Data Source=RDTOOLS;"
-        Dim conn As New OleDb.OleDbConnection(Oradb) 'OracleConnection(oradb)
-        'Dim myCommand As OleDb.OleDbCommand
-        'Dim dr As OleDb.OleDbDataReader
-        Dim Oradb2 As String = "Provider=OraOLEDB.Oracle.1;Password=RFE_READ;Persist Security Info=True;User ID=RFE_READ;Data Source=RDTOOLS;"
-        Dim conn2 As New OleDb.OleDbConnection(Oradb2) 'OracleConnection(oradb)
+        Dim oradb As String = "Data Source=RDTOOLS;User Id=read_only;Password=read_only;"
+        Dim conn As New OracleConnection(oradb)
+        Dim myCommand As New OracleCommand
+        Dim dr As OracleDataReader
+
+        Dim oradb2 As String = "Data Source=RDTOOLS;User Id=RFE_READ;Password=RFE_READ;"
+        Dim conn2 As New OracleConnection(oradb2)
+
+
         'Dim Customer As Env
         Dim found As Boolean
         Dim i, j, z, nbBranch, nbenv, nbappli, IndEnv As Integer
@@ -214,7 +215,8 @@ Public Class FCustomer
         'opening the connection
         conn.Open()
         Dim request As String = RequestBacklog(Replace(Trim(TBCus.Text), "'", "''"))
-        myCommand = New OleDb.OleDbCommand(request, conn)
+        myCommand = conn.CreateCommand()
+        myCommand.CommandText = request
         dr = myCommand.ExecuteReader()
         nbBranch = 0
         nbenv = 0
@@ -336,7 +338,8 @@ Public Class FCustomer
             For j = 0 To MyModule.Customers.Branch(i).NbEnv
 
                 request = RequestAppli(MyModule.Customers.Branch(i).Branchname, MyModule.Customers.Branch(i).Env(j).Envname)
-                myCommand = New OleDb.OleDbCommand(request, conn)
+                myCommand = conn.CreateCommand()
+                myCommand.CommandText = request
                 dr = myCommand.ExecuteReader()
 
                 nbappli = 0
@@ -369,7 +372,8 @@ Public Class FCustomer
 
         conn2.Open()
         request = RequestRFE(Replace(Trim(TBCus.Text), "'", "''"))
-        myCommand = New OleDb.OleDbCommand(request, conn2)
+        myCommand = conn2.CreateCommand()
+        myCommand.CommandText = request
         dr = myCommand.ExecuteReader()
         Dim nbrow2 As Integer = 0
         While dr.Read()

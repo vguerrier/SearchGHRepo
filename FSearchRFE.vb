@@ -1,7 +1,7 @@
-﻿Imports Oracle.DataAccess.Client
+﻿Imports Oracle.ManagedDataAccess.Client
 Imports System.Data.SqlClient
 Imports System.Data.Sql
-Imports Oracle.DataAccess.Types
+Imports Oracle.ManagedDataAccess.Types
 Imports MaterialSkin
 
 Public Class FSearchRFE
@@ -118,10 +118,12 @@ Public Class FSearchRFE
     End Function
 
     Public Function researchRFETitle(RFE As String) As Cases()
-        Dim myCommand As OleDb.OleDbCommand
-        Dim dr As OleDb.OleDbDataReader
-        Dim Oradb As String = "Provider=OraOLEDB.Oracle.1;Password=RFE_READ;Persist Security Info=True;User ID=RFE_READ;Data Source=RDTOOLS;"
-        Dim conn As New OleDb.OleDbConnection(Oradb) 'OracleConnection(oradb)
+        Dim oradb As String = "Data Source=RDTOOLS;User Id=RFE_READ;Password=RFE_READ;"
+        Dim conn As New OracleConnection(oradb)
+        Dim myCommand As New OracleCommand
+        Dim dr As OracleDataReader
+
+
         Dim req As String
         Dim NbRow As Integer
         Dim LstRFE() As Cases
@@ -129,7 +131,8 @@ Public Class FSearchRFE
         req = RequestRFETitle(Trim(RFE))
         conn.Open()
         'myCommand.Open()
-        myCommand = New OleDb.OleDbCommand(req, conn)
+        myCommand = conn.CreateCommand()
+        myCommand.CommandText = req
 
         'Dim dr As SqlDataReader = cmd.ExecuteReader()
         dr = myCommand.ExecuteReader()
@@ -156,15 +159,17 @@ Public Class FSearchRFE
     End Function
 
     Public Function researchRFE(RFE As String) As Integer
-        Dim myCommand As OleDb.OleDbCommand
-        Dim dr As OleDb.OleDbDataReader
-        Dim Oradb As String = "Provider=OraOLEDB.Oracle.1;Password=RFE_READ;Persist Security Info=True;User ID=RFE_READ;Data Source=RDTOOLS;"
-        Dim conn As New OleDb.OleDbConnection(Oradb) 'OracleConnection(oradb)
+        Dim oradb As String = "Data Source=RDTOOLS;User Id=RFE_READ;Password=RFE_READ;"
+        Dim conn As New OracleConnection(oradb)
+        Dim myCommand As New OracleCommand
+        Dim dr As OracleDataReader
+
         Dim nbRFE As Integer
-        Dim Oradb2 As String = "Provider=OraOLEDB.Oracle.1;Password=READCQUEST;Persist Security Info=True;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1;"
-        Dim SqlConn2 As New OleDb.OleDbConnection(Oradb2) 'OracleConnection(oradb2)
-        Dim SqlCmd2 As OleDb.OleDbCommand
-        Dim myReader2 As OleDb.OleDbDataReader
+        Dim oradb2 As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        Dim SqlConn2 As New OracleConnection(oradb2)
+        Dim SqlCmd2 As New OracleCommand
+        Dim myReader2 As OracleDataReader
+
         Dim nbrow2 As Integer
         Dim status, label As String
         'ex : RN37022 
@@ -189,7 +194,8 @@ Public Class FSearchRFE
         'opening the connection
         conn.Open()
         Dim request As String = RequestRFE(RFE)
-        myCommand = New OleDb.OleDbCommand(request, conn)
+        myCommand = conn.CreateCommand()
+        myCommand.CommandText = request
         dr = myCommand.ExecuteReader()
 
         researchRFE = 0
@@ -251,7 +257,7 @@ Public Class FSearchRFE
         Dim req As String = GetGcentInfoCQ(RFE)
         'opening the connection
         SqlConn2.Open()
-        SqlCmd2 = New OleDb.OleDbCommand(req, SqlConn2)
+        SqlCmd2 = SqlConn2.CreateCommand()
         SqlCmd2.CommandText = req
         myReader2 = SqlCmd2.ExecuteReader()
 

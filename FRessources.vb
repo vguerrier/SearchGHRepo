@@ -1,7 +1,6 @@
 ﻿Imports System.Data
-Imports System.Data.OleDb
-Imports Oracle.DataAccess.Client ' ODP.NET Oracle managed provider
-Imports Oracle.DataAccess.Types
+Imports Oracle.ManagedDataAccess.Client ' ODP.NET Oracle managed provider
+Imports Oracle.ManagedDataAccess.Types
 Imports System.Data.SqlClient
 Imports System.Data.Sql
 Imports System.IO
@@ -82,10 +81,11 @@ Public Class FRessources
     End Function
 
     Public Function researchRes(name As String) As Integer
-        Dim myCommand As OleDb.OleDbCommand
-        Dim dr As OleDb.OleDbDataReader
-        Dim Oradb As String = "Provider=OraOLEDB.Oracle.1;Password=read_only;Persist Security Info=True;User ID=read_only;Data Source=RDTOOLS;"
-        Dim conn As New OleDb.OleDbConnection(Oradb) 'OracleConnection(oradb)
+
+        Dim dr As OracleDataReader
+        Dim oradb As String = "Data Source=RDTOOLS;User Id=read_only;Password=read_only;"
+        Dim myCommand As OracleCommand
+        Dim conn As New OracleConnection(oradb)
         Dim request As String
 
 
@@ -98,7 +98,8 @@ Public Class FRessources
         conn.Open()
 
         request = RequestRessourceCount(Replace(name, "'", "''"))
-        myCommand = New OleDb.OleDbCommand(request, conn)
+        myCommand = conn.CreateCommand()
+        myCommand.CommandText = request
         dr = myCommand.ExecuteReader()
         'remplissage du treeview
         researchRes = 0
@@ -114,7 +115,8 @@ Public Class FRessources
         conn.Open()
 
         request = RequestRessource(Replace(name, "'", "''"))
-        myCommand = New OleDb.OleDbCommand(request, conn)
+        myCommand = conn.CreateCommand()
+        myCommand.CommandText = request
         dr = myCommand.ExecuteReader()
         'remplissage du treeview
         researchRes = 0

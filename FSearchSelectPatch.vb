@@ -1,8 +1,8 @@
 ﻿Imports MaterialSkin
 Imports System.Data
 Imports System.Data.OleDb
-Imports Oracle.DataAccess.Client ' ODP.NET Oracle managed provider
-Imports Oracle.DataAccess.Types
+Imports Oracle.ManagedDataAccess.Client ' ODP.NET Oracle managed provider
+Imports Oracle.ManagedDataAccess.Types
 Imports System.Data.SqlClient
 Imports System.Data.Sql
 Imports System.IO
@@ -73,12 +73,11 @@ Public Class FsearchSelectPatch
         'Me.Close()
     End Sub
     Public Function researchPatch(patch As String) As Integer
+        Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        Dim conn As New OracleConnection(oradb)
+        Dim myCommand As New OracleCommand
+        Dim dr As OracleDataReader
 
-
-        Dim myCommand As OleDb.OleDbCommand
-        Dim dr As OleDb.OleDbDataReader
-        Dim Oradb As String = "Provider=OraOLEDB.Oracle.1;Password=READCQUEST;Persist Security Info=True;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1;"
-        Dim conn As New OleDb.OleDbConnection(Oradb) 'OracleConnection(oradb)
         Dim nb As Integer
         'Dim LVITime As New ListViewItem()
         'CEN510-SP26JUL18-18
@@ -89,7 +88,8 @@ Public Class FsearchSelectPatch
         conn.Open()
         Dim request As String = RequestPatch(patch)
         'request = "select 1 from dual"
-        myCommand = New OleDb.OleDbCommand(request, conn)
+        myCommand = conn.CreateCommand()
+        myCommand.CommandText = request
 
         'executing the command and assigning it to connection
         dr = myCommand.ExecuteReader()

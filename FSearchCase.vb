@@ -1,7 +1,7 @@
-﻿Imports Oracle.DataAccess.Client
+﻿Imports Oracle.ManagedDataAccess.Client
 Imports System.Data.SqlClient
 Imports System.Data.Sql
-Imports Oracle.DataAccess.Types
+Imports Oracle.ManagedDataAccess.Types
 Imports MaterialSkin
 
 
@@ -207,10 +207,14 @@ Public Class FSearchCase
         Dim SqlConn As New SqlClient.SqlConnection(Sqldb)
         Dim SqlCmd As New SqlCommand
         Dim myReader As SqlDataReader
-        Dim Oradb As String = "Provider=OraOLEDB.Oracle.1;Password=READCQUEST;Persist Security Info=True;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1;"
-        Dim SqlConn2 As New OleDb.OleDbConnection(Oradb) 'OracleConnection(oradb)
-        Dim SqlCmd2 As OleDb.OleDbCommand
-        Dim myReader2 As OleDb.OleDbDataReader
+        '--Dim Oradb As String = "Provider=OraOLEDB.Oracle.1;Password=READCQUEST;Persist Security Info=True;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1;"
+        Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        '--Dim SqlConn2 As New OleDb.OleDbConnection(Oradb) 'OracleConnection(oradb)
+        Dim conn As New OracleConnection(oradb)
+        '--Dim SqlCmd2 As OleDb.OleDbCommand
+        Dim cmd As New OracleCommand
+        '--Dim myReader2 As OleDb.OleDbDataReader
+        Dim dr As OracleDataReader
         Dim req As String
         Dim NbRow As Integer
         Dim NbRow2 As Integer
@@ -337,14 +341,16 @@ Public Class FSearchCase
                             CBGcent.ForeColor = Color.Red
                         End If
                         'on enrichie avec label et status de la fiche.
-                        SqlConn2.Open()
+                        conn.Open()
 
                         req = GetGcentInfo(myReader.Item(5))
-                        SqlCmd2 = New OleDb.OleDbCommand(req, SqlConn2)
-                        SqlCmd2.CommandText = req
-                        myReader2 = SqlCmd2.ExecuteReader()
-                        myReader2.Read()
-                        status = myReader2.Item(0)
+                        '--Ole SqlCmd2 = New OleDb.OleDbCommand(req, SqlConn2)
+                        cmd = conn.CreateCommand()
+                        cmd.CommandText = req
+                        cmd.CommandText = req
+                        dr = cmd.ExecuteReader()
+                        dr.Read()
+                        status = dr.Item(0)
 
 
                         If status = "Corrigée" Then
@@ -380,13 +386,13 @@ Public Class FSearchCase
                         End If
 
                         Label = ""
-                        If myReader2.Item(1) IsNot DBNull.Value Then
-                            Label = myReader2.Item(1)
+                        If dr.Item(1) IsNot DBNull.Value Then
+                            Label = dr.Item(1)
                         End If
 
-                        If myReader2.Item(2) IsNot DBNull.Value Then
+                        If dr.Item(2) IsNot DBNull.Value Then
                             If TBPatch.Text = "" Then
-                                TBPatch.Text = myReader2.Item(2)
+                                TBPatch.Text = dr.Item(2)
                             End If
                         End If
 
@@ -397,7 +403,7 @@ Public Class FSearchCase
                         fiche(NbRow) = TBGcent.Text
                         CBGcent.Text = myReader.Item(5) + "  " + status + "  " + Label
                         CBGcent.Items.Add(myReader.Item(5) + "  " + status + "  " + Label)
-                        SqlConn2.Close()
+                        conn.Close()
                     End If
 
 
@@ -477,7 +483,7 @@ Public Class FSearchCase
                 'on recherche les fiches liées aux cases par CQ
 
                 'on enrichie avec label et status de la fiche.
-                SqlConn2.Open()
+                conn.Open()
                 If RTBCase.Text = "" Then
                     'Throw New System.Exception("")
                     If CusCase = 0 Then
@@ -492,14 +498,14 @@ Public Class FSearchCase
                 End If
 
                 req = GetGcentInfoCQ(RTBCase.Text)
-                SqlCmd2 = New OleDb.OleDbCommand(req, SqlConn2)
-                SqlCmd2.CommandText = req
-                myReader2 = SqlCmd2.ExecuteReader()
+                cmd = conn.CreateCommand()
+                cmd.CommandText = req
+                dr = cmd.ExecuteReader()
 
                 NbRow2 = 0
-                While myReader2.Read()
+                While dr.Read()
 
-                    status = myReader2.Item(0)
+                    status = dr.Item(0)
 
                     If status = "Corrigée" Then
                         status = "C"
@@ -535,8 +541,8 @@ Public Class FSearchCase
 
 
                     Label = ""
-                    If myReader2.Item(1) IsNot DBNull.Value Then
-                        Label = myReader2.Item(1)
+                    If dr.Item(1) IsNot DBNull.Value Then
+                        Label = dr.Item(1)
                     End If
 
 
@@ -544,7 +550,7 @@ Public Class FSearchCase
                     noadd = False
 
                     For i = 0 To NbRow
-                        If myReader2.Item(2) = fiche(i) Then
+                        If dr.Item(2) = fiche(i) Then
                             noadd = True
                         End If
 
@@ -552,9 +558,9 @@ Public Class FSearchCase
 
 
                     If noadd = False Then
-                        TBGcent2.Text = myReader2.Item(2)
-                        CBGcent2.Text = myReader2.Item(2) + "  " + status + "  " + Label
-                        CBGcent2.Items.Add(myReader2.Item(2) + "  " + status + "  " + Label)
+                        TBGcent2.Text = dr.Item(2)
+                        CBGcent2.Text = dr.Item(2) + "  " + status + "  " + Label
+                        CBGcent2.Items.Add(dr.Item(2) + "  " + status + "  " + Label)
                         NbRow2 = NbRow2 + 1
                         If NbRow2 > 1 Then
                             CBGcent2.ForeColor = Color.Red
@@ -565,22 +571,23 @@ Public Class FSearchCase
 
 
                 End While
-                SqlConn2.Close()
+                conn.Close()
                 '-----
                 'GLIB
-                SqlConn2.Open()
+                conn.Open()
 
                 If RTBCase.Text <> "" Then
                     req = GetGlibCQ(RTBCase.Text)
-                    SqlCmd2 = New OleDb.OleDbCommand(req, SqlConn2)
-                    SqlCmd2.CommandText = req
-                    myReader2 = SqlCmd2.ExecuteReader()
+                    cmd = conn.CreateCommand()
+                    cmd.CommandText = req
+
+                    dr = cmd.ExecuteReader()
                     'myReader2.Read()
                     'status = myReader2.Item(0)
                     NbRow2 = 0
-                    While myReader2.Read()
+                    While dr.Read()
 
-                        framework = myReader2.Item(0)
+                        framework = dr.Item(0)
                         frameworkC = ""
                         Try
                             If myReader.Item(3) IsNot DBNull.Value Then
@@ -592,13 +599,13 @@ Public Class FSearchCase
                         noadd = False
 
                         For i = 0 To NbRow
-                            If myReader2.Item(1) = fiche(i) Then
+                            If dr.Item(1) = fiche(i) Then
                                 noadd = True
                             End If
 
                         Next
 
-                        status = myReader2.Item(2)
+                        status = dr.Item(2)
 
                         If status = "Corrigée" Then
                             status = "C"
@@ -634,13 +641,13 @@ Public Class FSearchCase
 
                         NbRow2 = 0
                         If noadd = False Then
-                            TBGlib.Text = myReader2.Item(1)
+                            TBGlib.Text = dr.Item(1)
                             If status <> "O" Or status <> "A" Then
                                 framework = framework
                             Else
                                 framework = frameworkC
                             End If
-                            CBGlib.Text = myReader2.Item(1) + "  " + status + "  " + framework
+                            CBGlib.Text = dr.Item(1) + "  " + status + "  " + framework
 
                             CBGlib.Items.Add(CBGlib.Text)
                             NbRow2 = NbRow2 + 1
@@ -661,7 +668,7 @@ Public Class FSearchCase
                         LBGlib.Visible = False
                     End If
 
-                    SqlConn2.Close()
+                    conn.Close()
                 End If
                 SqlConn.Close()
                 BGCaseComment(FKcomment)

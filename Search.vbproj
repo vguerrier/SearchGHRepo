@@ -89,11 +89,11 @@
     </Reference>
     <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Documents\Visual Studio 2010\Projects\Projects\MaterialSkin-master\MaterialSkin\bin\Debug\MaterialSkin.dll</HintPath>
+      <HintPath>bin\Release\MaterialSkin.dll</HintPath>
     </Reference>
-    <Reference Include="Oracle.DataAccess, Version=2.112.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.18.3, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\app\ODAC121021Xcopy_32bit\odp.net4\odp.net\bin\4\Oracle.DataAccess.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Oracle Developer Tools for VS2017\odp.net\managed\common\Oracle.ManagedDataAccess.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -393,6 +393,15 @@
       <VersionMinor>9</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="ORAOLEDBLib">
+      <Guid>{0BB9AFD1-51A1-11D2-BB7D-00C04FA30080}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>

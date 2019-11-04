@@ -1,7 +1,7 @@
 ﻿Imports System.Data
-Imports System.Data.OleDb
-Imports Oracle.DataAccess.Client ' ODP.NET Oracle managed provider
-Imports Oracle.DataAccess.Types
+'--Imports System.Data.OleDb
+Imports Oracle.ManagedDataAccess.Client ' ODP.NET Oracle managed provider
+Imports Oracle.ManagedDataAccess.Types
 Imports System.Data.SqlClient
 Imports System.Data.Sql
 Imports System.IO
@@ -21,20 +21,26 @@ Public Class FSearchGcent
 
         Dim PictureCol As Integer = 0 ' the column # of the BLOB field
 
-        Dim myCommand As OleDb.OleDbCommand
-        Dim dr As OleDb.OleDbDataReader
-        Dim Oradb As String = "Provider=OraOLEDB.Oracle.1;Password=READCQUEST;Persist Security Info=True;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1;"
+        Dim myCommand As OracleCommand
+        Dim dr As OracleDataReader
+        '--Ole Dim Oradb As String = "Provider=OraOLEDB.Oracle.1;Password=READCQUEST;Persist Security Info=True;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1;"
+        Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
 
-        Dim conn As New OleDb.OleDbConnection(Oradb) 'OracleConnection(oradb)
+        '-- Ole Dim conn As New OleDb.OleDbConnection(Oradb) 'OracleConnection(oradb)
+        Dim conn As New OracleConnection(oradb)
 
         'Dim cn As New SqlConnection("Provider=OraOLEDB.Oracle.1;Password=READCQUEST;Persist Security Info=True;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1;")
-        Dim cmd As String = "select atb.data   from cqcentral.anomalie         Ta,        cqcentral.attachments      Tat,        cqcentral.attachments_blob atb  where Ta.dbid = Tat.entity_dbid(+)  and Tat.dbid = atb.attachments_dbid    and Ta.numerofiche = 'GCENT15070806'"
+        Dim request As String = "select atb.data   from cqcentral.anomalie         Ta,        cqcentral.attachments      Tat,        cqcentral.attachments_blob atb  where Ta.dbid = Tat.entity_dbid(+)  and Tat.dbid = atb.attachments_dbid    and Ta.numerofiche = 'GCENT15070806'"
         'Dim DestFilePath As String = "C:\test.doc"
         Dim DestFilePath As String = "c:\tempSearch\MyTest.xlsx"
 
         conn.Open()
         'myCommand.Open()
-        myCommand = New OleDb.OleDbCommand(cmd, conn)
+        '--myCommand = New OleDb.OleDbCommand(cmd, conn)
+        myCommand = conn.CreateCommand()
+        myCommand.CommandText = request
+
+        dr = myCommand.ExecuteReader()
 
         'Dim dr As SqlDataReader = cmd.ExecuteReader()
         dr = myCommand.ExecuteReader()
@@ -330,22 +336,31 @@ Public Class FSearchGcent
         'Provider=OraOLEDB.Oracle.1;Password=READCQUEST;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1
         'Dim oradb As String = "Data Source=seyccrmsqlsip1.fi;User Id=readcquest;Password=readcquest;"
 
-        Dim myCommand As OleDb.OleDbCommand
-        Dim dr As OleDb.OleDbDataReader
-        Dim Oradb As String = "Provider=OraOLEDB.Oracle.1;Password=READCQUEST;Persist Security Info=True;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1;"
+        '--Dim myCommand As OleDb.OleDbCommand
+        '--Dim dr As OleDb.OleDbDataReader
+        '--Dim Oradb As String = "Provider=OraOLEDB.Oracle.1;Password=READCQUEST;Persist Security Info=True;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1;"
+        Dim conString As String = "User Id=readcquest;Password=readcquest;Data Source=CQSCM1_SEYCSMC1"
         Dim GCENT As String
         Dim req As String
         'Data Source=myOracleServer;Persist Security Info=False";
         'Dim Oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;Provider=OraOLEDB.Oracle;OLEDB.NET=True;LazyLoad=1;"
-        Dim conn As New OleDb.OleDbConnection(Oradb) 'OracleConnection(oradb)
+        '--Dim conn As New OleDb.OleDbConnection(Oradb) 'OracleConnection(oradb)
         Dim pos As Integer
-        'Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
-        'Dim conn As New OracleConnection(oradb)
-        'Dim cmd As New OracleCommand
-        'Dim dr As OracleDataReader
-        Dim SqlConn2 As New OleDb.OleDbConnection(Oradb) 'OracleConnection(oradb)
-        Dim SqlCmd2 As OleDb.OleDbCommand
-        Dim myReader2 As OleDb.OleDbDataReader
+        Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        Dim conn As New OracleConnection(oradb)
+        Dim cmd As New OracleCommand
+        Dim dr As OracleDataReader
+        '--Dim SqlConn2 As New OleDb.OleDbConnection(oradb) 'OracleConnection(oradb)
+        '--Dim SqlCmd2 As OleDb.OleDbCommand
+        '--Dim myReader2 As OleDb.OleDbDataReader
+        Dim conn2 As New OracleConnection(oradb)
+        Dim cmd2 As New OracleCommand
+        Dim dr2 As OracleDataReader
+
+        Dim conn3 As New OracleConnection(oradb)
+        Dim cmd3 As New OracleCommand
+
+
         Dim nbrow2 As Integer
         Dim status As String
         Dim label As String
@@ -390,10 +405,13 @@ Public Class FSearchGcent
         'opening the connection
         Dim request As String = RequestCQ(Trim(GCENT))
         'request = "select 1 from dual"
-        myCommand = New OleDb.OleDbCommand(request, conn)
+        '--myCommand = New OleDb.OleDbCommand(request, conn)
+        cmd = conn.CreateCommand()
+        cmd.CommandText = request
 
         'executing the command and assigning it to connection
-        dr = myCommand.ExecuteReader()
+        '--dr = myCommand.ExecuteReader()
+        dr = cmd.ExecuteReader()
 
         'dr.Read()
         'dr.GetValue(0)
@@ -555,21 +573,22 @@ Public Class FSearchGcent
         'on recherche les fiches de retrofits de cette fiche
 
         'on enrichie avec label et status de la fiche.
-        SqlConn2.Open()
+        conn2.Open()
         If TBGcent.Text = "" Then
             'Throw New System.Exception("")
             Throw New Exception("Not a Case")
         End If
 
         req = GetGcentRetInfo(TBGcent.Text)
-        SqlCmd2 = New OleDb.OleDbCommand(req, SqlConn2)
-        SqlCmd2.CommandText = req
-        myReader2 = SqlCmd2.ExecuteReader()
+        '--Ole SqlCmd2 = New OleDb.OleDbCommand(req, SqlConn2)
+        cmd2 = conn2.CreateCommand()
+        cmd2.CommandText = req
+        dr2 = cmd2.ExecuteReader()
 
         nbrow2 = 0
-        While myReader2.Read()
+        While dr2.Read()
 
-            status = myReader2.Item(0)
+            status = dr2.Item(0)
 
             If status = "Corrigée" Then
                 status = "C"
@@ -605,37 +624,40 @@ Public Class FSearchGcent
 
 
             label = ""
-            If myReader2.Item(1) IsNot DBNull.Value Then
-                label = myReader2.Item(1)
+            If dr2.Item(1) IsNot DBNull.Value Then
+                label = dr2.Item(1)
             End If
 
-            TBGcentRet.Text = myReader2.Item(2)
-            CBGcent.Text = myReader2.Item(2) + "  " + status + "  " + label
-            CBGcent.Items.Add(myReader2.Item(2) + "  " + status + "  " + label)
+            TBGcentRet.Text = dr2.Item(2)
+            CBGcent.Text = dr2.Item(2) + "  " + status + "  " + label
+            CBGcent.Items.Add(dr2.Item(2) + "  " + status + "  " + label)
             nbrow2 = nbrow2 + 1
             If nbrow2 > 1 Then
                 CBGcent.ForeColor = Color.Red
             End If
 
         End While
-        SqlConn2.Close()
+        conn2.Close()
         '-----
 
 
 
         'on cherche les documents associés
-        conn = New OleDb.OleDbConnection(Oradb) 'OracleConnection(oradb)
-        conn.Open()
+        '-- Ole conn = New OleDb.OleDbConnection(oradb) 'OracleConnection(oradb)
+        conn3.Open()
 
         'opening the connection
         request = RequestCQDoc(Trim(GCENT))
         'request = "select 1 from dual"
-        myCommand = New OleDb.OleDbCommand(request, conn)
+        '-- Ole myCommand = New OleDb.OleDbCommand(request, conn)
+        cmd3 = conn3.CreateCommand()
+        cmd3.CommandText = request
 
+        dr = cmd3.ExecuteReader()
         'executing the command and assigning it to connection
-        dr = myCommand.ExecuteReader()
+        '-- Ole dr = myCommand.ExecuteReader()
 
-        ' While dr.Read()
+        'While dr.Read()
         'Attached document
         ' If dr.GetValue(1) IsNot DBNull.Value Then
         ' RTBad.Text = RTBad.Text + vbCrLf + dr.GetValue(1)
@@ -676,13 +698,13 @@ Public Class FSearchGcent
         'Provider=OraOLEDB.Oracle.1;Password=READCQUEST;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1
         'Dim oradb As String = "Data Source=seyccrmsqlsip1.fi;User Id=readcquest;Password=readcquest;"
 
-        Dim myCommand As OleDb.OleDbCommand
-        Dim dr As OleDb.OleDbDataReader
-        Dim Oradb As String = "Provider=OraOLEDB.Oracle.1;Password=READCQUEST;Persist Security Info=True;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1;"
+        Dim myCommand As OracleCommand
+        Dim dr As OracleDataReader
+        Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
 
         'Data Source=myOracleServer;Persist Security Info=False";
         'Dim Oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;Provider=OraOLEDB.Oracle;OLEDB.NET=True;LazyLoad=1;"
-        Dim conn As New OleDb.OleDbConnection(Oradb) 'OracleConnection(oradb)
+        Dim conn As New OracleConnection(oradb)
 
         'Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
         'Dim conn As New OracleConnection(oradb)
@@ -719,7 +741,7 @@ Public Class FSearchGcent
         'opening the connection
         Dim request As String = RequestGlib(Trim(TBGcent.Text))
         'request = "select 1 from dual"
-        myCommand = New OleDb.OleDbCommand(request, conn)
+        myCommand = conn.CreateCommand()
 
         'executing the command and assigning it to connection
         dr = myCommand.ExecuteReader()
@@ -859,22 +881,23 @@ Public Class FSearchGcent
 
     'Private Sub BHistory_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BHistory.Click
     Private Sub BGcentHistory()
-        Dim myCommand As OleDb.OleDbCommand
-        Dim dr As OleDb.OleDbDataReader
-        Dim Oradb As String = "Provider=OraOLEDB.Oracle.1;Password=READCQUEST;Persist Security Info=True;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1;"
+        Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        Dim conn As New OracleConnection(oradb)
+        Dim cmd As New OracleCommand
+        Dim dr As OracleDataReader
 
         'Data Source=myOracleServer;Persist Security Info=False";
         'Dim Oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;Provider=OraOLEDB.Oracle;OLEDB.NET=True;LazyLoad=1;"
-        Dim conn As New OleDb.OleDbConnection(Oradb) 'OracleConnection(oradb)
 
         conn.Open()
         'opening the connection
         Dim request As String = RequestGcentHistory(Trim(TBGcent.Text))
         'request = "select 1 from dual"
-        myCommand = New OleDb.OleDbCommand(request, conn)
+        cmd = conn.CreateCommand()
+        cmd.CommandText = request
 
         'executing the command and assigning it to connection
-        dr = myCommand.ExecuteReader()
+        dr = cmd.ExecuteReader()
 
         'dr.Read()
         'dr.GetValue(0)
@@ -915,22 +938,22 @@ Public Class FSearchGcent
 
     'Private Sub BHistory_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BHistory.Click
     Private Sub BGlibHistory()
-        Dim myCommand As OleDb.OleDbCommand
-        Dim dr As OleDb.OleDbDataReader
-        Dim Oradb As String = "Provider=OraOLEDB.Oracle.1;Password=READCQUEST;Persist Security Info=True;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1;"
-
+        Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        Dim conn As New OracleConnection(oradb)
+        Dim cmd As New OracleCommand
+        Dim dr As OracleDataReader
         'Data Source=myOracleServer;Persist Security Info=False";
         'Dim Oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;Provider=OraOLEDB.Oracle;OLEDB.NET=True;LazyLoad=1;"
-        Dim conn As New OleDb.OleDbConnection(Oradb) 'OracleConnection(oradb)
 
         conn.Open()
         'opening the connection
         Dim request As String = RequestGlibHistory(Trim(TBGcent.Text))
         'request = "select 1 from dual"
-        myCommand = New OleDb.OleDbCommand(request, conn)
+        cmd = conn.CreateCommand()
+        cmd.CommandText = request
 
         'executing the command and assigning it to connection
-        dr = myCommand.ExecuteReader()
+        dr = cmd.ExecuteReader()
 
         'dr.Read()
         'dr.GetValue(0)
@@ -1043,23 +1066,30 @@ Public Class FSearchGcent
     Private Sub Button2_Click(sender As System.Object, e As System.EventArgs) Handles Button2.Click
 
         System.Diagnostics.Process.Start("mailto:? subject=" + "[" & Replace(TBCustomer.Text, "&", "") & "] " & TBCase.Text & " " & TBGcent.Text)
+
+
+
+
     End Sub
 
 
     Private Sub LVad_DoubleClick(sender As System.Object, e As System.EventArgs) Handles LVad.DoubleClick
         Dim PictureCol As Integer = 0 ' the column # of the BLOB field
 
-        Dim myCommand As OleDb.OleDbCommand
         Dim Ind As Integer
         Dim gcent As String
-        Dim dr As OleDb.OleDbDataReader
-        Dim Oradb As String = "Provider=OraOLEDB.Oracle.1;Password=READCQUEST;Persist Security Info=True;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1;"
 
-        Dim conn As New OleDb.OleDbConnection(Oradb) 'OracleConnection(oradb)
+        Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        Dim conn As New OracleConnection(Oradb)
+        Dim cmd As New OracleCommand
+        Dim dr As OracleDataReader
+
+        cmd = conn.CreateCommand()
+
         Try
             'Dim cn As New SqlConnection("Provider=OraOLEDB.Oracle.1;Password=READCQUEST;Persist Security Info=True;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1;")
             gcent = TBGcent.Text
-            Dim cmd As String = "Select atb.data   from cqcentral.anomalie Ta, cqcentral.attachments Tat, cqcentral.attachments_blob atb where Ta.dbid = Tat.entity_dbid(+) And Tat.dbid = atb.attachments_dbid And Ta.numerofiche = " + "'" + gcent + "' order by tat.dbid"
+            Dim request As String = "Select atb.data   from cqcentral.anomalie Ta, cqcentral.attachments Tat, cqcentral.attachments_blob atb where Ta.dbid = Tat.entity_dbid(+) And Tat.dbid = atb.attachments_dbid And Ta.numerofiche = " + "'" + gcent + "' order by tat.dbid"
             'Dim DestFilePath As String = "C:\test.doc"
             'Dim saveFileDialog1 As New SaveFileDialog()
             'saveFileDialog1.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif"
@@ -1083,10 +1113,10 @@ Public Class FSearchGcent
 
             conn.Open()
             'myCommand.Open()
-            myCommand = New OleDb.OleDbCommand(cmd, conn)
+            cmd.CommandText = request
 
             'Dim dr As SqlDataReader = cmd.ExecuteReader()
-            dr = myCommand.ExecuteReader()
+            dr = cmd.ExecuteReader()
 
             Ind = LVad.FocusedItem.Index
             For r = 0 To Ind
@@ -1216,10 +1246,10 @@ sortie:
 
 
     Public Function researchCQTitle() As Cases()
-        Dim myCommand As OleDb.OleDbCommand
-        Dim dr As OleDb.OleDbDataReader
-        Dim Oradb As String = "Provider=OraOLEDB.Oracle.1;Password=READCQUEST;Persist Security Info=True;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1;"
-        Dim conn As New OleDb.OleDbConnection(Oradb) 'OracleConnection(oradb)
+        Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        Dim conn As New OracleConnection(oradb)
+        Dim cmd As New OracleCommand
+        Dim dr As OracleDataReader
         Dim req As String
         Dim NbRow As Integer
         Dim LstCase() As Cases
@@ -1232,10 +1262,11 @@ sortie:
             req = RequestCardTitle(Trim(TBGcent.Text), base)
             conn.Open()
             'myCommand.Open()
-            myCommand = New OleDb.OleDbCommand(req, conn)
+            cmd = conn.CreateCommand()
+            cmd.CommandText = req
 
             'Dim dr As SqlDataReader = cmd.ExecuteReader()
-            dr = myCommand.ExecuteReader()
+            dr = cmd.ExecuteReader()
 
             'LstCase(0).Number = "0"
 

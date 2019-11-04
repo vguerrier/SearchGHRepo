@@ -1,7 +1,7 @@
-﻿Imports Oracle.DataAccess.Client
+﻿Imports Oracle.ManagedDataAccess.Client
 Imports System.Data.SqlClient
 Imports System.Data.Sql
-Imports Oracle.DataAccess.Types
+Imports Oracle.ManagedDataAccess.Types
 Imports MaterialSkin
 
 Public Class FSearchWorkstream
@@ -167,10 +167,12 @@ Public Class FSearchWorkstream
         Dim nbRows As Integer
 
         Dim nbRFE As Integer
-        Dim Oradb2 As String = "Provider=OraOLEDB.Oracle.1;Password=READCQUEST;Persist Security Info=True;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1;"
-        Dim SqlConn2 As New OleDb.OleDbConnection(Oradb2) 'OracleConnection(oradb2)
-        Dim SqlCmd2 As OleDb.OleDbCommand
-        Dim myReader2 As OleDb.OleDbDataReader
+
+        Dim Oradb2 As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        Dim SqlConn2 As New OracleConnection(Oradb2)
+        Dim SqlCmd2 As New OracleCommand
+        Dim myReader2 As OracleDataReader
+
         Dim nbrow2 As Integer
         Dim status, label As String
         'ex : Gold Specific 
@@ -277,7 +279,7 @@ Public Class FSearchWorkstream
             req = GetGcentInfoCQ(WS)
             'opening the connection
             SqlConn2.Open()
-            SqlCmd2 = New OleDb.OleDbCommand(req, SqlConn2)
+            SqlCmd2 = SqlConn2.CreateCommand()
             SqlCmd2.CommandText = req
             myReader2 = SqlCmd2.ExecuteReader()
 

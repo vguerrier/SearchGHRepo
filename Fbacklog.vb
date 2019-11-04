@@ -1,7 +1,7 @@
-﻿Imports Oracle.DataAccess.Client
+﻿Imports Oracle.ManagedDataAccess.Client
 Imports System.Data.SqlClient
 Imports System.Data.Sql
-Imports Oracle.DataAccess.Types
+Imports Oracle.ManagedDataAccess.Types
 Imports System.Data.Common
 Imports MaterialSkin
 Imports Excel = Microsoft.Office.Interop.Excel
@@ -210,11 +210,11 @@ Public Class FBacklog
         Dim Sqldb As String = "Data Source=seyccrmsqlsip1;Integrated Security=SSPI;Initial Catalog=crm_MSCRM"
         Dim SqlConn As New SqlClient.SqlConnection(Sqldb)
         Dim SqlCmd As New SqlCommand
-        Dim Oradb As String = "Provider=OraOLEDB.Oracle.1;Password=READCQUEST;Persist Security Info=True;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1;"
-        Dim SqlConn2 As New OleDb.OleDbConnection(Oradb) 'OracleConnection(oradb)
-        Dim SqlCmd2 As OleDb.OleDbCommand
+        Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        Dim SqlConn2 As New OracleConnection(oradb)
+        Dim SqlCmd2 As OracleCommand
         Dim myReader As SqlDataReader
-        Dim myReader2 As OleDb.OleDbDataReader
+        Dim myReader2 As OracleDataReader
         Dim req As String
         Dim nbrow As Integer
         Dim Opt, OptGcent As Integer
@@ -269,7 +269,7 @@ Public Class FBacklog
                     'recherche des infos de la fiche 
                     If k.item("CQ_Card") IsNot DBNull.Value Then
                         req = GetGcentInfo(k.item("CQ_Card"))
-                        SqlCmd2 = New OleDb.OleDbCommand(req, SqlConn2)
+                        SqlCmd2 = SqlConn2.CreateCommand()
                         SqlCmd2.CommandText = req
                         myReader2 = SqlCmd2.ExecuteReader()
                         myReader2.Read()
