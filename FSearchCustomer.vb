@@ -13,6 +13,7 @@ Public Structure Appli
     Public Framework_Spring As String
     Public BranchProduct As String
     Public URL As String
+    Public Schemas() As String
 End Structure
 
 Public Structure Env
@@ -22,6 +23,7 @@ Public Structure Env
     Public Oracle As String
     Public java As String
     Public NbAppli As Integer
+    Public NbSchemas As Integer
 
     Public Appli() As Appli
 End Structure
@@ -128,6 +130,12 @@ Public Class FCustomer
         RequestAppli = RequestAppli & "and t1.ENVTYPE = '" & envtype & "' "
     End Function
 
+    Function RequestAppliOSchemas(Branch As String, envtype As String) As String
+        RequestAppliOSchemas = "select t.OSID, t.ouser, t.domain from V_INFRA_OSCHEMA t "
+        RequestAppliOSchemas = RequestAppliOSchemas & "where t.BRANCH = '" & Branch & "' "
+        RequestAppliOSchemas = RequestAppliOSchemas & "and t.ENV = '" & envtype & "' "
+    End Function
+
     Function RequestEnv(Env As String) As String
         RequestEnv = "select * from V_INFRA_ENV t"
         RequestEnv = RequestEnv & "where t.P_BRANCH ='%" + Env + "%'"
@@ -178,10 +186,13 @@ Public Class FCustomer
         Dim oradb2 As String = "Data Source=RDTOOLS;User Id=RFE_READ;Password=RFE_READ;"
         Dim conn2 As New OracleConnection(oradb2)
 
+        Dim conn3 As New OracleConnection(oradb)
+        Dim myCommand3 As New OracleCommand
+        Dim dr3 As OracleDataReader
 
         'Dim Customer As Env
         Dim found As Boolean
-        Dim i, j, z, nbBranch, nbenv, nbappli, IndEnv As Integer
+        Dim i, j, z, nbBranch, nbenv, nbappli, nbschema, IndEnv As Integer
         Dim env, branchname, BranchType, Description, Application, label As String
 
         TBDesc.Text = ""
@@ -364,9 +375,25 @@ Public Class FCustomer
                     nbappli = nbappli + 1
                     MyModule.Customers.Branch(i).Env(j).NbAppli = nbappli
                 End While
+
+                'recherche des schémas Oracle liés à la branche sélectionnée
+                conn3.Open()
+                request = RequestAppliOSchemas(MyModule.Customers.Branch(i).Branchname, MyModule.Customers.Branch(i).Env(j).Envname)
+                myCommand3 = conn3.CreateCommand()
+                myCommand3.CommandText = request
+                dr3 = myCommand3.ExecuteReader()
+                nbschema = 0
+                While dr3.Read()
+                    If dr.GetValue(1) IsNot DBNull.Value Then
+                        MyModule.Customers.Branch(i).Env(j).Appli(nbappli).Appliname = dr.GetValue(1)
+                    End If
+                    nbschema = nbschema + 1
+                End While
+
             Next
         Next
         conn.Close()
+
 
         'recherche des RFE
 
