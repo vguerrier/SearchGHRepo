@@ -742,7 +742,7 @@ Public Class FSearchGcent
         Dim request As String = RequestGlib(Trim(TBGcent.Text))
         'request = "select 1 from dual"
         myCommand = conn.CreateCommand()
-
+        myCommand.CommandText = request
         'executing the command and assigning it to connection
         dr = myCommand.ExecuteReader()
         researchGlib = 0

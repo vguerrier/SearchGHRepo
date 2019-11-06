@@ -66,8 +66,7 @@ Partial Class FCustomer
         Me.TBRfe = New System.Windows.Forms.TextBox()
         Me.TBWs = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.CBSchemas = New System.Windows.Forms.ComboBox()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -78,7 +77,7 @@ Partial Class FCustomer
         '
         Me.TVCus.Location = New System.Drawing.Point(19, 101)
         Me.TVCus.Name = "TVCus"
-        Me.TVCus.Size = New System.Drawing.Size(325, 634)
+        Me.TVCus.Size = New System.Drawing.Size(325, 626)
         Me.TVCus.TabIndex = 0
         '
         'TBCus
@@ -94,9 +93,9 @@ Partial Class FCustomer
         '
         'TBFramework
         '
+        Me.TBFramework.Enabled = False
         Me.TBFramework.Location = New System.Drawing.Point(13, 35)
         Me.TBFramework.Name = "TBFramework"
-        Me.TBFramework.ReadOnly = True
         Me.TBFramework.Size = New System.Drawing.Size(300, 20)
         Me.TBFramework.TabIndex = 7
         '
@@ -112,11 +111,11 @@ Partial Class FCustomer
         'LBURL
         '
         Me.LBURL.AutoSize = True
-        Me.LBURL.Location = New System.Drawing.Point(19, 180)
+        Me.LBURL.Location = New System.Drawing.Point(10, 140)
         Me.LBURL.Name = "LBURL"
-        Me.LBURL.Size = New System.Drawing.Size(29, 13)
+        Me.LBURL.Size = New System.Drawing.Size(38, 13)
         Me.LBURL.TabIndex = 10
-        Me.LBURL.Text = "URL"
+        Me.LBURL.Text = "URL : "
         '
         'TBFSpring
         '
@@ -207,7 +206,9 @@ Partial Class FCustomer
         '
         Me.GroupBox2.BackColor = System.Drawing.Color.White
         Me.GroupBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.GroupBox2.Controls.Add(Me.CBSchemas)
         Me.GroupBox2.Controls.Add(Me.Button1)
+        Me.GroupBox2.Controls.Add(Me.Label10)
         Me.GroupBox2.Controls.Add(Me.TBJava)
         Me.GroupBox2.Controls.Add(Me.Label4)
         Me.GroupBox2.Controls.Add(Me.TBOracle)
@@ -219,7 +220,7 @@ Partial Class FCustomer
         Me.GroupBox2.ForeColor = System.Drawing.Color.Black
         Me.GroupBox2.Location = New System.Drawing.Point(358, 217)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(322, 184)
+        Me.GroupBox2.Size = New System.Drawing.Size(322, 224)
         Me.GroupBox2.TabIndex = 23
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Environment Information"
@@ -240,9 +241,6 @@ Partial Class FCustomer
         'GroupBox3
         '
         Me.GroupBox3.BackColor = System.Drawing.Color.White
-        Me.GroupBox3.Controls.Add(Me.ComboBox1)
-        Me.GroupBox3.Controls.Add(Me.Label10)
-        Me.GroupBox3.Controls.Add(Me.Label11)
         Me.GroupBox3.Controls.Add(Me.Label8)
         Me.GroupBox3.Controls.Add(Me.LinkLabel1)
         Me.GroupBox3.Controls.Add(Me.TBProduct)
@@ -254,9 +252,9 @@ Partial Class FCustomer
         Me.GroupBox3.Controls.Add(Me.TBFramework)
         Me.GroupBox3.Controls.Add(Me.LBFramework)
         Me.GroupBox3.ForeColor = System.Drawing.Color.Black
-        Me.GroupBox3.Location = New System.Drawing.Point(358, 407)
+        Me.GroupBox3.Location = New System.Drawing.Point(358, 447)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(322, 203)
+        Me.GroupBox3.Size = New System.Drawing.Size(322, 160)
         Me.GroupBox3.TabIndex = 24
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Application Information"
@@ -273,7 +271,7 @@ Partial Class FCustomer
         'LinkLabel1
         '
         Me.LinkLabel1.AutoSize = True
-        Me.LinkLabel1.Location = New System.Drawing.Point(237, 180)
+        Me.LinkLabel1.Location = New System.Drawing.Point(237, 140)
         Me.LinkLabel1.Name = "LinkLabel1"
         Me.LinkLabel1.Size = New System.Drawing.Size(45, 13)
         Me.LinkLabel1.TabIndex = 142
@@ -291,7 +289,7 @@ Partial Class FCustomer
         'LLBURL
         '
         Me.LLBURL.AutoSize = True
-        Me.LLBURL.Location = New System.Drawing.Point(75, 180)
+        Me.LLBURL.Location = New System.Drawing.Point(47, 140)
         Me.LLBURL.Name = "LLBURL"
         Me.LLBURL.Size = New System.Drawing.Size(27, 13)
         Me.LLBURL.TabIndex = 141
@@ -333,7 +331,7 @@ Partial Class FCustomer
         Me.BBacklog.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BBacklog.ForeColor = System.Drawing.Color.Black
         Me.BBacklog.Image = Global.WindowsApplication1.My.Resources.Resources.Backlog
-        Me.BBacklog.Location = New System.Drawing.Point(288, 9)
+        Me.BBacklog.Location = New System.Drawing.Point(288, 8)
         Me.BBacklog.Name = "BBacklog"
         Me.BBacklog.Size = New System.Drawing.Size(25, 25)
         Me.BBacklog.TabIndex = 26
@@ -403,9 +401,9 @@ Partial Class FCustomer
         Me.GroupBox4.Controls.Add(Me.TBRfe)
         Me.GroupBox4.Controls.Add(Me.TBWs)
         Me.GroupBox4.ForeColor = System.Drawing.Color.Black
-        Me.GroupBox4.Location = New System.Drawing.Point(358, 617)
+        Me.GroupBox4.Location = New System.Drawing.Point(358, 613)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(322, 119)
+        Me.GroupBox4.Size = New System.Drawing.Size(322, 115)
         Me.GroupBox4.TabIndex = 25
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "RFE && Workstream"
@@ -489,31 +487,21 @@ Partial Class FCustomer
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(10, 140)
+        Me.Label10.Location = New System.Drawing.Point(10, 180)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(85, 13)
         Me.Label10.TabIndex = 146
         Me.Label10.Text = "Oracle Schemas"
         '
-        'Label11
+        'CBSchemas
         '
-        Me.Label11.AutoSize = True
-        Me.Label11.ForeColor = System.Drawing.Color.White
-        Me.Label11.Location = New System.Drawing.Point(10, 161)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(44, 13)
-        Me.Label11.TabIndex = 144
-        Me.Label11.Text = "Product"
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.BackColor = System.Drawing.Color.White
-        Me.ComboBox1.ForeColor = System.Drawing.SystemColors.WindowText
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(13, 155)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(300, 21)
-        Me.ComboBox1.TabIndex = 161
+        Me.CBSchemas.BackColor = System.Drawing.Color.White
+        Me.CBSchemas.ForeColor = System.Drawing.SystemColors.WindowText
+        Me.CBSchemas.FormattingEnabled = True
+        Me.CBSchemas.Location = New System.Drawing.Point(13, 195)
+        Me.CBSchemas.Name = "CBSchemas"
+        Me.CBSchemas.Size = New System.Drawing.Size(300, 21)
+        Me.CBSchemas.TabIndex = 161
         '
         'FCustomer
         '
@@ -584,7 +572,6 @@ Partial Class FCustomer
     Friend WithEvents CBRfe As ComboBox
     Friend WithEvents TBRfe As TextBox
     Friend WithEvents TBWs As TextBox
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents CBSchemas As ComboBox
     Friend WithEvents Label10 As Label
-    Friend WithEvents Label11 As Label
 End Class

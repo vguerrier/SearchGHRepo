@@ -7,13 +7,19 @@ Imports System.Data.SqlClient
 Imports System.Data.Sql
 Imports System.IO
 
+Public Structure Schema
+    Public OSID As String
+    Public ouser As String
+    Public domain As String
+End Structure
+
 Public Structure Appli
     Public Appliname As String
     Public Framework As String
     Public Framework_Spring As String
     Public BranchProduct As String
     Public URL As String
-    Public Schemas() As String
+
 End Structure
 
 Public Structure Env
@@ -24,7 +30,7 @@ Public Structure Env
     Public java As String
     Public NbAppli As Integer
     Public NbSchemas As Integer
-
+    Public Schemas() As Schema
     Public Appli() As Appli
 End Structure
 
@@ -219,6 +225,7 @@ Public Class FCustomer
             ReDim MyModule.Customers.Branch(i).Env(NbCusmax)
             For j = 0 To NbCusmax
                 ReDim MyModule.Customers.Branch(i).Env(j).Appli(NbCusmax)
+                ReDim MyModule.Customers.Branch(i).Env(j).Schemas(NbCusmax)
             Next
         Next
 
@@ -343,6 +350,7 @@ Public Class FCustomer
         If nbBranch = 0 Then GoTo Fin
         Me.Show()
         conn.Open()
+        conn3.Open()
         'Appli
         'On parcourt les branchs et on recherche les appli
         For i = 0 To MyModule.Customers.NbBranch
@@ -377,21 +385,28 @@ Public Class FCustomer
                 End While
 
                 'recherche des schémas Oracle liés à la branche sélectionnée
-                conn3.Open()
+
                 request = RequestAppliOSchemas(MyModule.Customers.Branch(i).Branchname, MyModule.Customers.Branch(i).Env(j).Envname)
                 myCommand3 = conn3.CreateCommand()
                 myCommand3.CommandText = request
                 dr3 = myCommand3.ExecuteReader()
                 nbschema = 0
                 While dr3.Read()
-                    If dr.GetValue(1) IsNot DBNull.Value Then
-                        MyModule.Customers.Branch(i).Env(j).Appli(nbappli).Appliname = dr.GetValue(1)
+                    If dr3.GetValue(0) IsNot DBNull.Value Then
+                        MyModule.Customers.Branch(i).Env(j).Schemas(nbschema).OSID = dr3.GetValue(0)
+                    End If
+                    If dr3.GetValue(1) IsNot DBNull.Value Then
+                        MyModule.Customers.Branch(i).Env(j).Schemas(nbschema).ouser = dr3.GetValue(1)
+                    End If
+                    If dr3.GetValue(2) IsNot DBNull.Value Then
+                        MyModule.Customers.Branch(i).Env(j).Schemas(nbschema).domain = dr3.GetValue(2)
                     End If
                     nbschema = nbschema + 1
+                    MyModule.Customers.Branch(i).Env(j).NbSchemas = nbschema
                 End While
-
             Next
         Next
+        conn3.Close()
         conn.Close()
 
 
@@ -504,6 +519,7 @@ Fin:
     Private Sub TVCus_AfterSelect(sender As System.Object, e As System.Windows.Forms.TreeViewEventArgs) Handles TVCus.AfterSelect
         Dim level As Integer
         Dim Index, IndexP, indexPP As Integer
+        Dim SchemaInf As String
 
         level = TVCus.SelectedNode.Level
         Index = TVCus.SelectedNode.Index
@@ -521,6 +537,7 @@ Fin:
         TBOracle.Text = ""
         TBJava.Text = ""
         TBProduct.Text = ""
+        CBSchemas.Items.Clear()
 
         If level = 1 Then
 
@@ -538,6 +555,14 @@ Fin:
             TBServer.Text = MyModule.Customers.Branch(IndexP).Env(Index).server
             TBOracle.Text = MyModule.Customers.Branch(IndexP).Env(Index).Oracle
             TBJava.Text = MyModule.Customers.Branch(IndexP).Env(Index).java
+
+            For i = 0 To MyModule.Customers.Branch(IndexP).Env(Index).NbSchemas - 1
+                SchemaInf = MyModule.Customers.Branch(IndexP).Env(Index).Schemas(i).OSID + " " + MyModule.Customers.Branch(IndexP).Env(Index).Schemas(i).ouser + " " + MyModule.Customers.Branch(IndexP).Env(Index).Schemas(i).domain
+                CBSchemas.Text = SchemaInf
+                CBSchemas.Items.Add(SchemaInf)
+            Next
+
+
             'TBProduct.Text = MyModule.Customers.Branch(IndexP).Env(Index).BranchProduct
 
         End If
