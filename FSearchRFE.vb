@@ -118,7 +118,8 @@ Public Class FSearchRFE
     End Function
 
     Public Function researchRFETitle(RFE As String) As Cases()
-        Dim oradb As String = "Data Source=RDTOOLS;User Id=RFE_READ;Password=RFE_READ;"
+        'Dim oradb As String = "Data Source=RDTOOLS;User Id=RFE_READ;Password=RFE_READ;"
+        Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.37)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = RDTOOLS)));User ID=RFE_READ;Password=RFE_READ"
         Dim conn As New OracleConnection(oradb)
         Dim myCommand As New OracleCommand
         Dim dr As OracleDataReader
@@ -159,13 +160,17 @@ Public Class FSearchRFE
     End Function
 
     Public Function researchRFE(RFE As String) As Integer
-        Dim oradb As String = "Data Source=RDTOOLS;User Id=RFE_READ;Password=RFE_READ;"
+        'Dim oradb As String = "Data Source=RDTOOLS;User Id=RFE_READ;Password=RFE_READ;"
+        Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.37)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = RDTOOLS)));User ID=RFE_READ;Password=RFE_READ"
+
         Dim conn As New OracleConnection(oradb)
         Dim myCommand As New OracleCommand
         Dim dr As OracleDataReader
 
         Dim nbRFE As Integer
-        Dim oradb2 As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        'Dim oradb2 As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        Dim oradb2 As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.30)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = CQSCM1)));User ID=READCQUEST;Password=READCQUEST"
+
         Dim SqlConn2 As New OracleConnection(oradb2)
         Dim SqlCmd2 As New OracleCommand
         Dim myReader2 As OracleDataReader

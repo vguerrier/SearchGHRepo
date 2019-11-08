@@ -210,7 +210,8 @@ Public Class FBacklog
         Dim Sqldb As String = "Data Source=seyccrmsqlsip1;Integrated Security=SSPI;Initial Catalog=crm_MSCRM"
         Dim SqlConn As New SqlClient.SqlConnection(Sqldb)
         Dim SqlCmd As New SqlCommand
-        Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        'Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.30)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = CQSCM1)));User ID=READCQUEST;Password=READCQUEST"
         Dim SqlConn2 As New OracleConnection(oradb)
         Dim SqlCmd2 As OracleCommand
         Dim myReader As SqlDataReader
@@ -817,7 +818,7 @@ Public Class FBacklog
     End Sub
 
     Private Sub BBacklog_Click(sender As Object, e As EventArgs)
-        FsearchEvolution.Show()
+        'FsearchEvolution.Show()
     End Sub
 
 

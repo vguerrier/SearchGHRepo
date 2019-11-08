@@ -40,7 +40,8 @@ Partial Class FCustomer
         Me.TBJava = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.CBSchemas = New System.Windows.Forms.ComboBox()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
@@ -48,7 +49,6 @@ Partial Class FCustomer
         Me.LLBURL = New System.Windows.Forms.LinkLabel()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.BBacklog = New System.Windows.Forms.Button()
         Me.TBLabel = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.TBBranchType = New System.Windows.Forms.TextBox()
@@ -57,16 +57,17 @@ Partial Class FCustomer
         Me.LBDesc = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.CBWorkstream = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.BSearch = New System.Windows.Forms.Button()
         Me.CBRfe = New System.Windows.Forms.ComboBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.TBRfe = New System.Windows.Forms.TextBox()
         Me.TBWs = New System.Windows.Forms.TextBox()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.CBSchemas = New System.Windows.Forms.ComboBox()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.BSearch = New System.Windows.Forms.Button()
+        Me.BDB = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.BBacklog = New System.Windows.Forms.Button()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -206,6 +207,7 @@ Partial Class FCustomer
         '
         Me.GroupBox2.BackColor = System.Drawing.Color.White
         Me.GroupBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.GroupBox2.Controls.Add(Me.BDB)
         Me.GroupBox2.Controls.Add(Me.CBSchemas)
         Me.GroupBox2.Controls.Add(Me.Button1)
         Me.GroupBox2.Controls.Add(Me.Label10)
@@ -225,18 +227,24 @@ Partial Class FCustomer
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Environment Information"
         '
-        'Button1
+        'CBSchemas
         '
-        Me.Button1.FlatAppearance.BorderSize = 0
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.ForeColor = System.Drawing.Color.Black
-        Me.Button1.Image = Global.WindowsApplication1.My.Resources.Resources.putty_dark_24
-        Me.Button1.Location = New System.Drawing.Point(291, 75)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(25, 25)
-        Me.Button1.TabIndex = 27
-        Me.ToolTip1.SetToolTip(Me.Button1, "Launch Putty on server")
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.CBSchemas.BackColor = System.Drawing.Color.White
+        Me.CBSchemas.ForeColor = System.Drawing.SystemColors.WindowText
+        Me.CBSchemas.FormattingEnabled = True
+        Me.CBSchemas.Location = New System.Drawing.Point(13, 195)
+        Me.CBSchemas.Name = "CBSchemas"
+        Me.CBSchemas.Size = New System.Drawing.Size(269, 21)
+        Me.CBSchemas.TabIndex = 161
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(10, 180)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(85, 13)
+        Me.Label10.TabIndex = 146
+        Me.Label10.Text = "Oracle Schemas"
         '
         'GroupBox3
         '
@@ -325,19 +333,6 @@ Partial Class FCustomer
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Branch Information"
         '
-        'BBacklog
-        '
-        Me.BBacklog.FlatAppearance.BorderSize = 0
-        Me.BBacklog.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BBacklog.ForeColor = System.Drawing.Color.Black
-        Me.BBacklog.Image = Global.WindowsApplication1.My.Resources.Resources.Backlog
-        Me.BBacklog.Location = New System.Drawing.Point(288, 8)
-        Me.BBacklog.Name = "BBacklog"
-        Me.BBacklog.Size = New System.Drawing.Size(25, 25)
-        Me.BBacklog.TabIndex = 26
-        Me.ToolTip1.SetToolTip(Me.BBacklog, "Customer Backlog")
-        Me.BBacklog.UseVisualStyleBackColor = True
-        '
         'TBLabel
         '
         Me.TBLabel.Location = New System.Drawing.Point(13, 115)
@@ -408,18 +403,6 @@ Partial Class FCustomer
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "RFE && Workstream"
         '
-        'Button2
-        '
-        Me.Button2.BackColor = System.Drawing.SystemColors.Window
-        Me.Button2.FlatAppearance.BorderSize = 0
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Image = Global.WindowsApplication1.My.Resources.Resources.search3_p
-        Me.Button2.Location = New System.Drawing.Point(290, 82)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(23, 25)
-        Me.Button2.TabIndex = 164
-        Me.Button2.UseVisualStyleBackColor = False
-        '
         'CBWorkstream
         '
         Me.CBWorkstream.BackColor = System.Drawing.Color.White
@@ -438,18 +421,6 @@ Partial Class FCustomer
         Me.Label9.Size = New System.Drawing.Size(64, 13)
         Me.Label9.TabIndex = 162
         Me.Label9.Text = "Workstream"
-        '
-        'BSearch
-        '
-        Me.BSearch.BackColor = System.Drawing.SystemColors.Window
-        Me.BSearch.FlatAppearance.BorderSize = 0
-        Me.BSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BSearch.Image = Global.WindowsApplication1.My.Resources.Resources.search3_p
-        Me.BSearch.Location = New System.Drawing.Point(290, 41)
-        Me.BSearch.Name = "BSearch"
-        Me.BSearch.Size = New System.Drawing.Size(23, 25)
-        Me.BSearch.TabIndex = 161
-        Me.BSearch.UseVisualStyleBackColor = False
         '
         'CBRfe
         '
@@ -484,24 +455,68 @@ Partial Class FCustomer
         Me.TBWs.Size = New System.Drawing.Size(100, 20)
         Me.TBWs.TabIndex = 166
         '
-        'Label10
+        'Button2
         '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(10, 180)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(85, 13)
-        Me.Label10.TabIndex = 146
-        Me.Label10.Text = "Oracle Schemas"
+        Me.Button2.BackColor = System.Drawing.SystemColors.Window
+        Me.Button2.FlatAppearance.BorderSize = 0
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.Image = Global.WindowsApplication1.My.Resources.Resources.search3_p
+        Me.Button2.Location = New System.Drawing.Point(290, 75)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(23, 25)
+        Me.Button2.TabIndex = 164
+        Me.Button2.UseVisualStyleBackColor = False
         '
-        'CBSchemas
+        'BSearch
         '
-        Me.CBSchemas.BackColor = System.Drawing.Color.White
-        Me.CBSchemas.ForeColor = System.Drawing.SystemColors.WindowText
-        Me.CBSchemas.FormattingEnabled = True
-        Me.CBSchemas.Location = New System.Drawing.Point(13, 195)
-        Me.CBSchemas.Name = "CBSchemas"
-        Me.CBSchemas.Size = New System.Drawing.Size(300, 21)
-        Me.CBSchemas.TabIndex = 161
+        Me.BSearch.BackColor = System.Drawing.SystemColors.Window
+        Me.BSearch.FlatAppearance.BorderSize = 0
+        Me.BSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BSearch.Image = Global.WindowsApplication1.My.Resources.Resources.search3_p
+        Me.BSearch.Location = New System.Drawing.Point(290, 33)
+        Me.BSearch.Name = "BSearch"
+        Me.BSearch.Size = New System.Drawing.Size(23, 25)
+        Me.BSearch.TabIndex = 161
+        Me.BSearch.UseVisualStyleBackColor = False
+        '
+        'BDB
+        '
+        Me.BDB.FlatAppearance.BorderSize = 0
+        Me.BDB.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BDB.ForeColor = System.Drawing.Color.Black
+        Me.BDB.Image = Global.WindowsApplication1.My.Resources.Resources.database
+        Me.BDB.Location = New System.Drawing.Point(288, 191)
+        Me.BDB.Name = "BDB"
+        Me.BDB.Size = New System.Drawing.Size(25, 25)
+        Me.BDB.TabIndex = 162
+        Me.ToolTip1.SetToolTip(Me.BDB, "Launch PL/SQL developper on the Schema selected")
+        Me.BDB.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.ForeColor = System.Drawing.Color.Black
+        Me.Button1.Image = Global.WindowsApplication1.My.Resources.Resources.putty_dark_24
+        Me.Button1.Location = New System.Drawing.Point(291, 75)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(25, 25)
+        Me.Button1.TabIndex = 27
+        Me.ToolTip1.SetToolTip(Me.Button1, "Launch Putty on server")
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'BBacklog
+        '
+        Me.BBacklog.FlatAppearance.BorderSize = 0
+        Me.BBacklog.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BBacklog.ForeColor = System.Drawing.Color.Black
+        Me.BBacklog.Image = Global.WindowsApplication1.My.Resources.Resources.Backlog
+        Me.BBacklog.Location = New System.Drawing.Point(288, 8)
+        Me.BBacklog.Name = "BBacklog"
+        Me.BBacklog.Size = New System.Drawing.Size(25, 25)
+        Me.BBacklog.TabIndex = 26
+        Me.ToolTip1.SetToolTip(Me.BBacklog, "Customer Backlog")
+        Me.BBacklog.UseVisualStyleBackColor = True
         '
         'FCustomer
         '
@@ -574,4 +589,5 @@ Partial Class FCustomer
     Friend WithEvents TBWs As TextBox
     Friend WithEvents CBSchemas As ComboBox
     Friend WithEvents Label10 As Label
+    Friend WithEvents BDB As Button
 End Class

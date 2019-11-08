@@ -168,7 +168,9 @@ Public Class FSearchWorkstream
 
         Dim nbRFE As Integer
 
-        Dim Oradb2 As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        'Dim Oradb2 As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        Dim oradb2 As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.30)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = CQSCM1)));User ID=READCQUEST;Password=READCQUEST"
+
         Dim SqlConn2 As New OracleConnection(Oradb2)
         Dim SqlCmd2 As New OracleCommand
         Dim myReader2 As OracleDataReader

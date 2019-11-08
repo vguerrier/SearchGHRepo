@@ -208,7 +208,10 @@ Public Class FSearchCase
         Dim SqlCmd As New SqlCommand
         Dim myReader As SqlDataReader
         '--Dim Oradb As String = "Provider=OraOLEDB.Oracle.1;Password=READCQUEST;Persist Security Info=True;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1;"
-        Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        'Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.30)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = CQSCM1)));User ID=READCQUEST;Password=READCQUEST"
+
+
         '--Dim SqlConn2 As New OleDb.OleDbConnection(Oradb) 'OracleConnection(oradb)
         Dim conn As New OracleConnection(oradb)
         '--Dim SqlCmd2 As OleDb.OleDbCommand

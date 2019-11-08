@@ -184,12 +184,14 @@ Public Class FCustomer
 
 
     Public Function researchCus() As Integer
-        Dim oradb As String = "Data Source=RDTOOLS;User Id=read_only;Password=read_only;"
+        'Dim oradb As String = "Data Source=RDTOOLS;User Id=read_only;Password=read_only;"
+        Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.37)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = RDTOOLS)));User ID=read_only;Password=read_only"
         Dim conn As New OracleConnection(oradb)
         Dim myCommand As New OracleCommand
         Dim dr As OracleDataReader
 
-        Dim oradb2 As String = "Data Source=RDTOOLS;User Id=RFE_READ;Password=RFE_READ;"
+        'Dim oradb2 As String = "Data Source=RDTOOLS;User Id=RFE_READ;Password=RFE_READ;"
+        Dim oradb2 As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.37)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = RDTOOLS)));User ID=RFE_READ;Password=RFE_READ"
         Dim conn2 As New OracleConnection(oradb2)
 
         Dim conn3 As New OracleConnection(oradb)
@@ -661,5 +663,47 @@ Fin:
         FSearch.MSTSearch.Text = Trim(TBWs.Text)
 
         FSearch.Research(6)
+    End Sub
+
+    Private Sub BDB_Click(sender As Object, e As EventArgs) Handles BDB.Click
+        Dim Dbase, user As String
+        'On lance Putty sur le server
+        'ligne de commande putty.exe <nom serveur>
+        'Ensuite on récupère la fenêtre pour l'afficher car sinon elle est minimisée
+        'pour cela via les fonction dans user32.dll, on récupère la main sur la fenêtre et on la restore.
+        Try
+            'on lance putty sur le serveur
+            Dim str() = CBSchemas.Text.Split(" ")
+
+            Dbase = str(0)
+            user = str(1)
+
+            Dim toto As String = "C:\Program Files\PLSQL Developer\plsqldev.exe userid=" + user + "/" + user + "@" + Dbase
+            'Dim toto As String = "C:\Program Files\PLSQL Developer 12\plsqldev.exe userid=" + user + "/" + user + "@" + Dbase
+            Shell(toto) ' & TBServer.Text)
+
+            'on recherche la fenêtre par son titre, pour cela il faut qu'on trouve le nom de la fenêtre :
+            '<servername> & ".eyc.com - Putty"
+            ''Dim WindowTitle As String
+            ''WindowTitle = TBServer.Text & ".eyc.com - Putty"
+            ''Dim windowhandle As IntPtr = FindWindow(Nothing, WindowTitle)
+            'test si on a trouvé la fenêtre ou non
+            'If windowhandle = Nothing Then
+            '    MessageBox.Show("Could Not find window", "Window Does Not Exist", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            'Else
+            '    If IsWindowVisible(windowhandle) = True Then
+            '        MessageBox.Show("The window Is visible", "Window Visible", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            '    Else
+            '        MessageBox.Show("The window Is Not visible", "Window Not Yet Visible", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            '    End If
+            'End If
+
+            'on restore la fenêtre
+            ''ShowWindow(windowhandle, 1)
+        Catch ex As Exception
+            MsgBox("Problem To launch PL/SQL Developer : " & vbCrLf & "Please select an Oracle Schema." & vbCrLf & "If the problem continues, please verify the path of PL/SQL Developer.exe : " & vbCrLf & " C:\Program Files\PLSQL Developer\plsqldev.exe" & vbCrLf & "Error : " & ex.Message)
+        End Try
+
+        'Shell("%systemroot%\system32\mstsc.exe ""C:\Users\guerrier\AppData\Roaming\Micros
     End Sub
 End Class

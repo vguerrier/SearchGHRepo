@@ -24,7 +24,8 @@ Public Class FSearchGcent
         Dim myCommand As OracleCommand
         Dim dr As OracleDataReader
         '--Ole Dim Oradb As String = "Provider=OraOLEDB.Oracle.1;Password=READCQUEST;Persist Security Info=True;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1;"
-        Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        'Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.30)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = CQSCM1)));User ID=READCQUEST;Password=READCQUEST"
 
         '-- Ole Dim conn As New OleDb.OleDbConnection(Oradb) 'OracleConnection(oradb)
         Dim conn As New OracleConnection(oradb)
@@ -339,14 +340,16 @@ Public Class FSearchGcent
         '--Dim myCommand As OleDb.OleDbCommand
         '--Dim dr As OleDb.OleDbDataReader
         '--Dim Oradb As String = "Provider=OraOLEDB.Oracle.1;Password=READCQUEST;Persist Security Info=True;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1;"
-        Dim conString As String = "User Id=readcquest;Password=readcquest;Data Source=CQSCM1_SEYCSMC1"
+        'Dim conString As String = "User Id=readcquest;Password=readcquest;Data Source=CQSCM1_SEYCSMC1"
+
         Dim GCENT As String
         Dim req As String
         'Data Source=myOracleServer;Persist Security Info=False";
         'Dim Oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;Provider=OraOLEDB.Oracle;OLEDB.NET=True;LazyLoad=1;"
         '--Dim conn As New OleDb.OleDbConnection(Oradb) 'OracleConnection(oradb)
         Dim pos As Integer
-        Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        'Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.30)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = CQSCM1)));User ID=READCQUEST;Password=READCQUEST"
         Dim conn As New OracleConnection(oradb)
         Dim cmd As New OracleCommand
         Dim dr As OracleDataReader
@@ -700,7 +703,8 @@ Public Class FSearchGcent
 
         Dim myCommand As OracleCommand
         Dim dr As OracleDataReader
-        Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        'Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.30)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = CQSCM1)));User ID=READCQUEST;Password=READCQUEST"
 
         'Data Source=myOracleServer;Persist Security Info=False";
         'Dim Oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;Provider=OraOLEDB.Oracle;OLEDB.NET=True;LazyLoad=1;"
@@ -881,7 +885,8 @@ Public Class FSearchGcent
 
     'Private Sub BHistory_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BHistory.Click
     Private Sub BGcentHistory()
-        Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        'Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.30)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = CQSCM1)));User ID=READCQUEST;Password=READCQUEST"
         Dim conn As New OracleConnection(oradb)
         Dim cmd As New OracleCommand
         Dim dr As OracleDataReader
@@ -938,7 +943,8 @@ Public Class FSearchGcent
 
     'Private Sub BHistory_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BHistory.Click
     Private Sub BGlibHistory()
-        Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        'Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.30)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = CQSCM1)));User ID=READCQUEST;Password=READCQUEST"
         Dim conn As New OracleConnection(oradb)
         Dim cmd As New OracleCommand
         Dim dr As OracleDataReader
@@ -1079,7 +1085,8 @@ Public Class FSearchGcent
         Dim Ind As Integer
         Dim gcent As String
 
-        Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        'Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.30)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = CQSCM1)));User ID=READCQUEST;Password=READCQUEST"
         Dim conn As New OracleConnection(Oradb)
         Dim cmd As New OracleCommand
         Dim dr As OracleDataReader
@@ -1246,7 +1253,8 @@ sortie:
 
 
     Public Function researchCQTitle() As Cases()
-        Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        'Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.30)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = CQSCM1)));User ID=READCQUEST;Password=READCQUEST"
         Dim conn As New OracleConnection(oradb)
         Dim cmd As New OracleCommand
         Dim dr As OracleDataReader

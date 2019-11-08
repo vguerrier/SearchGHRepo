@@ -122,21 +122,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="DataSet1.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </Compile>
     <Compile Include="FSearchSelectPatch.Designer.vb">
       <DependentUpon>FSearchSelectPatch.vb</DependentUpon>
     </Compile>
     <Compile Include="FSearchSelectPatch.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FsearchEvolution.Designer.vb">
-      <DependentUpon>FsearchEvolution.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FsearchEvolution.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FSearchSelectWS.Designer.vb">
@@ -257,9 +246,6 @@
     <EmbeddedResource Include="FSearchSelectPatch.resx">
       <DependentUpon>FSearchSelectPatch.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FsearchEvolution.resx">
-      <DependentUpon>FsearchEvolution.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FSearchSelectWS.resx">
       <DependentUpon>FSearchSelectWS.vb</DependentUpon>
     </EmbeddedResource>
@@ -297,17 +283,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="DataSet1.xsc">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="DataSet1.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSet1.Designer.vb</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="DataSet1.xss">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </None>
     <None Include="My Project\app.manifest">
       <SubType>Designer</SubType>
     </None>
@@ -352,6 +327,7 @@
     <None Include="icons\putty-dark-32.png" />
     <None Include="icons\putty-dark-16.png" />
     <None Include="icons\putty-dark-24.png" />
+    <Content Include="icons\database.png" />
     <Content Include="Igh0zt-Ios7-Style-Metro-Ui-MetroUI-Other-Search.ico" />
     <None Include="Resources\search.png" />
   </ItemGroup>

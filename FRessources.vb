@@ -83,7 +83,8 @@ Public Class FRessources
     Public Function researchRes(name As String) As Integer
 
         Dim dr As OracleDataReader
-        Dim oradb As String = "Data Source=RDTOOLS;User Id=read_only;Password=read_only;"
+        'Dim oradb As String = "Data Source=RDTOOLS;User Id=read_only;Password=read_only;"
+        Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.37)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = RDTOOLS)));User ID=read_only;Password=read_only"
         Dim myCommand As OracleCommand
         Dim conn As New OracleConnection(oradb)
         Dim request As String

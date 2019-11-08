@@ -73,7 +73,10 @@ Public Class FsearchSelectPatch
         'Me.Close()
     End Sub
     Public Function researchPatch(patch As String) As Integer
-        Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        'Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.30)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = CQSCM1)));User ID=READCQUEST;Password=READCQUEST"
+
+
         Dim conn As New OracleConnection(oradb)
         Dim myCommand As New OracleCommand
         Dim dr As OracleDataReader
