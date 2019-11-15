@@ -15,6 +15,8 @@ Public Structure Cards
     Public Assigned As String
     Public Correction_Date As String
     Public External_Patch As String
+    Public CardNumber As String
+    Public CaseNumber As String
 End Structure
 
 Public Class FBacklog
@@ -196,13 +198,13 @@ Public Class FBacklog
             CQbase = "CQGOLDEVENTS"
         End If
 
-        GetGcentInfo = "select  T5.name, T1.label, Tu.login_name, T1.dateplanifauplustot + 1, T1.identificationexterne from "
+        GetGcentInfo = "select  T5.name, T1.label, Tu.login_name, T1.dateplanifauplustot + 1, T1.identificationexterne, T1.numeroreference, T1.numerofiche from "
         GetGcentInfo = GetGcentInfo & CQbase & ".anomalie T1, "
         GetGcentInfo = GetGcentInfo & CQbase & ".statedef T5, "
         GetGcentInfo = GetGcentInfo & CQbase & ".users Tu "
         GetGcentInfo = GetGcentInfo & " where T1.State = T5.ID"
         GetGcentInfo = GetGcentInfo & " And T1.assigne = Tu.dbid "
-        GetGcentInfo = GetGcentInfo & " and T1.numerofiche = '" + gcent + "'"
+        GetGcentInfo = GetGcentInfo & " and T1.numerofiche = '" + gcent + "' order by 1"
 
     End Function
 
@@ -275,6 +277,8 @@ Public Class FBacklog
                         myReader2 = SqlCmd2.ExecuteReader()
                         myReader2.Read()
                         k.item("Card Status") = myReader2.Item(0)
+                        myCards(j).CardNumber = k.item("CQ_Card")
+                        myCards(j).CaseNumber = myReader2.Item(5)
                         myCards(j).Status = myReader2.Item(0)
                         If myReader2.Item(1) IsNot DBNull.Value Then
                             k.item("Label") = myReader2.Item(1)
@@ -294,9 +298,9 @@ Public Class FBacklog
                             myCards(j).External_Patch = Replace(myReader2.Item(4), ",", "")
 
                         End If
-
+                        j = j + 1
                     End If
-                    j = j + 1
+
                 Next
                 'DGVBacklog.DataSource = MonDataSet.Tables("backlog")
                 DGVBacklog.Columns("CQ_Card").DefaultCellStyle.BackColor = Color.Yellow
@@ -700,6 +704,8 @@ Public Class FBacklog
         i = 0
         If OptGcent = 1 Then
 
+
+
             objExcel.Cells(2, 4).Value = "Card Status"
             objExcel.Cells(2, 4).Font.ColorIndex = 5
             objExcel.Cells(2, 5).Value = "Label"
@@ -743,17 +749,22 @@ Public Class FBacklog
             objExcel.Cells(j, 2).Value = DGVBacklog.Item(1, j - 3).Value
             objExcel.Cells(j, 3).Value = DGVBacklog.Item(2, j - 3).Value
             If OptGcent = 1 Then
+                For k = 0 To UBound(myCards) - LBound(myCards)
+                    If objExcel.Cells(j, 1).Value = myCards(k).CaseNumber Then
+                        objExcel.Cells(j, 4).Value = myCards(k).Status
+                        objExcel.Cells(j, 5).Value = myCards(k).Label
+                        objExcel.Cells(j, 6).Value = myCards(k).Assigned
+                        objExcel.Cells(j, 7).Value = myCards(k).Correction_Date
+                        objExcel.Cells(j, 8).Value = myCards(k).External_Patch
+                    End If
+                Next
 
-                objExcel.Cells(j, 4).Value = myCards(j - 3).Status
-                objExcel.Cells(j, 5).Value = myCards(j - 3).Label
-                objExcel.Cells(j, 6).Value = myCards(j - 3).Assigned
-                objExcel.Cells(j, 7).Value = myCards(j - 3).Correction_Date
-                objExcel.Cells(j, 8).Value = myCards(j - 3).External_Patch
+
 
                 'objExcel.Cells(j, 9).Value = DGVBacklog.Item(8, j - 3).Value
                 'objExcel.Cells(j, 10).Value = DGVBacklog.Item(9, j - 3).Value
 
-                i = 5
+                i = 6
             End If
             objExcel.Cells(j, 3 + i).Value = DGVBacklog.Item(2, j - 3).Value
             objExcel.Cells(j, 4 + i).Value = DGVBacklog.Item(3, j - 3).Value
