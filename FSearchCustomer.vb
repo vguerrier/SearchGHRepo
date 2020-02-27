@@ -52,7 +52,7 @@ Public Structure Cus
 End Structure
 
 Module MyModule
-    Public Const NbCusmax = 50
+    Public Const NbCusmax = 100
     Public Customers As Cus
     Declare Auto Function FindWindow Lib "User32.dll" (ByVal lpClassName As String, ByVal lpWindowName As String) As IntPtr
     Public Declare Function IsWindowVisible Lib "User32" Alias "IsWindowVisible" (ByVal hWnd As IntPtr) As Boolean

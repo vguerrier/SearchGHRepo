@@ -59,7 +59,8 @@ Public Class FBacklog
                 RequestBacklog = RequestBacklog & "c.aldata_workstreamname as Workstream, "               '13
 
                 RequestBacklog = RequestBacklog & "CONVERT(date,c.createdonutc,103) as ""Created_Date"", "                        '14
-                RequestBacklog = RequestBacklog & "CONVERT(date,c.sfmig_laststatuschangeutc,103) as ""LastStatusDate"" "           '15
+                RequestBacklog = RequestBacklog & "CONVERT(date,c.sfmig_laststatuschangeutc,103) as ""LastStatusDate"", "           '15
+                RequestBacklog = RequestBacklog & "c.aldata_versionidname as ""Version"" "                         '16
 
         End Select
         'RequestBacklog = RequestBacklog & "c.sfmig_truelastmodifieddateutc, "       '15
@@ -136,7 +137,8 @@ Public Class FBacklog
                 RequestBacklogClosed = RequestBacklogClosed & "c.aldata_workstreamname as Workstream, "               '13
 
                 RequestBacklogClosed = RequestBacklogClosed & "CONVERT(date,c.createdonutc,103) as ""Created_Date"", "                        '14
-                RequestBacklogClosed = RequestBacklogClosed & "CONVERT(date,c.sfmig_laststatuschangeutc,103) as ""LastStatusDate"" "           '15
+                RequestBacklogClosed = RequestBacklogClosed & "CONVERT(date,c.sfmig_laststatuschangeutc,103) as ""LastStatusDate"", "           '15
+                RequestBacklogClosed = RequestBacklogClosed & "c.aldata_versionidname as ""Version"" "                         '16
                 RequestBacklogClosed = RequestBacklogClosed & RequestBacklogClosedGen(Client, Optgcent)
 
 
@@ -145,8 +147,8 @@ Public Class FBacklog
         'RequestBacklogClosed = RequestBacklogClosed & "c.sfmig_srclientnumber, "                '16
         'RequestBacklogClosed = RequestBacklogClosed & "c.sfmig_prodenvtname, "                  '17
         'RequestBacklogClosed = RequestBacklogClosed & "cq.aldata_assignedto, "                  '18
-        'RequestBacklogClosed = RequestBacklogClosed & "cq.aldata_label as Label, "                       '19
-        'RequestBacklogClosed = RequestBacklogClosed & "cq.aldata_state as ""CQ State"", "                       '20
+        'RequestBacklogClosed = RequestBacklogClosed & "cq.aldata_label As Label, "                       '19
+        'RequestBacklogClosed = RequestBacklogClosed & "cq.aldata_state As ""CQ State"", "                       '20
         'RequestBacklogClosed = RequestBacklogClosed & "c.aldata_assignedpersonname, "           '21
         'RequestBacklogClosed = RequestBacklogClosed & "c.sfmig_rejectedsolutionscount, "        '22
         'RequestBacklogClosed = RequestBacklogClosed & "c.sfmig_targetpatch, "                   '24
@@ -163,15 +165,15 @@ Public Class FBacklog
         If Optgcent = 0 Then
             RequestBacklogClosedGen = "FROM FilteredIncident c "
         Else
-            RequestBacklogClosedGen = "FROM FilteredIncident c WITH (NOLOCK) "
-            RequestBacklogClosedGen = RequestBacklogClosedGen & "LEFT OUTER JOIN Filteredaldata_clearquestbug cq WITH (NOLOCK) ON c.incidentid = cq.aldata_case "
+            RequestBacklogClosedGen = "FROM FilteredIncident c With (NOLOCK) "
+            RequestBacklogClosedGen = RequestBacklogClosedGen & "LEFT OUTER JOIN Filteredaldata_clearquestbug cq With (NOLOCK) On c.incidentid = cq.aldata_case "
         End If
 
 
         RequestBacklogClosedGen = RequestBacklogClosedGen & "WHERE 1 = 1 "
         'Si opt = 1 alors on veut les cases fermés
-        RequestBacklogClosedGen = RequestBacklogClosedGen & "and c.statuscode = 5 /*5=closed;6=cancelled,129770007=livre*/ "
-        RequestBacklogClosedGen = RequestBacklogClosedGen & "and c.customeridname like '%" & Client & "%' "
+        RequestBacklogClosedGen = RequestBacklogClosedGen & "And c.statuscode = 5 /*5=closed;6=cancelled,129770007=livre*/ "
+        RequestBacklogClosedGen = RequestBacklogClosedGen & "And c.customeridname Like '%" & Client & "%' "
         RequestBacklogClosedGen = RequestBacklogClosedGen & "order by LastStatusDate desc) as ClosedReq"
 
 
@@ -472,6 +474,7 @@ Public Class FBacklog
         DGVBacklog.Columns("Workstream").DisplayIndex = 9 + i
         DGVBacklog.Columns("Created_Date").DisplayIndex = 10 + i
         DGVBacklog.Columns("LastStatusDate").DisplayIndex = 11 + i
+        DGVBacklog.Columns("Version").DisplayIndex = 12 + i
     End Sub
 
     Private Sub DGVBacklog_CellContentDoubleClick(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DGVBacklog.CellContentDoubleClick
@@ -738,6 +741,8 @@ Public Class FBacklog
         objExcel.Cells(2, 11 + i).Font.ColorIndex = 5
         objExcel.Cells(2, 12 + i).Value = "LastStatusDate"
         objExcel.Cells(2, 12 + i).Font.ColorIndex = 5
+        objExcel.Cells(2, 13 + i).Value = "Version"
+        objExcel.Cells(2, 13 + i).Font.ColorIndex = 5
 
         'Export Each Row Start
         i = 0
@@ -776,12 +781,13 @@ Public Class FBacklog
             objExcel.Cells(j, 10 + i).Value = DGVBacklog.Item(9, j - 3).Value
             objExcel.Cells(j, 11 + i).Value = DGVBacklog.Item(10, j - 3).Value
             objExcel.Cells(j, 12 + i).Value = DGVBacklog.Item(11, j - 3).Value
+            objExcel.Cells(j, 13 + i).Value = DGVBacklog.Item(12, j - 3).Value
             'Loop
         Next
 
         ' Autofit des cellules Excel
 
-        objExcel.Columns("A:N").Select()
+        objExcel.Columns("A:O").Select()
         objExcel.Selection.Columns.AutoFit()
         objExcel.Range("A1").Select()
         'Export Each Row End
