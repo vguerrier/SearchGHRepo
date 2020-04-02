@@ -15,6 +15,7 @@ Public Structure Cards
     Public Assigned As String
     Public Correction_Date As String
     Public External_Patch As String
+    Public Domain As String
     Public CardNumber As String
     Public CaseNumber As String
 End Structure
@@ -200,13 +201,15 @@ Public Class FBacklog
             CQbase = "CQGOLDEVENTS"
         End If
 
-        GetGcentInfo = "select  T5.name, T1.label, Tu.login_name, T1.dateplanifauplustot + 1, T1.identificationexterne, T1.numeroreference, T1.numerofiche from "
+        GetGcentInfo = "select  T5.name, T1.label, Tu.login_name, T1.dateplanifauplustot + 1, T1.identificationexterne, T1.numeroreference, T1.numerofiche, Td.Name from "
         GetGcentInfo = GetGcentInfo & CQbase & ".anomalie T1, "
         GetGcentInfo = GetGcentInfo & CQbase & ".statedef T5, "
-        GetGcentInfo = GetGcentInfo & CQbase & ".users Tu "
+        GetGcentInfo = GetGcentInfo & CQbase & ".users Tu, "
+        GetGcentInfo = GetGcentInfo & CQbase & ".domainrecord Td "
         GetGcentInfo = GetGcentInfo & " where T1.State = T5.ID"
         GetGcentInfo = GetGcentInfo & " And T1.assigne = Tu.dbid "
-        GetGcentInfo = GetGcentInfo & " and T1.numerofiche = '" + gcent + "' order by 1"
+        GetGcentInfo = GetGcentInfo & " and T1.Domain_1 = Td.Dbid "
+        GetGcentInfo = GetGcentInfo & " And T1.numerofiche = '" + gcent + "' order by 1"
 
     End Function
 
@@ -264,6 +267,7 @@ Public Class FBacklog
                 MonDataSet.Tables("backlog").Columns.Add("Assigned", GetType(String))
                 MonDataSet.Tables("backlog").Columns.Add("Correction Date", GetType(String))
                 MonDataSet.Tables("backlog").Columns.Add("External Patch", GetType(String))
+                MonDataSet.Tables("backlog").Columns.Add("Domain", GetType(String))
 
                 'Ta.label, Tu.login_name, Ta.dateplanifauplustot + 1, Ta.RETROFITCARD retrofit
                 SqlConn2.Open()
@@ -300,6 +304,11 @@ Public Class FBacklog
                             myCards(j).External_Patch = Replace(myReader2.Item(4), ",", "")
 
                         End If
+                        If myReader2.Item(7) IsNot DBNull.Value Then
+                            k.item("Domain") = Replace(myReader2.Item(7), ",", "")
+                            myCards(j).Domain = Replace(myReader2.Item(7), ",", "")
+
+                        End If
                         j = j + 1
                     End If
 
@@ -311,6 +320,7 @@ Public Class FBacklog
                 DGVBacklog.Columns("Assigned").DefaultCellStyle.BackColor = Color.Yellow
                 DGVBacklog.Columns("Correction Date").DefaultCellStyle.BackColor = Color.Yellow
                 DGVBacklog.Columns("External Patch").DefaultCellStyle.BackColor = Color.Yellow
+                DGVBacklog.Columns("Domain").DefaultCellStyle.BackColor = Color.Yellow
             End If
             'DGVBacklog.DataSource = MonDataSet.Tables("backlog")
 
@@ -462,7 +472,8 @@ Public Class FBacklog
             DGVBacklog.Columns("Assigned").DisplayIndex = 5
             DGVBacklog.Columns("Correction Date").DisplayIndex = 6
             DGVBacklog.Columns("External Patch").DisplayIndex = 7
-            i = 6
+            DGVBacklog.Columns("Domain").DisplayIndex = 8
+            i = 7
         End If
         DGVBacklog.Columns("State").DisplayIndex = 2 + i
         DGVBacklog.Columns("Priority").DisplayIndex = 3 + i
@@ -719,7 +730,9 @@ Public Class FBacklog
             objExcel.Cells(2, 7).Font.ColorIndex = 5
             objExcel.Cells(2, 8).Value = "External Patch"
             objExcel.Cells(2, 8).Font.ColorIndex = 5
-            i = 6
+            objExcel.Cells(2, 9).Value = "Domain"
+            objExcel.Cells(2, 9).Font.ColorIndex = 5
+            i = 7
         End If
         objExcel.Cells(2, 3 + i).Value = "State"
         objExcel.Cells(2, 3 + i).Font.ColorIndex = 5
@@ -761,6 +774,7 @@ Public Class FBacklog
                         objExcel.Cells(j, 6).Value = myCards(k).Assigned
                         objExcel.Cells(j, 7).Value = myCards(k).Correction_Date
                         objExcel.Cells(j, 8).Value = myCards(k).External_Patch
+                        objExcel.Cells(j, 9).Value = myCards(k).Domain
                     End If
                 Next
 
@@ -769,25 +783,25 @@ Public Class FBacklog
                 'objExcel.Cells(j, 9).Value = DGVBacklog.Item(8, j - 3).Value
                 'objExcel.Cells(j, 10).Value = DGVBacklog.Item(9, j - 3).Value
 
-                i = 6
+                i = 7
             End If
-            objExcel.Cells(j, 3 + i).Value = DGVBacklog.Item(2, j - 3).Value
-            objExcel.Cells(j, 4 + i).Value = DGVBacklog.Item(3, j - 3).Value
-            objExcel.Cells(j, 5 + i).Value = DGVBacklog.Item(4, j - 3).Value
-            objExcel.Cells(j, 6 + i).Value = DGVBacklog.Item(5, j - 3).Value
-            objExcel.Cells(j, 7 + i).Value = DGVBacklog.Item(6, j - 3).Value
-            objExcel.Cells(j, 8 + i).Value = DGVBacklog.Item(7, j - 3).Value
-            objExcel.Cells(j, 9 + i).Value = DGVBacklog.Item(8, j - 3).Value
-            objExcel.Cells(j, 10 + i).Value = DGVBacklog.Item(9, j - 3).Value
-            objExcel.Cells(j, 11 + i).Value = DGVBacklog.Item(10, j - 3).Value
-            objExcel.Cells(j, 12 + i).Value = DGVBacklog.Item(11, j - 3).Value
-            objExcel.Cells(j, 13 + i).Value = DGVBacklog.Item(12, j - 3).Value
+            objExcel.Cells(j, 3 + i).Value = DGVBacklog.Item(3, j - 3).Value
+            objExcel.Cells(j, 4 + i).Value = DGVBacklog.Item(4, j - 3).Value
+            objExcel.Cells(j, 5 + i).Value = DGVBacklog.Item(5, j - 3).Value
+            objExcel.Cells(j, 6 + i).Value = DGVBacklog.Item(6, j - 3).Value
+            objExcel.Cells(j, 7 + i).Value = DGVBacklog.Item(7, j - 3).Value
+            objExcel.Cells(j, 8 + i).Value = DGVBacklog.Item(8, j - 3).Value
+            objExcel.Cells(j, 9 + i).Value = DGVBacklog.Item(9, j - 3).Value
+            objExcel.Cells(j, 10 + i).Value = DGVBacklog.Item(10, j - 3).Value
+            objExcel.Cells(j, 11 + i).Value = DGVBacklog.Item(11, j - 3).Value
+            objExcel.Cells(j, 12 + i).Value = DGVBacklog.Item(12, j - 3).Value
+            objExcel.Cells(j, 13 + i).Value = DGVBacklog.Item(13, j - 3).Value
             'Loop
         Next
 
         ' Autofit des cellules Excel
 
-        objExcel.Columns("A:O").Select()
+        objExcel.Columns("A:P").Select()
         objExcel.Selection.Columns.AutoFit()
         objExcel.Range("A1").Select()
         'Export Each Row End
