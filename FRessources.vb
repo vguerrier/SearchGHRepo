@@ -80,6 +80,25 @@ Public Class FRessources
 
     End Function
 
+    Function RequestRessourceCountCQ(name As String) As String
+
+        RequestRessourceCountCQ = "Select count(*) From cqcentral.users u "
+        RequestRessourceCountCQ = RequestRessourceCountCQ & "Where lower(u.login_name) = lower('" + Trim(name) + "') "
+        RequestRessourceCountCQ = RequestRessourceCountCQ & "Or lower(u.fullname) = lower('" + Trim(name) + "') "
+
+
+
+
+    End Function
+
+    Function RequestRessourceCQ(name As String) As String
+
+        RequestRessourceCQ = "Select u.is_active, u.login_name, u.fullname, u.email From cqcentral.users u "
+        RequestRessourceCQ = RequestRessourceCQ & "Where lower(u.login_name) = lower('" + Trim(name) + "') "
+        RequestRessourceCQ = RequestRessourceCQ & "Or lower(u.fullname) = lower('" + Trim(name) + "') "
+
+    End Function
+
     Public Function researchRes(name As String) As Integer
 
         Dim dr As OracleDataReader
@@ -251,6 +270,78 @@ Public Class FRessources
         End If
     End Function
 
+    Public Function researchResCQ(name As String) As Integer
+
+        Dim dr As OracleDataReader
+        'Dim oradb As String = "Data Source=RDTOOLS;User Id=read_only;Password=read_only;"
+        Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.30)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = CQSCM1)));User ID=READCQUEST;Password=READCQUEST"
+        Dim myCommand As OracleCommand
+        Dim conn As New OracleConnection(oradb)
+        Dim request As String
+
+
+        Bnext.Visible = False
+        BBack.Visible = False
+        'Dim Tressource() As ressource
+
+        'opening the connection count
+        nbrow = 0
+        conn.Open()
+
+        request = RequestRessourceCountCQ(Replace(name, "'", "''"))
+        myCommand = conn.CreateCommand()
+        myCommand.CommandText = request
+        dr = myCommand.ExecuteReader()
+        'remplissage du treeview
+        researchResCQ = 0
+        dr.Read()
+        nbrow = dr.GetValue(0)
+        conn.Close()
+
+        ReDim Tressource(nbrow)
+
+
+
+        'opening the connection
+        conn.Open()
+
+        request = RequestRessourceCQ(Replace(name, "'", "''"))
+        myCommand = conn.CreateCommand()
+        myCommand.CommandText = request
+        dr = myCommand.ExecuteReader()
+        'remplissage du treeview
+        researchResCQ = 0
+
+        If nbrow > 1 Then
+            Bnext.Visible = True
+
+        End If
+
+        If nbrow = 0 Then
+            researchResCQ = 0
+            Me.Close()
+            Exit Function
+        Else researchResCQ = nbrow
+        End If
+
+        Dim nb = 0
+        While dr.Read()
+            TBName.Text = dr.GetValue(2)
+            TBCQLogin.Text = dr.GetValue(1)
+            TBEmail.Text = dr.GetValue(3)
+
+            If dr.GetValue(0) = 1 Then
+                LBactual.ForeColor = Color.Red
+                LBactual.Text = "CQ Search : Active"
+            Else
+                LBactual.ForeColor = Color.Black
+                LBactual.Text = "CQ Search : Inactive"
+            End If
+            nb = nb + 1
+
+        End While
+
+    End Function
 
 
     Sub Extract_AD_UserName_And_UserLogin()

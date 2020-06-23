@@ -211,6 +211,14 @@ Public Class FSearch
                             End If
                         End If
 
+                        If ret = 0 Then
+                            'recherche sur les infos Ressources
+                            ret = FRessources.researchResCQ(Me.MSTSearch.Text)
+                            If ret <> 0 Then
+                                FRessources.Show()
+                            End If
+                        End If
+
                         'recherche RFE et Workstream
                         If ret = 0 Then
                             retRFE = FSearchRFE.researchRFE(Me.MSTSearch.Text)

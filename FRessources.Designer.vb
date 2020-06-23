@@ -459,7 +459,7 @@ Partial Class FRessources
         Me.Button2.FlatAppearance.BorderSize = 0
         Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button2.Image = Global.WindowsApplication1.My.Resources.Resources.Mail_i
-        Me.Button2.Location = New System.Drawing.Point(97, 54)
+        Me.Button2.Location = New System.Drawing.Point(158, 54)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(50, 50)
         Me.Button2.TabIndex = 154
