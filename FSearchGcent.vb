@@ -1198,7 +1198,11 @@ sortie:
         If FRessources.researchRes(TBAssigned.Text) <> 0 Then
             FRessources.Show()
         Else
-            MessageBox.Show("Not a R&D Ressource", "Warning", MessageBoxButtons.OKCancel)
+            If FRessources.researchResCQ(TBAssigned.Text) <> 0 Then
+                FRessources.Show()
+            Else
+                MessageBox.Show("Not a R&D Ressource", "Warning", MessageBoxButtons.OKCancel)
+            End If
         End If
     End Sub
 
