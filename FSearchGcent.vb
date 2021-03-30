@@ -82,7 +82,9 @@ Public Class FSearchGcent
         If InStr(Card, "GEVEN") > 0 Then
             CQbase = "CQGOLDEVENTS"
         End If
-
+        If InStr(Card, "GAUTO") > 0 Then
+            CQbase = "CQGAUTO"
+        End If
 
         Request = " select Ta.numerofiche,"             '0
         Request = Request & " Ta.titre,"                '1
@@ -181,6 +183,9 @@ Public Class FSearchGcent
         If InStr(Card, "GEVEN") > 0 Then
             CQbase = "CQGOLDEVENTS"
         End If
+        If InStr(Card, "GAUTO") > 0 Then
+            CQbase = "CQGAUTO"
+        End If
 
         Request = " select Ta.numerofiche, Tat.filename from "
         Request = Request & CQbase & ".anomalie     Ta,"
@@ -255,6 +260,9 @@ Public Class FSearchGcent
         If InStr(Card, "GEVEN") > 0 Then
             CQbase = "CQGOLDEVENTS"
         End If
+        If InStr(Card, "GAUTO") > 0 Then
+            CQbase = "CQGAUTO"
+        End If
 
         RequestGcentHistory = "select distinct T1.DBID,"
         RequestGcentHistory = RequestGcentHistory & " T1.action_timestamp,"
@@ -323,6 +331,9 @@ Public Class FSearchGcent
         End If
         If InStr(gcent, "GEVEN") > 0 Then
             CQbase = "CQGOLDEVENTS"
+        End If
+        If InStr(gcent, "GAUTO") > 0 Then
+            CQbase = "CQGAUTO"
         End If
 
         GetGcentRetInfo = "select   s.name, a.label, a.numerofiche from  "
@@ -1246,6 +1257,9 @@ sortie:
         If InStr(base, "GLIB") > 0 Then
             CQbase = "cqglib"
         End If
+        If InStr(base, "GAUTO") > 0 Then
+            CQbase = "CQGAUTO"
+        End If
 
         Request = " Select a.numerofiche, a.titre from "
         Request = Request & CQbase & ".anomalie a "
@@ -1265,7 +1279,7 @@ sortie:
         Dim req As String
         Dim NbRow As Integer
         Dim LstCase() As Cases
-        Dim Lstbase() As String = {"cqcentral", "GTOP", "GADMI", "GSTOC", "GTRAC", "GCAS", "GEVEN", "GLIB"}
+        Dim Lstbase() As String = {"cqcentral", "GTOP", "GADMI", "GSTOC", "GTRAC", "GCAS", "GEVEN", "GLIB", "GAUTO"}
 
         LstCase = Nothing
         NbRow = 0

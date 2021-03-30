@@ -249,7 +249,7 @@ Public Class FSearchRFE
             'link
             If dr.GetValue(13) IsNot DBNull.Value Then
 
-                LbLink.Text = "https://rdtools.eyc.com:5577/rfe/rfe4.html?screen=27&gap_ident=" + CStr(dr.GetValue(13))
+                LbLink.Text = "https://rfe.eyc.com/rfe/rfe6.html?screen=27&gap_ident=" + CStr(dr.GetValue(13))
 
             End If
         End If

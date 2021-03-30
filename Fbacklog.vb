@@ -200,6 +200,9 @@ Public Class FBacklog
         If InStr(gcent, "GEVEN") > 0 Then
             CQbase = "CQGOLDEVENTS"
         End If
+        If InStr(gcent, "GAUTO") > 0 Then
+            CQbase = "CQGAUTO"
+        End If
 
         GetGcentInfo = "select  T5.name, T1.label, Tu.login_name, T1.dateplanifauplustot + 1, T1.identificationexterne, T1.numeroreference, T1.numerofiche, Td.Name from "
         GetGcentInfo = GetGcentInfo & CQbase & ".anomalie T1, "

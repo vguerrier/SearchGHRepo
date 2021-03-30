@@ -148,6 +148,12 @@ Public Class FSearchCase
         If InStr(gcent, "GEVEN") > 0 Then
             CQbase = "CQGOLDEVENTS"
         End If
+        If InStr(gcent, "GEVEN") > 0 Then
+            CQbase = "CQGOLDEVENTS"
+        End If
+        If InStr(gcent, "GAUTO") > 0 Then
+            CQbase = "CQGAUTO"
+        End If
 
         GetGcentInfo = "select  T5.name,T1.label, T1.identificationexterne from "
         GetGcentInfo = GetGcentInfo & CQbase & ".anomalie T1,"

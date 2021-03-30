@@ -616,7 +616,8 @@ Fin:
         'pour cela via les fonction dans user32.dll, on récupère la main sur la fenêtre et on la restore.
         Try
             'on lance putty sur le serveur
-            Shell("C:\Program Files (x86)\putty\putty.exe " & TBServer.Text)
+            Shell("C:\Program Files\putty\putty.exe " & TBServer.Text)
+
 
             'on recherche la fenêtre par son titre, pour cela il faut qu'on trouve le nom de la fenêtre :
             '<servername> & ".eyc.com - Putty"
