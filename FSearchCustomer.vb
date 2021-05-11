@@ -184,8 +184,8 @@ Public Class FCustomer
 
 
     Public Function researchCus() As Integer
-        'Dim oradb As String = "Data Source=RDTOOLS;User Id=read_only;Password=read_only;"
-        Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.37)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = RDTOOLS)));User ID=read_only;Password=read_only"
+        'Dim oradb As String = "Data Source=RDTOOLS;User Id=READ_ONLY;Password=READ_ONLY;"
+        Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.37)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = RDTOOLS)));User ID=READ_ONLY;Password=READ_ONLY"
         Dim conn As New OracleConnection(oradb)
         Dim myCommand As New OracleCommand
         Dim dr As OracleDataReader
