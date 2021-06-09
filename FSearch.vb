@@ -195,7 +195,6 @@ Public Class FSearch
                         If ret = 0 Then
                             'recherche sur les infos clients
                             FCustomer.TBCus.Text = Me.MSTSearch.Text
-
                             ret = FCustomer.researchCus()
                             If ret <> 0 Then
                                 'FCustomer.Show()

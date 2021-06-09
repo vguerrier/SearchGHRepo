@@ -182,16 +182,41 @@ Public Class FCustomer
         FoundEnv = i
     End Function
 
+    Public Function Test() As Integer
+        Dim dr As OracleDataReader
+        'Dim oradb As String = "Data Source=RDTOOLS;User Id=READ_ONLY;Password=READ_ONLY;"
+        Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.133)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = RDTOOLS)));User ID=READ_ONLY;Password=READ_ONLY"
+        Dim myCommand As OracleCommand
+        Dim conn As New OracleConnection(oradb)
+        Dim request As String
+
+
+        'Dim Tressource() As ressource
+
+        'opening the connection count
+        conn.Open()
+
+        request = "Select t.p_customer from V_INFRA_BRANCH t "
+        myCommand = conn.CreateCommand()
+        myCommand.CommandText = request
+        dr = myCommand.ExecuteReader()
+        Return 0
+
+    End Function
 
     Public Function researchCus() As Integer
         'Dim oradb As String = "Data Source=RDTOOLS;User Id=READ_ONLY;Password=READ_ONLY;"
-        Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.37)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = RDTOOLS)));User ID=READ_ONLY;Password=READ_ONLY"
+        'Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.133)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = RDTOOLS)));User ID=READ_ONLY;Password=READ_ONLY"
+        Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.133)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = RDTOOLS)));User ID=READ_ONLY;Password=READ_ONLY"
+
+
         Dim conn As New OracleConnection(oradb)
         Dim myCommand As New OracleCommand
         Dim dr As OracleDataReader
 
-        'Dim oradb2 As String = "Data Source=RDTOOLS;User Id=RFE_READ;Password=RFE_READ;"
-        Dim oradb2 As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.37)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = RDTOOLS)));User ID=RFE_READ;Password=RFE_READ"
+        'Dim oradb2 As String = "Data Source=RDTOOLS;User Id=RFE_DEV;Password=RFE_DEV;"
+        Dim oradb2 As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.133)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = RDTOOLS)));User ID=RFE_DEV;Password=RFE_DEV"
+        'Dim oradb2 As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.133)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = RDTOOLS)));User ID=READ_ONLY;Password=READ_ONLY"
         Dim conn2 As New OracleConnection(oradb2)
 
         Dim conn3 As New OracleConnection(oradb)
@@ -237,6 +262,7 @@ Public Class FCustomer
         Dim request As String = RequestBacklog(Replace(Trim(TBCus.Text), "'", "''"))
         myCommand = conn.CreateCommand()
         myCommand.CommandText = request
+
         dr = myCommand.ExecuteReader()
         nbBranch = 0
         nbenv = 0
