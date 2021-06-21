@@ -103,7 +103,7 @@ Public Class FRessources
         Dim dr As OracleDataReader
         'Dim oradb As String = "Data Source=RDTOOLS;User Id=READ_ONLY;Password=READ_ONLY;"
         'Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.133)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = RDTOOLS)));User ID=READ_ONLY;Password=READ_ONLY"
-        Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.133)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = RDTOOLS)));User ID=RFE_DEV;Password=RFE_DEV"
+        Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.133)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = RDTOOLS)));User ID=RFE_READ;Password=RFE_READ"
         Dim myCommand As OracleCommand
         Dim conn As New OracleConnection(oradb)
         Dim request As String

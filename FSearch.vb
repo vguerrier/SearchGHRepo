@@ -132,244 +132,276 @@ Public Class FSearch
                     FCustomer.researchCus()
                     MCBBranch.Checked = False
                 Else
-                    If MCBTitle.Checked = False Then
-
-
-
-                        If InStr(Trim(Me.MSTSearch.Text), "GCENT") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GTOP") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GADMI") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GSTOC") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GTRAC") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GCAS") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GAUTO") > 0 Then
-                            'on recherche une GCENT
-                            'on va ouvrir la form GCENT
-
-                            FSearchGcent.TBGcent.Text = Me.MSTSearch.Text
-                            FSearchGcent.Show()
-                            ret = FSearchGcent.researchCQ()
+                    If MCB_RFE.Checked Then
+                        'recherche par RFE
+                        retRFE = FSearchRFE.researchRFE(Me.MSTSearch.Text)
+                        If retRFE = 0 Then
+                            ret = FSearchWorkstream.researchWS(Me.MSTSearch.Text)
+                            If ret <> 0 Then
+                                FSearchWorkstream.Show()
+                            End If
                         Else
-                            If InStr(Trim(Me.MSTSearch.Text), "GLIB") > 0 Then
+                            'si on trouve un rfe on va chercher aussi si on a un workstream car ils peuvent avoir le même nom
+                            ret = FSearchWorkstream.researchWS(Me.MSTSearch.Text)
+                            If ret = 0 And retRFE = 1 Then
+                                FSearchRFE.Show()
+                            Else
+                                If ret <> 0 And retRFE = 0 Then
+                                    FSearchWorkstream.Show()
+                                Else
+                                    'on a le cas où on a un RFE et un workstream avec le même nom. on propose le choix.
+                                    For Each frm In Application.OpenForms
+                                        '    'Si son nom est celui que l'on cherche
+                                        If frm.Name = Trim("FSearchSelect") Then
+                                            FSearchSelect.Close()
+                                            Exit For
+                                        End If
+                                    Next
+
+                                    FSearchSelect.Show()
+                                    FSearchSelect.List(Me.MSTSearch.Text, "RFE")
+                                    FSearchSelect.List(Me.MSTSearch.Text, "Workstream")
+                                End If
+
+                            End If
+                            ret = 1
+                        End If
+                        MCB_RFE.Checked = False
+                    Else
+                        If MCBTitle.Checked = False Then
+                            If InStr(Trim(Me.MSTSearch.Text), "GCENT") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GTOP") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GADMI") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GSTOC") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GTRAC") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GCAS") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GAUTO") > 0 Then
                                 'on recherche une GCENT
                                 'on va ouvrir la form GCENT
-                                Dim toto = Me.MSTSearch.Text
+
                                 FSearchGcent.TBGcent.Text = Me.MSTSearch.Text
                                 FSearchGcent.Show()
-                                ret = FSearchGcent.researchGlib()
+                                ret = FSearchGcent.researchCQ()
                             Else
-                                'on recherche un case
-                                'on va ouvrir la form CASE
-                                FSearchCase.RTBCase.Text = Me.MSTSearch.Text
-                                'FSearchCase.Show()
-                                If MMCBCusCase.Checked Then
-                                    ' on recherche par numéro du client
-                                    ret = FSearchCase.researchCase(1)
-                                    If ret <> 0 Then
-                                        FSearchCase.Show()
-                                    End If
-
-                                    MCBCusCase.Checked = False
+                                If InStr(Trim(Me.MSTSearch.Text), "GLIB") > 0 Then
+                                    'on recherche une GCENT
+                                    'on va ouvrir la form GCENT
+                                    Dim toto = Me.MSTSearch.Text
+                                    FSearchGcent.TBGcent.Text = Me.MSTSearch.Text
+                                    FSearchGcent.Show()
+                                    ret = FSearchGcent.researchGlib()
                                 Else
-                                    ret = FSearchCase.researchCase(0)
-                                    If ret <> 0 Then
-                                        FSearchCase.Show()
-                                    End If
-                                    MCBCusCase.Checked = False
-                                End If
-                                'End If
-                            End If
-                        End If
+                                    'on recherche un case
+                                    'on va ouvrir la form CASE
+                                    FSearchCase.RTBCase.Text = Me.MSTSearch.Text
+                                    'FSearchCase.Show()
+                                    If MMCBCusCase.Checked Then
+                                        ' on recherche par numéro du client
+                                        ret = FSearchCase.researchCase(1)
+                                        If ret <> 0 Then
+                                            FSearchCase.Show()
+                                        End If
 
-                        'recherche patch externe
-                        If ret = 0 Then
-                            For Each frm In Application.OpenForms
-                                '    'Si son nom est celui que l'on cherche
-                                If frm.Name = Trim("FsearchSelectPatch") Then
-                                    FsearchSelectPatch.Close()
-                                    Exit For
-                                End If
-                            Next
-                            retPatch = FsearchSelectPatch.researchPatch(Me.MSTSearch.Text)
-                            ret = retPatch
-                            If ret <> 0 Then
-
-                                FsearchSelectPatch.Show()
-                            End If
-                        End If
-
-                        If ret = 0 Then
-                            'recherche sur les infos clients
-                            FCustomer.TBCus.Text = Me.MSTSearch.Text
-                            ret = FCustomer.researchCus()
-                            If ret <> 0 Then
-                                'FCustomer.Show()
-                            End If
-                            MCBBranch.Checked = False
-                        End If
-
-                        If ret = 0 Then
-                            'recherche sur les infos Ressources
-                            ret = FRessources.researchRes(Me.MSTSearch.Text)
-                            If ret <> 0 Then
-                                FRessources.Show()
-                            End If
-                        End If
-
-                        If ret = 0 Then
-                            'recherche sur les infos Ressources
-                            ret = FRessources.researchResCQ(Me.MSTSearch.Text)
-                            If ret <> 0 Then
-                                FRessources.Show()
-                            End If
-                        End If
-
-                        'recherche RFE et Workstream
-                        If ret = 0 Then
-                            retRFE = FSearchRFE.researchRFE(Me.MSTSearch.Text)
-                            If retRFE = 0 Then
-                                ret = FSearchWorkstream.researchWS(Me.MSTSearch.Text)
-                                If ret <> 0 Then
-                                    FSearchWorkstream.Show()
-                                End If
-                            Else
-                                'si on trouve un rfe on va chercher aussi si on a un workstream car ils peuvent avoir le même nom
-                                ret = FSearchWorkstream.researchWS(Me.MSTSearch.Text)
-                                If ret = 0 And retRFE = 1 Then
-                                    FSearchRFE.Show()
-                                Else
-                                    If ret <> 0 And retRFE = 0 Then
-                                        FSearchWorkstream.Show()
+                                        MCBCusCase.Checked = False
                                     Else
-                                        'on a le cas où on a un RFE et un workstream avec le même nom. on propose le choix.
-                                        For Each frm In Application.OpenForms
-                                            '    'Si son nom est celui que l'on cherche
-                                            If frm.Name = Trim("FSearchSelect") Then
-                                                FSearchSelect.Close()
-                                                Exit For
-                                            End If
-                                        Next
-
-                                        FSearchSelect.Show()
-                                        FSearchSelect.List(Me.MSTSearch.Text, "RFE")
-                                        FSearchSelect.List(Me.MSTSearch.Text, "Workstream")
+                                        ret = FSearchCase.researchCase(0)
+                                        If ret <> 0 Then
+                                            FSearchCase.Show()
+                                        End If
+                                        MCBCusCase.Checked = False
                                     End If
-
+                                    'End If
                                 End If
-                                ret = 1
+                            End If
+
+                            'recherche patch externe
+                            If ret = 0 Then
+                                For Each frm In Application.OpenForms
+                                    '    'Si son nom est celui que l'on cherche
+                                    If frm.Name = Trim("FsearchSelectPatch") Then
+                                        FsearchSelectPatch.Close()
+                                        Exit For
+                                    End If
+                                Next
+                                retPatch = FsearchSelectPatch.researchPatch(Me.MSTSearch.Text)
+                                ret = retPatch
+                                If ret <> 0 Then
+
+                                    FsearchSelectPatch.Show()
+                                End If
+                            End If
+
+                            If ret = 0 Then
+                                'recherche sur les infos clients
+                                FCustomer.TBCus.Text = Me.MSTSearch.Text
+                                ret = FCustomer.researchCus()
+                                If ret <> 0 Then
+                                    'FCustomer.Show()
+                                End If
+                                MCBBranch.Checked = False
+                            End If
+
+                            If ret = 0 Then
+                                'recherche sur les infos Ressources
+                                ret = FRessources.researchRes(Me.MSTSearch.Text)
+                                If ret <> 0 Then
+                                    FRessources.Show()
+                                End If
+                            End If
+
+                            If ret = 0 Then
+                                'recherche sur les infos Ressources
+                                ret = FRessources.researchResCQ(Me.MSTSearch.Text)
+                                If ret <> 0 Then
+                                    FRessources.Show()
+                                End If
+                            End If
+
+                            'recherche RFE et Workstream
+                            If ret = 0 Then
+                                retRFE = FSearchRFE.researchRFE(Me.MSTSearch.Text)
+                                If retRFE = 0 Then
+                                    ret = FSearchWorkstream.researchWS(Me.MSTSearch.Text)
+                                    If ret <> 0 Then
+                                        FSearchWorkstream.Show()
+                                    End If
+                                Else
+                                    'si on trouve un rfe on va chercher aussi si on a un workstream car ils peuvent avoir le même nom
+                                    ret = FSearchWorkstream.researchWS(Me.MSTSearch.Text)
+                                    If ret = 0 And retRFE = 1 Then
+                                        FSearchRFE.Show()
+                                    Else
+                                        If ret <> 0 And retRFE = 0 Then
+                                            FSearchWorkstream.Show()
+                                        Else
+                                            'on a le cas où on a un RFE et un workstream avec le même nom. on propose le choix.
+                                            For Each frm In Application.OpenForms
+                                                '    'Si son nom est celui que l'on cherche
+                                                If frm.Name = Trim("FSearchSelect") Then
+                                                    FSearchSelect.Close()
+                                                    Exit For
+                                                End If
+                                            Next
+
+                                            FSearchSelect.Show()
+                                            FSearchSelect.List(Me.MSTSearch.Text, "RFE")
+                                            FSearchSelect.List(Me.MSTSearch.Text, "Workstream")
+                                        End If
+
+                                    End If
+                                    ret = 1
+                                End If
                             End If
                         End If
+                        'recherche par titre
+                        If ret = 0 Then
 
-
-                    End If
-                    'recherche par titre
-                    If ret = 0 Then
-
-                        'recherche par case, 
-                        nbCase = 0
-                        nb = 0
-
-                        FSearchCase.RTBCase.Text = Me.MSTSearch.Text
-                        LstCases = FSearchCase.researchCaseTitle()
-                        'nbCase = UBound(LstCases)
-                        If LstCases Is Nothing Then
+                            'recherche par case, 
                             nbCase = 0
-                        Else
-                            nbCase = UBound(LstCases) + 1
-                        End If
+                            nb = 0
 
-                        'recherche par card
-                        nbCard = 0
-                        FSearchGcent.TBGcent.Text = Me.MSTSearch.Text
-                        LstCard = FSearchGcent.researchCQTitle()
+                            FSearchCase.RTBCase.Text = Me.MSTSearch.Text
+                            LstCases = FSearchCase.researchCaseTitle()
+                            'nbCase = UBound(LstCases)
+                            If LstCases Is Nothing Then
+                                nbCase = 0
+                            Else
+                                nbCase = UBound(LstCases) + 1
+                            End If
 
-                        'nbCard = UBound(LstCard)
-                        If LstCard Is Nothing Then
+                            'recherche par card
                             nbCard = 0
-                        Else
-                            nbCard = UBound(LstCard) + 1
-                        End If
+                            FSearchGcent.TBGcent.Text = Me.MSTSearch.Text
+                            LstCard = FSearchGcent.researchCQTitle()
 
-                        'recherche par RFE
-                        nbRFE = 0
-                        LstRFE = FSearchRFE.researchRFETitle(Me.MSTSearch.Text)
-                        If LstRFE Is Nothing Then
+                            'nbCard = UBound(LstCard)
+                            If LstCard Is Nothing Then
+                                nbCard = 0
+                            Else
+                                nbCard = UBound(LstCard) + 1
+                            End If
+
+                            'recherche par RFE
                             nbRFE = 0
-                        Else
-                            nbRFE = UBound(LstRFE) + 1
-                        End If
+                            LstRFE = FSearchRFE.researchRFETitle(Me.MSTSearch.Text)
+                            If LstRFE Is Nothing Then
+                                nbRFE = 0
+                            Else
+                                nbRFE = UBound(LstRFE) + 1
+                            End If
 
-                        'recherche par Workstream
-                        nbWS = 0
-                        LstWS = FSearchWorkstream.ResearchWSTitle(Me.MSTSearch.Text)
-                        If LstWS Is Nothing Then
+                            'recherche par Workstream
                             nbWS = 0
-                        Else
-                            nbWS = UBound(LstWS) + 1
+                            LstWS = FSearchWorkstream.ResearchWSTitle(Me.MSTSearch.Text)
+                            If LstWS Is Nothing Then
+                                nbWS = 0
+                            Else
+                                nbWS = UBound(LstWS) + 1
+                            End If
+
+                            ret = nbCase + nbCard + nbRFE + nbWS
+
+                            'fusion des tableaux et affichage
+                            If LstCases Is Nothing And LstCard Is Nothing And LstRFE Is Nothing And LstWS Is Nothing Then
+                                ret = 0
+                            Else
+                                'ret = UBound(LstCases)
+                                'Fusion des 2 tableaux
+                                nb = ret
+                                ReDim Preserve LstCases(nb - 1)
+                                For i = 0 To nbCard - 1
+                                    LstCases(nbCase + i).Number = LstCard(i).Number
+                                    LstCases(nbCase + i).Title = LstCard(i).Title
+                                    LstCases(nbCase + i).Type = LstCard(i).Type
+                                Next
+                                For i = 0 To nbRFE - 1
+                                    LstCases(nbCase + nbCard + i).Number = LstRFE(i).Number
+                                    LstCases(nbCase + nbCard + i).Title = LstRFE(i).Title
+                                    LstCases(nbCase + nbCard + i).Type = LstRFE(i).Type
+                                Next
+                                For i = 0 To nbWS - 1
+                                    LstCases(nbCase + nbCard + nbRFE + i).Number = LstWS(i).Number
+                                    LstCases(nbCase + nbCard + nbRFE + i).Title = LstWS(i).Title
+                                    LstCases(nbCase + nbCard + nbRFE + i).Type = LstWS(i).Type
+                                Next
+
+
+                                For Each frm In Application.OpenForms
+                                    '    'Si son nom est celui que l'on cherche
+                                    If frm.Name = Trim("FSearchSelect") Then
+                                        FSearchSelect.Close()
+                                        Exit For
+                                    End If
+                                Next
+
+                                'If VB.Forms.
+
+                                FSearchSelect.Show()
+                                FSearchSelect.Text = "Results on title"
+                                FSearchSelect.TBNB.Text = ret
+                                FSearchSelect.LVChoice.Columns(0).Text = "ID"
+                                FSearchSelect.LVChoice.Columns(0).Width = 134
+                                Dim CHTitle As New ColumnHeader
+                                CHTitle.Text = "Title"
+                                CHTitle.Width = 495
+                                CHTitle.DisplayIndex = 2
+                                FSearchSelect.LVChoice.Columns.Add(CHTitle)
+                                FSearchSelect.LVChoice.Columns(1).Width = 80
+                                FSearchSelect.LVChoice.Columns(2).Text = "Title"
+                                FSearchSelect.LVChoice.Columns(2).Width = 565
+
+                                For i = 0 To ret - 1
+                                    FSearchSelect.ListCases(LstCases(i).Number, LstCases(i).Type, LstCases(i).Title)
+                                    'FSearchSelect.List(Me.MSTSearch.Text, "Workstream")
+                                Next
+
+
+
+                            End If
+
                         End If
 
-                        ret = nbCase + nbCard + nbRFE + nbWS
-
-                        'fusion des tableaux et affichage
-                        If LstCases Is Nothing And LstCard Is Nothing And LstRFE Is Nothing And LstWS Is Nothing Then
-                            ret = 0
-                        Else
-                            'ret = UBound(LstCases)
-                            'Fusion des 2 tableaux
-                            nb = ret
-                            ReDim Preserve LstCases(nb - 1)
-                            For i = 0 To nbCard - 1
-                                LstCases(nbCase + i).Number = LstCard(i).Number
-                                LstCases(nbCase + i).Title = LstCard(i).Title
-                                LstCases(nbCase + i).Type = LstCard(i).Type
-                            Next
-                            For i = 0 To nbRFE - 1
-                                LstCases(nbCase + nbCard + i).Number = LstRFE(i).Number
-                                LstCases(nbCase + nbCard + i).Title = LstRFE(i).Title
-                                LstCases(nbCase + nbCard + i).Type = LstRFE(i).Type
-                            Next
-                            For i = 0 To nbWS - 1
-                                LstCases(nbCase + nbCard + nbRFE + i).Number = LstWS(i).Number
-                                LstCases(nbCase + nbCard + nbRFE + i).Title = LstWS(i).Title
-                                LstCases(nbCase + nbCard + nbRFE + i).Type = LstWS(i).Type
-                            Next
-
-
-                            For Each frm In Application.OpenForms
-                                '    'Si son nom est celui que l'on cherche
-                                If frm.Name = Trim("FSearchSelect") Then
-                                    FSearchSelect.Close()
-                                    Exit For
-                                End If
-                            Next
-
-                            'If VB.Forms.
-
-                            FSearchSelect.Show()
-                            FSearchSelect.Text = "Results on title"
-                            FSearchSelect.TBNB.Text = ret
-                            FSearchSelect.LVChoice.Columns(0).Text = "ID"
-                            FSearchSelect.LVChoice.Columns(0).Width = 134
-                            Dim CHTitle As New ColumnHeader
-                            CHTitle.Text = "Title"
-                            CHTitle.Width = 495
-                            CHTitle.DisplayIndex = 2
-                            FSearchSelect.LVChoice.Columns.Add(CHTitle)
-                            FSearchSelect.LVChoice.Columns(1).Width = 80
-                            FSearchSelect.LVChoice.Columns(2).Text = "Title"
-                            FSearchSelect.LVChoice.Columns(2).Width = 565
-
-                            For i = 0 To ret - 1
-                                FSearchSelect.ListCases(LstCases(i).Number, LstCases(i).Type, LstCases(i).Title)
-                                'FSearchSelect.List(Me.MSTSearch.Text, "Workstream")
-                            Next
-
-
-
+                        If ret = 0 Then
+                            MsgBox("Nothing matches with your search")
                         End If
-
-                    End If
-
-                    If ret = 0 Then
-                        MsgBox("Nothing matches with your search")
                     End If
                 End If
             Else
-                Select Case type
+            Select Case type
                     Case 1
                         ret = FSearchCase.researchCase(0)
                         If ret <> 0 Then
@@ -498,7 +530,7 @@ Public Class FSearch
 
     Private Sub BPlus_Click(sender As Object, e As EventArgs) Handles BPlus.Click
         If Me.Height = 135 Then
-            Me.Height = 244
+            Me.Height = 260
             BPlus.Visible = False
             Bminus.Visible = True
 
@@ -511,7 +543,7 @@ Public Class FSearch
 
     Private Sub Bminus_Click(sender As Object, e As EventArgs) Handles Bminus.Click
         If Me.Height = 135 Then
-            Me.Height = 244
+            Me.Height = 260
             BPlus.Visible = False
             Bminus.Visible = True
 

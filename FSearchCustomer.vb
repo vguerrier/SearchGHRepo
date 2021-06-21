@@ -214,8 +214,8 @@ Public Class FCustomer
         Dim myCommand As New OracleCommand
         Dim dr As OracleDataReader
 
-        'Dim oradb2 As String = "Data Source=RDTOOLS;User Id=RFE_DEV;Password=RFE_DEV;"
-        Dim oradb2 As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.133)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = RDTOOLS)));User ID=RFE_DEV;Password=RFE_DEV"
+        'Dim oradb2 As String = "Data Source=RDTOOLS;User Id=RFE_READ;Password=RFE_READ;"
+        Dim oradb2 As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.133)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = RDTOOLS)));User ID=RFE_READ;Password=RFE_READ"
         'Dim oradb2 As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.133)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = RDTOOLS)));User ID=READ_ONLY;Password=READ_ONLY"
         Dim conn2 As New OracleConnection(oradb2)
 

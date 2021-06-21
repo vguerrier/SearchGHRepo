@@ -41,6 +41,7 @@ Partial Class FSearch
         Me.Llong = New System.Windows.Forms.Label()
         Me.MCBTitle = New MaterialSkin.Controls.MaterialCheckBox()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
+        Me.MCB_RFE = New MaterialSkin.Controls.MaterialCheckBox()
         Me.SuspendLayout()
         '
         'MCBCusCase
@@ -244,12 +245,29 @@ Partial Class FSearch
         Me.LinkLabel1.Tag = ""
         Me.LinkLabel1.Text = "Help"
         '
+        'MCB_RFE
+        '
+        Me.MCB_RFE.AutoSize = True
+        Me.MCB_RFE.Depth = 0
+        Me.MCB_RFE.Font = New System.Drawing.Font("Roboto", 10.0!)
+        Me.MCB_RFE.Location = New System.Drawing.Point(10, 212)
+        Me.MCB_RFE.Margin = New System.Windows.Forms.Padding(0)
+        Me.MCB_RFE.MouseLocation = New System.Drawing.Point(-1, -1)
+        Me.MCB_RFE.MouseState = MaterialSkin.MouseState.HOVER
+        Me.MCB_RFE.Name = "MCB_RFE"
+        Me.MCB_RFE.Ripple = True
+        Me.MCB_RFE.Size = New System.Drawing.Size(118, 30)
+        Me.MCB_RFE.TabIndex = 163
+        Me.MCB_RFE.Text = "Search by RFE"
+        Me.MCB_RFE.UseVisualStyleBackColor = True
+        '
         'FSearch
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(270, 135)
+        Me.Controls.Add(Me.MCB_RFE)
         Me.Controls.Add(Me.LinkLabel1)
         Me.Controls.Add(Me.MCBTitle)
         Me.Controls.Add(Me.Llong)
@@ -291,4 +309,5 @@ Partial Class FSearch
     Friend WithEvents Llong As Label
     Friend WithEvents MCBTitle As MaterialSkin.Controls.MaterialCheckBox
     Friend WithEvents LinkLabel1 As LinkLabel
+    Friend WithEvents MCB_RFE As MaterialSkin.Controls.MaterialCheckBox
 End Class
