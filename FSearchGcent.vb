@@ -566,16 +566,17 @@ Public Class FSearchGcent
                 RTBms.AppendText(vbCrLf)
                 'RTBms.Text = RTBms.Text + vbCrLf + vbCrLf + dr.GetValue(30) + ":" + vbCrLf + dr.GetValue(29)
                 'RTBms.Text = dr.GetValue(30) + vbCrLf + vbCrLf + dr.GetValue(29)
+                'End If
+
+
+            Else
+                'on ajoute à la liste des sources modifiées
+                If dr.GetValue(27) IsNot DBNull.Value Then
+                    RTBms.Text = dr.GetValue(27)
+                    'RTBms.Text = dr.GetValue(27) + ":" + vbCrLf + RTBms.Text + vbCrLf + vbCrLf + dr.GetValue(29)
+                    'RTBms.Text = RTBms.Text + vbCrLf + vbCrLf + dr.GetValue(29)
+                End If
             End If
-
-
-            'Else
-            '    'on ajoute à la liste des sources modifiées
-            '    If dr.GetValue(29) IsNot DBNull.Value Then
-            '        'RTBms.Text = dr.GetValue(27) + ":" + vbCrLf + RTBms.Text + vbCrLf + vbCrLf + dr.GetValue(29)
-            '        RTBms.Text = RTBms.Text + vbCrLf + vbCrLf + dr.GetValue(29)
-            '    End If
-            'End If
         End While
 
 
