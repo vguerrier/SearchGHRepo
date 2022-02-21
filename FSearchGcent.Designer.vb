@@ -79,8 +79,8 @@ Partial Class FSearchGcent
         Me.RTBDOTM = New System.Windows.Forms.RichTextBox()
         Me.RTBms = New System.Windows.Forms.RichTextBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.TBCP = New System.Windows.Forms.TextBox()
-        Me.LbCP = New System.Windows.Forms.Label()
+        Me.TBECu = New System.Windows.Forms.TextBox()
+        Me.LbEC = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.LVad = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -210,6 +210,7 @@ Partial Class FSearchGcent
         '
         Me.LVHistory.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.CHTime, Me.CHUser, Me.CHAction, Me.CHNState, Me.CGOState})
         Me.LVHistory.GridLines = True
+        Me.LVHistory.HideSelection = False
         Me.LVHistory.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.LVHistory.Location = New System.Drawing.Point(23, 274)
         Me.LVHistory.Name = "LVHistory"
@@ -505,7 +506,7 @@ Partial Class FSearchGcent
         'RTBDesc
         '
         Me.RTBDesc.BackColor = System.Drawing.Color.White
-        Me.RTBDesc.Location = New System.Drawing.Point(23, 594)
+        Me.RTBDesc.Location = New System.Drawing.Point(23, 640)
         Me.RTBDesc.Name = "RTBDesc"
         Me.RTBDesc.ReadOnly = True
         Me.RTBDesc.Size = New System.Drawing.Size(470, 264)
@@ -516,7 +517,7 @@ Partial Class FSearchGcent
         '
         Me.LBDesc.AutoSize = True
         Me.LBDesc.BackColor = System.Drawing.Color.White
-        Me.LBDesc.Location = New System.Drawing.Point(20, 578)
+        Me.LBDesc.Location = New System.Drawing.Point(20, 624)
         Me.LBDesc.Name = "LBDesc"
         Me.LBDesc.Size = New System.Drawing.Size(60, 13)
         Me.LBDesc.TabIndex = 116
@@ -538,7 +539,7 @@ Partial Class FSearchGcent
         Me.RTBDOTI.Location = New System.Drawing.Point(24, 518)
         Me.RTBDOTI.Name = "RTBDOTI"
         Me.RTBDOTI.ReadOnly = True
-        Me.RTBDOTI.Size = New System.Drawing.Size(943, 20)
+        Me.RTBDOTI.Size = New System.Drawing.Size(943, 40)
         Me.RTBDOTI.TabIndex = 118
         Me.RTBDOTI.Text = ""
         '
@@ -556,7 +557,7 @@ Partial Class FSearchGcent
         '
         Me.Label4.AutoSize = True
         Me.Label4.BackColor = System.Drawing.Color.White
-        Me.Label4.Location = New System.Drawing.Point(19, 540)
+        Me.Label4.Location = New System.Drawing.Point(19, 566)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(154, 13)
         Me.Label4.TabIndex = 121
@@ -565,17 +566,17 @@ Partial Class FSearchGcent
         'RTBDOTM
         '
         Me.RTBDOTM.BackColor = System.Drawing.Color.White
-        Me.RTBDOTM.Location = New System.Drawing.Point(22, 556)
+        Me.RTBDOTM.Location = New System.Drawing.Point(22, 581)
         Me.RTBDOTM.Name = "RTBDOTM"
         Me.RTBDOTM.ReadOnly = True
-        Me.RTBDOTM.Size = New System.Drawing.Size(945, 20)
+        Me.RTBDOTM.Size = New System.Drawing.Size(945, 40)
         Me.RTBDOTM.TabIndex = 120
         Me.RTBDOTM.Text = ""
         '
         'RTBms
         '
         Me.RTBms.BackColor = System.Drawing.Color.White
-        Me.RTBms.Location = New System.Drawing.Point(499, 593)
+        Me.RTBms.Location = New System.Drawing.Point(499, 639)
         Me.RTBms.Name = "RTBms"
         Me.RTBms.ReadOnly = True
         Me.RTBms.Size = New System.Drawing.Size(469, 264)
@@ -586,30 +587,30 @@ Partial Class FSearchGcent
         '
         Me.Label5.AutoSize = True
         Me.Label5.BackColor = System.Drawing.Color.White
-        Me.Label5.Location = New System.Drawing.Point(498, 578)
+        Me.Label5.Location = New System.Drawing.Point(498, 624)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(89, 13)
         Me.Label5.TabIndex = 123
         Me.Label5.Text = "Modified Sources"
         '
-        'TBCP
+        'TBECu
         '
-        Me.TBCP.BackColor = System.Drawing.Color.White
-        Me.TBCP.Location = New System.Drawing.Point(603, 234)
-        Me.TBCP.Name = "TBCP"
-        Me.TBCP.ReadOnly = True
-        Me.TBCP.Size = New System.Drawing.Size(140, 20)
-        Me.TBCP.TabIndex = 125
+        Me.TBECu.BackColor = System.Drawing.Color.White
+        Me.TBECu.Location = New System.Drawing.Point(603, 234)
+        Me.TBECu.Name = "TBECu"
+        Me.TBECu.ReadOnly = True
+        Me.TBECu.Size = New System.Drawing.Size(140, 20)
+        Me.TBECu.TabIndex = 125
         '
-        'LbCP
+        'LbEC
         '
-        Me.LbCP.AutoSize = True
-        Me.LbCP.BackColor = System.Drawing.Color.White
-        Me.LbCP.Location = New System.Drawing.Point(603, 218)
-        Me.LbCP.Name = "LbCP"
-        Me.LbCP.Size = New System.Drawing.Size(85, 13)
-        Me.LbCP.TabIndex = 124
-        Me.LbCP.Text = "Project Manager"
+        Me.LbEC.AutoSize = True
+        Me.LbEC.BackColor = System.Drawing.Color.White
+        Me.LbEC.Location = New System.Drawing.Point(603, 218)
+        Me.LbEC.Name = "LbEC"
+        Me.LbEC.Size = New System.Drawing.Size(73, 13)
+        Me.LbEC.TabIndex = 124
+        Me.LbEC.Text = "End Customer"
         '
         'Label6
         '
@@ -625,6 +626,7 @@ Partial Class FSearchGcent
         '
         Me.LVad.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1})
         Me.LVad.GridLines = True
+        Me.LVad.HideSelection = False
         Me.LVad.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
         Me.LVad.Location = New System.Drawing.Point(514, 405)
         Me.LVad.Name = "LVad"
@@ -673,9 +675,9 @@ Partial Class FSearchGcent
         Me.LbGcret.BackColor = System.Drawing.Color.White
         Me.LbGcret.Location = New System.Drawing.Point(483, 65)
         Me.LbGcret.Name = "LbGcret"
-        Me.LbGcret.Size = New System.Drawing.Size(104, 13)
+        Me.LbGcret.Size = New System.Drawing.Size(87, 13)
         Me.LbGcret.TabIndex = 134
-        Me.LbGcret.Text = "Card Retrofited From"
+        Me.LbGcret.Text = "Cards that retrofit"
         '
         'TBGcent2
         '
@@ -859,7 +861,7 @@ Partial Class FSearchGcent
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(987, 869)
+        Me.ClientSize = New System.Drawing.Size(987, 915)
         Me.Controls.Add(Me.BPatch)
         Me.Controls.Add(Me.BRFE)
         Me.Controls.Add(Me.BRessource)
@@ -881,8 +883,8 @@ Partial Class FSearchGcent
         Me.Controls.Add(Me.LVad)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.TBCP)
-        Me.Controls.Add(Me.LbCP)
+        Me.Controls.Add(Me.TBECu)
+        Me.Controls.Add(Me.LbEC)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.RTBms)
         Me.Controls.Add(Me.Label4)
@@ -991,8 +993,8 @@ Partial Class FSearchGcent
     Friend WithEvents RTBDOTM As System.Windows.Forms.RichTextBox
     Friend WithEvents RTBms As System.Windows.Forms.RichTextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents TBCP As System.Windows.Forms.TextBox
-    Friend WithEvents LbCP As System.Windows.Forms.Label
+    Friend WithEvents TBECu As System.Windows.Forms.TextBox
+    Friend WithEvents LbEC As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents LVad As System.Windows.Forms.ListView

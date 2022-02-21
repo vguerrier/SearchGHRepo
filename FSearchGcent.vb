@@ -123,7 +123,8 @@ Public Class FSearchGcent
         Request = Request & "ta.identificationexterne, " '33
         'Request = Request & "ta.originpatch, " '33
         Request = Request & "ta.datelivraisoninterne, "  '34
-        Request = Request & "ta.internalstate "  '35
+        Request = Request & "ta.internalstate, "  '35
+        Request = Request & "Tce.nom " '36
         Request = Request & "from "
         Request = Request & CQbase & ".anomalie     Ta,"
         Request = Request & CQbase & ".statedef     Ts,"
@@ -137,9 +138,11 @@ Public Class FSearchGcent
         Request = Request & CQbase & ".cc_change_set      Tcs,"
         Request = Request & CQbase & ".cc_vob_object      Tvo, "
         Request = Request & CQbase & ".parent_child_links Tpcl, "
-        Request = Request & CQbase & ".rfe                Tr "
+        Request = Request & CQbase & ".rfe                Tr, "
+        Request = Request & CQbase & ".customerend                Tce "
         Request = Request & "where(Ta.state = Ts.id) "
         Request = Request & "and Ta.assigne = Tu.dbid "
+        Request = Request & "and ta.customerend = Tce.dbid "
         Request = Request & "and Ta.chefprojet = Tu2.dbid "
         Request = Request & "and Ta.PRODUIT_1 = Tp.dbid "
         Request = Request & "and Ta.client_champ = Tc.dbid "
@@ -522,8 +525,8 @@ Public Class FSearchGcent
             ' RTBms.Text = dr.GetValue(29)
             'End If
             'Project Manager
-            If dr.GetValue(28) IsNot DBNull.Value Then
-                TBCP.Text = dr.GetValue(28)
+            If dr.GetValue(36) IsNot DBNull.Value Then
+                TBECu.Text = dr.GetValue(36)
             End If
             'urgence
             If dr.GetValue(31) IsNot DBNull.Value Then
@@ -875,8 +878,8 @@ Public Class FSearchGcent
             End If
             TBECD.Text = motif
             If dr.GetValue(17) IsNot DBNull.Value Then
-                LbCP.Text = "Framework Other Versions"
-                TBCP.Text = dr.GetValue(17)
+                LbEC.Text = "Framework Other Versions"
+                TBECu.Text = dr.GetValue(17)
             End If
             If dr.GetValue(18) IsNot DBNull.Value Then
                 LbRetCard.Text = "GCENT linked"
@@ -1326,6 +1329,7 @@ sortie:
             FSearch.Research(7)
         End If
     End Sub
+
 
 End Class
 
