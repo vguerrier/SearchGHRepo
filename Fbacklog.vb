@@ -798,7 +798,7 @@ Public Class FBacklog
             objExcel.Cells(j, 10 + i).Value = DGVBacklog.Item(10, j - 3).Value
             objExcel.Cells(j, 11 + i).Value = DGVBacklog.Item(11, j - 3).Value
             objExcel.Cells(j, 12 + i).Value = DGVBacklog.Item(12, j - 3).Value
-            'objExcel.Cells(j, 13 + i).Value = DGVBacklog.Item(13, j - 3).Value
+            objExcel.Cells(j, 13 + i).Value = DGVBacklog.Item(13, j - 3).Value
             'Loop
         Next
 
