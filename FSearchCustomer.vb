@@ -11,6 +11,7 @@ Public Structure Schema
     Public OSID As String
     Public ouser As String
     Public domain As String
+    Public DBHOST As String
 End Structure
 
 Public Structure Appli
@@ -136,8 +137,15 @@ Public Class FCustomer
         RequestAppli = RequestAppli & "and t1.ENVTYPE = '" & envtype & "' "
     End Function
 
+    Function RequestAppli2(Branch As String, envtype As String) As String
+        RequestAppli2 = "select t1.branch, t1.appli, t1.client_version_value, t1.SERVER_VERSION_VALUE  "
+        RequestAppli2 = RequestAppli2 & "from V_INFRA_FRAMEWORK_V6 t1 "
+        RequestAppli2 = RequestAppli2 & "where t1.BRANCH = '" & Branch & "' "
+        RequestAppli2 = RequestAppli2 & "and t1.ENVTYPE = '" & envtype & "' "
+    End Function
+
     Function RequestAppliOSchemas(Branch As String, envtype As String) As String
-        RequestAppliOSchemas = "select t.OSID, t.ouser, t.domain from V_INFRA_OSCHEMA t "
+        RequestAppliOSchemas = "select t.OSID, t.ouser, t.domain, t.DBHOST from V_INFRA_OSCHEMA t "
         RequestAppliOSchemas = RequestAppliOSchemas & "where t.BRANCH = '" & Branch & "' "
         RequestAppliOSchemas = RequestAppliOSchemas & "and t.ENV = '" & envtype & "' "
     End Function
@@ -223,6 +231,10 @@ Public Class FCustomer
         Dim myCommand3 As New OracleCommand
         Dim dr3 As OracleDataReader
 
+        Dim conn4 As New OracleConnection(oradb)
+        Dim myCommand4 As New OracleCommand
+        Dim dr4 As OracleDataReader
+
         'Dim Customer As Env
         Dim found As Boolean
         Dim i, j, z, nbBranch, nbenv, nbappli, nbschema, IndEnv As Integer
@@ -239,6 +251,9 @@ Public Class FCustomer
         TBServer.Text = ""
         TBOracle.Text = ""
         TBJava.Text = ""
+        CBSchemas.Text = ""
+        'CBSchemas.Items.Clear()
+        TBPVI.Text = ""
         BranchType = ""
         Description = ""
         label = ""
@@ -379,6 +394,7 @@ Public Class FCustomer
         Me.Show()
         conn.Open()
         conn3.Open()
+        conn4.Open()
         'Appli
         'On parcourt les branchs et on recherche les appli
         For i = 0 To MyModule.Customers.NbBranch
@@ -412,6 +428,31 @@ Public Class FCustomer
                     MyModule.Customers.Branch(i).Env(j).NbAppli = nbappli
                 End While
 
+
+                'si on a trouvé aucune appli alors on fait la recherche sans l'URL (à partir de HF31, la table url est vide)
+                If nbappli = 0 Then
+
+                    request = RequestAppli2(MyModule.Customers.Branch(i).Branchname, MyModule.Customers.Branch(i).Env(j).Envname)
+                    myCommand4 = conn4.CreateCommand()
+                    myCommand4.CommandText = request
+                    dr4 = myCommand4.ExecuteReader()
+
+                    nbappli = 0
+
+                    While dr4.Read()
+                        If dr4.GetValue(1) IsNot DBNull.Value Then
+                            MyModule.Customers.Branch(i).Env(j).Appli(nbappli).Appliname = dr4.GetValue(1)
+                        End If
+                        If dr4.GetValue(2) IsNot DBNull.Value Then
+                            MyModule.Customers.Branch(i).Env(j).Appli(nbappli).Framework = dr4.GetValue(2)
+                        End If
+                        If dr4.GetValue(3) IsNot DBNull.Value Then
+                            MyModule.Customers.Branch(i).Env(j).Appli(nbappli).Framework_Spring = dr4.GetValue(3)
+                        End If
+                        nbappli = nbappli + 1
+                        MyModule.Customers.Branch(i).Env(j).NbAppli = nbappli
+                    End While
+                End If
                 'recherche des schémas Oracle liés à la branche sélectionnée
 
                 request = RequestAppliOSchemas(MyModule.Customers.Branch(i).Branchname, MyModule.Customers.Branch(i).Env(j).Envname)
@@ -429,12 +470,16 @@ Public Class FCustomer
                     If dr3.GetValue(2) IsNot DBNull.Value Then
                         MyModule.Customers.Branch(i).Env(j).Schemas(nbschema).domain = dr3.GetValue(2)
                     End If
+                    If dr3.GetValue(3) IsNot DBNull.Value Then
+                        MyModule.Customers.Branch(i).Env(j).Schemas(nbschema).DBHOST = dr3.GetValue(3)
+                    End If
                     nbschema = nbschema + 1
                     MyModule.Customers.Branch(i).Env(j).NbSchemas = nbschema
                 End While
             Next
         Next
         conn3.Close()
+        conn4.Close()
         conn.Close()
 
 
@@ -585,11 +630,11 @@ Fin:
             TBJava.Text = MyModule.Customers.Branch(IndexP).Env(Index).java
 
             For i = 0 To MyModule.Customers.Branch(IndexP).Env(Index).NbSchemas - 1
-                SchemaInf = MyModule.Customers.Branch(IndexP).Env(Index).Schemas(i).OSID + " " + MyModule.Customers.Branch(IndexP).Env(Index).Schemas(i).ouser + " " + MyModule.Customers.Branch(IndexP).Env(Index).Schemas(i).domain
+                SchemaInf = MyModule.Customers.Branch(IndexP).Env(Index).Schemas(i).OSID + " " + MyModule.Customers.Branch(IndexP).Env(Index).Schemas(i).ouser + " " + MyModule.Customers.Branch(IndexP).Env(Index).Schemas(i).domain + " " + MyModule.Customers.Branch(IndexP).Env(Index).Schemas(i).DBHOST
                 CBSchemas.Text = SchemaInf
                 CBSchemas.Items.Add(SchemaInf)
             Next
-
+            CBSchemas_SelectedIndexChanged(sender, e)
 
             'TBProduct.Text = MyModule.Customers.Branch(IndexP).Env(Index).BranchProduct
 
@@ -733,4 +778,36 @@ Fin:
 
         'Shell("%systemroot%\system32\mstsc.exe ""C:\Users\guerrier\AppData\Roaming\Micros
     End Sub
+
+    Private Sub CBSchemas_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CBSchemas.SelectedIndexChanged
+        'recherche de la derière version installée sur le schéma sélectionné
+        'TBPVI.Text = CBSchemas.Text
+        Dim str() = CBSchemas.Text.Split(" ")
+
+        Dim Dbase = str(0)
+        Dim user = str(1)
+        Dim domain = str(2)
+        Dim DBHOST = str(3)
+
+        Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = " & DBHOST & ")(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = " & Dbase & ")));User ID=" & user & ";Password=" & user
+        '   (DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.105)(PORT = 1521))(CONNECT_DATA = (SERVICE_NAME = RD12C01)))
+        'Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.30)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = CQSCM1)));User ID=READCQUEST;Password=READCQUEST"
+        Dim conn As New OracleConnection(oradb)
+        Dim myCommand As New OracleCommand
+        Dim dr As OracleDataReader
+
+        conn.Open()
+        Dim request As String = "select t1.verlabqa, to_char(t1.verdatqa, 'DD/MM/YY') from (select t.* from VERSION t order by t.verdatqa desc) t1 where rownum = 1"
+        myCommand = conn.CreateCommand()
+        myCommand.CommandText = request
+
+        dr = myCommand.ExecuteReader()
+
+        dr.Read()
+        TBPVI.Text = dr.GetValue(0) & " " & dr.GetValue(1)
+
+        dr.Close()
+        conn.Close()
+    End Sub
+
 End Class

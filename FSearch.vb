@@ -55,14 +55,14 @@ Public Class FSearch
             End If
         End If
 
-        If My.Computer.FileSystem.DirectoryExists(curdir) Then
-        Else
-            If My.Forms.Dlogs.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
-                ' OK button pressed
-                My.Computer.FileSystem.CreateDirectory(curdir)
-
-            End If
-        End If
+        'If My.Computer.FileSystem.DirectoryExists(curdir) Then
+        'Else
+        ' If My.Forms.Dlogs.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
+        ' ' OK button pressed
+        ' My.Computer.FileSystem.CreateDirectory(curdir)
+        '
+        '        End If
+        '       End If
 
         EcrireLog("", "", curdir)
 

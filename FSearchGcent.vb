@@ -125,6 +125,9 @@ Public Class FSearchGcent
         Request = Request & "ta.datelivraisoninterne, "  '34
         Request = Request & "ta.internalstate, "  '35
         Request = Request & "Tce.nom " '36
+        'Pull Request Commits
+        'Request = Request & "Tapr.PRURL "
+        'Request = Request & "dbms_lob.substr(Ta.Sourcesmodifies,4000,1) " '37
         Request = Request & "from "
         Request = Request & CQbase & ".anomalie     Ta,"
         Request = Request & CQbase & ".statedef     Ts,"
@@ -139,7 +142,10 @@ Public Class FSearchGcent
         Request = Request & CQbase & ".cc_vob_object      Tvo, "
         Request = Request & CQbase & ".parent_child_links Tpcl, "
         Request = Request & CQbase & ".rfe                Tr, "
-        Request = Request & CQbase & ".customerend                Tce "
+        Request = Request & CQbase & ".customerend        Tce "
+        'Request = Request & CQbase & ".customerend        Tce, "
+        'Request = Request & CQbase & ".azureprdetails     Tapr, "
+        'Request = Request & CQbase & ".parent_child_links Taprmm "
         Request = Request & "where(Ta.state = Ts.id) "
         Request = Request & "and Ta.assigne = Tu.dbid "
         Request = Request & "and ta.customerend = Tce.dbid "
@@ -150,12 +156,14 @@ Public Class FSearchGcent
         Request = Request & "and Ta.subproduct = Td.dbid "
         Request = Request & "and Ta.DBID = Th.entity_dbid "
         Request = Request & "and Th.action_name = 'Ouvrir' "
-        Request = Request & "and Ta.cc_change_set = Tcs.dbid "
-        Request = Request & "and Tcs.dbid = Tpcl.parent_dbid(+) "
-        Request = Request & "and 16778186 = Tpcl.parent_fielddef_id(+) "
-        Request = Request & "and Tpcl.child_dbid = Tvo.dbid(+) "
-        Request = Request & "and Ta.rfecode = Tr.dbid "
-        Request = Request & "and Ta.numerofiche = '" + Card + "'"
+        'Request = Request & "and Ta.dbid = Taprmm.parent_dbid "
+        'Request = Request & "and Taprmm.child_dbid = Tapr.dbid "
+        Request = Request & "And Ta.cc_change_set = Tcs.dbid "
+        Request = Request & "And Tcs.dbid = Tpcl.parent_dbid(+) "
+        Request = Request & "And 16778186 = Tpcl.parent_fielddef_id(+) "
+        Request = Request & "And Tpcl.child_dbid = Tvo.dbid(+) "
+        Request = Request & "And Ta.rfecode = Tr.dbid "
+        Request = Request & "And Ta.numerofiche = '" + Card + "'"
 
         RequestCQ = Request
 
