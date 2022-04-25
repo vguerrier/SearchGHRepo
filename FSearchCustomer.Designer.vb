@@ -53,6 +53,8 @@ Partial Class FCustomer
         Me.LLBURL = New System.Windows.Forms.LinkLabel()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.TBCategory = New System.Windows.Forms.TextBox()
         Me.BBacklog = New System.Windows.Forms.Button()
         Me.TBLabel = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -365,6 +367,8 @@ Partial Class FCustomer
         '
         Me.GroupBox1.BackColor = System.Drawing.Color.White
         Me.GroupBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.GroupBox1.Controls.Add(Me.Label12)
+        Me.GroupBox1.Controls.Add(Me.TBCategory)
         Me.GroupBox1.Controls.Add(Me.BBacklog)
         Me.GroupBox1.Controls.Add(Me.TBLabel)
         Me.GroupBox1.Controls.Add(Me.Label7)
@@ -379,6 +383,23 @@ Partial Class FCustomer
         Me.GroupBox1.TabIndex = 22
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Branch Information"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(165, 60)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(49, 13)
+        Me.Label12.TabIndex = 28
+        Me.Label12.Text = "Category"
+        '
+        'TBCategory
+        '
+        Me.TBCategory.Location = New System.Drawing.Point(168, 75)
+        Me.TBCategory.Name = "TBCategory"
+        Me.TBCategory.ReadOnly = True
+        Me.TBCategory.Size = New System.Drawing.Size(145, 20)
+        Me.TBCategory.TabIndex = 27
         '
         'BBacklog
         '
@@ -415,7 +436,7 @@ Partial Class FCustomer
         Me.TBBranchType.Location = New System.Drawing.Point(13, 75)
         Me.TBBranchType.Name = "TBBranchType"
         Me.TBBranchType.ReadOnly = True
-        Me.TBBranchType.Size = New System.Drawing.Size(300, 20)
+        Me.TBBranchType.Size = New System.Drawing.Size(145, 20)
         Me.TBBranchType.TabIndex = 23
         '
         'Label5
@@ -613,4 +634,6 @@ Partial Class FCustomer
     Friend WithEvents BDB As Button
     Friend WithEvents TBPVI As TextBox
     Friend WithEvents Label11 As Label
+    Friend WithEvents Label12 As Label
+    Friend WithEvents TBCategory As TextBox
 End Class

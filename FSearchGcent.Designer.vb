@@ -26,6 +26,7 @@ Partial Class FSearchGcent
         Me.components = New System.ComponentModel.Container()
         Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
         Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
+        Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FSearchGcent))
         Me.CBRetrofit = New System.Windows.Forms.CheckBox()
         Me.TBRetCard = New System.Windows.Forms.TextBox()
@@ -70,7 +71,6 @@ Partial Class FSearchGcent
         Me.TBstom = New System.Windows.Forms.TextBox()
         Me.LBstom = New System.Windows.Forms.Label()
         Me.RTBLog = New System.Windows.Forms.RichTextBox()
-        Me.RTBDesc = New System.Windows.Forms.RichTextBox()
         Me.LBDesc = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.RTBDOTI = New System.Windows.Forms.RichTextBox()
@@ -106,6 +106,22 @@ Partial Class FSearchGcent
         Me.Button2 = New System.Windows.Forms.Button()
         Me.BPatch = New System.Windows.Forms.Button()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
+        Me.TCInfos = New System.Windows.Forms.TabControl()
+        Me.TPDesc = New System.Windows.Forms.TabPage()
+        Me.RTBDesc2 = New System.Windows.Forms.RichTextBox()
+        Me.TPPRDetails = New System.Windows.Forms.TabPage()
+        Me.DGPRDetails = New System.Windows.Forms.DataGridView()
+        Me.TBPRCommit = New System.Windows.Forms.TabPage()
+        Me.LVPRCommits = New System.Windows.Forms.ListView()
+        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.PullRequestID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PullRequestURL = New System.Windows.Forms.DataGridViewLinkColumn()
+        Me.TCInfos.SuspendLayout()
+        Me.TPDesc.SuspendLayout()
+        Me.TPPRDetails.SuspendLayout()
+        CType(Me.DGPRDetails, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TBPRCommit.SuspendLayout()
         Me.SuspendLayout()
         '
         'CBRetrofit
@@ -503,16 +519,6 @@ Partial Class FSearchGcent
         Me.RTBLog.TabIndex = 114
         Me.RTBLog.Text = ""
         '
-        'RTBDesc
-        '
-        Me.RTBDesc.BackColor = System.Drawing.Color.White
-        Me.RTBDesc.Location = New System.Drawing.Point(23, 640)
-        Me.RTBDesc.Name = "RTBDesc"
-        Me.RTBDesc.ReadOnly = True
-        Me.RTBDesc.Size = New System.Drawing.Size(470, 264)
-        Me.RTBDesc.TabIndex = 115
-        Me.RTBDesc.Text = ""
-        '
         'LBDesc
         '
         Me.LBDesc.AutoSize = True
@@ -856,12 +862,114 @@ Partial Class FSearchGcent
         Me.ToolTip1.SetToolTip(Me.BPatch, "Patch content")
         Me.BPatch.UseVisualStyleBackColor = False
         '
+        'TCInfos
+        '
+        Me.TCInfos.Controls.Add(Me.TPDesc)
+        Me.TCInfos.Controls.Add(Me.TPPRDetails)
+        Me.TCInfos.Controls.Add(Me.TBPRCommit)
+        Me.TCInfos.Location = New System.Drawing.Point(24, 640)
+        Me.TCInfos.Name = "TCInfos"
+        Me.TCInfos.SelectedIndex = 0
+        Me.TCInfos.Size = New System.Drawing.Size(469, 264)
+        Me.TCInfos.TabIndex = 159
+        '
+        'TPDesc
+        '
+        Me.TPDesc.BackColor = System.Drawing.Color.White
+        Me.TPDesc.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.TPDesc.Controls.Add(Me.RTBDesc2)
+        Me.TPDesc.Location = New System.Drawing.Point(4, 22)
+        Me.TPDesc.Name = "TPDesc"
+        Me.TPDesc.Padding = New System.Windows.Forms.Padding(3)
+        Me.TPDesc.Size = New System.Drawing.Size(461, 238)
+        Me.TPDesc.TabIndex = 0
+        Me.TPDesc.Text = "Description"
+        '
+        'RTBDesc2
+        '
+        Me.RTBDesc2.BackColor = System.Drawing.Color.White
+        Me.RTBDesc2.Location = New System.Drawing.Point(1, -2)
+        Me.RTBDesc2.Name = "RTBDesc2"
+        Me.RTBDesc2.ReadOnly = True
+        Me.RTBDesc2.Size = New System.Drawing.Size(469, 264)
+        Me.RTBDesc2.TabIndex = 116
+        Me.RTBDesc2.Text = ""
+        '
+        'TPPRDetails
+        '
+        Me.TPPRDetails.Controls.Add(Me.DGPRDetails)
+        Me.TPPRDetails.Location = New System.Drawing.Point(4, 22)
+        Me.TPPRDetails.Name = "TPPRDetails"
+        Me.TPPRDetails.Padding = New System.Windows.Forms.Padding(3)
+        Me.TPPRDetails.Size = New System.Drawing.Size(461, 238)
+        Me.TPPRDetails.TabIndex = 1
+        Me.TPPRDetails.Text = "Pull Request Details"
+        Me.TPPRDetails.UseVisualStyleBackColor = True
+        '
+        'DGPRDetails
+        '
+        Me.DGPRDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGPRDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.PullRequestID, Me.PullRequestURL})
+        Me.DGPRDetails.Location = New System.Drawing.Point(0, 0)
+        Me.DGPRDetails.Name = "DGPRDetails"
+        Me.DGPRDetails.RowHeadersVisible = False
+        Me.DGPRDetails.Size = New System.Drawing.Size(469, 264)
+        Me.DGPRDetails.TabIndex = 98
+        '
+        'TBPRCommit
+        '
+        Me.TBPRCommit.Controls.Add(Me.LVPRCommits)
+        Me.TBPRCommit.Location = New System.Drawing.Point(4, 22)
+        Me.TBPRCommit.Name = "TBPRCommit"
+        Me.TBPRCommit.Padding = New System.Windows.Forms.Padding(3)
+        Me.TBPRCommit.Size = New System.Drawing.Size(461, 238)
+        Me.TBPRCommit.TabIndex = 2
+        Me.TBPRCommit.Text = "Pull Request Commits"
+        Me.TBPRCommit.UseVisualStyleBackColor = True
+        '
+        'LVPRCommits
+        '
+        Me.LVPRCommits.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader2, Me.ColumnHeader3})
+        Me.LVPRCommits.GridLines = True
+        Me.LVPRCommits.HideSelection = False
+        Me.LVPRCommits.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem3})
+        Me.LVPRCommits.Location = New System.Drawing.Point(-4, 20)
+        Me.LVPRCommits.Name = "LVPRCommits"
+        Me.LVPRCommits.Size = New System.Drawing.Size(645, 318)
+        Me.LVPRCommits.TabIndex = 96
+        Me.LVPRCommits.UseCompatibleStateImageBehavior = False
+        Me.LVPRCommits.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader2
+        '
+        Me.ColumnHeader2.Text = "PullRequestID"
+        Me.ColumnHeader2.Width = 90
+        '
+        'ColumnHeader3
+        '
+        Me.ColumnHeader3.Text = "Commited Files"
+        Me.ColumnHeader3.Width = 370
+        '
+        'PullRequestID
+        '
+        Me.PullRequestID.HeaderText = "PullRequestID"
+        Me.PullRequestID.Name = "PullRequestID"
+        Me.PullRequestID.ReadOnly = True
+        '
+        'PullRequestURL
+        '
+        Me.PullRequestURL.HeaderText = "PullRequest URL"
+        Me.PullRequestURL.Name = "PullRequestURL"
+        Me.PullRequestURL.ReadOnly = True
+        Me.PullRequestURL.Width = 369
+        '
         'FSearchGcent
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(987, 915)
+        Me.Controls.Add(Me.TCInfos)
         Me.Controls.Add(Me.BPatch)
         Me.Controls.Add(Me.BRFE)
         Me.Controls.Add(Me.BRessource)
@@ -893,7 +1001,6 @@ Partial Class FSearchGcent
         Me.Controls.Add(Me.RTBDOTI)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.LBDesc)
-        Me.Controls.Add(Me.RTBDesc)
         Me.Controls.Add(Me.RTBLog)
         Me.Controls.Add(Me.TBECD)
         Me.Controls.Add(Me.LbECD)
@@ -937,6 +1044,11 @@ Partial Class FSearchGcent
         Me.Name = "FSearchGcent"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Search Card"
+        Me.TCInfos.ResumeLayout(False)
+        Me.TPDesc.ResumeLayout(False)
+        Me.TPPRDetails.ResumeLayout(False)
+        CType(Me.DGPRDetails, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TBPRCommit.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -984,7 +1096,6 @@ Partial Class FSearchGcent
     Friend WithEvents TBstom As System.Windows.Forms.TextBox
     Friend WithEvents LBstom As System.Windows.Forms.Label
     Friend WithEvents RTBLog As System.Windows.Forms.RichTextBox
-    Friend WithEvents RTBDesc As System.Windows.Forms.RichTextBox
     Friend WithEvents LBDesc As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents RTBDOTI As System.Windows.Forms.RichTextBox
@@ -1020,4 +1131,15 @@ Partial Class FSearchGcent
     Friend WithEvents BRFE As Button
     Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
     Friend WithEvents BPatch As Button
+    Friend WithEvents TCInfos As TabControl
+    Friend WithEvents TPDesc As TabPage
+    Friend WithEvents TPPRDetails As TabPage
+    Friend WithEvents RTBDesc2 As RichTextBox
+    Friend WithEvents TBPRCommit As TabPage
+    Friend WithEvents LVPRCommits As ListView
+    Friend WithEvents ColumnHeader2 As ColumnHeader
+    Friend WithEvents ColumnHeader3 As ColumnHeader
+    Friend WithEvents DGPRDetails As DataGridView
+    Friend WithEvents PullRequestID As DataGridViewTextBoxColumn
+    Friend WithEvents PullRequestURL As DataGridViewLinkColumn
 End Class

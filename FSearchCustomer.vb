@@ -42,6 +42,7 @@ Public Structure Branch
     Public Application As String
     Public Description As String
     Public NbEnv As Integer
+    Public Category As String
 
     Public Env() As Env
 End Structure
@@ -116,7 +117,7 @@ Public Class FCustomer
     Function RequestBacklog(Branch As String) As String
 
 
-        RequestBacklog = "select t.p_customer, t.BRANCHNAME, t2.ENVTYPE, t.BRANCHTYPE, t.p_label, t.DESCRIPTION, t2.P_SERVER, t2.P_ORACLE, t2.P_JAVA, t.application "
+        RequestBacklog = "select t.p_customer, t.BRANCHNAME, t2.ENVTYPE, t.BRANCHTYPE, t.p_label, t.DESCRIPTION, t2.P_SERVER, t2.P_ORACLE, t2.P_JAVA, t.application, t.category "
         RequestBacklog = RequestBacklog & "from V_INFRA_BRANCH t, v_infra_env t2 "
         RequestBacklog = RequestBacklog & "where(t.BRANCHNAME = t2.P_BRANCH) "
         RequestBacklog = RequestBacklog & "and (upper(t.BRANCHNAME) like upper('%" + Branch + "%') "
@@ -238,10 +239,11 @@ Public Class FCustomer
         'Dim Customer As Env
         Dim found As Boolean
         Dim i, j, z, nbBranch, nbenv, nbappli, nbschema, IndEnv As Integer
-        Dim env, branchname, BranchType, Description, Application, label As String
+        Dim env, branchname, BranchType, Description, Application, label, Category As String
 
         TBDesc.Text = ""
         TBBranchType.Text = ""
+        TBCategory.Text = ""
 
         TBFramework.Text = ""
         TBFSpring.Text = ""
@@ -258,6 +260,7 @@ Public Class FCustomer
         Description = ""
         label = ""
         Application = ""
+        Category = ""
         IndEnv = 0
         env = ""
         branchname = ""
@@ -314,6 +317,10 @@ Public Class FCustomer
             Else
                 Description = ""
             End If
+            'category
+            If dr.GetValue(6) IsNot DBNull.Value Then
+                Category = dr.GetValue(10)
+            End If
             If dr.GetValue(2) IsNot DBNull.Value Then
                 env = dr.GetValue(2)
             End If
@@ -349,6 +356,8 @@ Public Class FCustomer
                 MyModule.Customers.Branch(nbBranch).Label = label
                 'on ajoute l'application
                 MyModule.Customers.Branch(nbBranch).Application = Application
+                'Categorie
+                MyModule.Customers.Branch(nbBranch).Category = Category
 
                 '******* Env *****
                 MyModule.Customers.Branch(nbBranch).Env(nbenv).Envname = env
@@ -599,6 +608,7 @@ Fin:
         TBDesc.Text = ""
         TBDesc.Text = MyModule.Customers.Branch(Index).Description
         TBBranchType.Text = MyModule.Customers.Branch(Index).BranchType
+        TBCategory.Text = MyModule.Customers.Branch(Index).Category
         TBLabel.Text = ""
         TBFramework.Text = ""
         TBFSpring.Text = ""
@@ -809,5 +819,6 @@ Fin:
         dr.Close()
         conn.Close()
     End Sub
+
 
 End Class

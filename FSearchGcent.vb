@@ -85,6 +85,9 @@ Public Class FSearchGcent
         If InStr(Card, "GAUTO") > 0 Then
             CQbase = "CQGAUTO"
         End If
+        If InStr(Card, "GREP") > 0 Then
+            CQbase = "CQGREP"
+        End If
 
         Request = " select Ta.numerofiche,"             '0
         Request = Request & " Ta.titre,"                '1
@@ -168,6 +171,104 @@ Public Class FSearchGcent
         RequestCQ = Request
 
     End Function
+
+    Function RequestAzurePR(ByVal Card As String) As String
+
+        Dim Request As String
+        Dim CQbase As String
+
+        CQbase = "cqcentral"
+
+        If InStr(Card, "GTOP") > 0 Then
+            CQbase = "cqgtop"
+        End If
+        If InStr(Card, "GADMI") > 0 Then
+            CQbase = "cqgadmin"
+        End If
+
+        If InStr(Card, "GSTOC") > 0 Then
+            CQbase = "CQGOLDSTOCK"
+        End If
+        If InStr(Card, "GTRAC") > 0 Then
+            CQbase = "cqgtrack"
+        End If
+        If InStr(Card, "GCAS") > 0 Then
+            CQbase = "cqcas"
+        End If
+        If InStr(Card, "GEVEN") > 0 Then
+            CQbase = "CQGOLDEVENTS"
+        End If
+        If InStr(Card, "GAUTO") > 0 Then
+            CQbase = "CQGAUTO"
+        End If
+        If InStr(Card, "GREP") > 0 Then
+            CQbase = "CQGREP"
+        End If
+
+
+        Request = " Select  azpr.prid, "
+        Request = Request & "azpr.prurl "
+        Request = Request & "From cqcentral.anomalie      a, "
+        Request = Request & CQbase & ".azureprdetails     azpr, "
+        Request = Request & CQbase & ".parent_child_links azprc "
+        Request = Request & "Where a.dbid = azprc.parent_dbid "
+        Request = Request & "And azprc.child_dbid = azpr.dbid "
+        Request = Request & "And a.numerofiche = '" + Card + "' "
+        Request = Request & "order by a.numerofiche ASC "
+
+
+        RequestAzurePR = Request
+
+    End Function
+
+    Function RequestAzureCommit(ByVal Card As String) As String
+        'Azure Commit
+        Dim Request As String
+        Dim CQbase As String
+
+        CQbase = "cqcentral"
+
+        If InStr(Card, "GTOP") > 0 Then
+            CQbase = "cqgtop"
+        End If
+        If InStr(Card, "GADMI") > 0 Then
+            CQbase = "cqgadmin"
+        End If
+
+        If InStr(Card, "GSTOC") > 0 Then
+            CQbase = "CQGOLDSTOCK"
+        End If
+        If InStr(Card, "GTRAC") > 0 Then
+            CQbase = "cqgtrack"
+        End If
+        If InStr(Card, "GCAS") > 0 Then
+            CQbase = "cqcas"
+        End If
+        If InStr(Card, "GEVEN") > 0 Then
+            CQbase = "CQGOLDEVENTS"
+        End If
+        If InStr(Card, "GAUTO") > 0 Then
+            CQbase = "CQGAUTO"
+        End If
+        If InStr(Card, "GREP") > 0 Then
+            CQbase = "CQGREP"
+        End If
+
+
+        Request = " Select  azc.PRID, azc.cfiles "
+        Request = Request & "From cqcentral.anomalie      a, "
+        Request = Request & CQbase & ".azureprcommits azc, "
+        Request = Request & CQbase & ".parent_child_links azcc "
+        Request = Request & "Where a.dbid = azcc.parent_dbid "
+        Request = Request & "And azcc.child_dbid = azc.dbid "
+        Request = Request & "And a.numerofiche = '" + Card + "' "
+        Request = Request & "order by a.numerofiche ASC "
+
+
+        RequestAzureCommit = Request
+
+    End Function
+
     Function RequestCQDoc(ByVal Card As String) As String
 
         Dim Request As String
@@ -196,6 +297,9 @@ Public Class FSearchGcent
         End If
         If InStr(Card, "GAUTO") > 0 Then
             CQbase = "CQGAUTO"
+        End If
+        If InStr(Card, "GREP") > 0 Then
+            CQbase = "CQGREP"
         End If
 
         Request = " select Ta.numerofiche, Tat.filename from "
@@ -274,6 +378,9 @@ Public Class FSearchGcent
         If InStr(Card, "GAUTO") > 0 Then
             CQbase = "CQGAUTO"
         End If
+        If InStr(Card, "GREP") > 0 Then
+            CQbase = "CQGREP"
+        End If
 
         RequestGcentHistory = "select distinct T1.DBID,"
         RequestGcentHistory = RequestGcentHistory & " T1.action_timestamp,"
@@ -345,6 +452,9 @@ Public Class FSearchGcent
         End If
         If InStr(gcent, "GAUTO") > 0 Then
             CQbase = "CQGAUTO"
+        End If
+        If InStr(gcent, "GREP") > 0 Then
+            CQbase = "CQGREP"
         End If
 
         GetGcentRetInfo = "select   s.name, a.label, a.numerofiche from  "
@@ -420,7 +530,7 @@ Public Class FSearchGcent
         RTBLog.Text = ""
         'RTBad.Text = ""
         RTBDOTM.Text = ""
-        RTBDesc.Text = ""
+        RTBDesc2.Text = ""
         RTBms.Text = ""
         CBGcent.Text = ""
         CBGcent.Items.Clear()
@@ -518,7 +628,9 @@ Public Class FSearchGcent
             End If
             'Description
             If dr.GetValue(24) IsNot DBNull.Value Then
-                RTBDesc.Text = dr.GetValue(24)
+                'RTBDesc.Text = dr.GetValue(24)
+                RTBDesc2.Text = dr.GetValue(24)
+
             End If
             'Description of the issue (for customers)
             If dr.GetValue(25) IsNot DBNull.Value Then
@@ -596,6 +708,9 @@ Public Class FSearchGcent
         conn.Dispose()
 
         '-----
+        'on ajoute la partie Azure
+        Azure()
+        '-----
         'on recherche les fiches de retrofits de cette fiche
 
         'on enrichie avec label et status de la fiche.
@@ -660,6 +775,8 @@ Public Class FSearchGcent
             nbrow2 = nbrow2 + 1
             If nbrow2 > 1 Then
                 CBGcent.ForeColor = Color.Red
+            Else
+                CBGcent.ForeColor = Color.Black
             End If
 
         End While
@@ -716,6 +833,8 @@ Public Class FSearchGcent
             TBUrgence.ForeColor = Color.Black
             TBSev.ForeColor = Color.Black
         End If
+
+
         BGcentHistory()
     End Function
 
@@ -760,7 +879,7 @@ Public Class FSearchGcent
         RTBLog.Text = ""
         'RTBad.Text = ""
         RTBDOTM.Text = ""
-        RTBDesc.Text = ""
+        RTBDesc2.Text = ""
         RTBms.Text = ""
 
         conn.Open()
@@ -834,7 +953,7 @@ Public Class FSearchGcent
             'End If
             'Description
             If dr.GetValue(8) IsNot DBNull.Value Then
-                RTBDesc.Text = dr.GetValue(8)
+                RTBDesc2.Text = dr.GetValue(8)
             End If
             ''Description of the issue (for customers)
             'If dr.GetValue(25) IsNot DBNull.Value Then
@@ -905,6 +1024,83 @@ Public Class FSearchGcent
         BGlibHistory()
 
     End Function
+
+    Private Sub Azure()
+        'Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.30)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = CQSCM1)));User ID=READCQUEST;Password=READCQUEST"
+        Dim conn As New OracleConnection(oradb)
+        Dim oradb2 As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.30)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = CQSCM1)));User ID=READCQUEST;Password=READCQUEST"
+        Dim conn2 As New OracleConnection(oradb)
+        Dim cmd As New OracleCommand
+        Dim dr As OracleDataReader
+
+        conn.Open()
+        'opening the connection
+        'On recherche d'abord les PR
+        Dim request As String = RequestAzurePR(Trim(TBGcent.Text))
+        'request = "select 1 from dual"
+        cmd = conn.CreateCommand()
+        cmd.CommandText = request
+
+        'LVPRDetails
+        dr = cmd.ExecuteReader()
+
+        DGPRDetails.Rows.Clear()
+        While dr.Read()
+
+            Dim LstRows As String()
+            ReDim LstRows(1)
+
+            LstRows(0) = (dr.GetValue(0).ToString)
+            LstRows(1) = (dr.GetValue(1).ToString)
+
+
+            DGPRDetails.Rows.Add(LstRows)
+
+        End While
+
+
+        'End If
+        conn.Close()
+        conn.Dispose()
+
+        'ensuite les fichiers commités
+
+        conn2.Open()
+        'opening the connection
+        'On recherche d'abord les PR
+        request = RequestAzureCommit(Trim(TBGcent.Text))
+        'request = "select 1 from dual"
+        cmd = conn2.CreateCommand()
+        cmd.CommandText = request
+
+        'executing the command and assigning it to connection
+        dr = cmd.ExecuteReader()
+
+        LVPRCommits.Items.Clear()
+        'GCENT21110400
+
+        While dr.Read()
+
+            Dim LVITime As New ListViewItem(dr.GetValue(0).ToString)
+
+            LbTitle.Visible = True
+            'Me.Size = New Size(776, 700)
+
+
+            LVITime.SubItems.Add(dr.GetValue(1).ToString)
+
+
+            LVPRCommits.Items.AddRange(New ListViewItem() {LVITime})
+
+        End While
+
+
+
+        'End If
+        conn2.Close()
+        conn2.Dispose()
+    End Sub
 
     'Private Sub BHistory_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BHistory.Click
     Private Sub BGcentHistory()
@@ -1272,6 +1468,9 @@ sortie:
         If InStr(base, "GAUTO") > 0 Then
             CQbase = "CQGAUTO"
         End If
+        If InStr(card, "GREP") > 0 Then
+            CQbase = "CQGREP"
+        End If
 
         Request = " Select a.numerofiche, a.titre from "
         Request = Request & CQbase & ".anomalie a "
@@ -1340,5 +1539,13 @@ sortie:
     End Sub
 
 
+    Private Sub DGPRDetails_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGPRDetails.CellContentClick
+        If e.ColumnIndex = 1 Then
+            Dim Row = DGPRDetails.Rows(e.RowIndex)
+            If Row.Cells(1).Value Is Nothing Then Return
+            Dim url = Row.Cells(1).Value.ToString()
+            System.Diagnostics.Process.Start(url)
+        End If
+    End Sub
 End Class
 

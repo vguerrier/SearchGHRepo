@@ -44,7 +44,7 @@ Partial Class Dabout
         Me.OK_Button.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.OK_Button.FlatAppearance.BorderSize = 0
         Me.OK_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.OK_Button.Location = New System.Drawing.Point(108, 156)
+        Me.OK_Button.Location = New System.Drawing.Point(302, 156)
         Me.OK_Button.Name = "OK_Button"
         Me.OK_Button.Size = New System.Drawing.Size(67, 23)
         Me.OK_Button.TabIndex = 0
@@ -53,7 +53,7 @@ Partial Class Dabout
         'LLBlinkCQ
         '
         Me.LLBlinkCQ.AutoSize = True
-        Me.LLBlinkCQ.Location = New System.Drawing.Point(68, 93)
+        Me.LLBlinkCQ.Location = New System.Drawing.Point(158, 93)
         Me.LLBlinkCQ.Margin = New System.Windows.Forms.Padding(3)
         Me.LLBlinkCQ.Name = "LLBlinkCQ"
         Me.LLBlinkCQ.Size = New System.Drawing.Size(29, 13)
@@ -67,7 +67,7 @@ Partial Class Dabout
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Black
-        Me.Label1.Location = New System.Drawing.Point(68, 3)
+        Me.Label1.Location = New System.Drawing.Point(158, 3)
         Me.Label1.Margin = New System.Windows.Forms.Padding(3)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(60, 20)
@@ -79,18 +79,18 @@ Partial Class Dabout
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(68, 33)
+        Me.Label2.Location = New System.Drawing.Point(158, 33)
         Me.Label2.Margin = New System.Windows.Forms.Padding(3)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(31, 20)
         Me.Label2.TabIndex = 144
-        Me.Label2.Text = "2.5"
+        Me.Label2.Text = "2.6"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(68, 63)
+        Me.Label3.Location = New System.Drawing.Point(158, 63)
         Me.Label3.Margin = New System.Windows.Forms.Padding(3)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(146, 13)
@@ -100,7 +100,7 @@ Partial Class Dabout
         'LinkLabel1
         '
         Me.LinkLabel1.AutoSize = True
-        Me.LinkLabel1.Location = New System.Drawing.Point(68, 123)
+        Me.LinkLabel1.Location = New System.Drawing.Point(158, 123)
         Me.LinkLabel1.Margin = New System.Windows.Forms.Padding(3)
         Me.LinkLabel1.Name = "LinkLabel1"
         Me.LinkLabel1.Size = New System.Drawing.Size(26, 13)
@@ -115,12 +115,12 @@ Partial Class Dabout
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.0!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.LogoPictureBox, 0, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.OK_Button, 1, 5)
         Me.TableLayoutPanel1.Controls.Add(Me.LinkLabel1, 1, 4)
         Me.TableLayoutPanel1.Controls.Add(Me.LLBlinkCQ, 1, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.Label1, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Label2, 1, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.Label3, 1, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.OK_Button, 1, 5)
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 55)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 6
@@ -130,7 +130,7 @@ Partial Class Dabout
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(218, 185)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(517, 185)
         Me.TableLayoutPanel1.TabIndex = 147
         '
         'LogoPictureBox
@@ -140,15 +140,15 @@ Partial Class Dabout
         Me.LogoPictureBox.Location = New System.Drawing.Point(3, 3)
         Me.LogoPictureBox.Name = "LogoPictureBox"
         Me.TableLayoutPanel1.SetRowSpan(Me.LogoPictureBox, 6)
-        Me.LogoPictureBox.Size = New System.Drawing.Size(59, 176)
-        Me.LogoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.LogoPictureBox.Size = New System.Drawing.Size(149, 179)
+        Me.LogoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.LogoPictureBox.TabIndex = 147
         Me.LogoPictureBox.TabStop = False
         '
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.WindowsApplication1.My.Resources.Resources.SRAI_logo
-        Me.PictureBox1.Location = New System.Drawing.Point(236, 61)
+        Me.PictureBox1.Location = New System.Drawing.Point(333, 58)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(57, 57)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -172,7 +172,7 @@ Partial Class Dabout
         Me.AcceptButton = Me.OK_Button
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(302, 246)
+        Me.ClientSize = New System.Drawing.Size(402, 246)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.TableLayoutPanel1)
