@@ -3,6 +3,7 @@ Imports System.Data.SqlClient
 Imports System.Data.Sql
 Imports Oracle.ManagedDataAccess.Types
 Imports MaterialSkin
+Imports Microsoft.Data.SqlClient
 
 Public Class FSearchWorkstream
     Private Sub FSearchWorkstream_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -17,7 +18,7 @@ Public Class FSearchWorkstream
 
 
         RequestWSCount = "Select count(*) "                  '0
-        RequestWSCount = RequestWSCount + "from Filteredaldata_workstream c "
+        RequestWSCount = RequestWSCount + "from aldata_workstream c "
         RequestWSCount = RequestWSCount + "Where c.aldata_name Like ('" + Trim(WS) + "') "
         'RequestWS = RequestWS + "Where c.aldata_accountname Like ('" + CaseN + "') "
 
@@ -27,7 +28,7 @@ Public Class FSearchWorkstream
 
 
         RequestWSA = "Select aldata_name, aldata_accountname "                  '0
-        RequestWSA = RequestWSA + "from Filteredaldata_workstream c "
+        RequestWSA = RequestWSA + "from aldata_workstream c "
         RequestWSA = RequestWSA + "Where c.aldata_name Like ('" + Trim(WS) + "') "
         'RequestWS = RequestWS + "Where c.aldata_accountname Like ('" + CaseN + "') "
 
@@ -51,7 +52,7 @@ Public Class FSearchWorkstream
         RequestWS = RequestWS + "modifiedon, "                          '13
         RequestWS = RequestWS + "owneridname, "                         '14
         RequestWS = RequestWS + "statecodename "                       '15
-        RequestWS = RequestWS + "from Filteredaldata_workstream c "
+        RequestWS = RequestWS + "from aldata_workstream c "
         RequestWS = RequestWS + "Where c.aldata_name Like ('" + Trim(WS) + "') "
         'RequestWS = RequestWS + "Where c.aldata_accountname Like ('" + CaseN + "') "
 
@@ -60,7 +61,7 @@ Public Class FSearchWorkstream
     Function RequestWStitle(ByVal WS As String) As String
 
 
-        RequestWStitle = "Select aldata_name  from Filteredaldata_workstream c  "                  '0
+        RequestWStitle = "Select aldata_name  from aldata_workstream c  "                  '0
         RequestWStitle = RequestWStitle + "Where c.aldata_name Like ('%" + Trim(WS) + "%') "
         'RequestWStitle = RequestWStitle + "Where c.aldata_accountname Like ('" + CaseN + "') "
 
@@ -126,10 +127,7 @@ Public Class FSearchWorkstream
 
     Public Function ResearchWSTitle(WS As String) As Cases()
         Dim req As String
-        Dim Sqldb As String = "Data Source=seyccrmsqlsip1;Integrated Security=SSPI;Initial Catalog=crm_MSCRM"
-        Dim SqlConn As New SqlClient.SqlConnection(Sqldb)
-        Dim SqlCmd As New SqlCommand
-        Dim myReader As SqlDataReader
+        Dim myReader As Microsoft.Data.SqlClient.SqlDataReader
         Dim NbRow As Integer
         Dim LstWS() As Cases
 
@@ -137,10 +135,8 @@ Public Class FSearchWorkstream
         'LstCase(0).Number = "0"
         LstWS = Nothing
 
-        SqlConn.Open()
-        SqlCmd = SqlConn.CreateCommand()
-        SqlCmd.CommandText = req
-        myReader = SqlCmd.ExecuteReader()
+        myReader = NewCRMReq(req)
+
         NbRow = 0
         While myReader.Read()
             If myReader.Item(0) IsNot DBNull.Value Then
@@ -157,13 +153,25 @@ Public Class FSearchWorkstream
         ResearchWSTitle = LstWS
     End Function
 
+    Public Function NewCRMReq(req As String) As Microsoft.Data.SqlClient.SqlDataReader
+
+        Dim Sqldb As String = "Server=srai.crm4.dynamics.com;Authentication=ActiveDirectoryServicePrincipal;Database=org343e290b;User Id=78379f80-7dac-4c00-9aaa-ceffaacc2587;Password=.Vq7Q~Q7iXabvOX_shVAbsVtoc9GfkM_EqJsu;"
+        Dim SqlConn As New Microsoft.Data.SqlClient.SqlConnection(Sqldb)
+        Dim myReader As Microsoft.Data.SqlClient.SqlDataReader
+
+        SqlConn.Open()
+
+        Dim SqlCmd As New Microsoft.Data.SqlClient.SqlCommand(req, SqlConn)
+
+        myReader = SqlCmd.ExecuteReader()
+
+        NewCRMReq = myReader
+    End Function
+
     Public Function researchWS(WS As String) As Integer
-        'Dim dr As OleDb.OleDbDataReader
-        Dim Sqldb As String = "Data Source=seyccrmsqlsip1;Integrated Security=SSPI;Initial Catalog=crm_MSCRM"
-        Dim SqlConn As New SqlClient.SqlConnection(Sqldb)
-        Dim SqlCmd As New SqlCommand
+
         Dim req As String
-        Dim myReader As SqlDataReader
+        Dim myReader As Microsoft.Data.SqlClient.SqlDataReader
         Dim nbRows As Integer
 
         Dim nbRFE As Integer
@@ -182,13 +190,8 @@ Public Class FSearchWorkstream
         CBGcent.Items.Clear()
 
         CBGcent.Text = ""
-
-        SqlConn.Open()
-        SqlCmd = SqlConn.CreateCommand()
         req = RequestWSCount(WS)
-
-        SqlCmd.CommandText = req
-        myReader = SqlCmd.ExecuteReader()
+        myReader = NewCRMReq(req)
 
         myReader.Read()
         nbRows = myReader.GetValue(0)
@@ -200,8 +203,7 @@ Public Class FSearchWorkstream
             If nbRows > 1 Then
                 req = RequestWSA(WS)
 
-                SqlCmd.CommandText = req
-                myReader = SqlCmd.ExecuteReader()
+                myReader = NewCRMReq(req)
 
                 myReader.Read()
                 FSearchSelectWS.Show()
@@ -217,8 +219,7 @@ Public Class FSearchWorkstream
             'SqlCmd = SqlConn.CreateCommand()
             req = RequestWS(WS)
 
-            SqlCmd.CommandText = req
-            myReader = SqlCmd.ExecuteReader()
+            myReader = NewCRMReq(req)
 
 
             'conn.Open()
@@ -272,8 +273,8 @@ Public Class FSearchWorkstream
                     TBState.Text = myReader.GetValue(15)
                 End If
             End If
-            SqlConn.Close()
-            SqlConn.Dispose()
+            'SqlConn.Close()
+            'SqlConn.Dispose()
 
 
 

@@ -525,9 +525,9 @@ Partial Class FSearchGcent
         Me.LBDesc.BackColor = System.Drawing.Color.White
         Me.LBDesc.Location = New System.Drawing.Point(20, 624)
         Me.LBDesc.Name = "LBDesc"
-        Me.LBDesc.Size = New System.Drawing.Size(60, 13)
+        Me.LBDesc.Size = New System.Drawing.Size(59, 13)
         Me.LBDesc.TabIndex = 116
-        Me.LBDesc.Text = "Description"
+        Me.LBDesc.Text = "Information"
         '
         'Label3
         '
@@ -888,10 +888,11 @@ Partial Class FSearchGcent
         'RTBDesc2
         '
         Me.RTBDesc2.BackColor = System.Drawing.Color.White
-        Me.RTBDesc2.Location = New System.Drawing.Point(1, -2)
+        Me.RTBDesc2.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.RTBDesc2.Location = New System.Drawing.Point(0, 0)
         Me.RTBDesc2.Name = "RTBDesc2"
         Me.RTBDesc2.ReadOnly = True
-        Me.RTBDesc2.Size = New System.Drawing.Size(469, 264)
+        Me.RTBDesc2.Size = New System.Drawing.Size(456, 233)
         Me.RTBDesc2.TabIndex = 116
         Me.RTBDesc2.Text = ""
         '
@@ -908,12 +909,13 @@ Partial Class FSearchGcent
         '
         'DGPRDetails
         '
+        Me.DGPRDetails.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.DGPRDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGPRDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.PullRequestID, Me.PullRequestURL})
         Me.DGPRDetails.Location = New System.Drawing.Point(0, 0)
         Me.DGPRDetails.Name = "DGPRDetails"
         Me.DGPRDetails.RowHeadersVisible = False
-        Me.DGPRDetails.Size = New System.Drawing.Size(469, 264)
+        Me.DGPRDetails.Size = New System.Drawing.Size(458, 235)
         Me.DGPRDetails.TabIndex = 98
         '
         'TBPRCommit
@@ -929,13 +931,14 @@ Partial Class FSearchGcent
         '
         'LVPRCommits
         '
+        Me.LVPRCommits.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.LVPRCommits.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader2, Me.ColumnHeader3})
         Me.LVPRCommits.GridLines = True
         Me.LVPRCommits.HideSelection = False
         Me.LVPRCommits.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem3})
-        Me.LVPRCommits.Location = New System.Drawing.Point(-4, 20)
+        Me.LVPRCommits.Location = New System.Drawing.Point(0, 0)
         Me.LVPRCommits.Name = "LVPRCommits"
-        Me.LVPRCommits.Size = New System.Drawing.Size(645, 318)
+        Me.LVPRCommits.Size = New System.Drawing.Size(458, 235)
         Me.LVPRCommits.TabIndex = 96
         Me.LVPRCommits.UseCompatibleStateImageBehavior = False
         Me.LVPRCommits.View = System.Windows.Forms.View.Details
@@ -943,12 +946,12 @@ Partial Class FSearchGcent
         'ColumnHeader2
         '
         Me.ColumnHeader2.Text = "PullRequestID"
-        Me.ColumnHeader2.Width = 90
+        Me.ColumnHeader2.Width = 100
         '
         'ColumnHeader3
         '
         Me.ColumnHeader3.Text = "Commited Files"
-        Me.ColumnHeader3.Width = 370
+        Me.ColumnHeader3.Width = 354
         '
         'PullRequestID
         '
@@ -961,7 +964,7 @@ Partial Class FSearchGcent
         Me.PullRequestURL.HeaderText = "PullRequest URL"
         Me.PullRequestURL.Name = "PullRequestURL"
         Me.PullRequestURL.ReadOnly = True
-        Me.PullRequestURL.Width = 369
+        Me.PullRequestURL.Width = 356
         '
         'FSearchGcent
         '

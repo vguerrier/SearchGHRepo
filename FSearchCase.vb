@@ -1,10 +1,12 @@
 ﻿Imports Oracle.ManagedDataAccess.Client
+Imports Microsoft.Data.SqlClient
 Imports System.Data.SqlClient
 Imports System.Data.Sql
+
 Imports Oracle.ManagedDataAccess.Types
 Imports MaterialSkin
-
-
+Imports SqlCommand = System.Data.SqlClient.SqlCommand
+Imports SqlDataReader = System.Data.SqlClient.SqlDataReader
 
 Public Class FSearchCase
 
@@ -31,6 +33,8 @@ Public Class FSearchCase
         FSearch.Research(0)
     End Sub
 
+
+
     Function RequestCase(ByVal CaseN As String, Opt As Short) As String
 
         'option :
@@ -49,8 +53,8 @@ Public Class FSearchCase
         RequestCase = RequestCase + "c.aldata_validatetargetpatch,     "    'Validate Target Patch",
         RequestCase = RequestCase + "c.title,                          "    'Title",
         RequestCase = RequestCase + "c.aldata_workstreamname,          "    'Workstream",
-        RequestCase = RequestCase + "c.createdonutc,                   "    'Created On (UTC)",
-        RequestCase = RequestCase + "c.sfmig_truelastmodifieddateutc,  "    'Last Modified (UTC)",
+        RequestCase = RequestCase + "c.createdon,                   "    'Created On (UTC)",
+        RequestCase = RequestCase + "c.sfmig_truelastmodifieddate,  "    'Last Modified (UTC)",
         RequestCase = RequestCase + "c.sfmig_srclientnumber,           "    'Customer's Case #",
         RequestCase = RequestCase + "c.sfmig_prodenvtname,             "    'Production?",
         RequestCase = RequestCase + "cq.aldata_assignedto,             "    'CQ Assigned To",
@@ -61,11 +65,11 @@ Public Class FSearchCase
         RequestCase = RequestCase + "c.aldata_expectedcorrectiondate,   "   'date_correction",
         RequestCase = RequestCase + "c.sfmig_targetpatch,                 "  'Target Patch"
         RequestCase = RequestCase + "c.aldata_versionidname,             " 'Version
-        RequestCase = RequestCase + "convert(nvarchar(50), c.incidentid), " 'foreign key Filteredaldata_casecomment commentaire
-        RequestCase = RequestCase + "c.description, "                        'Description
-        RequestCase = RequestCase + "convert(sql_variant,c.incidentid) "
-        RequestCase = RequestCase + "FROM FilteredIncident c WITH (NOLOCK) " '"
-        RequestCase = RequestCase + "LEFT OUTER JOIN Filteredaldata_clearquestbug cq WITH (NOLOCK) ON c.incidentid = cq.aldata_case "
+        RequestCase = RequestCase + "convert(nvarchar(50), c.incidentid), " 'foreign key aldata_casecomment commentaire
+        RequestCase = RequestCase + "c.description "                        'Description
+        'RequestCase = RequestCase + "convert(sql_variant,c.incidentid) "
+        RequestCase = RequestCase + "FROM Incident c WITH (NOLOCK) " '"
+        RequestCase = RequestCase + "LEFT OUTER JOIN aldata_clearquestbug cq WITH (NOLOCK) ON c.incidentid = cq.aldata_case "
         If Opt = 0 Then
             RequestCase = RequestCase + "WHERE c.ticketnumber like '%" + Trim(CaseN) + "%'"
         Else
@@ -80,7 +84,7 @@ Public Class FSearchCase
 
         RequestCaseTitle = "SELECT c.ticketnumber, "                           ' Account name
         RequestCaseTitle = RequestCaseTitle + "c.title                        "    'Title",
-        RequestCaseTitle = RequestCaseTitle + "FROM FilteredIncident c " '"
+        RequestCaseTitle = RequestCaseTitle + "FROM Incident c " '"
         RequestCaseTitle = RequestCaseTitle + "WHERE c.title like '%" + Trim(CaseN) + "%'"
 
 
@@ -88,21 +92,13 @@ Public Class FSearchCase
 
     Function RequestCaseComment(ByVal CaseN As String) As String
 
-        'RequestCaseComment = "SELECT c.ticketnumber, "                           ' Case #
-        'RequestCaseComment = RequestCaseComment + "cc.aldata_comment, "         'Comment #,
-        'RequestCaseComment = RequestCaseComment + "cc.createdonutc,                  "    'date,
-        'RequestCaseComment = RequestCaseComment + "cc.createdbyname                  "    'user,
-        'RequestCaseComment = RequestCaseComment + "FROM FilteredIncident c, Filteredaldata_casecomment cc "
-        'RequestCaseComment = RequestCaseComment + "WHERE c.ticketnumber like '%" + CaseN + "%' "
-        'RequestCaseComment = RequestCaseComment + "and cc.aldata_case = c.incidentid "
-        'RequestCaseComment = RequestCaseComment + "order by cc.createdonutc desc"
 
         RequestCaseComment = "SELECT cc.aldata_comment, "
-        RequestCaseComment = RequestCaseComment + "cc.createdonutc, "
+        RequestCaseComment = RequestCaseComment + "cc.createdon, "
         RequestCaseComment = RequestCaseComment + "cc.createdbyname "
-        RequestCaseComment = RequestCaseComment + "from Filteredaldata_casecomment cc "
+        RequestCaseComment = RequestCaseComment + "from aldata_casecomment cc "
         RequestCaseComment = RequestCaseComment + "where cc.aldata_case = '" + CaseN + "' "
-        RequestCaseComment = RequestCaseComment + "order by cc.createdonutc desc"
+        RequestCaseComment = RequestCaseComment + "order by cc.createdon desc"
 
     End Function
     Public Sub ClearTextBox(ByVal root As Control)
@@ -174,22 +170,23 @@ Public Class FSearchCase
 
     End Function
 
-    Public Function researchCaseTitle() As Cases()
+    Public Function ResearchCaseTitle() As Cases()
         Dim req As String
-        Dim Sqldb As String = "Data Source=seyccrmsqlsip1;Integrated Security=SSPI;Initial Catalog=crm_MSCRM"
-        Dim SqlConn As New SqlClient.SqlConnection(Sqldb)
-        Dim SqlCmd As New SqlCommand
-        Dim myReader As SqlDataReader
+        'Dim Sqldb As String = "Data Source=seyccrmsqlsip1;Integrated Security=SSPI;Initial Catalog=crm_MSCRM"
+        'Dim SqlConn As New SqlClient.SqlConnection(Sqldb)
+        'Dim SqlCmd As New SqlCommand
+        Dim myReader As Microsoft.Data.SqlClient.SqlDataReader
         Dim NbRow As Integer
         Dim LstCase() As Cases
         req = RequestCaseTitle(Trim(RTBCase.Text))
         'LstCase(0).Number = "0"
         LstCase = Nothing
 
-        SqlConn.Open()
-        SqlCmd = SqlConn.CreateCommand()
-        SqlCmd.CommandText = req
-        myReader = SqlCmd.ExecuteReader()
+        'SqlConn.Open()
+        'SqlCmd = SqlConn.CreateCommand()
+        'SqlCmd.CommandText = req
+        myReader = NewCRMReq(req)
+        'myReader = SqlCmd.ExecuteReader()
         NbRow = 0
         While myReader.Read()
             If myReader.Item(0) IsNot DBNull.Value Then
@@ -203,16 +200,32 @@ Public Class FSearchCase
             End If
         End While
         'Nb = UBound(LstCase)
-        researchCaseTitle = LstCase
+        ResearchCaseTitle = LstCase
 
     End Function
+    Public Function NewCRMReq(req As String) As Microsoft.Data.SqlClient.SqlDataReader
+
+        Dim Sqldb As String = "Server=srai.crm4.dynamics.com;Authentication=ActiveDirectoryServicePrincipal;Database=org343e290b;User Id=78379f80-7dac-4c00-9aaa-ceffaacc2587;Password=.Vq7Q~Q7iXabvOX_shVAbsVtoc9GfkM_EqJsu;"
+        Dim SqlConn As New Microsoft.Data.SqlClient.SqlConnection(Sqldb)
+        Dim myReader As Microsoft.Data.SqlClient.SqlDataReader
+
+        SqlConn.Open()
+
+        Dim SqlCmd As New Microsoft.Data.SqlClient.SqlCommand(req, SqlConn)
+
+        myReader = SqlCmd.ExecuteReader()
+
+        NewCRMReq = myReader
+    End Function
+
 
     Public Function researchCase(CusCase As Short) As Integer
 
         Dim Sqldb As String = "Data Source=seyccrmsqlsip1;Integrated Security=SSPI;Initial Catalog=crm_MSCRM"
         Dim SqlConn As New SqlClient.SqlConnection(Sqldb)
         Dim SqlCmd As New SqlCommand
-        Dim myReader As SqlDataReader
+        Dim myReader As Microsoft.Data.SqlClient.SqlDataReader
+
         '--Dim Oradb As String = "Provider=OraOLEDB.Oracle.1;Password=READCQUEST;Persist Security Info=True;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1;"
         'Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
         Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.30)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = CQSCM1)));User ID=READCQUEST;Password=READCQUEST"
@@ -237,6 +250,8 @@ Public Class FSearchCase
         Dim frameworkC As String
         FKcomment = "0"
 
+
+
         ' mise au premier plan
         Me.TopMost = True
         Me.TopMost = False
@@ -255,17 +270,13 @@ Public Class FSearchCase
         If (RTBCase.Text <> "" And Len(RTBCase.Text) >= 6) Or CusCase = 1 Then
 
             Try
-                SqlConn.Open()
-                SqlCmd = SqlConn.CreateCommand()
                 If CusCase = 1 Then
                     'si on recherche par numéro de du client (ex Mantis pour Confo)
                     req = RequestCase(Trim(RTBCase.Text), 1)
                 Else
                     req = RequestCase(Trim(RTBCase.Text), 0)
                 End If
-                SqlCmd.CommandText = req
-                myReader = SqlCmd.ExecuteReader()
-
+                myReader = NewCRMReq(req)
 
                 'MsgBox(myReader.GetString(0) + " " + myReader.GetString(1) + " " + myReader.GetString(2) + " " + myReader.GetString(3) + " " + myReader.GetString(4) + " " + myReader.GetString(5))
                 'MsgBox(myReader.GetString(0) + " " + myReader.GetString(1) + " " + myReader.GetString(3) + " " + myReader.GetString(4) + " " + myReader.GetString(5))
@@ -328,7 +339,7 @@ Public Class FSearchCase
                 CBGlib.Visible = True
                 BGlib.Visible = True
                 LBGlib.Visible = True
-                Dim IncID As Guid
+                'Dim IncID As Guid
 
 
 
@@ -482,10 +493,13 @@ Public Class FSearchCase
                         RTBDesc.Text = myReader.Item(27)
                     End If
                     'Id
-                    If myReader.Item(28) IsNot DBNull.Value Then
-                        IncID = myReader.Item(28)
+                    If myReader.Item(26) IsNot DBNull.Value Then
+                        'IncID = myReader.Item(26)
 
-                        LbLink.Text = "https://crm.eyc.com/main.aspx?etc=112&id=%7b" + IncID.ToString() + "%7d&pagetype=entityrecord"
+                        'LbLink.Text = "https://crm.eyc.com/main.aspx?etc=112&id=%7b" + IncID.ToString() + "%7d&pagetype=entityrecord"
+                        LbLink.Text = "https://srai.crm4.dynamics.com/main.aspx?appid=c4bd02ff-dcd9-ec11-bb3d-000d3a2e2149&forceUCI=1&pagetype=entityrecord&etn=incident&id=" + FKcomment 'IncID.ToString()
+                        '"https://srai.crm4.dynamics.com/"
+                        'https://srai.crm4.dynamics.com/main.aspx?appid=c4bd02ff-dcd9-ec11-bb3d-000d3a2e2149&forceUCI=1&pagetype=entityrecord&etn=incident&id=907d899a-78a4-ec11-80f1-005056ae2cd3
                     End If
                 End While
                 '-----
@@ -701,18 +715,15 @@ Public Class FSearchCase
 
     Private Sub BGCaseComment(FKcomment As String)
 
-        Dim Sqldb As String = "Data Source=seyccrmsqlsip1;Integrated Security=SSPI;Initial Catalog=crm_MSCRM"
-        Dim SqlConn As New SqlClient.SqlConnection(Sqldb)
-        Dim SqlCmd As New SqlCommand
-        Dim myReader As SqlDataReader
+
+        Dim myReader As Microsoft.Data.SqlClient.SqlDataReader
         Dim req As String
 
         Try
-            SqlConn.Open()
-            SqlCmd = SqlConn.CreateCommand()
+
             req = RequestCaseComment(FKcomment)
-            SqlCmd.CommandText = req
-            myReader = SqlCmd.ExecuteReader()
+
+            myReader = NewCRMReq(req)
 
             LVComment.Items.Clear()
 
@@ -732,8 +743,6 @@ Public Class FSearchCase
                 LVComment.Items.AddRange(New ListViewItem() {LVITime})
 
             End While
-            SqlConn.Close()
-
 
 
         Catch ex As Exception
@@ -824,4 +833,6 @@ Public Class FSearchCase
             FSearch.Research(7)
         End If
     End Sub
+
+
 End Class

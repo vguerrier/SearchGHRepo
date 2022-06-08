@@ -98,9 +98,11 @@ Partial Class FSearchCase
         Me.BSearch2 = New System.Windows.Forms.Button()
         Me.BSearch = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.BPatch = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TBPatch = New System.Windows.Forms.TextBox()
-        Me.BPatch = New System.Windows.Forms.Button()
+        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'CHComments
@@ -146,6 +148,7 @@ Partial Class FSearchCase
         '
         Me.LVComment.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.CHComments, Me.CHUser, Me.CHTime})
         Me.LVComment.GridLines = True
+        Me.LVComment.HideSelection = False
         Me.LVComment.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.LVComment.Location = New System.Drawing.Point(31, 585)
         Me.LVComment.Name = "LVComment"
@@ -773,6 +776,19 @@ Partial Class FSearchCase
         Me.ToolTip1.SetToolTip(Me.Button2, "Mail")
         Me.Button2.UseVisualStyleBackColor = True
         '
+        'BPatch
+        '
+        Me.BPatch.BackColor = System.Drawing.Color.White
+        Me.BPatch.FlatAppearance.BorderSize = 0
+        Me.BPatch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BPatch.Image = Global.WindowsApplication1.My.Resources.Resources.search3_p
+        Me.BPatch.Location = New System.Drawing.Point(728, 402)
+        Me.BPatch.Name = "BPatch"
+        Me.BPatch.Size = New System.Drawing.Size(25, 25)
+        Me.BPatch.TabIndex = 160
+        Me.ToolTip1.SetToolTip(Me.BPatch, "Patch Content")
+        Me.BPatch.UseVisualStyleBackColor = False
+        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -791,18 +807,8 @@ Partial Class FSearchCase
         Me.TBPatch.Size = New System.Drawing.Size(691, 20)
         Me.TBPatch.TabIndex = 158
         '
-        'BPatch
+        'BindingSource1
         '
-        Me.BPatch.BackColor = System.Drawing.Color.White
-        Me.BPatch.FlatAppearance.BorderSize = 0
-        Me.BPatch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BPatch.Image = Global.WindowsApplication1.My.Resources.Resources.search3_p
-        Me.BPatch.Location = New System.Drawing.Point(728, 402)
-        Me.BPatch.Name = "BPatch"
-        Me.BPatch.Size = New System.Drawing.Size(25, 25)
-        Me.BPatch.TabIndex = 160
-        Me.ToolTip1.SetToolTip(Me.BPatch, "Patch Content")
-        Me.BPatch.UseVisualStyleBackColor = False
         '
         'FSearchCase
         '
@@ -890,6 +896,7 @@ Partial Class FSearchCase
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Search Case"
         Me.TransparencyKey = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -969,4 +976,5 @@ Partial Class FSearchCase
     Friend WithEvents Label1 As Label
     Friend WithEvents TBPatch As TextBox
     Friend WithEvents BPatch As Button
+    Friend WithEvents BindingSource1 As BindingSource
 End Class

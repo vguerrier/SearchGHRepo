@@ -1,0 +1,32 @@
+SELECT c.customeridname,
+c.ticketnumber,                    
+c.sfmig_ranking,                  
+c.aldata_functionaldomainname, 
+c.statuscodename,                 
+cq.aldata_clearquestbugnumber,    
+c.productidname,                  
+c.prioritycodename,               
+c.sfmig_expecteddeliverydate,     
+c.owneridname,                    
+c.aldata_assignedgroupname,       
+c.aldata_validatetargetpatch,     
+c.title,                          
+c.aldata_workstreamname,          
+c.createdon,                   
+c.sfmig_truelastmodifieddate,  
+c.sfmig_srclientnumber,           
+c.sfmig_prodenvtname,             
+cq.aldata_assignedto,             
+cq.aldata_label,                  
+cq.aldata_state,                  
+c.aldata_assignedpersonname,      
+c.sfmig_rejectedsolutionscount,   
+c.aldata_expectedcorrectiondate,   
+c.sfmig_targetpatch,
+c.aldata_versionidname,
+--convert(nvarchar(50), c.incidentid),
+c.description
+--convert(sql_variant,c.incidentid)
+FROM Incident c WITH (NOLOCK)
+LEFT OUTER JOIN aldata_clearquestbug cq WITH (NOLOCK) ON c.incidentid = cq.aldata_case
+    WHERE c.ticketnumber like '%CAS-199240-C2Q3%'

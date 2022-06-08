@@ -1,10 +1,12 @@
 ﻿Imports Oracle.ManagedDataAccess.Client
 Imports System.Data.SqlClient
+Imports Microsoft.Data.SqlClient
 Imports System.Data.Sql
 Imports Oracle.ManagedDataAccess.Types
 Imports System.Data.Common
 Imports MaterialSkin
 Imports Excel = Microsoft.Office.Interop.Excel
+'Imports Microsoft.Data.SqlClient
 
 'Imports DataGridViewAutoFilter;
 
@@ -20,11 +22,49 @@ Public Structure Cards
     Public CaseNumber As String
 End Structure
 
+Public Structure MData
+    Public mReader As Microsoft.Data.SqlClient.SqlDataReader
+    Public mCmd As Microsoft.Data.SqlClient.SqlCommand
+    Public mCon As Microsoft.Data.SqlClient.SqlConnection
+End Structure
+
 Public Class FBacklog
 
     Private lvwColumnSorter As ListViewColumnSorter
     Dim FirstOpened, iStatus, iWorkstream, iAssign, iVTP, iPriority As Integer
     Dim myCards As Cards()
+
+    Public Function NewCRMReqDATA(req As String) As MData 'Microsoft.Data.SqlClient.SqlDataReader
+
+        Dim Sqldb As String = "Server=srai.crm4.dynamics.com;Authentication=ActiveDirectoryServicePrincipal;Database=org343e290b;User Id=78379f80-7dac-4c00-9aaa-ceffaacc2587;Password=.Vq7Q~Q7iXabvOX_shVAbsVtoc9GfkM_EqJsu;"
+        Dim SqlConn As New Microsoft.Data.SqlClient.SqlConnection(Sqldb)
+        Dim myReader As Microsoft.Data.SqlClient.SqlDataReader
+        Dim myMData As MData
+
+        SqlConn.Open()
+        myMData.mCon = SqlConn
+
+        Dim SqlCmd As New Microsoft.Data.SqlClient.SqlCommand(req, SqlConn)
+        myMData.mCmd = SqlCmd
+
+        myReader = SqlCmd.ExecuteReader()
+        myMData.mReader = myReader
+        NewCRMReqDATA = myMData
+    End Function
+    Public Function NewCRMReq(req As String) As Microsoft.Data.SqlClient.SqlDataReader
+
+        Dim Sqldb As String = "Server=srai.crm4.dynamics.com;Authentication=ActiveDirectoryServicePrincipal;Database=org343e290b;User Id=78379f80-7dac-4c00-9aaa-ceffaacc2587;Password=.Vq7Q~Q7iXabvOX_shVAbsVtoc9GfkM_EqJsu;"
+        Dim SqlConn As New Microsoft.Data.SqlClient.SqlConnection(Sqldb)
+        Dim myReader As Microsoft.Data.SqlClient.SqlDataReader
+
+        SqlConn.Open()
+
+        Dim SqlCmd As New Microsoft.Data.SqlClient.SqlCommand(req, SqlConn)
+
+        myReader = SqlCmd.ExecuteReader()
+
+        NewCRMReq = myReader
+    End Function
 
     Function RequestBacklog(Client As String, dist As String, Opt As Integer, Optgcent As Integer) As String
         'Opt = 1 si on veut les cases fermés
@@ -59,12 +99,12 @@ Public Class FBacklog
                 RequestBacklog = RequestBacklog & "c.title as Title, "                               '12
                 RequestBacklog = RequestBacklog & "c.aldata_workstreamname as Workstream, "               '13
 
-                RequestBacklog = RequestBacklog & "CONVERT(date,c.createdonutc,103) as ""Created_Date"", "                        '14
-                RequestBacklog = RequestBacklog & "CONVERT(date,c.sfmig_laststatuschangeutc,103) as ""LastStatusDate"", "           '15
+                RequestBacklog = RequestBacklog & "CONVERT(date,c.createdon,103) as ""Created_Date"", "                        '14
+                RequestBacklog = RequestBacklog & "CONVERT(date,c.sfmig_laststatuschange,103) as ""LastStatusDate"", "           '15
                 RequestBacklog = RequestBacklog & "c.aldata_versionidname as ""Version"" "                         '16
 
         End Select
-        'RequestBacklog = RequestBacklog & "c.sfmig_truelastmodifieddateutc, "       '15
+        'RequestBacklog = RequestBacklog & "c.sfmig_truelastmodifieddate, "       '15
         'RequestBacklog = RequestBacklog & "c.sfmig_srclientnumber, "                '16
         'RequestBacklog = RequestBacklog & "c.sfmig_prodenvtname, "                  '17
         'RequestBacklog = RequestBacklog & "cq.aldata_assignedto, "                  '18
@@ -88,10 +128,10 @@ Public Class FBacklog
 
 
         If optgcent = 0 Then
-            RequestBacklogGen = "FROM FilteredIncident c "
+            RequestBacklogGen = "FROM Incident c "
         Else
-            RequestBacklogGen = "FROM FilteredIncident c WITH (NOLOCK) "
-            RequestBacklogGen = RequestBacklogGen & "LEFT OUTER JOIN Filteredaldata_clearquestbug cq WITH (NOLOCK) ON c.incidentid = cq.aldata_case "
+            RequestBacklogGen = "FROM Incident c WITH (NOLOCK) "
+            RequestBacklogGen = RequestBacklogGen & "LEFT OUTER JOIN aldata_clearquestbug cq WITH (NOLOCK) ON c.incidentid = cq.aldata_case "
         End If
 
 
@@ -137,14 +177,14 @@ Public Class FBacklog
                 RequestBacklogClosed = RequestBacklogClosed & "c.title as Title, "                               '12
                 RequestBacklogClosed = RequestBacklogClosed & "c.aldata_workstreamname as Workstream, "               '13
 
-                RequestBacklogClosed = RequestBacklogClosed & "CONVERT(date,c.createdonutc,103) as ""Created_Date"", "                        '14
-                RequestBacklogClosed = RequestBacklogClosed & "CONVERT(date,c.sfmig_laststatuschangeutc,103) as ""LastStatusDate"", "           '15
+                RequestBacklogClosed = RequestBacklogClosed & "CONVERT(date,c.createdon,103) as ""Created_Date"", "                        '14
+                RequestBacklogClosed = RequestBacklogClosed & "CONVERT(date,c.sfmig_laststatuschange,103) as ""LastStatusDate"", "           '15
                 RequestBacklogClosed = RequestBacklogClosed & "c.aldata_versionidname as ""Version"" "                         '16
                 RequestBacklogClosed = RequestBacklogClosed & RequestBacklogClosedGen(Client, Optgcent)
 
 
         End Select
-        'RequestBacklogClosed = RequestBacklogClosed & "c.sfmig_truelastmodifieddateutc, "       '15
+        'RequestBacklogClosed = RequestBacklogClosed & "c.sfmig_truelastmodifieddate, "       '15
         'RequestBacklogClosed = RequestBacklogClosed & "c.sfmig_srclientnumber, "                '16
         'RequestBacklogClosed = RequestBacklogClosed & "c.sfmig_prodenvtname, "                  '17
         'RequestBacklogClosed = RequestBacklogClosed & "cq.aldata_assignedto, "                  '18
@@ -164,10 +204,10 @@ Public Class FBacklog
 
 
         If Optgcent = 0 Then
-            RequestBacklogClosedGen = "FROM FilteredIncident c "
+            RequestBacklogClosedGen = "FROM Incident c "
         Else
-            RequestBacklogClosedGen = "FROM FilteredIncident c With (NOLOCK) "
-            RequestBacklogClosedGen = RequestBacklogClosedGen & "LEFT OUTER JOIN Filteredaldata_clearquestbug cq With (NOLOCK) On c.incidentid = cq.aldata_case "
+            RequestBacklogClosedGen = "FROM Incident c With (NOLOCK) "
+            RequestBacklogClosedGen = RequestBacklogClosedGen & "LEFT OUTER JOIN aldata_clearquestbug cq With (NOLOCK) On c.incidentid = cq.aldata_case "
         End If
 
 
@@ -217,20 +257,25 @@ Public Class FBacklog
     End Function
 
     Function researchBacklog() As Integer
-        Dim Sqldb As String = "Data Source=seyccrmsqlsip1;Integrated Security=SSPI;Initial Catalog=crm_MSCRM"
-        Dim SqlConn As New SqlClient.SqlConnection(Sqldb)
-        Dim SqlCmd As New SqlCommand
+        Dim Sqldb As String = "Server=srai.crm4.dynamics.com;Authentication=ActiveDirectoryServicePrincipal;Database=org343e290b;User Id=78379f80-7dac-4c00-9aaa-ceffaacc2587;Password=.Vq7Q~Q7iXabvOX_shVAbsVtoc9GfkM_EqJsu;"
+        Dim SqlConn As New Microsoft.Data.SqlClient.SqlConnection(Sqldb)
+        Dim myReader As Microsoft.Data.SqlClient.SqlDataReader
+        Dim SqlCmd As Microsoft.Data.SqlClient.SqlCommand
+        'Dim Sqldb As String = "Data Source=seyccrmsqlsip1;Integrated Security=SSPI;Initial Catalog=crm_MSCRM"
+        'Dim SqlConn As New SqlClient.SqlConnection(Sqldb)
+        'Dim SqlCmd As New System.Data.SqlClient.SqlCommand
         'Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
         Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.30)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = CQSCM1)));User ID=READCQUEST;Password=READCQUEST"
         Dim SqlConn2 As New OracleConnection(oradb)
         Dim SqlCmd2 As OracleCommand
-        Dim myReader As SqlDataReader
+        'Dim myReader As Microsoft.Data.SqlClient.SqlDataReader
         Dim myReader2 As OracleDataReader
         Dim req As String
         Dim nbrow As Integer
         Dim Opt, OptGcent As Integer
         Dim MonDataSet, MonDataSetState, MonDataSetPriority, MonDataSetAgroup, MonDataSetWorkstream, MonDataSetVTP As New DataSet
-        Dim Adaptateur As New SqlDataAdapter
+        Dim Adaptateur As New Microsoft.Data.SqlClient.SqlDataAdapter
+        Dim myMData, myMData2 As MData
         Dim j As Integer
 
         'Dim toto As String
@@ -248,15 +293,15 @@ Public Class FBacklog
 
         Try
             SqlConn.Open()
-            SqlCmd = SqlConn.CreateCommand()
-            req = RequestBacklog(Replace(Trim(TBCus.Text), "'", "''"), "", Opt, OptGcent)
 
-            SqlCmd.CommandText = req
+            req = RequestBacklog(Replace(Trim(TBCus.Text), "'", "''"), "", Opt, OptGcent)
+            SqlCmd = New Microsoft.Data.SqlClient.SqlCommand(req, SqlConn)
+
+            myMData = NewCRMReqDATA(req)
 
             Adaptateur.SelectCommand = SqlCmd
             Adaptateur.Fill(MonDataSet, "backlog")
 
-            myReader = SqlCmd.ExecuteReader()
             DGVBacklog.ClearSelection()
             DGVBacklog.DataSource = MonDataSet.Tables("backlog")
 
@@ -347,14 +392,13 @@ Public Class FBacklog
 
 
             SqlConn.Close()
-            myReader.Close()
+            ' mReader.Close()
 
 
             '*********filtre*************
             SqlConn.Open()
             SqlCmd = SqlConn.CreateCommand()
             req = RequestBacklog(Replace(Trim(TBCus.Text), "'", "''"), "state", Opt, OptGcent)
-
 
             SqlCmd.CommandText = req
 
@@ -444,6 +488,7 @@ Public Class FBacklog
 
             SqlConn.Close()
             myReader.Close()
+
 
             TBNbCases.Text = nbrow
             ' MessageBox.Show(nbrow)

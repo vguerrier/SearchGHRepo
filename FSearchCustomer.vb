@@ -213,7 +213,22 @@ Public Class FCustomer
 
     End Function
 
-    Public Function researchCus() As Integer
+    Public Function NewCRMReq(req As String) As Microsoft.Data.SqlClient.SqlDataReader
+
+        Dim Sqldb As String = "Server=srai.crm4.dynamics.com;Authentication=ActiveDirectoryServicePrincipal;Database=org343e290b;User Id=78379f80-7dac-4c00-9aaa-ceffaacc2587;Password=.Vq7Q~Q7iXabvOX_shVAbsVtoc9GfkM_EqJsu;"
+        Dim SqlConn As New Microsoft.Data.SqlClient.SqlConnection(Sqldb)
+        Dim myReader As Microsoft.Data.SqlClient.SqlDataReader
+
+        SqlConn.Open()
+
+        Dim SqlCmd As New Microsoft.Data.SqlClient.SqlCommand(req, SqlConn)
+
+        myReader = SqlCmd.ExecuteReader()
+
+        NewCRMReq = myReader
+    End Function
+
+    Public Function ResearchCus() As Integer
         'Dim oradb As String = "Data Source=RDTOOLS;User Id=READ_ONLY;Password=READ_ONLY;"
         'Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.133)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = RDTOOLS)));User ID=READ_ONLY;Password=READ_ONLY"
         Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.133)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = RDTOOLS)));User ID=READ_ONLY;Password=READ_ONLY"
@@ -285,12 +300,12 @@ Public Class FCustomer
         nbBranch = 0
         nbenv = 0
         'remplissage du treeview
-        researchCus = 0
+        ResearchCus = 0
         nbenv = 0
         nbBranch = 0
         While dr.Read()
             'Customer Name
-            researchCus = 1
+            ResearchCus = 1
             If dr.GetValue(0) IsNot DBNull.Value Then
                 MyModule.Customers.CustomerName = dr.GetValue(0)
                 TBCus.Text = dr.GetValue(0)
@@ -318,7 +333,7 @@ Public Class FCustomer
                 Description = ""
             End If
             'category
-            If dr.GetValue(6) IsNot DBNull.Value Then
+            If dr.GetValue(10) IsNot DBNull.Value Then
                 Category = dr.GetValue(10)
             End If
             If dr.GetValue(2) IsNot DBNull.Value Then
@@ -509,18 +524,16 @@ Public Class FCustomer
         dr.Close()
 
         'recherche des Workstream
-        Dim Sqldb As String = "Data Source=seyccrmsqlsip1;Integrated Security=SSPI;Initial Catalog=crm_MSCRM"
-        Dim SqlConn As New SqlClient.SqlConnection(Sqldb)
-        Dim SqlCmd As New SqlCommand
+        'Dim Sqldb As String = "Data Source=seyccrmsqlsip1;Integrated Security=SSPI;Initial Catalog=crm_MSCRM"
+        'Dim SqlConn As New SqlClient.SqlConnection(Sqldb)
+        'Dim SqlCmd As New SqlCommand
         Dim req As String
-        Dim myReader As SqlDataReader
+        Dim myReader As Microsoft.Data.SqlClient.SqlDataReader
 
         req = RequestWS(Replace(Trim(TBCus.Text), "'", "''"))
-        SqlConn.Open()
-        SqlCmd = SqlConn.CreateCommand()
 
-        SqlCmd.CommandText = req
-        myReader = SqlCmd.ExecuteReader()
+
+        myReader = NewCRMReq(req)
 
         While myReader.Read()
 
@@ -538,8 +551,8 @@ Fin:
 
 
             'FBacklog.Show()
-            researchCus = FBacklog.researchBacklog()
-            If researchCus <> 0 Then
+            ResearchCus = FBacklog.researchBacklog()
+            If ResearchCus <> 0 Then
                 FBacklog.Show()
             End If
             'MsgBox("Not a card, Case or Customer please retry")
@@ -592,7 +605,7 @@ Fin:
 
         RequestWS = "Select c.aldata_name, "
         RequestWS = RequestWS + "statecodename "
-        RequestWS = RequestWS + "From Filteredaldata_workstream c "
+        RequestWS = RequestWS + "From aldata_workstream c "
         RequestWS = RequestWS + "Where lower(c.aldata_accountname) Like ('%" + LCase(WS) + "%') "
 
     End Function
