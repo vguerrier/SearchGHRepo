@@ -103,4 +103,6 @@ Public Class Dabout
         '    MsgBox("Erreur de lecture du fichier LOG : " + ex.Message)
         'End Try
     End Sub
+
+
 End Class

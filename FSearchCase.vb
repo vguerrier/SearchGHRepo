@@ -150,6 +150,10 @@ Public Class FSearchCase
         If InStr(gcent, "GAUTO") > 0 Then
             CQbase = "CQGAUTO"
         End If
+        If InStr(gcent, "GREP") > 0 Then
+            CQbase = "CQGREP"
+        End If
+
 
         GetGcentInfo = "select  T5.name,T1.label, T1.identificationexterne from "
         GetGcentInfo = GetGcentInfo & CQbase & ".anomalie T1,"

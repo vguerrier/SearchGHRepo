@@ -818,7 +818,7 @@ Fin:
         Dim conn As New OracleConnection(oradb)
         Dim myCommand As New OracleCommand
         Dim dr As OracleDataReader
-
+        TBPVI.Text = ""
         conn.Open()
         Dim request As String = "select t1.verlabqa, to_char(t1.verdatqa, 'DD/MM/YY') from (select t.* from VERSION t order by t.verdatqa desc) t1 where rownum = 1"
         myCommand = conn.CreateCommand()

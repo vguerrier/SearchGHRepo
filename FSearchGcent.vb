@@ -172,6 +172,107 @@ Public Class FSearchGcent
 
     End Function
 
+    Function RequestPR(ByVal PR As String, base As String) As String
+
+
+        Dim Request As String
+        Dim CQbase As String
+
+        CQbase = "cqcentral"
+
+        If InStr(base, "GTOP") > 0 Then
+            CQbase = "cqgtop"
+        End If
+        If InStr(base, "GADMI") > 0 Then
+            CQbase = "cqgadmin"
+        End If
+
+        If InStr(base, "GSTOC") > 0 Then
+            CQbase = "CQGOLDSTOCK"
+        End If
+        If InStr(base, "GTRAC") > 0 Then
+            CQbase = "cqgtrack"
+        End If
+        If InStr(base, "GCAS") > 0 Then
+            CQbase = "cqcas"
+        End If
+        If InStr(base, "GEVEN") > 0 Then
+            CQbase = "CQGOLDEVENTS"
+        End If
+        If InStr(base, "GLIB") > 0 Then
+            CQbase = "cqglib"
+        End If
+        If InStr(base, "GAUTO") > 0 Then
+            CQbase = "CQGAUTO"
+        End If
+        If InStr(base, "GREP") > 0 Then
+            CQbase = "CQGREP"
+        End If
+
+
+        'Request = " Select  a.numerofiche, a.numeroreference, azpr.prurl "
+        Request = " Select a.numerofiche, a.titre From "
+        Request = Request & CQbase & ".anomalie      a, "
+        Request = Request & CQbase & ".azureprdetails     azpr, "
+        Request = Request & CQbase & ".parent_child_links azprc "
+        Request = Request & "Where a.dbid = azprc.parent_dbid "
+        Request = Request & "And azprc.child_dbid = azpr.dbid "
+        Request = Request & "And azpr.prid = '" + PR + "' "
+
+
+        RequestPR = Request
+
+    End Function
+
+    Public Function researchCQPR() As Cases()
+        'Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
+        Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.30)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = CQSCM1)));User ID=READCQUEST;Password=READCQUEST"
+        Dim conn As New OracleConnection(oradb)
+        Dim cmd As New OracleCommand
+        Dim dr As OracleDataReader
+        Dim req As String
+        Dim NbRow As Integer
+        Dim LstPR() As Cases
+        Dim Lstbase() As String = {"cqcentral", "GTOP", "GADMI", "GSTOC", "GTRAC", "GCAS", "GEVEN", "GAUTO", "GREP"}
+
+        LstPR = Nothing
+        NbRow = 0
+        For Each base In Lstbase
+
+            'req = RequestCardTitle(Trim(TBGcent.Text), base)
+            req = RequestPR(Trim(TBGcent.Text), base)
+            conn.Open()
+            'myCommand.Open()
+            cmd = conn.CreateCommand()
+            cmd.CommandText = req
+
+            'Dim dr As SqlDataReader = cmd.ExecuteReader()
+            dr = cmd.ExecuteReader()
+
+            'LstCase(0).Number = "0"
+
+
+
+            'myReader = dr.Read()
+            'NbRow = 0
+            While dr.Read()
+                If dr.Item(0) IsNot DBNull.Value Then
+                    ReDim Preserve LstPR(NbRow)
+                    LstPR(NbRow).Number = dr.Item(0)
+                    If dr.Item(1) IsNot DBNull.Value Then
+                        LstPR(NbRow).Title = dr.Item(1)
+                    End If
+                    LstPR(NbRow).Type = "CARD"
+                    NbRow = NbRow + 1
+                End If
+            End While
+            conn.Close()
+            'Nb = UBound(LstCase)
+        Next
+        researchCQPR = LstPR
+
+    End Function
+
     Function RequestAzurePR(ByVal Card As String) As String
 
         Dim Request As String
@@ -1468,7 +1569,7 @@ sortie:
         If InStr(base, "GAUTO") > 0 Then
             CQbase = "CQGAUTO"
         End If
-        If InStr(card, "GREP") > 0 Then
+        If InStr(base, "GREP") > 0 Then
             CQbase = "CQGREP"
         End If
 
@@ -1490,7 +1591,7 @@ sortie:
         Dim req As String
         Dim NbRow As Integer
         Dim LstCase() As Cases
-        Dim Lstbase() As String = {"cqcentral", "GTOP", "GADMI", "GSTOC", "GTRAC", "GCAS", "GEVEN", "GLIB", "GAUTO"}
+        Dim Lstbase() As String = {"cqcentral", "GTOP", "GADMI", "GSTOC", "GTRAC", "GCAS", "GEVEN", "GLIB", "GAUTO", "GREP"}
 
         LstCase = Nothing
         NbRow = 0

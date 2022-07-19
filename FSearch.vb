@@ -85,8 +85,8 @@ Public Class FSearch
         '6 workstream
 
         Dim ret, retRFE, retcus, retPatch As Integer
-        Dim LstCases(), LstCard(), LstRFE(), LstWS() As Cases
-        Dim nb, nbCase, nbCard, nbRFE, nbWS As Integer
+        Dim LstCases(), LstCard(), LstRFE(), LstWS(), LstPR() As Cases
+        Dim nb, nbCase, nbCard, nbRFE, nbWS, nbPR As Integer
 
 
         If Nav = False Then
@@ -169,7 +169,7 @@ Public Class FSearch
                         MCB_RFE.Checked = False
                     Else
                         If MCBTitle.Checked = False Then
-                            If InStr(Trim(Me.MSTSearch.Text), "GCENT") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GTOP") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GADMI") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GSTOC") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GTRAC") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GCAS") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GAUTO") > 0 Then
+                            If InStr(Trim(Me.MSTSearch.Text), "GCENT") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GTOP") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GADMI") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GSTOC") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GTRAC") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GCAS") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GAUTO") > 0 Or InStr(Trim(Me.MSTSearch.Text), "GREP") > 0 Then
                                 'on recherche une GCENT
                                 'on va ouvrir la form GCENT
 
@@ -333,10 +333,22 @@ Public Class FSearch
                                 nbWS = UBound(LstWS) + 1
                             End If
 
-                            ret = nbCase + nbCard + nbRFE + nbWS
+                            'recherche par PR
+                            nbPR = 0
+                            If IsNumeric(Me.MSTSearch.Text) Then
+                                FSearchCase.RTBCase.Text = Me.MSTSearch.Text
+                                LstPR = FSearchGcent.researchCQPR()
+                                If LstPR Is Nothing Then
+                                    nbPR = 0
+                                Else
+                                    nbPR = UBound(LstPR) + 1
+                                End If
+                            End If
+
+                            ret = nbCase + nbCard + nbRFE + nbWS + nbPR
 
                             'fusion des tableaux et affichage
-                            If LstCases Is Nothing And LstCard Is Nothing And LstRFE Is Nothing And LstWS Is Nothing Then
+                            If LstCases Is Nothing And LstCard Is Nothing And LstRFE Is Nothing And LstWS Is Nothing And LstPR Is Nothing Then
                                 ret = 0
                             Else
                                 'ret = UBound(LstCases)
@@ -357,6 +369,11 @@ Public Class FSearch
                                     LstCases(nbCase + nbCard + nbRFE + i).Number = LstWS(i).Number
                                     LstCases(nbCase + nbCard + nbRFE + i).Title = LstWS(i).Title
                                     LstCases(nbCase + nbCard + nbRFE + i).Type = LstWS(i).Type
+                                Next
+                                For i = 0 To nbPR - 1
+                                    LstCases(nbCase + nbCard + nbRFE + nbWS + i).Number = LstPR(i).Number
+                                    LstCases(nbCase + nbCard + nbRFE + nbWS + i).Title = LstPR(i).Title
+                                    LstCases(nbCase + nbCard + nbRFE + nbWS + i).Type = LstPR(i).Type
                                 Next
 
 
