@@ -1,0 +1,59 @@
+﻿SRAIRDTools	
+	EclipsePlugin
+	SRAIRDTools
+	DBIntegrator
+	DBIntegratorVSCPlugin
+SRAIRDTek	
+	MobileBuild
+	v6MobileFramework
+	SRAIRDTek
+	not-going-to-be-commons-ssl
+	testplaypen
+	mobiletestapp
+	v6mobiletest
+	testapp
+	GoldSDK
+	GoldReferenceDataApp
+	SpringFramework
+	DesktopFramework
+	MobileFramework
+	GTT
+GOLDStoreMobility	
+	gsm
+	gsm2
+	gsm2-bck
+	gsm-bck
+GOLDStoreOperations	
+	gso-bck
+	gso
+GOLDRetailPortal	
+	retailportal
+	Semantic-UI
+	SRRetailPortalDevContainer
+	openid_connect_windows_aad
+	vscode-retailportal
+	openid_connect
+	aggrid
+	retailportal-qa
+	azure-devops-tool
+GOLDCentralOperations	
+	gco
+	gco-bck
+	SRWOForked
+GOLDMasterData	
+	gmd
+	gmd-bck
+GOLDFunctionalAdministration	
+	gfa-bck
+	gfa
+	gfa-old
+SRAI-SCM-QA	
+	SRAI-SCM-QA
+GOLDCentral	
+	GoldMainMenu
+	central
+	eretail-bck
+	central-bck
+	vscode-central
+	test
+	eretail

@@ -24,6 +24,9 @@ Partial Class FBacklog
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FBacklog))
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.TBCus = New System.Windows.Forms.TextBox()
         Me.TBNbCases = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -51,8 +54,11 @@ Partial Class FBacklog
         Me.CLBVTP = New System.Windows.Forms.CheckedListBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.BS1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.CKPI = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.TBReq = New System.Windows.Forms.TextBox()
         CType(Me.DGVBacklog, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BS1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CKPI, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TBCus
@@ -343,6 +349,31 @@ Partial Class FBacklog
         Me.Label5.TabIndex = 146
         Me.Label5.Text = "VTP"
         '
+        'CKPI
+        '
+        ChartArea1.Name = "ChartArea1"
+        Me.CKPI.ChartAreas.Add(ChartArea1)
+        Legend1.Name = "Legend1"
+        Me.CKPI.Legends.Add(Legend1)
+        Me.CKPI.Location = New System.Drawing.Point(1111, 94)
+        Me.CKPI.Name = "CKPI"
+        Me.CKPI.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen
+        Series1.ChartArea = "ChartArea1"
+        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series1.Legend = "Legend1"
+        Series1.Name = "Series1"
+        Me.CKPI.Series.Add(Series1)
+        Me.CKPI.Size = New System.Drawing.Size(431, 118)
+        Me.CKPI.TabIndex = 153
+        Me.CKPI.Text = "Chart1"
+        '
+        'TBReq
+        '
+        Me.TBReq.Location = New System.Drawing.Point(916, 223)
+        Me.TBReq.Name = "TBReq"
+        Me.TBReq.Size = New System.Drawing.Size(235, 20)
+        Me.TBReq.TabIndex = 154
+        '
         'FBacklog
         '
         Me.AccessibleDescription = ""
@@ -351,6 +382,8 @@ Partial Class FBacklog
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Window
         Me.ClientSize = New System.Drawing.Size(1584, 809)
+        Me.Controls.Add(Me.TBReq)
+        Me.Controls.Add(Me.CKPI)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button3)
@@ -382,6 +415,7 @@ Partial Class FBacklog
         Me.Text = "Backlog"
         CType(Me.DGVBacklog, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BS1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CKPI, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -413,4 +447,6 @@ Partial Class FBacklog
     Friend WithEvents Button3 As Button
     Friend WithEvents Button4 As Button
     Friend WithEvents Button5 As Button
+    Friend WithEvents CKPI As DataVisualization.Charting.Chart
+    Friend WithEvents TBReq As TextBox
 End Class

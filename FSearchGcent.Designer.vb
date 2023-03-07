@@ -117,6 +117,7 @@ Partial Class FSearchGcent
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.PullRequestID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PullRequestURL = New System.Windows.Forms.DataGridViewLinkColumn()
+        Me.PRStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TCInfos.SuspendLayout()
         Me.TPDesc.SuspendLayout()
         Me.TPPRDetails.SuspendLayout()
@@ -867,6 +868,7 @@ Partial Class FSearchGcent
         Me.TCInfos.Controls.Add(Me.TPDesc)
         Me.TCInfos.Controls.Add(Me.TPPRDetails)
         Me.TCInfos.Controls.Add(Me.TBPRCommit)
+        Me.TCInfos.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TCInfos.Location = New System.Drawing.Point(24, 640)
         Me.TCInfos.Name = "TCInfos"
         Me.TCInfos.SelectedIndex = 0
@@ -911,7 +913,7 @@ Partial Class FSearchGcent
         '
         Me.DGPRDetails.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.DGPRDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGPRDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.PullRequestID, Me.PullRequestURL})
+        Me.DGPRDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.PullRequestID, Me.PullRequestURL, Me.PRStatus})
         Me.DGPRDetails.Location = New System.Drawing.Point(0, 0)
         Me.DGPRDetails.Name = "DGPRDetails"
         Me.DGPRDetails.RowHeadersVisible = False
@@ -964,7 +966,13 @@ Partial Class FSearchGcent
         Me.PullRequestURL.HeaderText = "PullRequest URL"
         Me.PullRequestURL.Name = "PullRequestURL"
         Me.PullRequestURL.ReadOnly = True
-        Me.PullRequestURL.Width = 356
+        Me.PullRequestURL.Width = 256
+        '
+        'PRStatus
+        '
+        Me.PRStatus.HeaderText = "PRStatus"
+        Me.PRStatus.Name = "PRStatus"
+        Me.PRStatus.ReadOnly = True
         '
         'FSearchGcent
         '
@@ -1145,4 +1153,5 @@ Partial Class FSearchGcent
     Friend WithEvents DGPRDetails As DataGridView
     Friend WithEvents PullRequestID As DataGridViewTextBoxColumn
     Friend WithEvents PullRequestURL As DataGridViewLinkColumn
+    Friend WithEvents PRStatus As DataGridViewTextBoxColumn
 End Class

@@ -259,6 +259,60 @@ Public Class FBacklog
 
     End Function
 
+    Function GetKPIInfo(Cus As String) As String
+        Dim CQbase As String
+
+        CQbase = "cqcentral"
+
+
+
+        GetKPIInfo = "Select Case EXTRACT(Month FROM h.action_timestamp) ""Month"", count (distinct a.numerofiche), EXTRACT(year FROM h.action_timestamp) From"
+        GetKPIInfo = GetKPIInfo & CQbase & ".anomalie a, "
+        GetKPIInfo = GetKPIInfo & CQbase & ".client c, "
+        GetKPIInfo = GetKPIInfo & CQbase & ".history h, "
+        GetKPIInfo = GetKPIInfo & CQbase & ".domainrecord d "
+        GetKPIInfo = GetKPIInfo & CQbase & ".statedef s "
+
+        GetKPIInfo = GetKPIInfo & " where a.client_champ = c.dbid"
+        GetKPIInfo = GetKPIInfo & " And c.nom = '" + Cus + "'"
+        GetKPIInfo = GetKPIInfo & " And h.entity_dbid = a.DBID "
+        GetKPIInfo = GetKPIInfo & " And a.domain_1 = d.dbid"
+        GetKPIInfo = GetKPIInfo & " And h.action_name = 'Fermer' "
+        GetKPIInfo = GetKPIInfo & " And s.name in ('Fermée') "
+        GetKPIInfo = GetKPIInfo & " And a.state = s.id "
+        GetKPIInfo = GetKPIInfo & " And a.reportfiche Is null "
+        GetKPIInfo = GetKPIInfo & " And DBMS_LOB.getlength(a.sourcesmodifies) <> 0 "
+        GetKPIInfo = GetKPIInfo & " And h.action_timestamp > to_date(sysdate-365, 'dd/mm/yy') "
+        GetKPIInfo = GetKPIInfo & " GROUP BY EXTRACT(month FROM h.action_timestamp), EXTRACT(year FROM h.action_timestamp) "
+        GetKPIInfo = GetKPIInfo & "  order by 3, 1 "
+
+
+    End Function
+    Sub LoadChart(Cus As String)
+        Dim req As String
+        Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.30)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = CQSCM1)));User ID=READCQUEST;Password=READCQUEST"
+        Dim SqlConn As New OracleConnection(oradb)
+        Dim SqlCmd As OracleCommand
+        'Dim myReader As Microsoft.Data.SqlClient.SqlDataReader
+        Dim myReader As OracleDataReader
+        'Dim toto, tata, 
+
+        req = GetKPIInfo(Cus)
+        SqlConn.Open()
+
+        SqlCmd = SqlConn.CreateCommand()
+        SqlCmd.CommandText = req
+        myReader = SqlCmd.ExecuteReader()
+        myReader.Read()
+        For i = 0 To 12
+            'toto = myReader.Item(0)
+            'tata = myReader.Item(1)
+            'titi = myReader.Item(2)
+        Next
+
+
+    End Sub
+
     Function researchBacklog() As Integer
         Dim Sqldb As String = "Server=srai.crm4.dynamics.com;Authentication=ActiveDirectoryServicePrincipal;Database=org343e290b;User Id=78379f80-7dac-4c00-9aaa-ceffaacc2587;Password=.Vq7Q~Q7iXabvOX_shVAbsVtoc9GfkM_EqJsu;"
         Dim SqlConn As New Microsoft.Data.SqlClient.SqlConnection(Sqldb)
@@ -283,6 +337,8 @@ Public Class FBacklog
 
         'Dim toto As String
 
+        'LoadChart(Replace(Trim(TBCus.Text), "'", "''"))
+
         researchBacklog = 0
         Opt = 0
         If CBClosed.Checked Then
@@ -299,7 +355,7 @@ Public Class FBacklog
 
             req = RequestBacklog(Replace(Trim(TBCus.Text), "'", "''"), "", Opt, OptGcent)
             SqlCmd = New Microsoft.Data.SqlClient.SqlCommand(req, SqlConn)
-
+            TBReq.Text = req
             myMData = NewCRMReqDATA(req)
 
             Adaptateur.SelectCommand = SqlCmd
@@ -402,6 +458,7 @@ Public Class FBacklog
             SqlConn.Open()
             SqlCmd = SqlConn.CreateCommand()
             req = RequestBacklog(Replace(Trim(TBCus.Text), "'", "''"), "state", Opt, OptGcent)
+            TBReq.Text = req
 
             SqlCmd.CommandText = req
 
@@ -420,7 +477,7 @@ Public Class FBacklog
             SqlConn.Open()
             SqlCmd = SqlConn.CreateCommand()
             req = RequestBacklog(Replace(Trim(TBCus.Text), "'", "''"), "Priority", Opt, OptGcent)
-
+            TBReq.Text = req
 
             SqlCmd.CommandText = req
 
@@ -439,7 +496,7 @@ Public Class FBacklog
             SqlConn.Open()
             SqlCmd = SqlConn.CreateCommand()
             req = RequestBacklog(Replace(Trim(TBCus.Text), "'", "''"), "Assign_Group", Opt, OptGcent)
-
+            TBReq.Text = req
 
             SqlCmd.CommandText = req
 
@@ -458,7 +515,7 @@ Public Class FBacklog
             SqlConn.Open()
             SqlCmd = SqlConn.CreateCommand()
             req = RequestBacklog(Replace(Trim(TBCus.Text), "'", "''"), "Workstream", Opt, OptGcent)
-
+            TBReq.Text = req
 
             SqlCmd.CommandText = req
 
@@ -477,7 +534,7 @@ Public Class FBacklog
             SqlConn.Open()
             SqlCmd = SqlConn.CreateCommand()
             req = RequestBacklog(Replace(Trim(TBCus.Text), "'", "''"), "VTP", Opt, OptGcent)
-
+            TBReq.Text = req
 
             SqlCmd.CommandText = req
 
@@ -984,4 +1041,6 @@ Public Class FBacklog
             Button5.Image = Global.WindowsApplication1.My.Resources.Resources.uncheckall
         End If
     End Sub
+
+
 End Class

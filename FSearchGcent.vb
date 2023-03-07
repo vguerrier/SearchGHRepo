@@ -7,6 +7,13 @@ Imports System.Data.Sql
 Imports System.IO
 
 
+Imports Newtonsoft.Json
+Imports System.Diagnostics
+Imports System.Text.RegularExpressions
+'Imports System.Windows.Forms.VisualStyles.VisualStyleElement
+
+
+
 Public Class FSearchGcent
 
     Private Sub BSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BSearch.Click
@@ -1134,6 +1141,7 @@ Public Class FSearchGcent
         Dim conn2 As New OracleConnection(oradb)
         Dim cmd As New OracleCommand
         Dim dr As OracleDataReader
+        Dim TabPR As PullRequests()
 
         conn.Open()
         'opening the connection
@@ -1150,16 +1158,32 @@ Public Class FSearchGcent
         While dr.Read()
 
             Dim LstRows As String()
-            ReDim LstRows(1)
+            ReDim LstRows(2)
+            If dr.GetValue(0).ToString <> "" Then
+                LstRows(0) = (dr.GetValue(0).ToString)
 
-            LstRows(0) = (dr.GetValue(0).ToString)
-            LstRows(1) = (dr.GetValue(1).ToString)
-
+                LstRows(1) = (dr.GetValue(1).ToString)
+                LstRows(2) = GetPRInfo(TBSubProduct.Text, LstRows(0))
+            End If
 
             DGPRDetails.Rows.Add(LstRows)
-
+            TBGcent.ForeColor = Color.Black
         End While
-
+        'PR Actives
+        TabPR = LstPRActive(TBSubProduct.Text, TBGcent.Text)
+        If TabPR IsNot Nothing Then
+            For i = 0 To TabPR.Length - 1
+                Dim LstRowsAct As String()
+                ReDim LstRowsAct(2)
+                If TabPR(i).pullRequestId <> "" Then
+                    LstRowsAct(0) = TabPR(i).pullRequestId
+                    LstRowsAct(1) = TabPR(i).url
+                    LstRowsAct(2) = TabPR(i).status
+                    DGPRDetails.Rows.Add(LstRowsAct)
+                    TBGcent.ForeColor = Color.Red
+                End If
+            Next
+        End If
 
         'End If
         conn.Close()
@@ -1188,11 +1212,11 @@ Public Class FSearchGcent
             LbTitle.Visible = True
             'Me.Size = New Size(776, 700)
 
+            If dr.GetValue(1).ToString <> "" Then
+                LVITime.SubItems.Add(dr.GetValue(1).ToString)
+                LVPRCommits.Items.AddRange(New ListViewItem() {LVITime})
+            End If
 
-            LVITime.SubItems.Add(dr.GetValue(1).ToString)
-
-
-            LVPRCommits.Items.AddRange(New ListViewItem() {LVITime})
 
         End While
 
@@ -1500,6 +1524,7 @@ sortie:
 
 
     Private Sub LLBlinkCQ_LinkClicked(sender As System.Object, e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LLBlinkCQ.LinkClicked
+
         System.Diagnostics.Process.Start(LbLink.Text)
 
     End Sub
@@ -1647,6 +1672,12 @@ sortie:
             Dim url = Row.Cells(1).Value.ToString()
             System.Diagnostics.Process.Start(url)
         End If
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs)
+        Dim TabPR As PullRequests()
+        TabPR = LstPRActive(TBGcent.Text, TBSubProduct.Text)
+        i = i
     End Sub
 End Class
 
