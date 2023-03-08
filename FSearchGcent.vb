@@ -1674,10 +1674,29 @@ sortie:
         End If
     End Sub
 
-    Private Sub Button4_Click(sender As Object, e As EventArgs)
-        Dim TabPR As PullRequests()
-        TabPR = LstPRActive(TBGcent.Text, TBSubProduct.Text)
-        i = i
+
+
+
+    Private Sub LVHistory_MouseDown(sender As Object, e As MouseEventArgs) Handles LVHistory.MouseDown
+        Dim hit = LVHistory.HitTest(e.Location)
+        'Dim startexternal As New Process()
+        Dim ProcessProperties As New ProcessStartInfo
+        If hit.SubItem IsNot Nothing Then
+            On Error GoTo ErrorH
+            ProcessProperties.FileName = hit.SubItem.Text
+            If FRessources.researchRes(hit.SubItem.Text) <> 0 Then
+                FRessources.Show()
+                Me.TopMost = True
+            Else
+                If FRessources.researchResCQ(hit.SubItem.Text) <> 0 Then
+                    FRessources.Show()
+                    Me.TopMost = True
+                    'Else
+                    ' MessageBox.Show("Not a R&D Ressource", "Warning", MessageBoxButtons.OKCancel)
+                End If
+            End If
+        End If
+ErrorH:
     End Sub
 End Class
 

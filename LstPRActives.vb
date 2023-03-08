@@ -177,6 +177,7 @@ ErrorR:
         Dim Nbr As Integer
         'Dim ThePr As PullRequests
         Dim prj As String
+        Dim Tprj As String() = {"GOLDCentral", "GOLDMasterData", "GOLD Functional Administration", "GOLDCentralOperations", "GOLDStoreOperations", "GOLDStoreMobility"}
 
         TabPrj = GetProjects()
         'correspondance produit => repos
@@ -186,47 +187,47 @@ ErrorR:
         'Project = GOLDMasterData
         'Repo = gmd
         prj = ProjectsRepo(SubProduct)
-
+        i = 0
         'on parcours les projets
-        'For Each prj In TabPrj
-        'ReDim TabPR(0)
-        If prj <> "" And prj <> "Not Found" Then
-            'ApiUrlPR = "https://dev.azure.com/seyc/" + prj + "/_apis/git/repositories/central/pullrequests?searchCriteria.status=active"
-            ' on parcours les repositories de chaque projets
-            TabRep = GetRepositories(prj)
-            i = 0
-            For Each rep In TabRep
-                If rep.name <> "" And rep.isDisabled = False Then
-                    i = i
+        For Each prj In Tprj
+            'ReDim TabPR(0)
+            If prj <> "" And prj <> "Not Found" Then
+                'ApiUrlPR = "https://dev.azure.com/seyc/" + prj + "/_apis/git/repositories/central/pullrequests?searchCriteria.status=active"
+                ' on parcours les repositories de chaque projets
+                TabRep = GetRepositories(prj)
 
-                    ApiUrlPR = "https://dev.azure.com/seyc/" + prj + "/_apis/git/repositories/" + rep.name + "/pullrequests?searchCriteria.status=active"
+                For Each rep In TabRep
+                    If rep.name <> "" And rep.isDisabled = False Then
+                        i = i
 
-                    authKey64 = Base64Encode(authKey)
-                    Dim request As HttpWebRequest = DirectCast(WebRequest.Create(ApiUrlPR), HttpWebRequest)
+                        ApiUrlPR = "https://dev.azure.com/seyc/" + prj + "/_apis/git/repositories/" + rep.name + "/pullrequests?searchCriteria.status=active"
 
-                    request.Method = "GET"
-                    request.ContentType = "application/json"
-                    request.UserAgent = "Visual Studio/15.0"
-                    request.Headers.Add("Authorization", "Basic " & authKey64)
-                    On Error GoTo ErrorR
-                    Dim response As HttpWebResponse = DirectCast(request.GetResponse(), HttpWebResponse)
-                    Dim responseString As String = New StreamReader(response.GetResponseStream()).ReadToEnd()
-                    'Console.WriteLine(responseString)
-                    'Dim p = MessageBox.Show(responseString)
+                        authKey64 = Base64Encode(authKey)
+                        Dim request As HttpWebRequest = DirectCast(WebRequest.Create(ApiUrlPR), HttpWebRequest)
 
-                    If response.StatusCode Then
-                        'Dim json As String = Await response.Content.ReadAsStringAsync()
+                        request.Method = "GET"
+                        request.ContentType = "application/json"
+                        request.UserAgent = "Visual Studio/15.0"
+                        request.Headers.Add("Authorization", "Basic " & authKey64)
+                        On Error GoTo ErrorR
+                        Dim response As HttpWebResponse = DirectCast(request.GetResponse(), HttpWebResponse)
+                        Dim responseString As String = New StreamReader(response.GetResponseStream()).ReadToEnd()
+                        'Console.WriteLine(responseString)
+                        'Dim p = MessageBox.Show(responseString)
 
-                        Dim myObj As Dictionary(Of String, Object)
+                        If response.StatusCode Then
+                            'Dim json As String = Await response.Content.ReadAsStringAsync()
 
-                        myObj = JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(responseString)
-                        If myObj("value").Count = 0 Then
-                            ReDim Preserve TabPR(i + myObj("value").Count)
-                        Else
-                            ReDim Preserve TabPR(i + myObj("value").Count - 1)
-                        End If
+                            Dim myObj As Dictionary(Of String, Object)
 
-                        For Each kvp In myObj("value")
+                            myObj = JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(responseString)
+                            If myObj("value").Count = 0 Then
+                                ReDim Preserve TabPR(i + myObj("value").Count)
+                            Else
+                                ReDim Preserve TabPR(i + myObj("value").Count - 1)
+                            End If
+
+                            For Each kvp In myObj("value")
                                 If card = ExtractGCENTCode(kvp("title")) Or card = ExtractGCENTCode(kvp("description")) Or card = ExtractGCENTCode(kvp("sourceRefName")) Then
                                     '0-Project
                                     TabPR(i).therepository.theproject.name = prj
@@ -308,11 +309,12 @@ ErrorR:
                         Else
                             'pullRequest.Title = "Not Found"
                         End If
-                End If
+                    End If
 ErrorR:
-            Next
-            i = i
-        End If
+                Next
+                i = i
+            End If
+        Next
         LstPRActive = TabPR
         'Next
     End Function

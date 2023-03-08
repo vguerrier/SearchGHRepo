@@ -636,4 +636,8 @@ Public Class FRessources
         End If
 
     End Sub
+
+    Private Sub FRessources_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        Me.TopMost = True
+    End Sub
 End Class
