@@ -179,6 +179,125 @@ Public Class FSearchGcent
 
     End Function
 
+    Function RequestCQ2(ByVal Card As String, DBID As Integer) As String
+
+        Dim Request2 As String
+        Dim CQbase As String
+
+
+
+        CQbase = "cqcentral"
+
+        If InStr(Card, "GTOP") > 0 Then
+            CQbase = "cqgtop"
+        End If
+        If InStr(Card, "GADMI") > 0 Then
+            CQbase = "cqgadmin"
+        End If
+        If InStr(Card, "GSTOC") > 0 Then
+            CQbase = "CQGOLDSTOCK"
+        End If
+        If InStr(Card, "GTRAC") > 0 Then
+            CQbase = "cqgtrack"
+        End If
+        If InStr(Card, "GCAS") > 0 Then
+            CQbase = "cqcas"
+        End If
+        If InStr(Card, "GEVEN") > 0 Then
+            CQbase = "CQGOLDEVENTS"
+        End If
+        If InStr(Card, "GAUTO") > 0 Then
+            CQbase = "CQGAUTO"
+        End If
+        If InStr(Card, "GREP") > 0 Then
+            CQbase = "CQGREP"
+        End If
+
+        Request2 = " select Ta.numerofiche,"             '0
+        Request2 = Request2 & " Ta.titre,"                '1
+        Request2 = Request2 & "Ts.name,"                  '2
+        Request2 = Request2 & "Ta.NUMEROREFERENCE,"       '3
+        Request2 = Request2 & "Tu.login_name,"            '4
+        Request2 = Request2 & "Tc.nom,"                   '5
+        Request2 = Request2 & "Ta.label,"                 '6
+        Request2 = Request2 & "Tp.NOM Produit,"           '7
+        Request2 = Request2 & "Ta.dateplanifauplustot + 2/24,"    '8
+        Request2 = Request2 & "Ta.RETROFITCARD retrofit,"         '9
+        Request2 = Request2 & "Td.name,"                  '10
+        Request2 = Request2 & "Tdr.name,"                 '11
+        Request2 = Request2 & "Ta.dateplanifauplustard_1 + 2/24," '12
+        Request2 = Request2 & "Ta.reportfiche,"           '13
+        Request2 = Request2 & "Ta.id,"                    '14
+        Request2 = Request2 & "Tr.nom,"                 '15
+        Request2 = Request2 & "Ta.typereference,"         '16
+        Request2 = Request2 & "Ta.numeroreference,"       '17
+        Request2 = Request2 & "to_char(Th.action_timestamp, 'DD/MM/YY') OPENING_DATE, "   '18
+        Request2 = Request2 & "Ta.SEVERITE, "             '19
+        Request2 = Request2 & "Ta.LOGS, "                 '20
+        Request2 = Request2 & "Tr.nom, "                '21
+        Request2 = Request2 & "Ta.FLDCOLUMN_1, "          '22
+        Request2 = Request2 & "Ta.expectedcorrectiondate, "       '23
+        Request2 = Request2 & "Ta.Description2, "         '24
+        Request2 = Request2 & "Ta.FUNCTIONALDESCRIPTION, "        '25
+        Request2 = Request2 & "Ta.MODIFICATIONDESCRIPTION, "      '26
+        Request2 = Request2 & "Ta.SOURCESMODIFIES, "      '27
+        Request2 = Request2 & "Tu2.login_name, "          '28
+        Request2 = Request2 & "Tvo.name,  "               '29
+
+        Request2 = Request2 & "replace(substr((select SUBSTR(replace(Tvo.name,'/','\'), 1, INSTR(Tvo.name, '@')) AS gauche from dual), INSTR((select SUBSTR(replace(Tvo.name,'/','\'), 1, INSTR(Tvo.name, '@')) AS gauche from dual),'\',-1) + 1),'@',''), "  '30
+        Request2 = Request2 & "Ta.urgence,  "             '31
+        Request2 = Request2 & "Ta.dbid,  "                 '32
+        Request2 = Request2 & "ta.identificationexterne, " '33
+        'Request2 = Request2 & "ta.originpatch, " '33
+        Request2 = Request2 & "ta.datelivraisoninterne, "  '34
+        Request2 = Request2 & "ta.internalstate, "  '35
+        Request2 = Request2 & "Tce.nom " '36
+        'Pull Request2 Commits
+        'Request2 = Request2 & "Tapr.PRURL "
+        'Request2 = Request2 & "dbms_lob.substr(Ta.Sourcesmodifies,4000,1) " '37
+        Request2 = Request2 & "from "
+        Request2 = Request2 & CQbase & ".anomalie     Ta,"
+        Request2 = Request2 & CQbase & ".statedef     Ts,"
+        Request2 = Request2 & CQbase & ".client       Tc,"
+        Request2 = Request2 & CQbase & ".subproduct   Td,"
+        Request2 = Request2 & CQbase & ".domainrecord Tdr,"
+        Request2 = Request2 & CQbase & ".users        Tu,"
+        Request2 = Request2 & CQbase & ".users        Tu2,"
+        Request2 = Request2 & CQbase & ".produit      Tp,"
+        'Request2 = Request2 & CQbase & ".History      Th, "
+        Request2 = Request2 & CQbase & ".cc_change_set      Tcs,"
+        Request2 = Request2 & CQbase & ".cc_vob_object      Tvo, "
+        Request2 = Request2 & CQbase & ".parent_child_links Tpcl, "
+        Request2 = Request2 & CQbase & ".rfe                Tr, "
+        Request2 = Request2 & CQbase & ".customerend        Tce, "
+        Request2 = Request2 & "(select * from " + CQbase + ".history where action_name = 'Ouvrir' and entity_dbid = " + DBID.ToString + ") TH "
+        'Request2 = Request2 & CQbase & ".customerend        Tce, "
+        'Request2 = Request2 & CQbase & ".azureprdetails     Tapr, "
+        'Request2 = Request2 & CQbase & ".parent_child_links Taprmm "
+        Request2 = Request2 & "where(Ta.state = Ts.id) "
+        Request2 = Request2 & "And Ta.assigne = Tu.dbid "
+        Request2 = Request2 & "And ta.customerend = Tce.dbid "
+        Request2 = Request2 & "And Ta.chefprojet = Tu2.dbid "
+        Request2 = Request2 & "And Ta.PRODUIT_1 = Tp.dbid "
+        Request2 = Request2 & "And Ta.client_champ = Tc.dbid "
+        Request2 = Request2 & "And Ta.Domain_1 = Tdr.dbid "
+        Request2 = Request2 & "And Ta.subproduct = Td.dbid "
+        Request2 = Request2 & "And Ta.DBID = Th.entity_dbid "
+        'Request2 = Request2 & "And Th.action_name = 'Ouvrir' "
+        'Request2 = Request2 & "and Ta.dbid = Taprmm.parent_dbid "
+        'Request2 = Request2 & "and Taprmm.child_dbid = Tapr.dbid "
+        Request2 = Request2 & "And Ta.cc_change_set = Tcs.dbid "
+        Request2 = Request2 & "And Tcs.dbid = Tpcl.parent_dbid(+) "
+        Request2 = Request2 & "And 16778186 = Tpcl.parent_fielddef_id(+) "
+        Request2 = Request2 & "And Tpcl.child_dbid = Tvo.dbid(+) "
+        Request2 = Request2 & "And Ta.rfecode = Tr.dbid "
+        Request2 = Request2 & "And Ta.numerofiche = '" + Card + "'"
+
+        RequestCQ2 = Request2
+
+    End Function
+
+
     Function RequestPR(ByVal PR As String, base As String) As String
 
 
@@ -458,7 +577,7 @@ Public Class FSearchGcent
 
     End Function
 
-    Function RequestGcentHistory(ByVal Card As String) As String
+    Function RequestGcentHistory(ByVal Card As String, DBID As Integer) As String
 
         Dim CQbase As String
 
@@ -499,7 +618,7 @@ Public Class FSearchGcent
         RequestGcentHistory = RequestGcentHistory & CQbase & ".history T1, "
         RequestGcentHistory = RequestGcentHistory & CQbase & ".anomalie a"
         RequestGcentHistory = RequestGcentHistory & " where a.dbid = T1.entity_dbid"
-        RequestGcentHistory = RequestGcentHistory & " and a.numerofiche = '" + Card + "'"
+        RequestGcentHistory = RequestGcentHistory & " and a.dbid = " + DBID.ToString
         RequestGcentHistory = RequestGcentHistory & " and t1.entitydef_name <> 'cc_vob_object'"
         RequestGcentHistory = RequestGcentHistory & " and t1.entitydef_name <> 'cc_change_set'"
         RequestGcentHistory = RequestGcentHistory & "  order by 2 desc"
@@ -572,6 +691,56 @@ Public Class FSearchGcent
         GetGcentRetInfo = GetGcentRetInfo & " and a.reportfiche like '%" + gcent + "%'"
 
     End Function
+    Function GetDBID(GCENT As String) As Integer
+        Dim CQbase As String
+        Dim request As String
+        Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.30)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = CQSCM1)));User ID=READCQUEST;Password=READCQUEST"
+        Dim conn As New OracleConnection(oradb)
+        Dim cmd As New OracleCommand
+        Dim dr As OracleDataReader
+
+        CQbase = "cqcentral"
+
+        If InStr(GCENT, "GTOP") > 0 Then
+            CQbase = "cqgtop"
+        End If
+        If InStr(GCENT, "GADMI") > 0 Then
+            CQbase = "cqgadmin"
+        End If
+        If InStr(GCENT, "GSTOC") > 0 Then
+            CQbase = "CQGOLDSTOCK"
+        End If
+        If InStr(GCENT, "GTRAC") > 0 Then
+            CQbase = "cqgtrack"
+        End If
+        If InStr(GCENT, "GCAS") > 0 Then
+            CQbase = "cqcas"
+        End If
+        If InStr(GCENT, "GEVEN") > 0 Then
+            CQbase = "CQGOLDEVENTS"
+        End If
+        If InStr(GCENT, "GAUTO") > 0 Then
+            CQbase = "CQGAUTO"
+        End If
+        If InStr(GCENT, "GREP") > 0 Then
+            CQbase = "CQGREP"
+        End If
+
+        request = "select a.dbid from cqcentral.anomalie a where a.numerofiche =  '" + GCENT + "'"
+
+        conn.Open()
+
+        cmd = conn.CreateCommand()
+        cmd.CommandText = request
+        GetDBID = 0
+        dr = cmd.ExecuteReader()
+        While dr.Read()
+            GetDBID = dr.GetValue(0)
+        End While
+
+        conn.Close()
+        'select a.dbid from cqcentral.anomalie a where a.numerofiche = 'GCENT23060157'
+    End Function
     Public Function researchCQ() As Integer
         'crmtest_MSCRM()
         'Provider=OraOLEDB.Oracle.1;Password=READCQUEST;User ID=READCQUEST;Data Source=CQSCM1_SEYCSMC1
@@ -609,7 +778,9 @@ Public Class FSearchGcent
         Dim label As String
         Dim link As String
         ''GCENT17030635
-
+        Dim timeS1, timeS2, timeS3, timeS4, timeS5 As DateTime
+        Dim timeR As TimeSpan
+        Dim dbid As Integer
 
 
         Me.TopMost = True
@@ -646,7 +817,11 @@ Public Class FSearchGcent
         conn.Open()
 
         'opening the connection
-        Dim request As String = RequestCQ(Trim(GCENT))
+        'on recherche le DBID de la gcent pour améliorerer les temps d'execution
+        dbid = GetDBID(Trim(GCENT))
+        'Dim request As String = RequestCQ(Trim(GCENT))
+        Dim request As String = RequestCQ2(Trim(GCENT), dbid)
+        Console.WriteLine(request)
         'request = "select 1 from dual"
         '--myCommand = New OleDb.OleDbCommand(request, conn)
         cmd = conn.CreateCommand()
@@ -670,7 +845,13 @@ Public Class FSearchGcent
 
         'If dr.Read() Then
         researchCQ = 0
+
+        timeS1 = DateTime.Now
+        Console.WriteLine("start researchCQ:" & timeS1)
         While dr.Read()
+
+            timeR = DateTime.Now - timeS1
+            Console.WriteLine("end researchCQ:" & timeR.ToString)
             LbTitle.Visible = True
             researchCQ = 1
             'Me.Size = New Size(776, 536)
@@ -817,7 +998,15 @@ Public Class FSearchGcent
 
         '-----
         'on ajoute la partie Azure
+        timeS3 = DateTime.Now
+        Console.WriteLine("start Azure:" & timeS3)
+
         Azure()
+
+        timeR = DateTime.Now - timeS3
+        Console.WriteLine("end Azure:" & timeR.ToString & " Time : " & DateTime.Now)
+
+
         '-----
         'on recherche les fiches de retrofits de cette fiche
 
@@ -832,6 +1021,13 @@ Public Class FSearchGcent
         '--Ole SqlCmd2 = New OleDb.OleDbCommand(req, SqlConn2)
         cmd2 = conn2.CreateCommand()
         cmd2.CommandText = req
+
+        timeS4 = DateTime.Now
+        Console.WriteLine("start GetGcentRetInfo:" & timeS4)
+        Console.WriteLine("GetGcentRetInfo : " & req)
+
+
+
         dr2 = cmd2.ExecuteReader()
 
         nbrow2 = 0
@@ -890,7 +1086,8 @@ Public Class FSearchGcent
         End While
         conn2.Close()
         '-----
-
+        timeR = DateTime.Now - timeS4
+        Console.WriteLine("end GetGcentRetInfo:" & timeR.ToString & " Time : " & DateTime.Now)
 
 
         'on cherche les documents associés
@@ -942,8 +1139,11 @@ Public Class FSearchGcent
             TBSev.ForeColor = Color.Black
         End If
 
-
-        BGcentHistory()
+        timeS2 = DateTime.Now
+        Console.WriteLine("start BGcentHistory:" & timeS2)
+        BGcentHistory(dbid)
+        timeR = DateTime.Now - timeS2
+        Console.WriteLine("end BGcentHistory:" & timeR.ToString)
     End Function
 
     Public Function researchGlib() As Integer
@@ -1228,22 +1428,28 @@ Public Class FSearchGcent
     End Sub
 
     'Private Sub BHistory_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BHistory.Click
-    Private Sub BGcentHistory()
+    Private Sub BGcentHistory(DBID As Integer)
         'Dim oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;"
         Dim oradb As String = "Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.132.16.30)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = CQSCM1)));User ID=READCQUEST;Password=READCQUEST"
         Dim conn As New OracleConnection(oradb)
         Dim cmd As New OracleCommand
         Dim dr As OracleDataReader
+        Dim timeS2 As DateTime
+        Dim timeR As TimeSpan
 
         'Data Source=myOracleServer;Persist Security Info=False";
         'Dim Oradb As String = "Data Source=CQSCM1_SEYCSMC1;User Id=readcquest;Password=readcquest;Provider=OraOLEDB.Oracle;OLEDB.NET=True;LazyLoad=1;"
 
         conn.Open()
         'opening the connection
-        Dim request As String = RequestGcentHistory(Trim(TBGcent.Text))
+        Dim request As String = RequestGcentHistory(Trim(TBGcent.Text), DBID)
         'request = "select 1 from dual"
         cmd = conn.CreateCommand()
         cmd.CommandText = request
+        Console.WriteLine(request)
+        timeS2 = DateTime.Now
+        Console.WriteLine("start BGcentHistory2:" & timeS2)
+
 
         'executing the command and assigning it to connection
         dr = cmd.ExecuteReader()
@@ -1265,7 +1471,8 @@ Public Class FSearchGcent
         LVHistory.Items.Clear()
 
         While dr.Read()
-
+            timeR = DateTime.Now - timeS2
+            Console.WriteLine("end BGcentHistory2:" & timeR.ToString)
             Dim LVITime As New ListViewItem(dr.GetValue(1).ToString)
 
             LbTitle.Visible = True
@@ -1280,6 +1487,8 @@ Public Class FSearchGcent
             LVHistory.Items.AddRange(New ListViewItem() {LVITime})
 
         End While
+        timeR = DateTime.Now - timeS2
+        Console.WriteLine("end BGcentHistory2 END:" & timeR.ToString)
         'End If
         conn.Close()
         conn.Dispose()

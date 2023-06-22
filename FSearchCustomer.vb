@@ -773,9 +773,11 @@ Fin:
             Dbase = str(0)
             user = str(1)
 
-            Dim toto As String = "C:\Program Files\PLSQL Developer\plsqldev.exe userid=" + user + "/" + user + "@" + Dbase
+            Dim PathPLSQL As String = "C:\Program Files\PLSQL Developer\plsqldev.exe userid=" + user + "/" + user + "@" + Dbase
+
+
             'Dim toto As String = "C:\Program Files\PLSQL Developer 12\plsqldev.exe userid=" + user + "/" + user + "@" + Dbase
-            Shell(toto) ' & TBServer.Text)
+            Shell(PathPLSQL) ' & TBServer.Text)
 
             'on recherche la fenêtre par son titre, pour cela il faut qu'on trouve le nom de la fenêtre :
             '<servername> & ".eyc.com - Putty"
@@ -796,7 +798,13 @@ Fin:
             'on restore la fenêtre
             ''ShowWindow(windowhandle, 1)
         Catch ex As Exception
-            MsgBox("Problem To launch PL/SQL Developer : " & vbCrLf & "Please select an Oracle Schema." & vbCrLf & "If the problem continues, please verify the path of PL/SQL Developer.exe : " & vbCrLf & " C:\Program Files\PLSQL Developer\plsqldev.exe" & vbCrLf & "Error : " & ex.Message)
+            Try
+                Dim PathPLSQLVDI As String = "C:\Program Files\PLSQL Developer 14\plsqldev.exe userid = " + user + " / " + user + "@" + Dbase
+                Shell(PathPLSQLVDI)
+            Catch err As Exception
+                MsgBox("Problem To launch PL/SQL Developer : " & vbCrLf & "Please select an Oracle Schema." & vbCrLf & "If the problem continues, please verify the path of PL/SQL Developer.exe : " & vbCrLf & " C:\Program Files\PLSQL Developer\plsqldev.exe" & vbCrLf & "Error : " & err.Message)
+
+            End Try
         End Try
 
         'Shell("%systemroot%\system32\mstsc.exe ""C:\Users\guerrier\AppData\Roaming\Micros

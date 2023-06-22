@@ -36,15 +36,15 @@ Public Class FSearch
         'SkinManager.ROBOTO_MEDIUM_10 = New Font("Microsoft Sans Serif", 8.25)
         'SkinManager.ROBOTO_MEDIUM_10 = New Font("Algerian", 8)
 
-        curdir = System.IO.Directory.GetCurrentDirectory
+        'curdir = System.IO.Directory.GetCurrentDirectory
         'curdir = "C:\logs"
-        If My.Computer.FileSystem.DirectoryExists(curdir) Then
-        Else
-            'If My.Forms.frmMessage.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
-            ' OK button pressed
-            My.Computer.FileSystem.CreateDirectory(curdir)
+        'If My.Computer.FileSystem.DirectoryExists(curdir) Then
+        'Else
+        'If My.Forms.frmMessage.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
+        ' OK button pressed
+        'My.Computer.FileSystem.CreateDirectory(curdir)
 
-        End If
+        'End If
         If My.Computer.FileSystem.DirectoryExists("c:\tempSearch\") Then
         Else
 
@@ -64,7 +64,7 @@ Public Class FSearch
         '        End If
         '       End If
 
-        EcrireLog("", "", curdir)
+        'EcrireLog("", "", curdir)
 
     End Sub
 
@@ -87,7 +87,8 @@ Public Class FSearch
         Dim ret, retRFE, retcus, retPatch As Integer
         Dim LstCases(), LstCard(), LstRFE(), LstWS(), LstPR() As Cases
         Dim nb, nbCase, nbCard, nbRFE, nbWS, nbPR As Integer
-
+        Dim timeS As DateTime
+        Dim timeR As TimeSpan
 
         If Nav = False Then
             LStCase(nbSearch) = Me.MSTSearch.Text
@@ -173,9 +174,22 @@ Public Class FSearch
                                 'on recherche une GCENT
                                 'on va ouvrir la form GCENT
 
+                                timeS = DateTime.Now
+                                Console.WriteLine("start FSearchGcent.Show:" & timeS)
                                 FSearchGcent.TBGcent.Text = Me.MSTSearch.Text
                                 FSearchGcent.Show()
+                                timeR = DateTime.Now - timeS
+                                Console.WriteLine("end FSearchGcent.Show:" & timeR.ToString & "time : " & DateTime.Now)
+
+
+
+
+                                timeS = DateTime.Now
+                                Console.WriteLine("start FSearchGcent.researchCQ():" & timeS)
                                 ret = FSearchGcent.researchCQ()
+
+                                timeR = DateTime.Now - timeS
+                                Console.WriteLine("end FSearchGcent.researchCQ():" & timeR.ToString & " time : " & DateTime.Now)
                             Else
                                 If InStr(Trim(Me.MSTSearch.Text), "GLIB") > 0 Then
                                     'on recherche une GCENT
@@ -213,11 +227,17 @@ Public Class FSearch
                                 For Each frm In Application.OpenForms
                                     '    'Si son nom est celui que l'on cherche
                                     If frm.Name = Trim("FsearchSelectPatch") Then
+
                                         FsearchSelectPatch.Close()
+
                                         Exit For
                                     End If
                                 Next
+                                timeS = DateTime.Now
+                                Console.WriteLine("start FsearchSelectPatch.researchPatch:" & timeS)
                                 retPatch = FsearchSelectPatch.researchPatch(Me.MSTSearch.Text)
+                                timeR = DateTime.Now - timeS
+                                Console.WriteLine("end FsearchSelectPatch.researchPatch:" & timeR.ToString)
                                 ret = retPatch
                                 If ret <> 0 Then
 
@@ -638,6 +658,5 @@ Public Class FSearch
         System.Diagnostics.Process.Start("https://eyc.sharepoint.com/sites/RS_SCM_RD/All_Documents/Search%20Help.pdf")
 
     End Sub
-
 
 End Class

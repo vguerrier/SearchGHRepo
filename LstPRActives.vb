@@ -9,7 +9,8 @@ Imports System.Text.RegularExpressions
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 
 Module LstPRActives
-    Public Const authKey As String = ":skpg3rox6mgo3sn5dxj7fxqx7e5jwahxvmkz2gbj2jrlpbheerda" '10/01/2023 16:08 'bien penser à ajouter ":" en premier avant de coder en 64
+    'Public Const authKey As String = ":skpg3rox6mgo3sn5dxj7fxqx7e5jwahxvmkz2gbj2jrlpbheerda" '10/01/2023 16:08 'bien penser à ajouter ":" en premier avant de coder en 64
+    Public Const authKey As String = ":tqo3n23n4vfotljkgzhb446qq3wzneolylnxvft2rpdupqhxi63q" '13/03/2023 11:36 (fin 11/03/2024) 'bien penser à ajouter ":" en premier avant de coder en 64
     'Public Const authKey64 As String = "xqucmupty6wjcu5rqiqbmtjthphhouh2bvp74w2jnhulipfvp64q="
 
     Public Structure ProjectRepositories
