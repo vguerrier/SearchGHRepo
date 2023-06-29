@@ -726,7 +726,7 @@ Public Class FSearchGcent
             CQbase = "CQGREP"
         End If
 
-        request = "select a.dbid from cqcentral.anomalie a where a.numerofiche =  '" + GCENT + "'"
+        request = "select a.dbid from " & CQbase & ".anomalie a where a.numerofiche =  '" + GCENT + "'"
 
         conn.Open()
 
