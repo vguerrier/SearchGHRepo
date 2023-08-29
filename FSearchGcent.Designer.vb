@@ -26,6 +26,8 @@ Partial Class FSearchGcent
         Me.components = New System.ComponentModel.Container()
         Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
         Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FSearchGcent))
         Me.CBRetrofit = New System.Windows.Forms.CheckBox()
@@ -111,13 +113,14 @@ Partial Class FSearchGcent
         Me.RTBDesc2 = New System.Windows.Forms.RichTextBox()
         Me.TPPRDetails = New System.Windows.Forms.TabPage()
         Me.DGPRDetails = New System.Windows.Forms.DataGridView()
+        Me.PullRequestID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PullRequestURL = New System.Windows.Forms.DataGridViewLinkColumn()
+        Me.PRStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TBPRCommit = New System.Windows.Forms.TabPage()
         Me.LVPRCommits = New System.Windows.Forms.ListView()
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.PullRequestID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PullRequestURL = New System.Windows.Forms.DataGridViewLinkColumn()
-        Me.PRStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CBRegression = New System.Windows.Forms.CheckBox()
         Me.TCInfos.SuspendLayout()
         Me.TPDesc.SuspendLayout()
         Me.TPPRDetails.SuspendLayout()
@@ -912,13 +915,48 @@ Partial Class FSearchGcent
         'DGPRDetails
         '
         Me.DGPRDetails.BorderStyle = System.Windows.Forms.BorderStyle.None
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGPRDetails.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DGPRDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGPRDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.PullRequestID, Me.PullRequestURL, Me.PRStatus})
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGPRDetails.DefaultCellStyle = DataGridViewCellStyle2
         Me.DGPRDetails.Location = New System.Drawing.Point(0, 0)
         Me.DGPRDetails.Name = "DGPRDetails"
         Me.DGPRDetails.RowHeadersVisible = False
         Me.DGPRDetails.Size = New System.Drawing.Size(458, 235)
         Me.DGPRDetails.TabIndex = 98
+        '
+        'PullRequestID
+        '
+        Me.PullRequestID.HeaderText = "PullRequestID"
+        Me.PullRequestID.Name = "PullRequestID"
+        Me.PullRequestID.ReadOnly = True
+        '
+        'PullRequestURL
+        '
+        Me.PullRequestURL.HeaderText = "PullRequest URL"
+        Me.PullRequestURL.Name = "PullRequestURL"
+        Me.PullRequestURL.ReadOnly = True
+        Me.PullRequestURL.Width = 256
+        '
+        'PRStatus
+        '
+        Me.PRStatus.HeaderText = "PRStatus"
+        Me.PRStatus.Name = "PRStatus"
+        Me.PRStatus.ReadOnly = True
         '
         'TBPRCommit
         '
@@ -955,24 +993,17 @@ Partial Class FSearchGcent
         Me.ColumnHeader3.Text = "Commited Files"
         Me.ColumnHeader3.Width = 354
         '
-        'PullRequestID
+        'CBRegression
         '
-        Me.PullRequestID.HeaderText = "PullRequestID"
-        Me.PullRequestID.Name = "PullRequestID"
-        Me.PullRequestID.ReadOnly = True
-        '
-        'PullRequestURL
-        '
-        Me.PullRequestURL.HeaderText = "PullRequest URL"
-        Me.PullRequestURL.Name = "PullRequestURL"
-        Me.PullRequestURL.ReadOnly = True
-        Me.PullRequestURL.Width = 256
-        '
-        'PRStatus
-        '
-        Me.PRStatus.HeaderText = "PRStatus"
-        Me.PRStatus.Name = "PRStatus"
-        Me.PRStatus.ReadOnly = True
+        Me.CBRegression.AutoSize = True
+        Me.CBRegression.BackColor = System.Drawing.Color.White
+        Me.CBRegression.Enabled = False
+        Me.CBRegression.Location = New System.Drawing.Point(181, 257)
+        Me.CBRegression.Name = "CBRegression"
+        Me.CBRegression.Size = New System.Drawing.Size(79, 17)
+        Me.CBRegression.TabIndex = 160
+        Me.CBRegression.Text = "Regression"
+        Me.CBRegression.UseVisualStyleBackColor = False
         '
         'FSearchGcent
         '
@@ -980,6 +1011,7 @@ Partial Class FSearchGcent
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(987, 915)
+        Me.Controls.Add(Me.CBRegression)
         Me.Controls.Add(Me.TCInfos)
         Me.Controls.Add(Me.BPatch)
         Me.Controls.Add(Me.BRFE)
@@ -1154,4 +1186,5 @@ Partial Class FSearchGcent
     Friend WithEvents PullRequestID As DataGridViewTextBoxColumn
     Friend WithEvents PullRequestURL As DataGridViewLinkColumn
     Friend WithEvents PRStatus As DataGridViewTextBoxColumn
+    Friend WithEvents CBRegression As CheckBox
 End Class

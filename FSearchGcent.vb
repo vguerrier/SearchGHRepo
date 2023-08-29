@@ -48,7 +48,7 @@ Public Class FSearchGcent
         myCommand = conn.CreateCommand()
         myCommand.CommandText = request
 
-        dr = myCommand.ExecuteReader()
+        ' dr = myCommand.ExecuteReader()
 
         'Dim dr As SqlDataReader = cmd.ExecuteReader()
         dr = myCommand.ExecuteReader()
@@ -135,6 +135,7 @@ Public Class FSearchGcent
         Request = Request & "ta.datelivraisoninterne, "  '34
         Request = Request & "ta.internalstate, "  '35
         Request = Request & "Tce.nom " '36
+        Request = Request & "Ta.regressionc " '37
         'Pull Request Commits
         'Request = Request & "Tapr.PRURL "
         'Request = Request & "dbms_lob.substr(Ta.Sourcesmodifies,4000,1) " '37
@@ -251,7 +252,8 @@ Public Class FSearchGcent
         'Request2 = Request2 & "ta.originpatch, " '33
         Request2 = Request2 & "ta.datelivraisoninterne, "  '34
         Request2 = Request2 & "ta.internalstate, "  '35
-        Request2 = Request2 & "Tce.nom " '36
+        Request2 = Request2 & "Tce.nom, " '36
+        Request2 = Request2 & "Ta.regressionc " '37
         'Pull Request2 Commits
         'Request2 = Request2 & "Tapr.PRURL "
         'Request2 = Request2 & "dbms_lob.substr(Ta.Sourcesmodifies,4000,1) " '37
@@ -778,7 +780,7 @@ Public Class FSearchGcent
         Dim label As String
         Dim link As String
         ''GCENT17030635
-        Dim timeS1, timeS2, timeS3, timeS4, timeS5 As DateTime
+        Dim timeS1, timeS2, timeS3, timeS4 As DateTime
         Dim timeR As TimeSpan
         Dim dbid As Integer
 
@@ -800,6 +802,7 @@ Public Class FSearchGcent
         TBProduct.Text = ""
         TBIDD.Text = ""
         CBRetrofit.Checked = False
+        CBRegression.Checked = False
         TBDomain.Text = ""
         TBSubProduct.Text = "1"
         TBRDate.Text = ""
@@ -959,6 +962,10 @@ Public Class FSearchGcent
                 If TBState.Text = "En_Attente" Then
                     TBState.Text = TBState.Text + " " + dr.GetValue(35)
                 End If
+            End If
+
+            If dr.GetValue(37) IsNot DBNull.Value Then
+                CBRegression.Checked = dr.GetValue(37)
             End If
 
             If dr.GetValue(29) IsNot DBNull.Value Then
@@ -1178,6 +1185,7 @@ Public Class FSearchGcent
         TBProduct.Text = ""
         TBIDD.Text = ""
         CBRetrofit.Checked = False
+        CBRegression.Checked = True
         TBDomain.Text = ""
         TBSubProduct.Text = "1"
         TBRDate.Text = ""
@@ -1907,5 +1915,7 @@ sortie:
         End If
 ErrorH:
     End Sub
+
+
 End Class
 
