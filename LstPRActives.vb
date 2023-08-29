@@ -11,7 +11,7 @@ Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Module LstPRActives
     'Public Const authKey As String = ":skpg3rox6mgo3sn5dxj7fxqx7e5jwahxvmkz2gbj2jrlpbheerda" '10/01/2023 16:08 'bien penser à ajouter ":" en premier avant de coder en 64
     'Public Const authKey As String = ":mxkag2tjyr7tc3kf42e3ldxvlvyh3dcoxog5z73v7mqkvnp32zvq" '29/06/2023 11:36 (fin 27/06/2024) 'bien penser à ajouter ":" en premier avant de coder en 64
-    Public Const authKey As String = ":a7exsgduw6vdxwtr5xkdvxfoaveg75mvh6daxrmzl46gjpzriwlq" '29/08/2023 16:13 (fin 27/08/2024)
+    Public Const authKey As String = ":d6nnvzjde335c4u3f3hm2ybiem2fmcmujqmpvucpse72r3f7viaa" '29/08/2023 17:02 (fin 26/08/2024)
 
     Public Structure ProjectRepositories
         Public name As String
