@@ -332,7 +332,7 @@ Public Class FBacklog
         Dim Opt, OptGcent As Integer
         Dim MonDataSet, MonDataSetState, MonDataSetPriority, MonDataSetAgroup, MonDataSetWorkstream, MonDataSetVTP As New DataSet
         Dim Adaptateur As New Microsoft.Data.SqlClient.SqlDataAdapter
-        Dim myMData, myMData2 As MData
+        Dim myMData As MData
         Dim j As Integer
 
         'Dim toto As String

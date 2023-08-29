@@ -53,7 +53,7 @@
     <DefineDebug>false</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>bin2\Release3\</OutputPath>
     <DocumentationFile>Search.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
@@ -255,41 +255,29 @@
     <Compile Include="FSearchSelectPatch.Designer.vb">
       <DependentUpon>FSearchSelectPatch.vb</DependentUpon>
     </Compile>
-    <Compile Include="FSearchSelectPatch.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="FSearchSelectPatch.vb" />
     <Compile Include="FSearchSelectWS.Designer.vb">
       <DependentUpon>FSearchSelectWS.vb</DependentUpon>
     </Compile>
-    <Compile Include="FSearchSelectWS.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="FSearchSelectWS.vb" />
     <Compile Include="FSearchSelect.Designer.vb">
       <DependentUpon>FSearchSelect.vb</DependentUpon>
     </Compile>
-    <Compile Include="FSearchSelect.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="FSearchSelect.vb" />
     <Compile Include="FSearchWorkstream.Designer.vb">
       <DependentUpon>FSearchWorkstream.vb</DependentUpon>
     </Compile>
-    <Compile Include="FSearchWorkstream.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="FSearchWorkstream.vb" />
     <Compile Include="FSearchRFE.Designer.vb">
       <DependentUpon>FSearchRFE.vb</DependentUpon>
     </Compile>
-    <Compile Include="FSearchRFE.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="FSearchRFE.vb" />
     <Compile Include="LstPRActives.vb" />
     <Compile Include="MyProcess.vb" />
     <Compile Include="FRessources.Designer.vb">
       <DependentUpon>FRessources.vb</DependentUpon>
     </Compile>
-    <Compile Include="FRessources.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="FRessources.vb" />
     <Compile Include="ListViewColumnSorter.vb" />
     <Compile Include="DwarningRepTempSearch.Designer.vb">
       <DependentUpon>DwarningRepTempSearch.vb</DependentUpon>
@@ -300,36 +288,24 @@
     <Compile Include="About.Designer.vb">
       <DependentUpon>About.vb</DependentUpon>
     </Compile>
-    <Compile Include="About.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="About.vb" />
     <Compile Include="DwarningRepLogs.Designer.vb">
       <DependentUpon>DwarningRepLogs.vb</DependentUpon>
     </Compile>
-    <Compile Include="DwarningRepLogs.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="DwarningRepLogs.vb" />
     <Compile Include="Fbacklog.Designer.vb">
       <DependentUpon>Fbacklog.vb</DependentUpon>
     </Compile>
-    <Compile Include="Fbacklog.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Fbacklog.vb" />
     <Compile Include="FSearchCustomer.Designer.vb">
       <DependentUpon>FSearchCustomer.vb</DependentUpon>
     </Compile>
-    <Compile Include="FSearchCustomer.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="FSearchCustomer.vb" />
     <Compile Include="FSearchCase.Designer.vb">
       <DependentUpon>FSearchCase.vb</DependentUpon>
     </Compile>
-    <Compile Include="FSearchCase.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FSearch.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="FSearchCase.vb" />
+    <Compile Include="FSearch.vb" />
     <Compile Include="FSearch.Designer.vb">
       <DependentUpon>FSearch.vb</DependentUpon>
       <SubType>Form</SubType>
@@ -337,9 +313,7 @@
     <Compile Include="FSearchGcent.Designer.vb">
       <DependentUpon>FSearchGcent.vb</DependentUpon>
     </Compile>
-    <Compile Include="FSearchGcent.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="FSearchGcent.vb" />
     <Compile Include="LogMod.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

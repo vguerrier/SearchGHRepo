@@ -23,7 +23,7 @@ Public Class FSearch
 
     Private Sub Form1_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         'Me.Size = New Size(300, 104)
-        Dim curdir As String
+        ' curdir As String
         Dim SkinManager As MaterialSkinManager = MaterialSkinManager.Instance
 
         BBack.Visible = False
